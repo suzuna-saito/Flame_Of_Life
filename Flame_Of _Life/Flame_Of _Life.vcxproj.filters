@@ -22,6 +22,30 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidJsonHelper.cpp">
+      <Filter>RapidJson</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -44,6 +68,30 @@
     <ClInclude Include="Mesh.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidJsonHelper.h">
+      <Filter>RapidJson</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -61,5 +109,64 @@
     <Filter Include="Renderer">
       <UniqueIdentifier>{1ce07e2a-45b2-4e17-b790-3dabb312ab15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RapidJson">
+      <UniqueIdentifier>{b2b239f3-7296-4dd5-9f1e-81fc71ec1528}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{06eb51b1-4b27-4151-92cb-56ac88197a87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{270db6ee-ae8d-4d61-b942-c993b3dd414d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collision">
+      <UniqueIdentifier>{84742b5a-62c1-417e-8d66-ff2a10391e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{6d792814-2013-4291-afca-00619534d179}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BasicMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="BasicMesh.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="downsampling.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="framebufferScreen.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="framebufferScreen.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="gaussianblur.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="hdrBlurBlend.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="HDRMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Particle.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Phong.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Phong.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Skinned.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Sprite.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

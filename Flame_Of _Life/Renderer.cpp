@@ -7,10 +7,6 @@
 @brief	インクルード
 */
 #include "pch.h"
-#include "Texture.h"
-#include "Mesh.h"
-#include "Shader.h"
-#include "VertexArray.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
 #include "Skeleton.h"

@@ -1,10 +1,7 @@
 /*
 @brief	インクルード
 */
-#include "Texture.h"
-#include "VertexArray.h"
-#include "Collision.h"
-#include "RapidJsonHelper.h"
+#include "pch.h"
 
 /*
 @fn		テクスチャステージを読み込み

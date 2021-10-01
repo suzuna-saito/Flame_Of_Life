@@ -8,10 +8,6 @@
 */
 #pragma once
 
-/*
-@brief	インクルード
-*/
-//#include "SamplePlayer.h"
 
 #define RENDERER Renderer::GetInstance()
 
@@ -40,16 +36,8 @@ enum class TextureStage
 
 class SpriteComponent;
 class Texture;
-class Mesh;
-class Game;
-class MeshComponent;
-class InvisibleMeshComponent;
 class Shader;
 class VertexArray;
-class ParticleComponent;
-class UIComponent;
-class HeartUI;
-class HDRRenderer;
 
 class Renderer
 {
@@ -225,15 +213,11 @@ private:
 	Shader* mParticleShader;
 	//パーティクル用頂点
 	VertexArray* mParticleVertex;
-	////プレイヤー
-	//SamplePlayer* mPlayer;
 
 	//ビュー行列
 	Matrix4 mView;
 	//射影行列
 	Matrix4 mProjection;
-	//ビルボード行列
-	Matrix4 mBillboardMat;
 	//スクリーンの横幅
 	float mScreenWidth;
 	//スクリーンの縦幅

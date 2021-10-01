@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL;../External\rapidjson\include\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -107,7 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL;../External\rapidjson\include\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -130,7 +130,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL;../External\rapidjson\include\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -149,7 +149,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../External\SDL\include\SDL;../External\GLEW\include\GL;../External\SOIL\include\SOIL;../External\rapidjson\include\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -167,8 +167,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColliderComponent.cpp" />
+    <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -183,18 +187,46 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="RapidJsonHelper.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SceneBase.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColliderComponent.h" />
+    <ClInclude Include="Collision.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="RapidJsonHelper.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SceneBase.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="VertexArray.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BasicMesh.frag" />
+    <None Include="BasicMesh.vert" />
+    <None Include="downsampling.frag" />
+    <None Include="framebufferScreen.frag" />
+    <None Include="framebufferScreen.vert" />
+    <None Include="gaussianblur.frag" />
+    <None Include="hdrBlurBlend.frag" />
+    <None Include="HDRMesh.frag" />
+    <None Include="Particle.frag" />
+    <None Include="Phong.frag" />
+    <None Include="Phong.vert" />
+    <None Include="Skinned.vert" />
+    <None Include="Sprite.frag" />
+    <None Include="Sprite.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,8 +7,6 @@ struct InputState;
 
 class BackGroundSprite;
 class MapCreate;
-//class SamplePlayer;
-//class Ground;
 
 class SceneBase
 {
@@ -59,10 +57,6 @@ protected:
     BackGroundSprite* mSprite;
     //マップ生成
     MapCreate* mMapCreate;
-    ////プレイヤーのポインタ
-    //SamplePlayer* mPlayer;
-    //// 試しに作った床のポインタ
-    //Ground* mGround;
 
     //ゲームクリアしたか
     bool mClearFlag;
