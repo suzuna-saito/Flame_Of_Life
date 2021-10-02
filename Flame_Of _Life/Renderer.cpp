@@ -7,14 +7,6 @@
 @brief	インクルード
 */
 #include "pch.h"
-#include "SpriteComponent.h"
-#include "MeshComponent.h"
-#include "Skeleton.h"
-#include "Animation.h"
-#include "SkeletalMeshComponent.h"
-#include "HDRRenderer.h"
-#include "ParticleComponent.h"
-
 
 //自分のインスタンスの初期化
 Renderer* Renderer::mRenderer = nullptr;
@@ -35,13 +27,15 @@ Renderer::Renderer()
 	, mSpriteVerts(nullptr)
 	, mMeshShader(nullptr)
 	, mBasicShader(nullptr)
+	, mParticleShader(nullptr)
 	, mParticleVertex(nullptr)
+	, mSkinnedShader(nullptr)
 	, mView(Matrix4::Identity)
 	, mProjection(Matrix4::Identity)
-	, mScreenWidth(0)
-	, mScreenHeight(0)
 	, mAmbientLight(Vector3::Zero)
-	, mSkinnedShader(nullptr)
+	, mAddPosition(Vector2::Zero)
+	, mScreenWidth(0.0f)
+	, mScreenHeight(0.0f)
 	, mUndefineTexID(0)
 {
 }
@@ -217,30 +211,6 @@ void Renderer::UnloadData()
 */
 void Renderer::Draw()
 {
-
-	////アルファブレンディングを有効にする
-	//glEnable(GL_BLEND);
-	////デプスバッファ法を無効にする
-	//glDisable(GL_DEPTH_TEST);
-
-	//// RGB成分とα成分のブレンディング方法を別々に設定
-	//glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-	//// RGB成分とアルファ成分に別々の混合係数を設定
-	//glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
-	//// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
-	//// 背景を写したいときは先にスプライト描画を行う（背景とUIでvector配列を分けること）
-	//mSpriteShader->SetActive();
-	//mSpriteVerts->SetActive();
-	//// すべてのスプライトの描画
-	//for (auto sprite : mSprites)
-	//{
-	//	if (sprite->GetVisible())
-	//	{
-	//		sprite->Draw(mSpriteShader);
-	//	}
-	//}
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glEnable(GL_DEPTH_TEST);

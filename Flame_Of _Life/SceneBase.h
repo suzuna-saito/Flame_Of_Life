@@ -37,6 +37,8 @@ public:
     */
     enum Scene
     {
+        // その他
+        other,
         // タイトル
         title,
         // チュートリアル

@@ -39,26 +39,46 @@
 #include "RapidJsonHelper.h"
 
 
-// コンポーネント -------------------
-#include "Component.h"
+// アニメーション -------------------
+#include "Animation.h"
+#include "BoneTransform.h"
+#include "MatrixPalette.h"
+#include "Skeleton.h"
 // ----------------------------------
 
-// コリジョン -----------------------
-#include "Collision.h"
+
+// コンポーネント -------------------
+#include "Component.h"
+#include "MeshComponent.h"
+#include "ParticleComponent.h"
+#include "SkeletalMeshComponent.h"
+#include "SpriteComponent.h"
+/* コリジョン */
+#include "BoxCollider.h"
 #include "ColliderComponent.h"
+#include "Collision.h"
+#include "PhysicsWorld.h"
+#include "SphereCollider.h"
 // ----------------------------------
+
 
 // ゲームオブジェクト ---------------
 #include "GameObject.h"
+#include "GameObjectManager.h"
+/* カメラ */
+#include "MainCameraObject.h"
+
 // ----------------------------------
 
+
 // レンダラー -----------------------
-#include "Renderer.h"
 #include "Mesh.h"
+#include "Renderer.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
 // ----------------------------------
+
 
 // シーン----------------------------
 #include "SceneBase.h"

@@ -275,15 +275,6 @@ public://ゲッターセッター
 	*/
 	DirectionalLight& GetDirectionalLight() { return mDirLight; }
 
-	/*
-	@return	スクリーンの横幅(float型)
-	*/
-	float GetScreenWidth() const { return mScreenWidth; }
-
-	/*
-	@return	スクリーンの縦幅(float型)
-	*/
-	float GetScreenHeight() const { return mScreenHeight; }
 
 	/*
 	@return	ビュー行列(class Matrix4)
