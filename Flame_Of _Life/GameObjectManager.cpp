@@ -1,7 +1,6 @@
 /*
 @brief	インクルード
 */
-#include "MainCameraObject.h"
 #include "pch.h"
 
 //自身のインスタンスの初期化

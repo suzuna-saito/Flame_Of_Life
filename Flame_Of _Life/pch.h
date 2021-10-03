@@ -1,7 +1,7 @@
 #ifndef PCH_H
 #define PCH_H
 
-// 外部依存--------------------------
+// 外部依存
 #include <algorithm>
 #include <array>
 #include <cstring>
@@ -27,27 +27,15 @@
 #include <SDL_image.h>
 #include <unordered_map>
 #include <vector>
-// ----------------------------------
+#include <Windows.h>
 
-
-#include "Game.h"
-#include "Windows.h"
-
-#include "FPS.h"
-#include "InputSystem.h"
-#include "Math.h"
-#include "RapidJsonHelper.h"
-
-
-// アニメーション -------------------
+// アニメーション
 #include "Animation.h"
 #include "BoneTransform.h"
 #include "MatrixPalette.h"
 #include "Skeleton.h"
-// ----------------------------------
 
-
-// コンポーネント -------------------
+// コンポーネント
 #include "Component.h"
 #include "MeshComponent.h"
 #include "ParticleComponent.h"
@@ -59,29 +47,50 @@
 #include "Collision.h"
 #include "PhysicsWorld.h"
 #include "SphereCollider.h"
-// ----------------------------------
 
+// FPS
+#include "FPS.h"
 
-// ゲームオブジェクト ---------------
+// ゲームオブジェクト
 #include "GameObject.h"
 #include "GameObjectManager.h"
 /* カメラ */
 #include "MainCameraObject.h"
 
-// ----------------------------------
+// インプットシステム
+#include "InputSystem.h"
 
+// Math
+#include "Math.h"
 
-// レンダラー -----------------------
+// マップ
+#include "MapCreate.h"
+
+// パーティクルエフェクト
+#include "ParticleEffectBase.h"
+#include "EffectManager.h"
+#include "SandEffect.h"
+
+// RapidJson
+#include "RapidJsonHelper.h"
+
+// レンダラー
 #include "Mesh.h"
 #include "Renderer.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
-// ----------------------------------
 
-
-// シーン----------------------------
+// シーン
 #include "SceneBase.h"
-//-----------------------------------
+#include "TitleScene.h"
+
+// UI
+#include "UIBase.h"
+#include "TitleUI.h"
+
+// Others
+#include "Game.h"
+
 
 #endif //PCH_H

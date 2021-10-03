@@ -82,6 +82,27 @@
     <ClCompile Include="SphereCollider.cpp">
       <Filter>Components\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="MapCreate.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="UIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEffectBase.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SandEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -167,6 +188,27 @@
     <ClInclude Include="SphereCollider.h">
       <Filter>Components\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="MapCreate.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEffectBase.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="SandEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -204,6 +246,15 @@
     </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{cc7d518f-0e42-4e76-b75d-d775472751f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{7a864268-6c17-41e9-84bf-034aee99d107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{fe76e703-4888-463a-80cd-0ca4eeb1895f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleEffect">
+      <UniqueIdentifier>{8fffc785-167f-47ab-9990-6287a3df67fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

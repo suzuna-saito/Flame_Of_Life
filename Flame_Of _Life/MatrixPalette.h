@@ -3,6 +3,7 @@
 */
 #pragma once
 
+#include "Math.h"
 
 //ƒ{[ƒ“‚ÌÅ‘å”
 const size_t MAX_SKELETON_BONES = 196;

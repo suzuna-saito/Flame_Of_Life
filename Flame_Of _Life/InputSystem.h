@@ -3,9 +3,6 @@
 */
 #pragma once
 
-/*
-@brief	インクルード
-*/
 
 /*
 enum ButtonState

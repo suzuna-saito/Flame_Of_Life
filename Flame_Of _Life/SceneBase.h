@@ -15,7 +15,7 @@ public:
     /*
     @fn	コンストラクタ
     */
-    SceneBase() {};
+    SceneBase();
 
     /*
     @fn	デストラクタ
