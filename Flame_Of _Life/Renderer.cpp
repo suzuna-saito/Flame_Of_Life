@@ -138,8 +138,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 		SDL_Log("Failed to load shaders.");
 		return false;
 	}
-	//// 未定義テクスチャ
-	//mUndefineTexID = GetTexture("Assets/noneTexture.png")->GetTextureID();
 
 
 	////// カリング

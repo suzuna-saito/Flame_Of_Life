@@ -65,8 +65,12 @@
 // ゲームオブジェクト
 #include "GameObject.h"
 #include "GameObjectManager.h"
-/*カメラ*/
+/* カメラ */
 #include "MainCameraObject.h"
+/* 床 */
+#include "Ground.h"
+/* プレイヤー */
+#include "Player.h"
 
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"
@@ -81,6 +85,7 @@
 // シーン
 #include "SceneBase.h"
 #include "TitleScene.h"
+#include "GameScene.h"
 
 // コリジョン *
 #include "PhysicsWorld.h"

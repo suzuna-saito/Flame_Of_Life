@@ -103,6 +103,15 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>UI\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -209,6 +218,15 @@
     <ClInclude Include="Sprite.h">
       <Filter>UI\Sprite</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -258,6 +276,12 @@
     </Filter>
     <Filter Include="UI\Sprite">
       <UniqueIdentifier>{5547509d-45b3-4a7a-9df0-4513791d40df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ground">
+      <UniqueIdentifier>{c1098e61-fa55-4d68-b075-ef315e1237b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{a3675b10-ecd6-40ab-b62b-15ff9a7185c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

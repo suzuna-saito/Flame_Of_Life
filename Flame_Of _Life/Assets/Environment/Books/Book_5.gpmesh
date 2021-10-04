@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Book_5.bmp"
+		"Assets/Environment/Books/Book_5.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

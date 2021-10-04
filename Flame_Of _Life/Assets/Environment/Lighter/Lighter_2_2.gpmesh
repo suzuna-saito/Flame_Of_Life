@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Lighter_2_2.bmp"
+		"Assets/Environment/Lighter/Lighter_2_2.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

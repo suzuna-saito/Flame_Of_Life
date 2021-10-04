@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Window_1_glass.bmp"
+		"Assets/Environment/Walls/Windows/Window_1_glass.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

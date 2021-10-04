@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Candle_2.bmp"
+		"Assets/Player/Candle/Candle_2.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

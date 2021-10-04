@@ -13,15 +13,13 @@ TitleScene::TitleScene(const Scene& _nowScene)
 	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
 	dir.m_direction = Vector3(1.0f, 0.7f, -0.7f);
-	//dir.diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
 	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	SetScene(_nowScene);
 
+	// ƒ^ƒCƒgƒ‹‰æ‘œ
 	mSprite = new Sprite("Assets/UI/Title.png");
-	//new TitleUI();
-
 
 	mNextSceneCount = 0;
 }
@@ -31,7 +29,7 @@ TitleScene::TitleScene(const Scene& _nowScene)
 */
 TitleScene::~TitleScene()
 {
-	//delete mSprite;
+	delete mSprite;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(title);
 }
 
@@ -52,7 +50,7 @@ SceneBase* TitleScene::update()
 
 	if (mGameSceneFlag)
 	{
-		//return new GameScene(tutorial);
+		return new GameScene(tutorial);
 	}
 
 	return this;

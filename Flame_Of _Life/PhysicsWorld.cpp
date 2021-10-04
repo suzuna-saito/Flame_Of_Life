@@ -125,44 +125,6 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 		}
 	}
 
-	//for (auto itr : mSpheres)
-	//{
-	//	if (itr == _sphere)
-	//	{
-	//		continue;
-	//	}
-	//	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	//	if (itr->GetOwner()->GetState() != State::Active)
-	//	{
-	//		continue;
-	//	}
-	//	bool hit = Intersect(itr->GetWorldSphere(), _sphere->GetWorldSphere());
-	//	if (hit)
-	//	{
-	//		OnCollisionFunc func = mCollisionFunction.at(_sphere);
-	//		func(*(itr->GetOwner()));
-	//		func = mCollisionFunction.at(itr);
-	//		func(*(_sphere->GetOwner()));
-	//		/*_sphere->Refresh();*/
-	//	}
-	//}
-	//for (auto itr : mBoxes)
-	//{
-	//	//コライダーの親オブジェクトがActiveじゃなければ終了する
-	//	if (itr->GetOwner()->GetState() != State::Active)
-	//	{
-	//		continue;
-	//	}
-	//	bool hit = Intersect(_sphere->GetWorldSphere(),itr->GetWorldBox());
-	//	if (hit)
-	//	{
-	//		OnCollisionFunc func = mCollisionFunction.at(_sphere);
-	//		func(*(itr->GetOwner()));
-	//		func = mCollisionFunction.at(itr);
-	//		func(*(_sphere->GetOwner()));
-	//		/*_sphere->Refresh();*/
-	//	}
-	//}
 }
 
 void PhysicsWorld::AddBox(BoxCollider* _box, OnCollisionFunc _func)
@@ -222,8 +184,6 @@ void PhysicsWorld::SphereAndSphere()
 				SphereCollider* sphereA = mSpheres[i];
 				SphereCollider* sphereB = mSpheres[j];
 
-				//sphereA->GetOwner()->OnCollision(*(sphereB->GetOwner()));
-				//sphereB->GetOwner()->OnCollision(*(sphereA->GetOwner()));
 			}
 		}
 	}
@@ -249,9 +209,6 @@ void PhysicsWorld::BoxAndBox()
 			{
 				BoxCollider* boxA = mBoxes[i];
 				BoxCollider* boxB = mBoxes[j];
-
-				//boxA->GetOwner()->OnCollision(*(boxB->GetOwner()));
-				//boxB->GetOwner()->OnCollision(*(boxA->GetOwner()));
 			}
 		}
 	}
@@ -273,11 +230,6 @@ void PhysicsWorld::SphereAndBox()
 			}
 			bool hit = Intersect(mSpheres[i]->GetWorldSphere(), mBoxes[j]->GetWorldBox());
 
-			if (hit)
-			{
-				//spheres[i]->GetOwner()->OnCollision(*(boxes[j]->GetOwner()));
-				//boxes[j]->GetOwner()->OnCollision(*(spheres[i]->GetOwner()));
-			}
 		}
 	}
 }

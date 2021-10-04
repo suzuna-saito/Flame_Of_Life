@@ -30,10 +30,7 @@ public:
 	void Input(const InputState& _inputState)override;
 
 private:
-	SpriteComponent* spriteComponent;
 
 	bool mGameSceneFlag;
-
-
 };
 

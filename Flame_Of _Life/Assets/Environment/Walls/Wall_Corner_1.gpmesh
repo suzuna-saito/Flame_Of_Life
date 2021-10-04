@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Wall_Corner_1.bmp"
+		"Assets/Environment/Walls/Wall_Corner_1.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

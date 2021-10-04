@@ -193,65 +193,6 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 	}
 }
 
-/*
-@brief 使用したすべてのゲームオブジェクトを解放する
-@detail シーン遷移の際に使用される。GameObject内の再利用フラグが建っているオブジェクトは解放しない
-*/
-//void GameObjectManager::RemoveAllUsedGameObject()
-//{
-//	std::vector<GameObject*> reUseObjects;
-//
-//	while (!gameObjects.empty())
-//	{
-//		GameObject* obj = gameObjects.back();
-//		if (obj->GetReUseGameObject())
-//		{
-//			reUseObjects.push_back(obj);
-//			gameObjects.pop_back();
-//			continue;
-//		}
-//		delete obj;
-//	}
-//
-//	while (!cameraObjects.empty())
-//	{
-//		GameObject* obj = cameraObjects.back();
-//		if (obj->GetReUseGameObject())
-//		{
-//			reUseObjects.push_back(obj);
-//			cameraObjects.pop_back();
-//			continue;
-//		}
-//		delete obj;
-//	}
-//}
-
-//GameObject * GameObjectManager::FindGameObject(Tag _tag)
-//{
-//	for (auto itr : gameObjects)
-//	{
-//		if (itr->GetTag() == _tag)
-//		{
-//			return itr;
-//		}
-//	}
-//
-//	return nullptr;
-//}
-
-//std::vector<GameObject*> GameObjectManager::FindGameObjects(Tag _tag)
-//{
-//	std::vector<GameObject*> ret;
-//	for (auto itr : gameObjects)
-//	{
-//		if (itr->GetTag() == _tag)
-//		{
-//			ret.push_back(itr);
-//		}
-//	}
-//	return ret;
-//}
-
 
 GameObjectManager::GameObjectManager()
 	: mUpdatingGameObject(false)
@@ -261,8 +202,4 @@ GameObjectManager::GameObjectManager()
 
 GameObjectManager::~GameObjectManager()
 {
-	/*while (!gameObjects.empty())
-	{
-		delete gameObjects.back();
-	}*/
 }

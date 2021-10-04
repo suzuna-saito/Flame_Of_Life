@@ -3,7 +3,7 @@
 	"vertexformat":"PosNormTex",
 	"shader":"BasicMesh",
 	"textures":[
-		"Assets/Carpet_long_1.bmp"
+		"Assets/Environment/Carpets/Carpet_long_1.bmp"
 	],
 	"specularPower":100.0,
 	"vertices":[

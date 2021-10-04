@@ -4,7 +4,6 @@
 #include "pch.h"
 //#include "Ground.h"
 //#include "SamplePlayer.h"
-#include "SceneBase.h"
 
 /*
 @fn	コンストラクタ
@@ -40,7 +39,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::tutorial)
 	{
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/tste2tmx.json", "layer1"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/test.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
@@ -51,7 +50,7 @@ bool MapCreate::OpenFile()
 		//mSizeZ = mGroundMapData.size();
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/tste2tmx.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/test.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
@@ -78,7 +77,7 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					//new Ground(objectPos, objectSize, ground, SceneBase::tutorial);
+					new Ground(objectPos, objectSize, ground, SceneBase::tutorial);
 					break;
 				}
 				break;
@@ -108,7 +107,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(2):
-					//new SamplePlayer(objectPos, objectSize, player, SceneBase::tutorial);
+					new Player(objectPos, objectSize, player, SceneBase::tutorial);
 					break;
 				}
 				break;
