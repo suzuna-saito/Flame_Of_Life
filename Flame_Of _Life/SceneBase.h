@@ -7,6 +7,7 @@ struct InputState;
 
 class BackGroundSprite;
 class MapCreate;
+class Sprite;
 
 class SceneBase
 {
@@ -55,8 +56,8 @@ public:
 
 protected:
 
-    ////îwåi
-    //Sprite* mSprite;
+    //îwåi
+    Sprite* mSprite;
 
     //É}ÉbÉvê∂ê¨
     MapCreate* mMapCreate;

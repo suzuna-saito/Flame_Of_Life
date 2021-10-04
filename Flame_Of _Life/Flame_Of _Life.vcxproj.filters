@@ -100,8 +100,8 @@
     <ClCompile Include="TitleScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="TitleUI.cpp">
-      <Filter>UI</Filter>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>UI\Sprite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +206,8 @@
     <ClInclude Include="TitleScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="TitleUI.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="Sprite.h">
+      <Filter>UI\Sprite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

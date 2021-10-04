@@ -210,10 +210,10 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SkeletalMeshComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="TitleUI.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
@@ -248,10 +248,10 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SkeletalMeshComponent.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="SphereCollider.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="TitleUI.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>

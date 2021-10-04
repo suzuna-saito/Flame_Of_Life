@@ -44,53 +44,57 @@
 #include "Skeleton.h"
 #include "Animation.h"
 
+// コリジョン
+#include "Collision.h"
+
 // コンポーネント
 #include "Component.h"
 #include "MeshComponent.h"
 #include "ParticleComponent.h"
-#include "SkeletalMeshComponent.h"
 #include "SpriteComponent.h"
-/* コリジョン */
-#include "ColliderComponent.h"
-#include "Collision.h"
-#include "PhysicsWorld.h"
-#include "BoxCollider.h"
-#include "SphereCollider.h"
+#include "SkeletalMeshComponent.h"
 
-// シーン
+// レンダラー
+#include "Shader.h"
+#include "VertexArray.h"
+#include "Texture.h"
+#include "Mesh.h"
+#include "Renderer.h"
 #include "SceneBase.h"
-#include "TitleScene.h"
 
 // ゲームオブジェクト
 #include "GameObject.h"
 #include "GameObjectManager.h"
-/* カメラ */
+/*カメラ*/
 #include "MainCameraObject.h"
-
-
-// マップ
-#include "MapCreate.h"
 
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"
 #include "EffectManager.h"
 #include "SandEffect.h"
 
+// UI
+#include "UIBase.h"
+/* スプライト*/
+#include "Sprite.h"
+
+// シーン
+#include "SceneBase.h"
+#include "TitleScene.h"
+
+// コリジョン *
+#include "PhysicsWorld.h"
+#include "ColliderComponent.h"
+#include "SphereCollider.h"
+#include "BoxCollider.h"
+
 // RapidJson
 #include "RapidJsonHelper.h"
 
-// レンダラー
-#include "Mesh.h"
-#include "Renderer.h"
-#include "Shader.h"
-#include "Texture.h"
-#include "VertexArray.h"
+// マップ
+#include "MapCreate.h"
 
-// UI
-#include "UIBase.h"
-#include "TitleUI.h"
-
-// Others
+// Game
 #include "Game.h"
 
 #endif //PCH_H
