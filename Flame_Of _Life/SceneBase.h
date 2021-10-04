@@ -55,8 +55,9 @@ public:
 
 protected:
 
-    //îwåi
-    BackGroundSprite* mSprite;
+    ////îwåi
+    //Sprite* mSprite;
+
     //É}ÉbÉvê∂ê¨
     MapCreate* mMapCreate;
 

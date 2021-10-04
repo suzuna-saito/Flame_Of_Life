@@ -256,6 +256,9 @@
     <Filter Include="ParticleEffect">
       <UniqueIdentifier>{8fffc785-167f-47ab-9990-6287a3df67fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="UI\Sprite">
+      <UniqueIdentifier>{5547509d-45b3-4a7a-9df0-4513791d40df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="BasicMesh.frag">

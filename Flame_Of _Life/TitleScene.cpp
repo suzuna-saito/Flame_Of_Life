@@ -19,7 +19,9 @@ TitleScene::TitleScene(const Scene& _nowScene)
 
 	SetScene(_nowScene);
 
+	//mSprite = new Sprite("Assets/UI/Title.png");
 	new TitleUI();
+
 
 	mNextSceneCount = 0;
 }
@@ -29,6 +31,7 @@ TitleScene::TitleScene(const Scene& _nowScene)
 */
 TitleScene::~TitleScene()
 {
+	//delete mSprite;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(title);
 }
 

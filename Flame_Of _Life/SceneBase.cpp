@@ -10,8 +10,8 @@ int SceneBase::mIsScene = 0;
 @fn	コンストラクタ
 */
 SceneBase::SceneBase()
-	: mSprite(nullptr)
-	, mMapCreate(nullptr)
+	:/* mSprite(nullptr)
+	, */mMapCreate(nullptr)
 	, mClearFlag(false)
 	, mNextSceneCount(false)
 {
