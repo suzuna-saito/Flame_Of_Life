@@ -60,6 +60,10 @@ bool MapCreate::OpenFile()
 	return false;
 }
 
+/*
+@fn	°‚ğ¶¬‚·‚é
+*/
+
 void MapCreate::CreateGround()
 {
 	for (float iz = 0; iz < mSizeY; iz++)
@@ -97,7 +101,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, 200.0f);
+			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, 250.0f);
 			Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
 
 			switch (mScene)
