@@ -33,18 +33,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Player/Candle/Candle_1.gpmesh"));
 
-
-	////プレイヤー自身の当たり判定(スフィア)
-	//mSelfSphereCollider = new SphereCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	//Sphere sphere = { Vector3::Zero,30.0f };
-	//mSelfSphereCollider->SetObjectSphere(sphere);
-	
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
 	AABB box = { Vector3(0.0f,0.0f,0.0f),Vector3(0.5f,0.5f,0.5f) };
 	mSelfBoxCollider->SetObjectBox(box);
-
-	//new SampleFireObject(this, Vector3(1.0f, 1.0f, 1.0f), _objectTag);
 }
 
 /*
@@ -55,7 +47,7 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -500, 200), mPosition);
+	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -700, 300), mPosition);
 
 	// 座標をセット
 	mPosition += mVelocity;
@@ -78,13 +70,6 @@ void Player::UpdateGameObject(float _deltaTime)
 	}*/
 
 	SetPosition(mPosition);
-
-	////回転処理(回転用サンプルコード)
-	//float radian = Math::ToRadians(mAngle);
-	//Quaternion rot = this->GetRotation();
-	//Quaternion inc(Vector3::UnitX, radian);
-	//Quaternion target = Quaternion::Concatenate(rot, inc);
-	//SetRotation(target);
 }
 
 /*

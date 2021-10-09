@@ -24,6 +24,9 @@ public:
 	*/
 	bool OpenFile();
 
+	/*
+	@fn	床を生成する
+	*/
 	void CreateGround();
 
 	/*
@@ -31,7 +34,10 @@ public:
 	*/
 	void CreatePlayer();
 
-
+	/*
+	@fn	ろうそくを生成する
+	*/
+	void CreateCandle();
 private:
 
 	bool readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName);
@@ -42,6 +48,8 @@ private:
 	std::vector<std::vector<int>> mGroundMapData;
 	//プレイヤーマップデータ
 	std::vector<std::vector<int>> mPlayerMapData;
+	//ろうそくマップデータ
+	std::vector<std::vector<int>> mCandleMapData;
 
 	//現在のシーン
 	int mScene;
@@ -54,5 +62,15 @@ private:
 
 	//オブジェクトごとの距離
 	float mOffset;
+
+	// 床のスケール
+	const float MGroundScale;
+	// ろうそくのスケール
+	const float MCandleScale;
+	// プレイヤーのスケール
+	const float MPlayerScale;
+
+	// ろうそく(プレイヤー含め)の初期ポジションｚ軸
+	const float MCandleZPos;
 };
 

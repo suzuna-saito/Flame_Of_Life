@@ -2,13 +2,16 @@
 @brief	インクルード
 */
 #include "pch.h"
-//#include "Ground.h"
-//#include "SamplePlayer.h"
 
 /*
 @fn	コンストラクタ
 */
-MapCreate::MapCreate() :GameObject(SceneBase::other, Tag::Other)
+MapCreate::MapCreate() 
+	:GameObject(SceneBase::other, Tag::Other)
+	, MGroundScale(7.0f)
+	, MCandleScale(4.0f)
+	, MPlayerScale(5.0f)
+	, MCandleZPos(60.0f)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -55,6 +58,14 @@ bool MapCreate::OpenFile()
 			printf("don't have Layer/player\n");
 			return true;
 		}
+
+		//ろうそくデータの読み込み
+		if (!readTiledJson(mCandleMapData, "Assets/Config/test.json", "Candle"))
+		{
+			printf("don't have Layer/Candle\n");
+			return true;
+		}
+
 	}
 
 	return false;
@@ -63,7 +74,6 @@ bool MapCreate::OpenFile()
 /*
 @fn	床を生成する
 */
-
 void MapCreate::CreateGround()
 {
 	for (float iz = 0; iz < mSizeY; iz++)
@@ -72,7 +82,7 @@ void MapCreate::CreateGround()
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
 			const Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, 0.0f);
-			const Vector3 objectSize = Vector3(100, 100, 100);
+			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 
 			switch (mScene)
 			{
@@ -101,8 +111,8 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, 250.0f);
-			Vector3 objectSize = Vector3(1.2f, 1.2f, 1.2f);
+			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, MCandleZPos);
+			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			switch (mScene)
 			{
@@ -120,6 +130,37 @@ void MapCreate::CreatePlayer()
 	}
 
 }
+
+/*
+@fn	ろうそくを生成する
+*/
+void MapCreate::CreateCandle()
+{
+	for (float iz = 0; iz < mSizeY; iz++)
+	{
+		for (float ix = 0; ix < mSizeX; ix++)
+		{
+			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
+			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, MCandleZPos);
+			Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
+
+			switch (mScene)
+			{
+			case SceneBase::tutorial:
+
+				switch (name)
+				{
+				case(3):
+					new Candle(objectPos, objectSize, candle, SceneBase::tutorial);
+					break;
+				}
+				break;
+			}
+		}
+	}
+
+}
+
 
 bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName)
 {

@@ -174,10 +174,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="Candle.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -224,10 +226,12 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="Candle.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="FireObject.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

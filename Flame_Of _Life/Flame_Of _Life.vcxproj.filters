@@ -112,6 +112,12 @@
     <ClCompile Include="Player.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Candle.cpp">
+      <Filter>GameObject\Candle</Filter>
+    </ClCompile>
+    <ClCompile Include="FireObject.cpp">
+      <Filter>GameObject\FireObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -227,6 +233,12 @@
     <ClInclude Include="Player.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Candle.h">
+      <Filter>GameObject\Candle</Filter>
+    </ClInclude>
+    <ClInclude Include="FireObject.h">
+      <Filter>GameObject\FireObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -282,6 +294,12 @@
     </Filter>
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{a3675b10-ecd6-40ab-b62b-15ff9a7185c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Candle">
+      <UniqueIdentifier>{e4e022d1-eb78-4ee7-a174-f64136e274f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\FireObject">
+      <UniqueIdentifier>{e2da35e8-e69e-4572-9ea7-38adfc020f5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

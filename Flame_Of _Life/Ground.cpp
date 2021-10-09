@@ -9,14 +9,15 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
-	SetScale(Vector3(1.0f, 1.0f, 1.0f));
+	SetScale(_size);
 	SetPosition(_pos);
 
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Environment/Fireplace/Fireplace.gpmesh"));
-	
+	//mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Environment/Carpets/Carpet_long_1.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Environment/Books/Book_1.gpmesh"));
+
 	//地面の当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
 	AABB box = { Vector3(-1.0f,-1.0f,0.0f),Vector3(1.0f,1.0f,0.7f) };

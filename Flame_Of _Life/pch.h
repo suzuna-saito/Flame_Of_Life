@@ -69,8 +69,12 @@
 #include "MainCameraObject.h"
 /* 床 */
 #include "Ground.h"
+/* ろうそく */
+#include "Candle.h"
 /* プレイヤー */
 #include "Player.h"
+/* ろうそくについてるオブジェクト */
+#include "FireObject.h"
 
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"

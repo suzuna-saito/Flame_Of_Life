@@ -33,6 +33,7 @@ enum Tag
 	Camera,
 	player,
 	ground,
+	candle,
 	UI,
 };
 

@@ -1,9 +1,7 @@
-#pragma once
-
 /*
-@brief	インクルード
+@brief	プリプロセッサ
 */
-#include "GameObject.h"
+#pragma once
 
 class Ground :public GameObject
 {
