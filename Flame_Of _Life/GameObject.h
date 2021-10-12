@@ -190,6 +190,9 @@ protected:
 	//このゲームオブジェクトのID
 	int mMyObjectId;
 
+	// ボックスの当たり判定
+	BoxCollider* mBoxCollider;
+
 	//Transform
 	Vector3 mPosition;
 	Vector3 mVelocity;

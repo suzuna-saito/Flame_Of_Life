@@ -40,14 +40,8 @@
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Components\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="MainCameraObject.cpp">
       <Filter>GameObject\CameraObject</Filter>
@@ -106,17 +100,23 @@
     <ClCompile Include="GameScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>GameObject\Ground</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameObject\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Candle.cpp">
-      <Filter>GameObject\Candle</Filter>
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="FireObject.cpp">
-      <Filter>GameObject\FireObject</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObject\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,14 +158,8 @@
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Components\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="MainCameraObject.h">
       <Filter>GameObject\CameraObject</Filter>
@@ -227,17 +221,23 @@
     <ClInclude Include="GameScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>GameObject\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameObject\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Candle.h">
-      <Filter>GameObject\Candle</Filter>
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="FireObject.h">
-      <Filter>GameObject\FireObject</Filter>
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObject\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -289,17 +289,8 @@
     <Filter Include="UI\Sprite">
       <UniqueIdentifier>{5547509d-45b3-4a7a-9df0-4513791d40df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Ground">
-      <UniqueIdentifier>{c1098e61-fa55-4d68-b075-ef315e1237b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player">
-      <UniqueIdentifier>{a3675b10-ecd6-40ab-b62b-15ff9a7185c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Candle">
-      <UniqueIdentifier>{e4e022d1-eb78-4ee7-a174-f64136e274f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\FireObject">
-      <UniqueIdentifier>{e2da35e8-e69e-4572-9ea7-38adfc020f5f}</UniqueIdentifier>
+    <Filter Include="GameObject\Game">
+      <UniqueIdentifier>{619c6d9e-a6ea-4ec8-ad79-67b51fde3cea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
