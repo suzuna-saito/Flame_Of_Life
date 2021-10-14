@@ -277,6 +277,9 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <None Include="Particle.frag" />
     <None Include="Phong.frag" />
     <None Include="Phong.vert" />
+    <None Include="Shaders\Line.frag" />
+    <None Include="Shaders\Line.vert" />
+    <None Include="Shaders\LineWorld.vert" />
     <None Include="Skinned.vert" />
     <None Include="Sprite.frag" />
     <None Include="Sprite.vert" />

@@ -23,6 +23,8 @@ public:
 	*/
 	~GameScene();
 
+	void Input(const InputState& state)override;
+
 	/*
 	@fn	現在のシーン時に毎フレーム更新処理をする
 	*/

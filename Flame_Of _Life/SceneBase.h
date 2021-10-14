@@ -62,11 +62,11 @@ protected:
     //マップ生成
     MapCreate* mMapCreate;
 
-    //ゲームクリアしたか
-    bool mClearFlag;
     //次のシーンに遷移する時の待機時間
     int mNextSceneCount;
 
+    //ゲームクリアしたか
+    bool mClearFlag;
 private:
 
     //現在のシーン

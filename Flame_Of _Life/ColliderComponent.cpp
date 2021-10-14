@@ -23,3 +23,13 @@ ColliderComponent::ColliderComponent(GameObject* _owner, ColliderTag _tag, int _
 {
 }
 
+ColliderTag& operator++(ColliderTag& rhs)
+{
+	if (rhs == ColliderTag::end)
+	{
+		throw std::out_of_range("for outof range Tag& operator ++ (Tag&)");
+	}
+	rhs = ColliderTag(static_cast<std::underlying_type<ColliderTag>::type>(rhs) + 1);
+
+	return rhs;
+}

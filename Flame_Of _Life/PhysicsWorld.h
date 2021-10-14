@@ -77,6 +77,9 @@ public:
 	*/
 	void RemoveSphere(SphereCollider* _sphere);
 
+	void DebugShowBox();                                               // デバッグ用ボックス表示
+	void ToggleDebugMode() { mBoolDebugMode = !mBoolDebugMode; }       // デバッグモード
+
 private:
 
 	/*
@@ -102,6 +105,11 @@ private:
 	*/
 	void SphereAndBox();
 
+	void InitBoxVertices();
+	void InitSquareVertices();
+	void InitLineVertices();
+	void DrawCollisions(std::vector<class BoxCollider*>& boxes, const Vector3& color);
+
 	//矩形の当たり判定を全て格納するための可変長コンテナ
 	std::vector<BoxCollider*> mBoxes;
 
@@ -112,6 +120,15 @@ private:
 	std::vector<SphereCollider*> mSpheres;
 
 	OnCollisionMap mCollisionFunction;
+
+	std::vector<Vector3>      mLineColors;                             // 当たり判定ボックスのカラー
+
+	bool                      mBoolDebugMode;                          // デバッグモード
+
+	unsigned int mBoxVAO;      // ボックス描画用のVAO 
+	unsigned int mSquareVAO;   // 平面描画用のVAO
+	unsigned int mLineVAO;     // ライン用VAO
+	class Shader* mLineShader; // ライン描画用シェーダー
 
 public://ゲッターセッター
 

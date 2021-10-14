@@ -22,6 +22,8 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mAccelerator(8.0f)
 	, mJump(7.0f)
 	, mMaxJump(150.0f)
+	, M_MinCol(-20.0f)
+	, M_MaxCol(10.0f)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -35,8 +37,9 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(0.0f,0.0f,0.0f),Vector3(0.5f,0.5f,0.5f) };
+	AABB box = { Vector3(-3.0f,0.0f,0.0f),Vector3(3.0f,2.0f,30.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
 }
 
 /*
@@ -47,7 +50,9 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -700, 300), mPosition);
+	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 300), mPosition);
+	//プレイヤーを横から見る位置にカメラをセット
+	mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 300), mPosition);
 
 	// 座標をセット
 	mPosition += mVelocity;

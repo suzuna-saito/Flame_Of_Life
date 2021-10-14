@@ -29,12 +29,16 @@ enum State
 */
 enum Tag
 {
+	start,
+
 	Other,
 	Camera,
 	player,
 	ground,
 	candle,
 	UI,
+
+	end,
 };
 
 /*
