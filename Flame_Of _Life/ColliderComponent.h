@@ -13,13 +13,21 @@
 @enum　GameObjectタグ
 衝突相手を判別するために使用
 */
-enum class ColliderTag
+enum class ColliderTag : unsigned char
 {
-	OtherTag,
+	start,
+
+	OtherTag = start,
 	CameraTag,
 	playerTag,
-	groundTag
+	groundTag,
+
+	end,
 };
+
+// 前置インクリメント
+ColliderTag& operator ++(ColliderTag& rhs);
+
 
 class ColliderComponent : public Component
 {

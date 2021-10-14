@@ -336,5 +336,14 @@
     <None Include="Sprite.vert">
       <Filter>Shader</Filter>
     </None>
+    <None Include="Shaders\Line.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\LineWorld.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Line.frag">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

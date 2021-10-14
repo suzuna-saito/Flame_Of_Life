@@ -35,8 +35,9 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(0.0f,0.0f,0.0f),Vector3(0.5f,0.5f,0.5f) };
+	AABB box = { Vector3(0.0f,0.0f,0.0f),Vector3(10.0f,10.0f,10.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
 }
 
 /*

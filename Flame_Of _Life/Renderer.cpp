@@ -254,6 +254,8 @@ void Renderer::Draw()
 		}
 	}
 
+	PHYSICS->DebugShowBox();
+
 	// バッファを交換
 	SDL_GL_SwapWindow(mWindow);
 }
