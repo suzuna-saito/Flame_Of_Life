@@ -61,7 +61,8 @@ private:
 	int	mSizeZ;
 
 	//オブジェクトごとの距離
-	float mOffset;
+	const float MOffsetX;
+	const float MOffsetY;
 
 	// 床のスケール
 	const float MGroundScale;

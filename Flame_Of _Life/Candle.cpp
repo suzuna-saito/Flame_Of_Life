@@ -22,17 +22,33 @@ Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
 	AABB box = { Vector3(-1.0f,-1.0f,0.0f),Vector3(1.0f,1.0f,0.7f) };
 	mSelfBoxCollider->SetObjectBox(box);
-
-	// ろうそくの火を生成
-	new FireObject(this, Vector3(3.0f, 3.0f, 3.0f), mTag);
 }
 
-//void Candle::UpdateGameObject(float _deltaTime)
-//{
-//	if (mFireFlag && !mDrawFireFlag)
-//	{
-//		
-//
-//		mDrawFireFlag = true;
-//	}
-//}
+/*
+@fn		ろうそくのアップデート
+@param	_deltaTime 最後のフレームを完了するのに要した時間
+*/
+void Candle::UpdateGameObject(float _deltaTime)
+{
+	if (mFireFlag)
+	{
+		// ろうそくの火を生成
+		new FireObject(this, Vector3(3.0f, 3.0f, 3.0f), mTag);
+	}
+}
+
+/*
+@fn		ろうそくがヒットした時の処理
+@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
+*/
+void Candle::OnCollision(const GameObject& _hitObject)
+{
+	//ヒットしたオブジェクトのタグを取得
+	mTag = _hitObject.GetTag();
+
+	// プレイヤーと当たったら
+	if (mTag == player)
+	{
+		mFireFlag = true;
+	}
+}

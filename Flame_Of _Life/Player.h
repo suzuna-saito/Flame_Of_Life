@@ -50,10 +50,7 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
-	// “–‚½‚è”»’è
-	const float M_MinCol; // “–‚½‚è”»’è‚ÌÅ¬’l
-	const float M_MaxCol; // “–‚½‚è”»’è‚ÌÅ‘å’l
-
+	
 	// d—Í
 	static const float Gravity;
 

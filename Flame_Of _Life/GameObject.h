@@ -31,7 +31,7 @@ enum Tag
 {
 	start,
 
-	Other,
+	Other = start,
 	Camera,
 	player,
 	ground,

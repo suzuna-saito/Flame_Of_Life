@@ -8,15 +8,16 @@
 */
 MapCreate::MapCreate() 
 	:GameObject(SceneBase::other, Tag::Other)
-	, MGroundScale(7.0f)
+	, MGroundScale(6.0f)
 	, MCandleScale(4.0f)
 	, MPlayerScale(5.0f)
 	, MCandleZPos(60.0f)
+	, MOffsetX(160.0f)
+	, MOffsetY(220.0f)
 {
 	mSizeX = 0;
 	mSizeY = 0;
 	mSizeZ = 0;
-	mOffset = 200;
 }
 
 /*
@@ -81,7 +82,7 @@ void MapCreate::CreateGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
-			const Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, 0.0f);
+			const Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, 0.0f);
 			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 
 			switch (mScene)
@@ -111,7 +112,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, MCandleZPos);
+			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, MCandleZPos);
 			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			switch (mScene)
@@ -141,7 +142,7 @@ void MapCreate::CreateCandle()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffset * ix, mOffset * iz, MCandleZPos);
+			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, MCandleZPos);
 			Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
 			switch (mScene)

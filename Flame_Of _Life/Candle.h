@@ -12,6 +12,12 @@ public:
 	// デストラクタ
 	~Candle() {};
 
+	/*
+	@fn		ろうそくのアップデート
+	@param	_deltaTime 最後のフレームを完了するのに要した時間
+	*/
+	void UpdateGameObject(float _deltaTime)override;
+
 
 private:
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -19,6 +25,14 @@ private:
 
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
+
+
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
+	@param	当たったGameObject
+	*/
+	void OnCollision(const GameObject& _hitObject)override;
+
 
 	// ろうそくの火がつくかどうか
 	bool mFireFlag;

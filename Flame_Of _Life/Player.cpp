@@ -22,8 +22,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mAccelerator(8.0f)
 	, mJump(7.0f)
 	, mMaxJump(150.0f)
-	, M_MinCol(-20.0f)
-	, M_MaxCol(10.0f)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -37,7 +35,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(-3.0f,0.0f,0.0f),Vector3(3.0f,2.0f,30.0f) };
+	AABB box = { Vector3(3.0f,-3.0f,0.0f),Vector3(-3.0f,3.0f,35.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
 }
@@ -50,30 +48,22 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 300), mPosition);
+	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -700, 150), mPosition);
 	//プレイヤーを横から見る位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 300), mPosition);
+	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 
 	// 座標をセット
 	mPosition += mVelocity;
 
-	// コード汚すぎ　書き直せ------------
-
-	//if (mNowJump)
-	//{
- //		mVelocity.z = mJump;
-	//}
-	//if(mPosition.z >= mMaxJump)
-	//{
-	//	mNowJump = false;
-	//	mVelocity.z = 3.0f;
-	//}
-
-	/*if (!mIsGroundFlag)
+	// 重力
+	if (!mIsGroundFlag)
 	{
 		mPosition.z -= Gravity;
-	}*/
+	}
 
+	mIsGroundFlag = false;
+
+	// ポジションをセット
 	SetPosition(mPosition);
 }
 
@@ -118,12 +108,14 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}
 
 
-	// スペースでジャンプ
-	if (mIsGroundFlag && _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE))
+	///// でバック用 //////
+	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN))
 	{
-		mVelocity.z = mAccelerator;
-		mIsGroundFlag = false;
-		mNowJump = true;
+		mVelocity.z = -mMoveSpeed;
+	}
+	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP))
+	{
+		mVelocity.z = mMoveSpeed;
 	}
 	else
 	{
@@ -140,9 +132,9 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	if (mTag == ground)
+	// 床と設置したら
+	if (mTag == ground && mPosition.z >= 50.0f )
 	{
-		//CalcCollisionFixVec();
 		mIsGroundFlag = true;
 
 		mVelocity.z = 0.0f;

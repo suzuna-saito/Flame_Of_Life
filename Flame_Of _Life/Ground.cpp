@@ -20,13 +20,13 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//’n–Ê‚Ì“–‚½‚è”»’è
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
-	AABB box = { Vector3(-1.0f,-1.0f,0.0f),Vector3(1.0f,1.0f,0.7f) };
+	AABB box = { Vector3(13.0f,-20.0f,0.0f),Vector3(-13.0f,16.5f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
-	//‰ñ“]ˆ—                        «‰ñ“]‚·‚é’l
-	float radian = Math::ToRadians(180.0f);
-	Quaternion rot = this->GetRotation();
-	Quaternion inc(Vector3::UnitZ, radian);
-	Quaternion target = Quaternion::Concatenate(rot, inc);
-	SetRotation(target);
+	////‰ñ“]ˆ—                        «‰ñ“]‚·‚é’l
+	//float radian = Math::ToRadians(180.0f);
+	//Quaternion rot = this->GetRotation();
+	//Quaternion inc(Vector3::UnitZ, radian);
+	//Quaternion target = Quaternion::Concatenate(rot, inc);
+	//SetRotation(target);
 }
