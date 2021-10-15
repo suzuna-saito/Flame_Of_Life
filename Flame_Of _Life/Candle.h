@@ -39,7 +39,13 @@ private:
 	// ろうそくの火を描画しているかどうか
 	bool mDrawFireFlag;
 
+	// 火がついたろうそくの本数
+	static int mCandleCount;
+
 public: // セッター、ゲッター
-	bool SetFireFlag(bool _flag) { mFireFlag = _flag; }
+	// 火がついたろうそくの本数を返す
+	int mGetCandleNum() { return mCandleCount; }
+
+
 };
 

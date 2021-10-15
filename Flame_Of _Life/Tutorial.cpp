@@ -7,7 +7,8 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-GameScene::GameScene(const Scene& _nowScene)
+Tutorial::Tutorial(const Scene& _nowScene)
+	:SceneBase()
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));
@@ -31,20 +32,24 @@ GameScene::GameScene(const Scene& _nowScene)
 		mMapCreate->CreateCandle();
 	}
 
+	mCandle = nullptr;
 }
 
 /*
 @fn	デストラクタ
 */
-GameScene::~GameScene()
+Tutorial::~Tutorial()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(tutorial);
+
+	delete mMapCreate;
+	delete mCandle;
 }
 
-void GameScene::Input(const InputState& state)
+void Tutorial::Input(const InputState& _state)
 {
 	// 当たり判定表示モードの切り替え
-	if (state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == 1)
+	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == 1)
 	{
 		PHYSICS->ToggleDebugMode();
 	}
@@ -53,9 +58,12 @@ void GameScene::Input(const InputState& state)
 /*
 @fn	現在のシーン時に毎フレーム更新処理をする
 */
-SceneBase* GameScene::update()
+SceneBase* Tutorial::update()
 {
-	
+	if (mCandle->mGetCandleNum() == 1)
+	{
+		//return new Stage01(stage01);
+	}
 
 	return this;
 }

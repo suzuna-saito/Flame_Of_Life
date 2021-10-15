@@ -3,6 +3,10 @@
 */
 #include "pch.h"
 
+// 静的メンバ変数
+
+int Candle::mCandleCount = 0; // 火がついてるろうそくの本数
+
 Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mFireFlag(false)
@@ -30,10 +34,14 @@ Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 */
 void Candle::UpdateGameObject(float _deltaTime)
 {
-	if (mFireFlag)
+	if (mFireFlag && !mDrawFireFlag)
 	{
 		// ろうそくの火を生成
 		new FireObject(this, Vector3(3.0f, 3.0f, 3.0f), mTag);
+
+		mDrawFireFlag = true;
+
+		mCandleCount++;
 	}
 }
 
@@ -46,8 +54,8 @@ void Candle::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// プレイヤーと当たったら
-	if (mTag == player)
+	// タグがろうそくになったら
+	if (mTag == candle && !mFireFlag)
 	{
 		mFireFlag = true;
 	}

@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 	Game game;
 	//ƒQ[ƒ€ƒNƒ‰ƒX‚Ì‰Šú‰»‚ª¬Œ÷‚µ‚½‚©
 	bool success = game.Initialize();
-	game.SetFirstScene(new TitleScene(SceneBase::title));
+	game.SetFirstScene(new Title(SceneBase::title));
 	if (success)
 	{
 		game.GameLoop();

@@ -91,14 +91,8 @@
     <ClCompile Include="SandEffect.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>UI\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Candle.cpp">
       <Filter>GameObject</Filter>
@@ -117,6 +111,15 @@
     </ClCompile>
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameObject\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Tutorial.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage01.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,14 +215,8 @@
     <ClInclude Include="SandEffect.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>UI\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Candle.h">
       <Filter>GameObject</Filter>
@@ -238,6 +235,15 @@
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
       <Filter>GameObject\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Tutorial.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage01.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

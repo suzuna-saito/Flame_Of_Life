@@ -4,9 +4,6 @@
 #include "pch.h"
 
 
-// 定数と静的メンバーの初期化
-const float Player::Gravity = 5.0f;
-
 /*
 @fn		コンストラクタ
 @param	_pos プレイヤーの座標
@@ -17,11 +14,7 @@ const float Player::Gravity = 5.0f;
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mIsGroundFlag(false)
-	, mNowJump(false)
 	, mMoveSpeed(7.0f)
-	, mAccelerator(8.0f)
-	, mJump(7.0f)
-	, mMaxJump(150.0f)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -37,7 +30,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
 	AABB box = { Vector3(3.0f,-3.0f,0.0f),Vector3(-3.0f,3.0f,35.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
-
 }
 
 /*
@@ -48,7 +40,7 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -700, 150), mPosition);
+	mMainCamera->SetViewMatrixLerpObject(Vector3(0, -700, 200), mPosition);
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 
@@ -58,7 +50,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 重力
 	if (!mIsGroundFlag)
 	{
-		mPosition.z -= Gravity;
+		mPosition.z -= mGravity;
 	}
 
 	mIsGroundFlag = false;
@@ -136,7 +128,5 @@ void Player::OnCollision(const GameObject& _hitObject)
 	if (mTag == ground && mPosition.z >= 50.0f )
 	{
 		mIsGroundFlag = true;
-
-		mVelocity.z = 0.0f;
 	}
 }

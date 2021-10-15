@@ -4,7 +4,7 @@
 #pragma once
 
 
-class TitleScene : public SceneBase
+class Title : public SceneBase
 {
 public:
 
@@ -12,12 +12,12 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	TitleScene(const Scene& _nowScene);
+	Title(const Scene& _nowScene);
 
 	/*
 	@fn	デストラクタ
 	*/
-	~TitleScene();
+	~Title();
 
 	/*
 	@fn	タイトルシーン時に毎フレーム更新処理をする
@@ -31,6 +31,5 @@ public:
 
 private:
 
-	bool mGameSceneFlag;
 };
 

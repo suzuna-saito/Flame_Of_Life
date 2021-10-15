@@ -13,6 +13,7 @@ SceneBase::SceneBase()
 	:/* mSprite(nullptr)
 	, */mMapCreate(nullptr)
 	, mClearFlag(false)
-	, mNextSceneCount(false)
+	, mGameSceneFlag(false)
+	, mNextSceneCount(0)
 {
 }

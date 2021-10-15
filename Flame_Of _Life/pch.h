@@ -71,10 +71,10 @@
 #include "Ground.h"
 /* ろうそく */
 #include "Candle.h"
-/* プレイヤー */
-#include "Player.h"
 /* ろうそくについてるオブジェクト */
 #include "FireObject.h"
+/* プレイヤー */
+#include "Player.h"
 
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"
@@ -88,8 +88,9 @@
 
 // シーン
 #include "SceneBase.h"
-#include "TitleScene.h"
-#include "GameScene.h"
+#include "Title.h"
+#include "Tutorial.h"
+#include "Stage01.h"
 
 // コリジョン *
 #include "PhysicsWorld.h"

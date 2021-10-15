@@ -62,6 +62,9 @@ protected:
     //マップ生成
     MapCreate* mMapCreate;
 
+    // 次のシーンに遷移するか
+    bool mGameSceneFlag;
+
     //次のシーンに遷移する時の待機時間
     int mNextSceneCount;
 

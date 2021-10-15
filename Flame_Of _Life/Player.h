@@ -51,23 +51,14 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 
 	
-	// 重力
-	static const float Gravity;
+	//// 重力
+	//static const float Gravity;
 
 	// 移動スピード
 	const float mMoveSpeed;
 
 	// 地面に接地しているどうか
 	bool mIsGroundFlag;
-
-	// 最初のジャンプ力
-	const float mAccelerator;
-	// ジャンプ力
-	const float mJump;
-	// 最大ジャンプ力
-	const float mMaxJump;
-	// ジャンプ中かどうか
-	bool mNowJump;
 
 public://ゲッターセッター
 

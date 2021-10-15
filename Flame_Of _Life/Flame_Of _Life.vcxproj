@@ -184,7 +184,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="main.cpp" />
@@ -217,8 +216,10 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="Stage01.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="Title.cpp" />
+    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
@@ -236,7 +237,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="GameScene.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="MainCameraObject.h" />
@@ -260,8 +260,10 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="Stage01.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>

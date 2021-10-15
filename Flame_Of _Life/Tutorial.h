@@ -3,12 +3,9 @@
 */
 #pragma once
 
-/*
-@brief	インクルード
-*/
-#include "SceneBase.h"
+class Candle;
 
-class GameScene : public SceneBase
+class Tutorial : public SceneBase
 {
 public:
 
@@ -16,12 +13,12 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	GameScene(const Scene& _nowScene);
+	Tutorial(const Scene& _nowScene);
 
 	/*
 	@fn	デストラクタ
 	*/
-	~GameScene();
+	~Tutorial();
 
 	void Input(const InputState& state)override;
 
@@ -31,5 +28,5 @@ public:
 	SceneBase* update() override;
 
 private:
-
+	Candle* mCandle;
 };
