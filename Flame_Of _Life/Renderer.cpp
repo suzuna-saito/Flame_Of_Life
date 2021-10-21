@@ -230,6 +230,22 @@ void Renderer::Draw()
 		}
 	}
 
+	// メッシュコンポーネントの描画
+ // 基本的なメッシュシェーダーをアクティブにする
+	mSkinnedShader->SetActive();
+	// ビュー射影行列を更新する
+	mSkinnedShader->SetMatrixUniform("uViewProj", mView * mProjection);
+	// シェーダーに渡すライティング情報を更新する
+	SetLightUniforms(mSkinnedShader, mView);
+	// すべてのメッシュの描画
+	for (auto skMc : mSkeletalMeshes)
+	{
+		if (skMc->GetVisible())
+		{
+			skMc->Draw(mSkinnedShader);
+		}
+	}
+
 	DrawParticle();
 
 	// UIの描画

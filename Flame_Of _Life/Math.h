@@ -365,6 +365,8 @@ public:
 		return clear;
 	}
 
+	
+
 	// Scalar *=
 	Vector3& operator*=(float _scalar)
 	{
@@ -1144,3 +1146,6 @@ namespace Color
 	static const Vector3 LightPink(1.0f, 0.71f, 0.76f);
 	static const Vector3 LightGreen(0.56f, 0.93f, 0.56f);
 }
+
+// 2つのベクトルはほぼ同じ角度か
+bool isNearAngle(const Vector3& v1, const Vector3& v2);

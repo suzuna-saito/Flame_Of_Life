@@ -30,9 +30,8 @@ MainCameraObject::~MainCameraObject()
 void MainCameraObject::UpdateGameObject(float _deltaTime)
 {
 	Vector3 pos = mOffsetPos + mPosition;
-	pos.x = mLerpObject.x + mOffsetPos.x;
-	pos.y = mLerpObject.y + mOffsetPos.y;
-	pos.z = mLerpObject.z + mOffsetPos.z;
+	pos = mLerpObject + mOffsetPos;
+	
 	mPosition = pos;
 
 	SetPosition(mPosition);

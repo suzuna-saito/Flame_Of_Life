@@ -10,13 +10,6 @@
 Title::Title(const Scene& _nowScene)
 	:SceneBase()
 {
-	// ライトを設定(設定しないと何も映らない)
-	RENDERER->SetAmbientLight(Vector3(0.4f, 0.4f, 0.4f));
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.m_direction = Vector3(1.0f, 0.7f, -0.7f);
-	dir.m_diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
-	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
-
 	SetScene(_nowScene);
 
 	// タイトル画像

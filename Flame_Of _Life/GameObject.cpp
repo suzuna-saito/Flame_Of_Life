@@ -20,6 +20,7 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mVelocity(Vector3::Zero)
 	, mAabb(Vector3::Zero, Vector3::Zero)
 	, mScale(Vector3(1.0f, 1.0f, 1.0f))
+	, mDirection(Vector3::Zero)
 	, mRotation(Quaternion::Identity)
 	, mMyObjectId(mGameObjectId)
 	, mTag(_objectTag)

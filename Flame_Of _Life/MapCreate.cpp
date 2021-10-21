@@ -13,7 +13,7 @@ MapCreate::MapCreate()
 	, MPlayerScale(5.0f)
 	, MCandleZPos(60.0f)
 	, MOffsetX(160.0f)
-	, MOffsetY(220.0f)
+	, MOffsetY(-220.0f)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -26,6 +26,10 @@ MapCreate::MapCreate()
 MapCreate::~MapCreate()
 {
 	mGroundMapData.clear();
+	mGroundMapData2.clear();
+	mGroundMapData3.clear();
+	mPlayerMapData.clear();
+	mCandleMapData.clear();
 }
 
 /*
@@ -69,6 +73,49 @@ bool MapCreate::OpenFile()
 
 	}
 
+	//-----------------------------------------------
+	//----------------stage0l------------------------
+	//-----------------------------------------------
+	if (mScene == SceneBase::stage01)
+	{
+		//床データの読み込み
+		if (!readTiledJson(mGroundMapData, "Assets/Config/map.json", "Ground"))
+		{
+			printf("don't have Layer/Ground\n");
+			return true;
+		}
+		if (!readTiledJson(mGroundMapData2, "Assets/Config/map.json", "Ground2"))
+		{
+			printf("don't have Layer/Ground2\n");
+			return true;
+		}
+		if (!readTiledJson(mGroundMapData3, "Assets/Config/map.json", "Ground3"))
+		{
+			printf("don't have Layer/Ground3\n");
+			return true;
+		}
+
+		mSizeX = mGroundMapData[0].size();
+		mSizeY = mGroundMapData[0].size();
+		//mSizeZ = mGroundMapData.size();
+
+		//プレイヤーデータの読み込み
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/map.json", "Player"))
+		{
+			printf("don't have Layer/player\n");
+			return true;
+		}
+
+		//ろうそくデータの読み込み
+		if (!readTiledJson(mCandleMapData, "Assets/Config/map.json", "Candle"))
+		{
+			printf("don't have Layer/Candle\n");
+			return true;
+		}
+
+	}
+
+
 	return false;
 }
 
@@ -95,6 +142,32 @@ void MapCreate::CreateGround()
 					new Ground(objectPos, objectSize, ground, SceneBase::tutorial);
 					break;
 				}
+				break;
+
+			case SceneBase::stage01:
+
+				switch (name)
+				{
+				case(1):
+					new Ground(objectPos, objectSize, ground, SceneBase::stage01);
+					break;
+				case(3):
+					new Ground(objectPos+Vector3(0.0f,0.0f,3.0f), objectSize, ground, SceneBase::stage01);
+					break;
+				case(4):
+					new Ground(objectPos/* + Vector3(0.0f, 0.0f, 10.0f)*/, objectSize, ground, SceneBase::stage01);
+					break;
+				case(5):
+					new Ground(objectPos/* + Vector3(0.0f, 0.0f, 15.0f)*/, objectSize, ground, SceneBase::stage01);
+					break;
+				case(6):
+					new Ground(objectPos/* + Vector3(0.0f, 0.0f, 20.0f)*/, objectSize, ground, SceneBase::stage01);
+					break;
+				case(7):
+					new Ground(objectPos /*+ Vector3(0.0f, 0.0f, 25.0f)*/, objectSize, ground, SceneBase::stage01);
+					break;
+				}
+
 				break;
 			}
 		}
@@ -123,6 +196,16 @@ void MapCreate::CreatePlayer()
 				{
 				case(2):
 					new Player(objectPos, objectSize, player, SceneBase::tutorial);
+					break;
+				}
+				break;
+
+			case SceneBase::stage01:
+
+				switch (name)
+				{
+				case(2):
+					new Player(objectPos, objectSize, player, SceneBase::stage01);
 					break;
 				}
 				break;

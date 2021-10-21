@@ -46,6 +46,8 @@ private:
 
 	//床マップデータ
 	std::vector<std::vector<int>> mGroundMapData;
+	std::vector<std::vector<int>> mGroundMapData2;
+	std::vector<std::vector<int>> mGroundMapData3;
 	//プレイヤーマップデータ
 	std::vector<std::vector<int>> mPlayerMapData;
 	//ろうそくマップデータ

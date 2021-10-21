@@ -10,7 +10,19 @@
 Stage01::Stage01(const Scene& _nowScene)
 	:SceneBase()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(stage01);
+	SetScene(_nowScene);
+
+	mMapCreate = new MapCreate();
+
+	if (!mMapCreate->OpenFile())
+	{
+		// °‚Ì¶¬
+		mMapCreate->CreateGround();
+		// ƒvƒŒƒCƒ„[‚Ì¶¬
+		mMapCreate->CreatePlayer();
+		// ‚ë‚¤‚»‚­‚Ì¶¬
+		mMapCreate->CreateCandle();
+	}
 }
 
 /*
@@ -18,6 +30,7 @@ Stage01::Stage01(const Scene& _nowScene)
 */
 Stage01::~Stage01()
 {
+	GAME_OBJECT_MANAGER->RemoveGameObjects(stage01);
 }
 
 

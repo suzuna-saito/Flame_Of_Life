@@ -201,6 +201,7 @@ protected:
 	Vector3 mPosition;
 	Vector3 mVelocity;
 	Vector3 mScale;
+	Vector3 mDirection;
 	//オブジェクトのクォータニオン
 	Quaternion  mRotation;
 	//オブジェクトのワールド行列
