@@ -37,12 +37,41 @@ public:
 	void GameObjectInput(const InputState& _keyState)override;
 
 private:
+	// プレイヤーの行動の状態
+	typedef enum PLAYER_STATE
+	{
+		IDLE,         // 待機
+		RUN,          // 走り
+
+		STATE_NUM           // state_num　必ず最後に書く
+							// ステートの個数
+	};
+
 
 	//ゲームオブジェクトのメッシュポインタ変数
 	MeshComponent* mMeshComponent;
-	//プレイヤーの球当たり判定を生成
-	//SphereCollider*		mSelfSphereCollider;
+	//プレイヤーの当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
+	//スケルタルメッシュ
+	SkeletalMeshComponent* mSkelComp;
+	
+	// 現在の状態
+	PLAYER_STATE  mNowState;
+	// 1つ前の状態
+	PLAYER_STATE  mPrevState;
+
+	// カメラポジション
+	const Vector3 MCameraPos;
+	// アニメーション
+	vector<const class Animation*> mAnimations;
+	// 回転目標方向
+	Vector3 mAnimVec; 
+
+	// 移動スピード
+	const float mMoveSpeed;
+
+	// 地面に接地しているどうか
+	bool mIsGround;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
@@ -51,14 +80,17 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 
 	
-	//// 重力
-	//static const float Gravity;
+	
+	// アニメーション関係
+	
+	// アイドル状態
+	void mIdleBehavior();
+	// ラン状態
+	void mRunBehavior();
 
-	// 移動スピード
-	const float mMoveSpeed;
 
-	// 地面に接地しているどうか
-	bool mIsGroundFlag;
+////デバック用
+//	Vector3 testPos;
 
 public://ゲッターセッター
 

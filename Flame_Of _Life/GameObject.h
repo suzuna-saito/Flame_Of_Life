@@ -29,16 +29,12 @@ enum State
 */
 enum Tag
 {
-	start,
-
-	Other = start,
+	Other,
 	Camera,
 	player,
 	ground,
 	candle,
 	UI,
-
-	end,
 };
 
 /*
@@ -201,6 +197,7 @@ protected:
 	Vector3 mPosition;
 	Vector3 mVelocity;
 	Vector3 mScale;
+	Vector3 mDirection;
 	//オブジェクトのクォータニオン
 	Quaternion  mRotation;
 	//オブジェクトのワールド行列

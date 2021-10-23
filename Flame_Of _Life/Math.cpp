@@ -293,3 +293,14 @@ void Matrix4::Transpose()
         }
     }
 }
+
+// 2つのベクトルはほぼ同じ角度か
+bool isNearAngle(const Vector3& v1, const Vector3& v2)
+{
+    float dot = Vector3::Dot(v1, v2);
+    if (dot > 0.99f)
+    {
+        return true;
+    }
+    return false;
+}

@@ -10,14 +10,6 @@
 Tutorial::Tutorial(const Scene& _nowScene)
 	:SceneBase()
 {
-	// ƒ‰ƒCƒg‚ğİ’è(İ’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
-	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));
-	DirectionalLight& dir = RENDERER->GetDirectionalLight();
-	dir.m_direction = Vector3(0.0f, 0.0f, 0.0f);
-	dir.m_diffuseColor = Vector3(1.0f, 1.0f, 1.0f);
-	//dir.m_diffuseColor = Vector3(0.5f, 0.5f, 0.8f);
-	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
-
 	SetScene(_nowScene);
 
 	mMapCreate = new MapCreate();
@@ -62,7 +54,7 @@ SceneBase* Tutorial::update()
 {
 	if (mCandle->mGetCandleNum() == 1)
 	{
-		//return new Stage01(stage01);
+		return new Stage01(stage01);
 	}
 
 	return this;

@@ -1,6 +1,8 @@
 #ifndef PCH_H
 #define PCH_H
 
+using namespace std;
+
 // ŠO•”ˆË‘¶
 #include <algorithm>
 #include <array>

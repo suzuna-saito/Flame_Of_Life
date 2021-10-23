@@ -161,6 +161,10 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 	// フレームと次のフレームの間の小数値を計算します。
 	float pct = _inTime / mFrameDuration - frame;
 
+	if (mNumFrames <= nextFrame)
+	{
+		--nextFrame;
+	}
 	// Setup the pose for the root
 	// ルートのポーズをセットアップ
 	if (mTracks[0].size() > 0)

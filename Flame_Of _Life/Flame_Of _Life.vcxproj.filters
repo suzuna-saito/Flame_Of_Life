@@ -121,6 +121,9 @@
     <ClCompile Include="Stage01.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Jump.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -244,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="Stage01.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Jump.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
