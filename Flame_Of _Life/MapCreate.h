@@ -77,7 +77,10 @@ private:
 	// プレイヤーのスケール
 	const float MPlayerScale;
 
-	// ろうそく(プレイヤー含め)の初期ポジションｚ軸
-	const float MCandleZPos;
+	// ろうそくの初期ポジションｚ軸
+	const float MCandleAddZPos;
+
+	// プレイヤーの初期ポジションｚ軸
+	const float MPlayerAddZPos;
 };
 

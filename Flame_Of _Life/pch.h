@@ -78,6 +78,9 @@ using namespace std;
 /* プレイヤー */
 #include "Player.h"
 
+// ジャンプ
+#include "Jump.h"
+
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"
 #include "EffectManager.h"

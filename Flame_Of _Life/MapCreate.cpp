@@ -11,7 +11,8 @@ MapCreate::MapCreate()
 	, MGroundScale(6.0f)
 	, MCandleScale(4.0f)
 	, MPlayerScale(5.0f)
-	, MCandleZPos(60.0f)
+	, MCandleAddZPos(60.0f)
+	, MPlayerAddZPos(60.0f)
 	, MOffsetX(160.0f)
 	, MOffsetY(-220.0f)
 	, mOffsetZ(0.0f)
@@ -173,7 +174,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, mOffsetZ +MCandleZPos);
+			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, mOffsetZ + MPlayerAddZPos);
 			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			switch (mScene)
@@ -213,7 +214,7 @@ void MapCreate::CreateCandle()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, mOffsetZ + MCandleZPos);
+			Vector3 objectPos = Vector3(-MOffsetX * ix, MOffsetY * iz, MCandleAddZPos);
 			Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
 			switch (mScene)

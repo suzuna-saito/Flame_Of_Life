@@ -122,7 +122,7 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="Jump.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>Jump</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,7 +249,7 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="Jump.h">
-      <Filter>GameObject</Filter>
+      <Filter>Jump</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +303,9 @@
     </Filter>
     <Filter Include="GameObject\Game">
       <UniqueIdentifier>{619c6d9e-a6ea-4ec8-ad79-67b51fde3cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Jump">
+      <UniqueIdentifier>{ee1e7d21-af4a-4760-b8d8-bdc337e8be4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
