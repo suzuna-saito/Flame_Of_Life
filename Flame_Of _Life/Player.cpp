@@ -15,6 +15,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	: GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
 	, MCameraPos(Vector3(0, -700, 200))
+	, mMoveSpeed(7.0f)
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
 {
@@ -200,7 +201,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 	mTag = _hitObject.GetTag();
 
 	// °‚ÆÝ’u‚µ‚½‚ç
-	if (mTag == ground /*&& mPosition.z >= 50.0f*/ )
+	if (mTag == ground)
 	{
 		mIsGround = true;
 	}

@@ -40,18 +40,18 @@ public:
 	void CreateCandle();
 private:
 
-	bool readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName);
+	bool readTiledJson(vector<vector<int>>& _mapData, const char* _fileName, const char* _layerName);
 
-	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& _layer, std::string& _layerName);
+	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& _layer, string& _layerName);
 
 	//床マップデータ
-	std::vector<std::vector<int>> mGroundMapData;
-	std::vector<std::vector<int>> mGroundMapData2;
-	std::vector<std::vector<int>> mGroundMapData3;
+	vector<vector<int>> mGroundMapData;
+	/*vector<vector<int>> mGroundMapData2;
+	vector<vector<int>> mGroundMapData3;*/
 	//プレイヤーマップデータ
-	std::vector<std::vector<int>> mPlayerMapData;
+	vector<vector<int>> mPlayerMapData;
 	//ろうそくマップデータ
-	std::vector<std::vector<int>> mCandleMapData;
+	vector<vector<int>> mCandleMapData;
 
 	//現在のシーン
 	int mScene;
@@ -66,8 +66,8 @@ private:
 	int mHeightChangeCount;
 
 	//オブジェクトごとの距離
-	const float MOffsetX;
-	const float MOffsetY;
+	float mOffsetX;
+	float mOffsetY;
 	float mOffsetZ;
 
 	// 床のスケール
@@ -77,10 +77,7 @@ private:
 	// プレイヤーのスケール
 	const float MPlayerScale;
 
-	// ろうそくの初期ポジションｚ軸
-	const float MCandleAddZPos;
-
-	// プレイヤーの初期ポジションｚ軸
-	const float MPlayerAddZPos;
+	// ろうそく(プレイヤー含め)の初期ポジションｚ軸
+	const float MCandleZPos;
 };
 

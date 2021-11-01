@@ -67,6 +67,9 @@ private:
 	// 回転目標方向
 	Vector3 mAnimVec; 
 
+	// 移動スピード
+	const float mMoveSpeed;
+
 	// 地面に接地しているどうか
 	bool mIsGround;
 
