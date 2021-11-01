@@ -214,7 +214,10 @@ void Renderer::Draw()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 
-	//glDisable(GL_BLEND);
+
+	/*glEnable(GL_BLEND);
+	glEnable(GL_ALPHA_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
 
 	// メッシュコンポーネントの描画
 	// 基本的なメッシュシェーダーをアクティブにする
@@ -276,6 +279,10 @@ void Renderer::Draw()
 
 	// バッファを交換
 	SDL_GL_SwapWindow(mWindow);
+
+	/*glDisable(GL_BLEND);
+	glDisable(GL_ALPHA_TEST);*/
+
 }
 
 /*
