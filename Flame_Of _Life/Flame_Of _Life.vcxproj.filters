@@ -11,7 +11,7 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
-      <Filter>InputSystem</Filter>
+      <Filter>GameObject\InputSystem</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Math</Filter>
@@ -135,7 +135,7 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
-      <Filter>InputSystem</Filter>
+      <Filter>GameObject\InputSystem</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Math</Filter>
@@ -259,9 +259,6 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{797cbb63-ca7b-489d-a5ae-c7b9691b5007}</UniqueIdentifier>
     </Filter>
-    <Filter Include="InputSystem">
-      <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Math">
       <UniqueIdentifier>{43cd4d49-b878-40c7-bcc2-d11ef44478fb}</UniqueIdentifier>
     </Filter>
@@ -303,6 +300,9 @@
     </Filter>
     <Filter Include="GameObject\Game">
       <UniqueIdentifier>{619c6d9e-a6ea-4ec8-ad79-67b51fde3cea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\InputSystem">
+      <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

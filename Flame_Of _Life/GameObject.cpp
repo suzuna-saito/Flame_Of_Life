@@ -26,11 +26,13 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mTag(_objectTag)
 	, mSceneTag(_sceneTag)
 	, mMoveSpeed(0.0f)
-	, mGravity(10.0f)
+	, MGravity(10.0f)
 	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)
 	, mHitFlag(false)
 	, mRespawnFlag(false)
+	, mAlpha(1.0f)
+	, mColor(Vector3(1.0f,1.0f,1.0f))
 {
 	mGameObjectId++;
 	//GameObjectManager‚Éƒ|ƒCƒ“ƒ^‚ð“n‚·

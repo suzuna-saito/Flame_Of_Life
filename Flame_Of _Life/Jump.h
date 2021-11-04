@@ -4,10 +4,11 @@ class Jump
 {
 public:
 	// コンストラクタ
-	Jump(Vector3& _pos);
+	Jump();
 	// デストラクタ
 	~Jump();
 
+	void Update();
 
 private:
 	// ジャンプの初速度

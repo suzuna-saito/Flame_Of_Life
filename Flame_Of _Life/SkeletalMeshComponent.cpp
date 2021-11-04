@@ -42,7 +42,8 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 			//スペキュラー強度をセット
 			_shader->SetFloatUniform("uSpecPower", 100);
 
-			_shader->SetVectorUniform("uColor", mColor);
+			// プレイヤーの色変更
+			_shader->SetVectorUniform("uColor", Vector3(0.8f, 0.1f, 0.5f));
 			//  テクスチャをセット 
 			Texture* t = mMesh->GetTexture(mTextureIndex);
 			if (t)

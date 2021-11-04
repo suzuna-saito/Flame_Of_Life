@@ -51,6 +51,7 @@ protected:
 	bool mVisible;
 	//スケルトンデータを用いるか
 	bool mSkeltonFlag;
+
 public: //ゲッターセッター
 	/*
 	@fn		描画をするかどうかを取得する

@@ -552,7 +552,7 @@ bool Renderer::LoadShaders()
 	}
 
 	mSkinnedShader = new Shader();
-	if (!mSkinnedShader->Load("Shaders/Skinned.vert", "Shaders/Phong.frag"))
+	if (!mSkinnedShader->Load("Shaders/Skinned.vert", "Shaders/SkinnedPhong.frag"))
 	{
 		return false;
 	}

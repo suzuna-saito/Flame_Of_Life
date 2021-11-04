@@ -48,6 +48,14 @@ private:
 	};
 
 
+	/*
+@fn		矩形と矩形の押し戻し
+@param	_myAABB	基準にするオブジェクトの矩形当たり判定
+@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
+@param	_pairTag ヒットするオブジェクトのタグ
+*/
+	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)override;
+
 	//ゲームオブジェクトのメッシュポインタ変数
 	MeshComponent* mMeshComponent;
 	//プレイヤーの当たり判定を生成

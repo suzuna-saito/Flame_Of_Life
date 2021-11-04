@@ -14,7 +14,7 @@
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
-	, MCameraPos(Vector3(0, -700, 200))
+	, MCameraPos(Vector3(0, -500, 100))
 	, mMoveSpeed(7.0f)
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
@@ -28,23 +28,24 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mSkelComp = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mSkelComp->SetMesh(RENDERER->GetMesh("Assets/Player/Human/Player.gpmesh"));
+	mSkelComp->SetMesh(RENDERER->GetMesh("Assets/Player/Doll/doll.gpmesh"));
 
 	// スケルトンの読み込み
-	mSkelComp->SetSkeleton(RENDERER->GetSkeleton("Assets/Player/Human/Player.gpskel"));
+	mSkelComp->SetSkeleton(RENDERER->GetSkeleton("Assets/Player/Doll/doll.gpskel"));
 
 	// アニメーションの読み込み
 	mAnimations.resize(STATE_NUM); // 配列を確保（mAnimationsはvector）(STSTE_NUMはenumの中の数)
-	mAnimations[IDLE] = RENDERER->GetAnimation("Assets/Player/Human/idle.gpanim");
-	mAnimations[RUN] = RENDERER->GetAnimation("Assets/Player/Human/run.gpanim");
+	mAnimations[IDLE] = RENDERER->GetAnimation("Assets/Player/Doll/idle.gpanim");
+	mAnimations[RUN] = RENDERER->GetAnimation("Assets/Player/Doll/run.gpanim");
 
 	//アニメーションの再生
 	mSkelComp->PlayAnimation(mAnimations[IDLE]);
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(3.0f,-3.0f,0.0f),Vector3(-3.0f,3.0f,35.0f) };
+	AABB box = { Vector3(750.0f,-750.0f,0.0f),Vector3(-750.0f,750.0f,3500.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
 
 	//回転処理                        ↓回転する値
 	float radian = Math::ToRadians(90.0f);
@@ -91,7 +92,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 重力
 	if (!mIsGround)
 	{
-		mPosition.z -= mGravity;
+		mPosition.z -= MGravity;
 	}
 
 	mIsGround = false;
@@ -191,6 +192,14 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}*/
 }
 
+void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)
+{
+	Vector3 ment = Vector3::Zero;
+	CalcCollisionFixVec(_myAABB, _pairAABB, ment);
+
+	SetPosition(mPosition + ment);
+}
+
 /*
 @fn		プレイヤーがヒットした時の処理
 @param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
@@ -204,6 +213,8 @@ void Player::OnCollision(const GameObject& _hitObject)
 	if (mTag == ground)
 	{
 		mIsGround = true;
+		// 押し戻し
+		FixCollision(mSelfBoxCollider->GetWorldBox(),_hitObject.GetAabb(), mTag);
 	}
 }
 

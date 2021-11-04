@@ -205,13 +205,17 @@ protected:
 	//移動速度
 	float mMoveSpeed;
 	//重力
-	float mGravity;
+	const float MGravity;
 	//ワールド変換の処理を行う必要性があるか
 	bool mRecomputeWorldTransform;
 	// 当たったかどうか
 	bool mHitFlag;
 	// リスポーンしたか
 	bool mRespawnFlag;
+
+	// α値
+	float mAlpha;
+	Vector3 mColor;
 
 	//シーンのタグ
 	SceneBase::Scene mSceneTag;
@@ -225,6 +229,8 @@ private:
 
 public://ゲッターセッター
 
+	float GetAlpha() { return mAlpha; }
+	Vector3 GetColor()const { return mColor; }
 	/*
 	@return	オブジェクトのポジション(Vector3型)
 	*/
@@ -319,6 +325,8 @@ public://ゲッターセッター
 	@param	_pos オブジェクトのポジション
 	*/
 	virtual void SetPosition(const Vector3& _pos) { mPosition = _pos; mRecomputeWorldTransform = true; }
+
+	AABB GetAabb() const { return mAabb; }
 
 };
 

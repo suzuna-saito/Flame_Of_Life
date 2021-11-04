@@ -50,6 +50,8 @@ void MeshComponent::Draw(Shader* _shader)
 			// Set specular power
 			_shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
 
+			_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
+			_shader->SetVectorUniform("uColor", mOwner->GetColor());
 			// Set the active texture
 
 			// メッシュに定義されているテクスチャをセット

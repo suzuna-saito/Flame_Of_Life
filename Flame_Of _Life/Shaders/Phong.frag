@@ -45,8 +45,9 @@ uniform vec3 uAmbientLight;
 // Directional Light
 uniform DirectionalLight uDirLight;
 
-uniform vec3 uColor=vec3(0,0,0);
+uniform vec3 uColor=vec3(1.0f,1.0f,1.0f);
 
+uniform float uAlpha = 1.0f;
 void main()
 {
 	// Surface normal
@@ -69,7 +70,7 @@ void main()
 	}
 
 	// Final color is texture color times phong light (alpha = 1)
-    outColor = texture(uDiffuseMap, fragTexCoord) * vec4(Phong, 1.0f);
- outColor.rgb=outColor.rgb+uColor;
+    outColor = texture(uDiffuseMap, fragTexCoord) * vec4(Phong, uAlpha);
+    outColor.rgb = outColor.rgb * uColor;
 
 }

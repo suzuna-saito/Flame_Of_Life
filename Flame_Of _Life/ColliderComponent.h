@@ -22,6 +22,8 @@ enum class ColliderTag : unsigned char
 	playerTag,
 	groundTag,
 
+	//playerLegsTag,
+
 	end,
 };
 
