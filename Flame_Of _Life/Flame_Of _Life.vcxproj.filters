@@ -103,9 +103,6 @@
     <ClCompile Include="Ground.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject\Game</Filter>
     </ClCompile>
@@ -121,8 +118,11 @@
     <ClCompile Include="Stage01.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Jump.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Player\Jump</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,9 +230,6 @@
     <ClInclude Include="Ground.h">
       <Filter>GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject\Game</Filter>
     </ClInclude>
@@ -248,8 +245,11 @@
     <ClInclude Include="Stage01.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
     <ClInclude Include="Jump.h">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Player\Jump</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +303,12 @@
     </Filter>
     <Filter Include="GameObject\InputSystem">
       <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{b3c5994d-da12-49a8-aeed-786a41e83eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player\Jump">
+      <UniqueIdentifier>{1a3018c0-136b-4fa9-b9b4-afa6ac4f4bca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

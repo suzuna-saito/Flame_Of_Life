@@ -37,7 +37,7 @@ void Candle::UpdateGameObject(float _deltaTime)
 	if (mFireFlag && !mDrawFireFlag)
 	{
 		// ÇÎÇ§ÇªÇ≠ÇÃâŒÇê∂ê¨
-		new FireObject(this, Vector3(3.0f, 3.0f, 3.0f), mTag);
+		new FireObject(this, Vector3(5.0f, 5.0f, 5.0f), mTag);
 
 		mDrawFireFlag = true;
 

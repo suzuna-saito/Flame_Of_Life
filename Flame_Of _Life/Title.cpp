@@ -29,7 +29,7 @@ Title::~Title()
 void Title::Input(const InputState& _state)
 {
 	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
-		_state.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1)
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
 	{
 		mGameSceneFlag = true;
 	}

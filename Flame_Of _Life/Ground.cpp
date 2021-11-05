@@ -16,7 +16,7 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	SetScale(_size);
 	SetPosition(_pos);
 
-	mColor = Vector3(0.5f,0.3f,0.7f);
+	//mColor = Vector3(0.5f,0.3f,0.7f);
 
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);

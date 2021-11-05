@@ -53,6 +53,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	Quaternion inc(Vector3::UnitZ, radian);
 	Quaternion target = Quaternion::Concatenate(rot, inc);
 	SetRotation(target);
+
+
+	// ジャンプを追加
+	mJump = new Jump(this);
 }
 
 /*
@@ -96,6 +100,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 	mIsGround = false;
+	
 
 	// 状態が切り替わったらアニメーションを開始
 	if (mNowState != mPrevState)
@@ -103,13 +108,20 @@ void Player::UpdateGameObject(float _deltaTime)
 		mSkelComp->PlayAnimation(mAnimations[mNowState], 0.5f);
 	}
 
-	if (!mIsGround)
+	/*if (!mIsGround)
 	{
 		ComputeWorldTransform();
-	}
+	}*/
 
 	//このフレームのステートは1つ前のステートになる
 	mPrevState = mNowState;
+
+
+	// ジャンプしてたらジャンプ力を足す
+	if (mJump->GetJumpFlag() == true)
+	{
+		mPosition += mJump->GetAddPos();
+	}
 
 	// ポジションをセット
 	SetPosition(mPosition);
@@ -159,6 +171,11 @@ void Player::GameObjectInput(const InputState& _keyState)
 		mVelocity.x = 0.0f;
 	}
 
+	// スペースでジャンプ
+	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1 && mIsGround)
+	{
+		mJump->SetJumpFlag(true);
+	}
 
 	// awsdのいずれかが押されていたら
 	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
@@ -192,6 +209,12 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}*/
 }
 
+/*
+@fn		矩形と矩形の押し戻し
+@param	_myAABB	基準にするオブジェクトの矩形当たり判定
+@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
+@param	_pairTag ヒットするオブジェクトのタグ
+*/
 void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)
 {
 	Vector3 ment = Vector3::Zero;
@@ -212,7 +235,12 @@ void Player::OnCollision(const GameObject& _hitObject)
 	// 床と設置したら
 	if (mTag == ground)
 	{
+		// ジャンプフラグをfalseにする
+		//mJumpNow = false;
+		
+		// 接地フラグをtrueにする
 		mIsGround = true;
+
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(),_hitObject.GetAabb(), mTag);
 	}

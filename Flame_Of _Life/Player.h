@@ -3,6 +3,7 @@
 */
 #pragma once
 
+class Jump;
 
 class Player :public GameObject
 {
@@ -80,6 +81,9 @@ private:
 
 	// 地面に接地しているどうか
 	bool mIsGround;
+
+	// ジャンプ
+	Jump* mJump;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
