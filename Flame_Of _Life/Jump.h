@@ -23,6 +23,8 @@ private:
 	bool mStartFlag;
 	// ジャンプ中かどうか
 	bool mJumpNow;
+	// 最高地点まで達したかどうか
+	bool mMaxFlag;
 
 	// ポジション
 	Vector3 mAddPos;
@@ -33,6 +35,6 @@ public:
 	// ジャンプしてるかどうかを返す
 	bool GetJumpFlag() { return mJumpNow; }
 
-	// 
+	// ジャンプで増えたポジション
 	Vector3 GetAddPos() { return mAddPos; }
 };

@@ -51,5 +51,14 @@ void Stage01::Input(const InputState& _state)
 SceneBase* Stage01::update()
 {
 
+	//// ƒƒ‚
+	//// SpriteComponent‚ð‰Šú‰»
+	//sprite = new SpriteComponent(this, false);
+	//sprite->SetTexture(firstTexure);
+	//SetPosition(Vector3(0.0f, 0.0f, 0.0f));
+	//sprite->SetVisible(false);
+	//sprite->SetAlpha(1.0f);
+
+
 	return this;
 }

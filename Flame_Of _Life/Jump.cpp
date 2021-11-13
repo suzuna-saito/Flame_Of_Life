@@ -4,11 +4,12 @@
 Jump::Jump(GameObject* _owner)
 	: Component(_owner)
 	, mAddPos(Vector3::Zero)
-	, mJumpAccel(5.0f)
-	, mJumpSpeed(2.0f)
-	, mMaxJumpHeight(50.0f)
+	, mJumpAccel(7.0f)
+	, mJumpSpeed(4.0f)
+	, mMaxJumpHeight(35.0f)
 	, mJumpNow(false)
 	, mStartFlag(false)
+	, mMaxFlag(false)
 {
 }
 
@@ -29,16 +30,31 @@ void Jump::Update(float _deltaTime)
 		mStartFlag = true;
 	}
 
-	// ジャンプ中
-	if (mJumpNow && mAddPos.z <= mMaxJumpHeight)
+	if (mAddPos.z >= mMaxJumpHeight)
 	{
-		mAddPos.z += mJumpSpeed;
+		mMaxFlag = true;
+	}
+
+	// ジャンプ中
+	if (mJumpNow)
+	{
+		if (!mMaxFlag)
+		{
+			mAddPos.z += mJumpSpeed;
+		}
+		else
+		{
+			mAddPos.z -= mJumpSpeed;
+		}
+		
 	}
 	// ジャンプ終了
-	else
+	if(mAddPos.z <= 0.0f)
 	{
  		mJumpNow = false;
 
 		mStartFlag = false;
+
+		mMaxFlag = false;
 	}
 }

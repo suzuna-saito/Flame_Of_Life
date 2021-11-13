@@ -3,8 +3,6 @@
 */
 #pragma once
 
-class Candle;
-
 class Tutorial : public SceneBase
 {
 public:
@@ -28,5 +26,5 @@ public:
 	SceneBase* update() override;
 
 private:
-	Candle* mCandle;
+	
 };

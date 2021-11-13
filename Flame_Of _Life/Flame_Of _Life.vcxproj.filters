@@ -94,15 +94,6 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>UI\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Candle.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="FireObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Ground.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject\Game</Filter>
     </ClCompile>
@@ -123,6 +114,21 @@
     </ClCompile>
     <ClCompile Include="Jump.cpp">
       <Filter>GameObject\Player\Jump</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>GameObject\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Candle.cpp">
+      <Filter>GameObject\Candle</Filter>
+    </ClCompile>
+    <ClCompile Include="FireObject.cpp">
+      <Filter>GameObject\Candle</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CountUp.cpp">
+      <Filter>UI\Count</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,15 +227,6 @@
     <ClInclude Include="Sprite.h">
       <Filter>UI\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Candle.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="FireObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Ground.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObject\Game</Filter>
     </ClInclude>
@@ -250,6 +247,21 @@
     </ClInclude>
     <ClInclude Include="Jump.h">
       <Filter>GameObject\Player\Jump</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>GameObject\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Candle.h">
+      <Filter>GameObject\Candle</Filter>
+    </ClInclude>
+    <ClInclude Include="FireObject.h">
+      <Filter>GameObject\Candle</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CountUp.h">
+      <Filter>UI\Count</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +321,15 @@
     </Filter>
     <Filter Include="GameObject\Player\Jump">
       <UniqueIdentifier>{1a3018c0-136b-4fa9-b9b4-afa6ac4f4bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Candle">
+      <UniqueIdentifier>{e242256f-a9f3-466d-b421-e277bb018305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Ground">
+      <UniqueIdentifier>{7ab657da-a96d-4f8d-8317-abdc93bb673c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Count">
+      <UniqueIdentifier>{42645ad2-bdbf-410b-b49d-aad475de1e85}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

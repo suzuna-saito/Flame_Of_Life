@@ -46,12 +46,16 @@ private:
 
 	//床マップデータ
 	vector<vector<int>> mGroundMapData;
-	/*vector<vector<int>> mGroundMapData2;
-	vector<vector<int>> mGroundMapData3;*/
+
 	//プレイヤーマップデータ
 	vector<vector<int>> mPlayerMapData;
 	//ろうそくマップデータ
 	vector<vector<int>> mCandleMapData;
+
+	// 前のデータ
+	int mTmpName;
+	// 今のデータ
+	int mNowName;
 
 	//現在のシーン
 	int mScene;
@@ -70,6 +74,8 @@ private:
 	float mOffsetY;
 	float mOffsetZ;
 
+	float mYAddPos;
+
 	// 床のスケール
 	const float MGroundScale;
 	// ろうそくのスケール
@@ -77,7 +83,13 @@ private:
 	// プレイヤーのスケール
 	const float MPlayerScale;
 
-	// ろうそく(プレイヤー含め)の初期ポジションｚ軸
+	// ろうそくの初期ポジションｚ軸
 	const float MCandleZPos;
+	// プレイヤーの初期ポジションｚ軸
+	const float MPlayerZPos;
+
+	bool flag;
+
+	float mAdd;
 };
 

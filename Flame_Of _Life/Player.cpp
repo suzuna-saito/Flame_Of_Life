@@ -14,7 +14,7 @@
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
-	, MCameraPos(Vector3(0, -500, 100))
+	, MCameraPos(Vector3(0, -1000, 450))
 	, mMoveSpeed(7.0f)
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
@@ -93,6 +93,13 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 座標をセット
 	mPosition += mVelocity;
 
+	// ジャンプしてたらジャンプ力を足す
+	if (mJump->GetJumpFlag())
+	{
+		mPosition += mJump->GetAddPos();
+	}
+
+
 	// 重力
 	if (!mIsGround)
 	{
@@ -108,20 +115,14 @@ void Player::UpdateGameObject(float _deltaTime)
 		mSkelComp->PlayAnimation(mAnimations[mNowState], 0.5f);
 	}
 
-	/*if (!mIsGround)
+	if (!mIsGround)
 	{
 		ComputeWorldTransform();
-	}*/
+	}
 
 	//このフレームのステートは1つ前のステートになる
 	mPrevState = mNowState;
 
-
-	// ジャンプしてたらジャンプ力を足す
-	if (mJump->GetJumpFlag() == true)
-	{
-		mPosition += mJump->GetAddPos();
-	}
 
 	// ポジションをセット
 	SetPosition(mPosition);
@@ -235,9 +236,6 @@ void Player::OnCollision(const GameObject& _hitObject)
 	// 床と設置したら
 	if (mTag == ground)
 	{
-		// ジャンプフラグをfalseにする
-		//mJumpNow = false;
-		
 		// 接地フラグをtrueにする
 		mIsGround = true;
 

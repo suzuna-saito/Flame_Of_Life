@@ -67,6 +67,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 			{
 				continue;
 			}
+
 			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
 			if (hit)
 			{

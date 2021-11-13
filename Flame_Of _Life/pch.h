@@ -71,6 +71,7 @@ using namespace std;
 #include "MainCameraObject.h"
 /* 床 */
 #include "Ground.h"
+
 /* ろうそく */
 #include "Candle.h"
 /* ろうそくについてるオブジェクト */
@@ -89,6 +90,9 @@ using namespace std;
 
 // UI
 #include "UIBase.h"
+/* タイム */
+#include "CountUp.h"
+#include "Time.h"
 /* スプライト*/
 #include "Sprite.h"
 

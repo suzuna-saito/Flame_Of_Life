@@ -8,6 +8,8 @@ struct InputState;
 class BackGroundSprite;
 class MapCreate;
 class Sprite;
+class Candle;
+class Time;
 
 class SceneBase
 {
@@ -58,9 +60,12 @@ protected:
 
     //背景
     Sprite* mSprite;
-
     //マップ生成
     MapCreate* mMapCreate;
+    // ろうそくの生成
+    Candle* mCandle;
+    //時間のUI
+    Time* mTime;
 
     // 次のシーンに遷移するか
     bool mGameSceneFlag;

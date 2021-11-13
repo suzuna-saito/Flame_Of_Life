@@ -6,16 +6,20 @@
 /*
 @fn	コンストラクタ
 */
-MapCreate::MapCreate() 
+MapCreate::MapCreate()
 	:GameObject(SceneBase::other, Tag::Other)
 	, MGroundScale(6.0f)
 	, MCandleScale(4.0f)
 	, MPlayerScale(0.05f)
 	, MCandleZPos(60.0f)
+	, MPlayerZPos(60.0f)
 	, mOffsetX(160.0f)
 	, mOffsetY(-220.0f)
 	, mOffsetZ(0.0f)
 	, mHeightChangeCount(0)
+	, mTmpName(1)
+	, flag(false)
+	, mAdd(0.0f)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -28,6 +32,7 @@ MapCreate::MapCreate()
 MapCreate::~MapCreate()
 {
 	mGroundMapData.clear();
+	
 	mPlayerMapData.clear();
 	mCandleMapData.clear();
 }
@@ -79,7 +84,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::stage01)
 	{
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/stage1.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/map3.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
@@ -90,15 +95,16 @@ bool MapCreate::OpenFile()
 		mSizeY = mGroundMapData.size();
 		//mSizeZ = mGroundMapData.size();
 
+
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/stage1.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/map3.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/stage1.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/map3.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
@@ -117,15 +123,23 @@ void MapCreate::CreateGround()
 {
 	for (float iz = 0; iz < mSizeY; iz++)
 	{
-		// チュートリアルシーンじゃなかったらカウントを足す
-		if (mScene != SceneBase::tutorial)
+		/*if (flag)
 		{
-			mHeightChangeCount++;
-		}
-		
+			mOffsetY -= 10.0f;
+			flag = false;
+		}*/
+
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
+
+			if (mTmpName != name && name != 7)
+			{
+				mOffsetZ -= 100.0f;
+				flag = true;
+				mTmpName = name;
+			}
+
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ);
 			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 
@@ -136,23 +150,21 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::tutorial);
+					new Ground(objectPos, objectSize, ground, SceneBase::tutorial, false);
 					break;
 				}
 				break;
 
 			case SceneBase::stage01:
 
-				if (mHeightChangeCount % 3 == 0)
-				{
-					// 高さを変更
-					mOffsetZ -= 30.0f;
-				}
-
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::stage01);
+				case(7):
+					new Ground(objectPos, objectSize, ground, SceneBase::stage01, false);
+					break;
+				default:
+					new Ground(objectPos, objectSize, ground, SceneBase::stage01, true);
 					break;
 				}
 
@@ -161,7 +173,6 @@ void MapCreate::CreateGround()
 		}
 	}
 }
-
 
 /*
 @fn	プレイヤーを生成する
@@ -173,7 +184,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ +MCandleZPos);
+			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ + MPlayerZPos);
 			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			switch (mScene)
@@ -192,7 +203,7 @@ void MapCreate::CreatePlayer()
 
 				switch (name)
 				{
-				case(2):
+				case(8):
 					new Player(objectPos, objectSize, player, SceneBase::stage01);
 					break;
 				}
@@ -232,7 +243,7 @@ void MapCreate::CreateCandle()
 
 				switch (name)
 				{
-				case(3):
+				case(9):
 					new Candle(objectPos, objectSize, candle, SceneBase::stage01);
 					break;
 				}
