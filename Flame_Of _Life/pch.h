@@ -22,14 +22,16 @@ using namespace std;
 #include <string>
 #include <sstream>
 #include <SDL.h>
-#include <SDL_scancode.h>
 #include <SDL_gamecontroller.h>
-#include <SDL_mouse.h>
-#include <SDL_log.h>
 #include <SDL_image.h>
+#include <SDL_log.h>
+#include <SDL_mouse.h>
+#include <SDL_scancode.h>
+#include <SDL_ttf.h>
 #include <unordered_map>
 #include <vector>
 #include <Windows.h>
+
 
 // Math
 #include "Math.h"
@@ -63,6 +65,8 @@ using namespace std;
 #include "Mesh.h"
 #include "Renderer.h"
 #include "SceneBase.h"
+/* TTF */
+#include "Font.h"
 
 // ゲームオブジェクト
 #include "GameObject.h"
@@ -71,7 +75,6 @@ using namespace std;
 #include "MainCameraObject.h"
 /* 床 */
 #include "Ground.h"
-
 /* ろうそく */
 #include "Candle.h"
 /* ろうそくについてるオブジェクト */
@@ -81,7 +84,6 @@ using namespace std;
 
 // ジャンプ
 #include "Jump.h"
-
 
 // パーティクルエフェクト
 #include "ParticleEffectBase.h"
@@ -100,7 +102,10 @@ using namespace std;
 #include "SceneBase.h"
 #include "Title.h"
 #include "Tutorial.h"
-#include "Stage01.h"
+#include "EasyStage.h"
+#include "NormalStage.h"
+#include "HardStage.h"
+
 
 // コリジョン *
 #include "PhysicsWorld.h"

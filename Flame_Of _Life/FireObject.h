@@ -27,6 +27,8 @@ private:
 	MeshComponent* mMeshComponent;
 
 	Candle* mOwner;
+
+	const float MAddPos;
 public://ゲッターセッター
 
 };

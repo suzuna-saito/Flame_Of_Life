@@ -8,13 +8,12 @@
 */
 MapCreate::MapCreate()
 	:GameObject(SceneBase::other, Tag::Other)
-	, MGroundScale(6.0f)
-	, MCandleScale(4.0f)
-	, MPlayerScale(0.05f)
-	, MCandleZPos(60.0f)
-	, MPlayerZPos(60.0f)
-	, mOffsetX(160.0f)
-	, mOffsetY(-220.0f)
+	, MGroundScale(10.0f)
+	, MCandleScale(6.0f)
+	, MPlayerScale(0.06f)
+	, MCandleZPos(90.0f)
+	, mOffsetX(265.0f)
+	, mOffsetY(-380.0f)
 	, mOffsetZ(0.0f)
 	, mHeightChangeCount(0)
 	, mTmpName(1)
@@ -52,7 +51,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::tutorial)
 	{
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/test.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/choice.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
@@ -63,14 +62,14 @@ bool MapCreate::OpenFile()
 		//mSizeZ = mGroundMapData.size();
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/test.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/choice.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/test.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/choice.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
@@ -81,10 +80,10 @@ bool MapCreate::OpenFile()
 	//-----------------------------------------------
 	//----------------stage0l------------------------
 	//-----------------------------------------------
-	if (mScene == SceneBase::stage01)
+	if (mScene == SceneBase::easy)
 	{
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/map3.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/easy.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
@@ -97,14 +96,14 @@ bool MapCreate::OpenFile()
 
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/map3.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/map3.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/easy.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
@@ -133,7 +132,7 @@ void MapCreate::CreateGround()
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
 
-			if (mTmpName != name && name != 7)
+			if (mTmpName != name)
 			{
 				mOffsetZ -= 100.0f;
 				flag = true;
@@ -155,16 +154,15 @@ void MapCreate::CreateGround()
 				}
 				break;
 
-			case SceneBase::stage01:
+			case SceneBase::easy:
 
 				switch (name)
 				{
 				case(1):
-				case(7):
-					new Ground(objectPos, objectSize, ground, SceneBase::stage01, false);
+					new Ground(objectPos, objectSize, ground, SceneBase::easy, false);
 					break;
 				default:
-					new Ground(objectPos, objectSize, ground, SceneBase::stage01, true);
+					new Ground(objectPos, objectSize, ground, SceneBase::easy, true);
 					break;
 				}
 
@@ -184,7 +182,7 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ + MPlayerZPos);
+			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ);
 			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			switch (mScene)
@@ -199,12 +197,12 @@ void MapCreate::CreatePlayer()
 				}
 				break;
 
-			case SceneBase::stage01:
+			case SceneBase::easy:
 
 				switch (name)
 				{
-				case(8):
-					new Player(objectPos, objectSize, player, SceneBase::stage01);
+				case(2):
+					new Player(objectPos, objectSize, player, SceneBase::easy);
 					break;
 				}
 				break;
@@ -239,12 +237,12 @@ void MapCreate::CreateCandle()
 				}
 				break;
 
-			case SceneBase::stage01:
+			case SceneBase::easy:
 
 				switch (name)
 				{
-				case(9):
-					new Candle(objectPos, objectSize, candle, SceneBase::stage01);
+				case(3):
+					new Candle(objectPos, objectSize, candle, SceneBase::easy);
 					break;
 				}
 				break;

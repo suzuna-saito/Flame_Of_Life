@@ -76,6 +76,8 @@ private:
 	//ゲームを続けるかどうか
 	bool mRunningFlag;
 
+	const float MWidth;
+	const float MHeight;
 public://ゲッターセッター
 
 	/*

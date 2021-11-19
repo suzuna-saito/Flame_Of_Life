@@ -24,7 +24,7 @@ Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//‚ë‚¤‚»‚­‚Ì“–‚½‚è”»’è
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
-	AABB box = { Vector3(-1.0f,-1.0f,0.0f),Vector3(1.0f,1.0f,0.7f) };
+	AABB box = { Vector3(-3.0f,-1.0f,0.0f),Vector3(3.0f,1.0f,10.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 }
 

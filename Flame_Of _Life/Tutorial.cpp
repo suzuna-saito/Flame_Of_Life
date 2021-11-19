@@ -25,6 +25,9 @@ Tutorial::Tutorial(const Scene& _nowScene)
 	}
 
 	mCandle = nullptr;
+
+	// カウントアップ
+	new CountUp(_nowScene);
 }
 
 /*
@@ -54,8 +57,10 @@ SceneBase* Tutorial::update()
 {
 	if (mCandle->mGetCandleNum() == 1)
 	{
-		return new Stage01(stage01);
+		return new EasyStage(easy);
 	}
+
+	CountUp::SetCountStartFlag(true);
 
 	return this;
 }

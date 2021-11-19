@@ -4,6 +4,7 @@
 FireObject::FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectTag)
 	: GameObject(SceneBase::Scene::tutorial, _objectTag)
 	, mOwner(_owner)
+	, MAddPos(160.0f)
 {
 	//GameObjectƒƒ“ƒo•Ï”‚Ì‰Šú‰»
 	mTag = _objectTag;
@@ -29,6 +30,6 @@ FireObject::FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectT
 void FireObject::UpdateGameObject(float _deltaTime)
 {
 	Vector3 tmp = mOwner->GetPosition();
-	tmp.z += 110.0f;
+	tmp.z += MAddPos;
 	SetPosition(tmp);
 }

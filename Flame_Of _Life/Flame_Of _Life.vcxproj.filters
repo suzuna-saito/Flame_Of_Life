@@ -11,7 +11,7 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
-      <Filter>GameObject\InputSystem</Filter>
+      <Filter>InputSystem</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Math</Filter>
@@ -106,9 +106,6 @@
     <ClCompile Include="Title.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Stage01.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObject\Player</Filter>
     </ClCompile>
@@ -124,11 +121,20 @@
     <ClCompile Include="FireObject.cpp">
       <Filter>GameObject\Candle</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
     <ClCompile Include="CountUp.cpp">
       <Filter>UI\Count</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Renderer\TTF</Filter>
+    </ClCompile>
+    <ClCompile Include="EasyStage.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="HardStage.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalStage.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +147,7 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
-      <Filter>GameObject\InputSystem</Filter>
+      <Filter>InputSystem</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Math</Filter>
@@ -239,9 +245,6 @@
     <ClInclude Include="Title.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Stage01.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameObject\Player</Filter>
     </ClInclude>
@@ -257,11 +260,20 @@
     <ClInclude Include="FireObject.h">
       <Filter>GameObject\Candle</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
-      <Filter>UI</Filter>
-    </ClInclude>
     <ClInclude Include="CountUp.h">
       <Filter>UI\Count</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Renderer\TTF</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyStage.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="HardStage.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalStage.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -313,9 +325,6 @@
     <Filter Include="GameObject\Game">
       <UniqueIdentifier>{619c6d9e-a6ea-4ec8-ad79-67b51fde3cea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\InputSystem">
-      <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Player">
       <UniqueIdentifier>{b3c5994d-da12-49a8-aeed-786a41e83eb7}</UniqueIdentifier>
     </Filter>
@@ -330,6 +339,12 @@
     </Filter>
     <Filter Include="UI\Count">
       <UniqueIdentifier>{42645ad2-bdbf-410b-b49d-aad475de1e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InputSystem">
+      <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\TTF">
+      <UniqueIdentifier>{16cdb9fe-ff65-427e-bbae-9026265c141a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -66,7 +66,7 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 		{
 			mTutorialObjects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::stage01)
+		if (pending->GetScene() == SceneBase::Scene::easy)
 		{
 			mStage01Objects.emplace_back(pending);
 		}
@@ -120,7 +120,7 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 		case SceneBase::tutorial:
 			mTutorialObjects.emplace_back(_object);
 			break;
-		case SceneBase::stage01:
+		case SceneBase::easy:
 			mStage01Objects.emplace_back(_object);
 			break;
 		}
@@ -183,7 +183,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::stage01:
+	case SceneBase::easy:
 
 		while (!mStage01Objects.empty())
 		{

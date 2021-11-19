@@ -85,8 +85,6 @@ private:
 
 	// ろうそくの初期ポジションｚ軸
 	const float MCandleZPos;
-	// プレイヤーの初期ポジションｚ軸
-	const float MPlayerZPos;
 
 	bool flag;
 

@@ -15,7 +15,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	: GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
 	, MCameraPos(Vector3(0, -1000, 450))
-	, mMoveSpeed(7.0f)
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
 {
@@ -24,6 +23,8 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	SetScale(_size);
 	SetPosition(_pos);
 
+	// 生成時のポジションｚを代入
+	mPrevPosZ = _pos.z;
 
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mSkelComp = new SkeletalMeshComponent(this);
@@ -233,15 +234,21 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// 床と設置したら
+	// 床と設置したとき、PrevPosよりも現在のポジションの位置が上だったら
 	if (mTag == ground)
 	{
 		// 接地フラグをtrueにする
 		mIsGround = true;
 
+		// PrevPosに現在のポジションを代入
+		mPrevPosZ = mPosition.z;
+
 		// 押し戻し
-		FixCollision(mSelfBoxCollider->GetWorldBox(),_hitObject.GetAabb(), mTag);
+		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 	}
+
+	//// 押し戻し
+	//FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 }
 
 

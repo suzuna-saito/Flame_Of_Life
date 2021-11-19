@@ -69,15 +69,15 @@ private:
 	// 1つ前の状態
 	PLAYER_STATE  mPrevState;
 
-	// カメラポジション
-	const Vector3 MCameraPos;
 	// アニメーション
 	vector<const class Animation*> mAnimations;
 	// 回転目標方向
 	Vector3 mAnimVec; 
 
-	// 移動スピード
-	const float mMoveSpeed;
+	// カメラポジション
+	const Vector3 MCameraPos;
+	//プレイヤーが落ちているか比較するよう
+	float mPrevPosZ;
 
 	// 地面に接地しているどうか
 	bool mIsGround;

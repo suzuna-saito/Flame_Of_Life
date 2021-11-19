@@ -38,6 +38,7 @@ class SpriteComponent;
 class Texture;
 class Shader;
 class VertexArray;
+class Font;
 
 class Renderer
 {
@@ -153,6 +154,14 @@ private:
 	void CreateParticleVerts();
 
 	/*
+	* @@@
+	@brief	時間制限用textureの生成
+	@param	_value　最大値
+	@param _fontSize　フォントサイズ
+	*/
+	void CreateTimeFontTexture(int _value, int _fontSize);
+
+	/*
 	@fn	Particleの描画
 	*/
 	void DrawParticle();
@@ -196,6 +205,13 @@ private:
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*> mTextures;
 
+	// フォントマップ
+	std::unordered_map<std::string, class Font*> fonts;
+
+	// 時間表示用のフォントtexture
+	// 白色
+	std::vector<Texture*> timeFontTextures;
+
 	//クラスのポインタ
 	//スプライト
 	Shader* mSpriteShader;
@@ -218,6 +234,12 @@ private:
 	Matrix4 mView;
 	//射影行列
 	Matrix4 mProjection;
+
+	// 制限時間用フォントtextureの最大数（作りたい数字の最大値）
+	const int MaxTimeFontTextures;
+	// 制限時間用フォントのサイズ
+	const int TimeFontSize;
+
 	//スクリーンの横幅
 	float mScreenWidth;
 	//スクリーンの縦幅
@@ -251,6 +273,21 @@ public://ゲッターセッター
 	@return Textureクラスのポインタ(class Texture)
 	*/
 	Texture* GetTexture(const std::string& _fileName);
+
+	/*
+	@brief  フォントの取得
+	@param	_fileName　取得したいフォントのファイル名
+	@return Fontクラスのポインタ
+	*/
+	Font* GetFont(const std::string& _fileName);
+
+	/*
+	* @@@
+	@brief	カウントダウンタイムごとのTimeTextureを取ってくる関数（白）
+	@param	カウントダウンタイム
+	@return カウントダウンタイムごとのTimeTexture
+	*/
+	Texture* GetTimeTexture(int _time);
 
 	/*
 	@param _fileName モデルへのアドレス

@@ -179,13 +179,16 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CountUp.cpp" />
+    <ClCompile Include="EasyStage.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FireObject.cpp" />
+    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HardStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Jump.cpp" />
     <ClCompile Include="main.cpp" />
@@ -194,6 +197,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
+    <ClCompile Include="NormalStage.cpp" />
     <ClCompile Include="ParticleComponent.cpp" />
     <ClCompile Include="ParticleEffectBase.cpp" />
     <ClCompile Include="pch.cpp">
@@ -218,12 +222,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
-    <ClCompile Include="Stage01.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Time.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UIBase.cpp" />
@@ -238,13 +237,16 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CountUp.h" />
+    <ClInclude Include="EasyStage.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="FireObject.h" />
+    <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="HardStage.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Jump.h" />
     <ClInclude Include="MainCameraObject.h" />
@@ -253,6 +255,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="MatrixPalette.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
+    <ClInclude Include="NormalStage.h" />
     <ClInclude Include="ParticleComponent.h" />
     <ClInclude Include="ParticleEffectBase.h" />
     <ClInclude Include="pch.h" />
@@ -268,12 +271,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="Stage01.h" />
     <ClInclude Include="Texture.h" />
-    <ClInclude Include="Time.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="UIBase.h" />

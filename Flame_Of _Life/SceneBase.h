@@ -46,8 +46,12 @@ public:
         title,
         // チュートリアル
         tutorial,
-        // ステージ1
-        stage01,
+        // Easyステージ
+        easy,
+        // Normalステージ
+        normal,
+        // Hardステージ
+        Hard,
         // ゲームクリア
         gameClear,
         // ゲームオーバー

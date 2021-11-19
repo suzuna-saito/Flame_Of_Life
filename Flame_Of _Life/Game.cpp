@@ -11,6 +11,8 @@ Game::Game()
 	, mRunningFlag(true)
 	, mSceneFlag(false)
 	, mInputSystem(0)
+	, MWidth(1920.0f)
+	, MHeight(1080.0f)
 {
 }
 
@@ -38,7 +40,7 @@ bool Game::Initialize()
 	//ƒŒƒ“ƒ_ƒ‰[‚Ì‰Šú‰»
 	Renderer::CreateInstance();
 	//‰æ–Êì¬
-	if (!RENDERER->Initialize(1080.0f, 980.0f, false))
+	if (!RENDERER->Initialize(MWidth, MHeight, false))
 	{
 		SDL_Log("Failed to initialize renderer");
 		Renderer::DeleteInstance();

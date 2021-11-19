@@ -3,7 +3,7 @@
 */
 #pragma once
 
-class Stage01 : public SceneBase
+class EasyStage : public SceneBase
 {
 public:
 
@@ -11,12 +11,12 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	Stage01(const Scene& _nowScene);
+	EasyStage(const Scene& _nowScene);
 
 	/*
 	@fn	デストラクタ
 	*/
-	~Stage01();
+	~EasyStage();
 
 	void Input(const InputState& state)override;
 

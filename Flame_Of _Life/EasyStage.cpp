@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-Stage01::Stage01(const Scene& _nowScene)
+EasyStage::EasyStage(const Scene& _nowScene)
 	:SceneBase()
 {
 	SetScene(_nowScene);
@@ -23,20 +23,23 @@ Stage01::Stage01(const Scene& _nowScene)
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
 	}
+
+	// カウントアップ
+	new CountUp(_nowScene);
 }
 
 /*
 @fn	デストラクタ
 */
-Stage01::~Stage01()
+EasyStage::~EasyStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(stage01);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(easy);
 
 	delete mMapCreate;
 }
 
 
-void Stage01::Input(const InputState& _state)
+void EasyStage::Input(const InputState& _state)
 {
 	// 当たり判定表示モードの切り替え
 	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == 1)
@@ -48,17 +51,10 @@ void Stage01::Input(const InputState& _state)
 /*
 @fn	現在のシーン時に毎フレーム更新処理をする
 */
-SceneBase* Stage01::update()
+SceneBase* EasyStage::update()
 {
 
-	//// メモ
-	//// SpriteComponentを初期化
-	//sprite = new SpriteComponent(this, false);
-	//sprite->SetTexture(firstTexure);
-	//SetPosition(Vector3(0.0f, 0.0f, 0.0f));
-	//sprite->SetVisible(false);
-	//sprite->SetAlpha(1.0f);
-
+	CountUp::SetCountStartFlag(true);
 
 	return this;
 }
