@@ -72,11 +72,11 @@ protected:
     // 次のシーンに遷移するか
     bool mGameSceneFlag;
 
-    //次のシーンに遷移する時の待機時間
-    int mNextSceneCount;
-
     //ゲームクリアしたか
     bool mClearFlag;
+
+    //次のシーンに遷移する時の待機時間
+    int mNextSceneCount;
 private:
 
     //現在のシーン

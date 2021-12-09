@@ -37,7 +37,7 @@ void Candle::UpdateGameObject(float _deltaTime)
 	if (mFireFlag && !mDrawFireFlag)
 	{
 		// ろうそくの火を生成
-		new FireObject(this, Vector3(5.0f, 5.0f, 5.0f), mTag);
+		new FireObject(this, Vector3(5.0f, 5.0f, 5.0f), mTag, GetScene());
 
 		mDrawFireFlag = true;
 
@@ -51,12 +51,13 @@ void Candle::UpdateGameObject(float _deltaTime)
 */
 void Candle::OnCollision(const GameObject& _hitObject)
 {
-	//ヒットしたオブジェクトのタグを取得
-	mTag = _hitObject.GetTag();
+	mFireFlag = true;
+	////ヒットしたオブジェクトのタグを取得
+	//mTag = _hitObject.GetTag();
 
-	// タグがろうそくになったら
-	if (mTag == candle && !mFireFlag)
-	{
-		mFireFlag = true;
-	}
+	//// タグがろうそくになったら
+	//if (mTag == candle && !mFireFlag)
+	//{
+	//	
+	//}
 }

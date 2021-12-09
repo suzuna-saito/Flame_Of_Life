@@ -13,7 +13,7 @@
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, MCameraPos(Vector3(0, -1200, 450))
+	, MCameraPos(Vector3(0, -1200, 700))
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
 {
@@ -69,7 +69,7 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, mPosition);
+	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y,66.0f));
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用
@@ -91,24 +91,22 @@ void Player::UpdateGameObject(float _deltaTime)
 		break;
 	}
 
-
-
 	// ジャンプしてたらジャンプ力を足す
 	if (mJump->GetJumpFlag())
 	{
-		mPosition += mJump->GetAddPos();
+ 		mVelocity.z += mJump->GetVelocity();
 	}
 
 	
 	// 重力
  	if (!mLegs->GetIsGround() && !mDebug)
 	{
-		mVelocity.z -= MGravity /** _deltaTime*/;
+		mVelocity.z -= MGravity/* * _deltaTime*/;
 	}
-	else
+	/*else
 	{
 		mVelocity.z = 0.0f;
-	}
+	}*/
 
 	// 座標をセット
 	mPosition += mVelocity * _deltaTime;
@@ -127,9 +125,11 @@ void Player::UpdateGameObject(float _deltaTime)
 	//このフレームのステートは1つ前のステートになる
 	mPrevState = mNowState;
 
+	
 	// ポジションをセット
 	SetPosition(mPosition);
 	mLegs->SetIsGround(false);
+
 }
 
 /*
@@ -177,10 +177,10 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}
 
 	// スペースでジャンプ
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1 && mLegs->GetIsGround())
+	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed &&
+		mLegs->GetIsGround())
 	{
-		mJump->SetJumpFlag(true);
-		//mLegs->SetIsGround(false);
+		mJump->SetJumpStart(true);
 	}
 
 	// awsdのいずれかが押されていたら
@@ -250,8 +250,9 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// 床と設置したとき
-	if (mTag == ground)
+	//// アイテム、ろうそく以外と設置したとき
+	if (mTag != item &&
+		mTag != candle)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);

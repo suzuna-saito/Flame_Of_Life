@@ -3,15 +3,15 @@
 // コンストラクタ
 Jump::Jump(GameObject* _owner)
 	: Component(_owner)
-	, mAddPos(Vector3::Zero)
-	, mJumpAccel(2.0f)
-	, mJumpSpeed(4.5f)
-	, mMaxJumpHeight(50.0f)
-	, mJumpNow(false)
+	, mVelocity(0.0f)
+	, mJumpAccel(600.0f)
+	, mJumpSpeed(200.0f)
+	, mMaxJumpHeight(3000.0f)
 	, mStartFlag(false)
+	, mJumpNow(false)
+	, mEndFlag(false)
 	, mMaxFlag(false)
 {
-	
 }
 
 // デストラクタ
@@ -23,15 +23,15 @@ Jump::~Jump()
 void Jump::Update(float _deltaTime)
 {
 	// ジャンプを始めた瞬間
-	if (!mStartFlag)
+	if (mStartFlag)
 	{
-		mAddPos = Vector3::Zero;
-		mAddPos.z += mJumpAccel;
-
-		mStartFlag = true;
+		mVelocity += mJumpAccel;
+		mStartFlag = false;
+		mEndFlag = false;
+		mJumpNow = true;
 	}
 
-	if (mAddPos.z >= mMaxJumpHeight)
+	if (mVelocity >= mMaxJumpHeight)
 	{
 		mMaxFlag = true;
 	}
@@ -41,21 +41,21 @@ void Jump::Update(float _deltaTime)
 	{
 		if (!mMaxFlag)
 		{
-			mAddPos.z += mJumpSpeed;
+			mVelocity += mJumpSpeed;
 		}
 		else
 		{
-			mAddPos.z -= mJumpSpeed+2.0f;
+			mEndFlag = true;
 		}
-		
+
 	}
 	// ジャンプ終了
-	if(mAddPos.z <= 0.0f)
+	if (mEndFlag)
 	{
- 		mJumpNow = false;
-
-		mStartFlag = false;
-
+		mJumpNow = false;
 		mMaxFlag = false;
+		mVelocity = 0.0f;
+
+		/*mJumpSpeed = 450.0f;*/
 	}
 }

@@ -145,7 +145,7 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	}
 
 	//プレイヤーが何かと当たったら
-	if (_sphere->GetTag() == ColliderTag::playerTag)
+	if (_sphere->GetTag() == ColliderTag::playerLegsTag)
 	{
 		//床
 		for (auto itr : mBoxes)
@@ -222,16 +222,6 @@ void PhysicsWorld::DebugShowBox()
 	mLineShader->SetMatrixUniform("uViewProj", viewProj);
 
 	DrawCollisions(mBoxes, Color::Green);
-
-	//// 当たり判定ボックス描画 tag毎に色を変えてすべてのリスト表示
-	//int colorCount = 0;
-	//size_t colorNum = mLineColors.size();
-	//for (auto t = Tag::Begin; t != Tag::End; ++t)
-	//{
-	//	// オブジェクトと色
-	//	DrawCollisions(mColliders[t], mLineColors[colorCount % colorNum]);
-	//	colorCount++;
-	//}
 }
 
 void PhysicsWorld::SphereAndSphere()

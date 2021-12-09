@@ -14,7 +14,7 @@ SceneBase::SceneBase()
 	, */mMapCreate(nullptr)
 	, mClearFlag(false)
 	, mGameSceneFlag(false)
-	, mNextSceneCount(0)
+	, mNextSceneCount(40)
 {
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));

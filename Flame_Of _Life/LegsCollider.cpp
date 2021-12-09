@@ -8,7 +8,7 @@ LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBas
 {
 	//プレイヤー足元の当たり判定(ボックス)
 	mLegsBoxCollider = new BoxCollider(_owner, ColliderTag::playerLegsTag, GetOnCollisionFunc());
-	AABB Legsbox = { Vector3(750.0f,-750.0f,0.0f),Vector3(-750.0f,750.0f,300.0f) };
+	AABB Legsbox = { Vector3(500.0f,-500.0f,0.0f),Vector3(-500.0f,500.0f,100.0f) };
 	mLegsBoxCollider->SetObjectBox(Legsbox);
 }
 
@@ -25,7 +25,7 @@ void LegsCollider::OnCollision(const GameObject& _hitObject)
 	// 接地フラグをtrueにする
 	mIsGround = true;
 	////ヒットしたオブジェクトのタグを取得
-	//mTag = _hitObject.GetTag();
+	mTag = _hitObject.GetTag();
 
 	//// 床と設置したとき
 	//if (mTag == ground)

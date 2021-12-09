@@ -23,18 +23,24 @@ private:
 	bool mStartFlag;
 	// ジャンプ中かどうか
 	bool mJumpNow;
+	// ジャンプを終了するかどうか
+	bool mEndFlag;
 	// 最高地点まで達したかどうか
 	bool mMaxFlag;
 
 	// ポジション
-	Vector3 mAddPos;
+	float mVelocity;
 
 public:
 	// ジャンプしてるかどうかセットする
-	void SetJumpFlag(bool _flag) { mJumpNow = _flag; }
-	// ジャンプしてるかどうかを返す
-	bool GetJumpFlag() { return mJumpNow; }
+	void SetJumpStart(bool _flag) { mStartFlag = _flag; }
 
-	// ジャンプで増えたポジション
-	Vector3 GetAddPos() { return mAddPos; }
+	// ジャンプ終了するかどうかセットする
+	void SetEndJump(bool _flag) { mEndFlag = _flag; }
+
+	// ジャンプしてるかどうかを返す
+	const bool GetJumpFlag() const { return mJumpNow; }
+
+	// ジャンプで増えたZ軸の増加分
+	const float GetVelocity() const { return mVelocity; }
 };

@@ -54,11 +54,23 @@ void Tutorial::Input(const InputState& _state)
 */
 SceneBase* Tutorial::update()
 {
+	// プレイヤーがろうそくにたどり着いたら
 	if (Candle::mCandleCount == 1)
 	{
-		//return new NormalStage(normal);
-		//return new EasyStage(easy);
-		return new HardStage(hard);
+		// 遷移フラグをtrueにする
+		mGameSceneFlag = true;
+	}
+
+	// 遷移フラグがtrueだったら
+	if (mGameSceneFlag)
+	{
+		// カウントを減らす
+		mNextSceneCount--;
+		// カウントが0以下になったら
+		if (mNextSceneCount <= 0)
+		{
+			return new HardStage(hard);
+		}
 	}
 
 	CountUp::SetCountStartFlag(true);

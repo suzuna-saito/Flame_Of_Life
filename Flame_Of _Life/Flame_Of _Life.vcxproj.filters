@@ -349,12 +349,6 @@
     <Filter Include="GameObject\Game">
       <UniqueIdentifier>{619c6d9e-a6ea-4ec8-ad79-67b51fde3cea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Player">
-      <UniqueIdentifier>{b3c5994d-da12-49a8-aeed-786a41e83eb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player\Jump">
-      <UniqueIdentifier>{1a3018c0-136b-4fa9-b9b4-afa6ac4f4bca}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Candle">
       <UniqueIdentifier>{e242256f-a9f3-466d-b421-e277bb018305}</UniqueIdentifier>
     </Filter>
@@ -378,6 +372,12 @@
     </Filter>
     <Filter Include="GameObject\Item\Cat">
       <UniqueIdentifier>{e5a35eea-07f1-4543-a4dd-d744a84d9cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{b3c5994d-da12-49a8-aeed-786a41e83eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player\Jump">
+      <UniqueIdentifier>{1a3018c0-136b-4fa9-b9b4-afa6ac4f4bca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
