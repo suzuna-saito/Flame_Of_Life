@@ -50,10 +50,20 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 		tutorialObject->Update(_deltaTime);
 	}
 
-	// ステージ１を更新する
-	for (auto stage01Object : mStage01Objects)
+	// Easyステージを更新する
+	for (auto easystageObject : mEasyStageObjects)
 	{
-		stage01Object->Update(_deltaTime);
+		easystageObject->Update(_deltaTime);
+	}
+	// Normaステージを更新する
+	for (auto normalstageObject : mNormalStageObjects)
+	{
+		normalstageObject->Update(_deltaTime);
+	}
+	// Hardステージを更新する
+	for (auto hardstageObject : mHardStageObjects)
+	{
+		hardstageObject->Update(_deltaTime);
 	}
 
 	mUpdatingGameObject = false;
@@ -68,7 +78,15 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 		}
 		if (pending->GetScene() == SceneBase::Scene::easy)
 		{
-			mStage01Objects.emplace_back(pending);
+			mEasyStageObjects.emplace_back(pending);
+		}
+		if (pending->GetScene() == SceneBase::Scene::normal)
+		{
+			mNormalStageObjects.emplace_back(pending);
+		}
+		if (pending->GetScene() == SceneBase::Scene::hard)
+		{
+			mHardStageObjects.emplace_back(pending);
 		}
 	}
 	mPendingGameObjects.clear();
@@ -85,9 +103,19 @@ void GameObjectManager::ProcessInput(const InputState& _state)
 		tutorialObject->ProcessInput(_state);
 	}
 
-	for (auto stage01Object : mStage01Objects)
+	for (auto easystageObject : mEasyStageObjects)
 	{
-		stage01Object->ProcessInput(_state);
+		easystageObject->ProcessInput(_state);
+	}
+
+	for (auto normalstageObject : mNormalStageObjects)
+	{
+		normalstageObject->ProcessInput(_state);
+	}
+
+	for (auto hardstageObject : mHardStageObjects)
+	{
+		hardstageObject->ProcessInput(_state);
 	}
 
 	mUpdatingGameObject = false;
@@ -121,7 +149,13 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 			mTutorialObjects.emplace_back(_object);
 			break;
 		case SceneBase::easy:
-			mStage01Objects.emplace_back(_object);
+			mEasyStageObjects.emplace_back(_object);
+			break;
+		case SceneBase::normal:
+			mNormalStageObjects.emplace_back(_object);
+			break;
+		case SceneBase::hard:
+			mHardStageObjects.emplace_back(_object);
 			break;
 		}
 	}
@@ -140,25 +174,40 @@ void GameObjectManager::RemoveGameObject(GameObject* _object)
 		mPendingGameObjects.pop_back();
 	}
 
+	// タイトルシーン
 	iter = std::find(mTitleObjects.begin(), mTitleObjects.end(), _object);
 	if (iter != mTitleObjects.end())
 	{
 		std::iter_swap(iter, mTitleObjects.end() - 1);
 		mTitleObjects.pop_back();
 	}
-
+	// チュートリアル
 	iter = std::find(mTutorialObjects.begin(), mTutorialObjects.end(), _object);
 	if (iter != mTutorialObjects.end())
 	{
 		std::iter_swap(iter, mTutorialObjects.end() - 1);
 		mTutorialObjects.pop_back();
 	}
-
-	iter = std::find(mStage01Objects.begin(), mStage01Objects.end(), _object);
-	if (iter != mStage01Objects.end())
+	// Easyシーン
+	iter = std::find(mEasyStageObjects.begin(), mEasyStageObjects.end(), _object);
+	if (iter != mEasyStageObjects.end())
 	{
-		std::iter_swap(iter, mStage01Objects.end() - 1);
-		mStage01Objects.pop_back();
+		std::iter_swap(iter, mEasyStageObjects.end() - 1);
+		mEasyStageObjects.pop_back();
+	}
+	// Normalシーン
+	iter = std::find(mNormalStageObjects.begin(), mNormalStageObjects.end(), _object);
+	if (iter != mNormalStageObjects.end())
+	{
+		std::iter_swap(iter, mNormalStageObjects.end() - 1);
+		mNormalStageObjects.pop_back();
+	}
+	// Hardシーン
+	iter = std::find(mHardStageObjects.begin(), mHardStageObjects.end(), _object);
+	if (iter != mHardStageObjects.end())
+	{
+		std::iter_swap(iter, mHardStageObjects.end() - 1);
+		mHardStageObjects.pop_back();
 	}
 
 }
@@ -185,9 +234,25 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 
 	case SceneBase::easy:
 
-		while (!mStage01Objects.empty())
+		while (!mEasyStageObjects.empty())
 		{
-			delete mStage01Objects.back();
+			delete mEasyStageObjects.back();
+		}
+		break;
+
+	case SceneBase::normal:
+
+		while (!mNormalStageObjects.empty())
+		{
+			delete mNormalStageObjects.back();
+		}
+		break;
+
+	case SceneBase::hard:
+
+		while (!mHardStageObjects.empty())
+		{
+			delete mHardStageObjects.back();
 		}
 		break;
 	}

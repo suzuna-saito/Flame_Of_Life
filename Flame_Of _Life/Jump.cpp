@@ -5,12 +5,13 @@ Jump::Jump(GameObject* _owner)
 	: Component(_owner)
 	, mAddPos(Vector3::Zero)
 	, mJumpAccel(2.0f)
-	, mJumpSpeed(5.0f)
+	, mJumpSpeed(4.5f)
 	, mMaxJumpHeight(50.0f)
 	, mJumpNow(false)
 	, mStartFlag(false)
 	, mMaxFlag(false)
 {
+	
 }
 
 // デストラクタ

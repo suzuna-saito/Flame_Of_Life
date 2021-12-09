@@ -35,6 +35,7 @@ enum Tag
 	player,
 	ground,
 	candle,
+	item,
 	UI,
 };
 
@@ -161,8 +162,8 @@ protected:
 	*/
 	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 
-	//std::function<void(GameObject&, AABB, AABB)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3); }
-	std::function<void(GameObject&)> GetOnCollisionFunc() { return std::bind(&GameObject::OnCollision, this, std::placeholders::_1); }
+	//function<void(GameObject&, AABB, AABB)> GetOnCollisionFunc() { return bind(&GameObject::OnCollision, this, placeholders::_1, placeholders::_2, placeholders::_3); }
+	function<void(GameObject&)> GetOnCollisionFunc() { return bind(&GameObject::OnCollision, this, placeholders::_1); }
 	/*
 	@fn		ゲームオブジェクトがヒットした時の処理
 	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
@@ -209,8 +210,6 @@ protected:
 	const float MGravity;
 	//ワールド変換の処理を行う必要性があるか
 	bool mRecomputeWorldTransform;
-	// 当たったかどうか
-	bool mHitFlag;
 	// リスポーンしたか
 	bool mRespawnFlag;
 
@@ -221,8 +220,7 @@ protected:
 	//シーンのタグ
 	SceneBase::Scene mSceneTag;
 	//アタッチされているコンポーネント
-	std::vector<class Component*>mComponents;
-
+	vector<class Component*>mComponents;
 private:
 
 	//シーンを跨ぐ際に解放されるオブジェクトかどうか、カメラなどが対象になる
@@ -232,6 +230,7 @@ public://ゲッターセッター
 
 	float GetAlpha() { return mAlpha; }
 	Vector3 GetColor()const { return mColor; }
+
 	/*
 	@return	オブジェクトのポジション(Vector3型)
 	*/

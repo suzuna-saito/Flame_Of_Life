@@ -122,7 +122,7 @@
       <Filter>GameObject\Candle</Filter>
     </ClCompile>
     <ClCompile Include="CountUp.cpp">
-      <Filter>UI\Count</Filter>
+      <Filter>UI\Font</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
       <Filter>Renderer\TTF</Filter>
@@ -135,6 +135,18 @@
     </ClCompile>
     <ClCompile Include="NormalStage.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemCount.cpp">
+      <Filter>UI\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Rose.cpp">
+      <Filter>GameObject\Item\test</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemCat.cpp">
+      <Filter>GameObject\Item\Cat</Filter>
+    </ClCompile>
+    <ClCompile Include="LegsCollider.cpp">
+      <Filter>GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -261,7 +273,7 @@
       <Filter>GameObject\Candle</Filter>
     </ClInclude>
     <ClInclude Include="CountUp.h">
-      <Filter>UI\Count</Filter>
+      <Filter>UI\Font</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
       <Filter>Renderer\TTF</Filter>
@@ -274,6 +286,18 @@
     </ClInclude>
     <ClInclude Include="NormalStage.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCount.h">
+      <Filter>UI\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Rose.h">
+      <Filter>GameObject\Item\test</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCat.h">
+      <Filter>GameObject\Item\Cat</Filter>
+    </ClInclude>
+    <ClInclude Include="LegsCollider.h">
+      <Filter>GameObject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,14 +361,23 @@
     <Filter Include="GameObject\Ground">
       <UniqueIdentifier>{7ab657da-a96d-4f8d-8317-abdc93bb673c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Count">
-      <UniqueIdentifier>{42645ad2-bdbf-410b-b49d-aad475de1e85}</UniqueIdentifier>
-    </Filter>
     <Filter Include="InputSystem">
       <UniqueIdentifier>{08023104-d0fd-45f4-b7b9-5da60995bc44}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer\TTF">
       <UniqueIdentifier>{16cdb9fe-ff65-427e-bbae-9026265c141a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item">
+      <UniqueIdentifier>{b20fc90c-7c6d-4211-bea6-5612fbc6131a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Font">
+      <UniqueIdentifier>{42645ad2-bdbf-410b-b49d-aad475de1e85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\test">
+      <UniqueIdentifier>{f6e9cfa3-7c86-468e-9ab8-81fa4c044047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Cat">
+      <UniqueIdentifier>{e5a35eea-07f1-4543-a4dd-d744a84d9cd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

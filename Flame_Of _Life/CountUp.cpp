@@ -15,10 +15,11 @@ CountUp::CountUp(SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, Tag::UI, false)
 	, AddTimeCount(60)
 	, time(0)
+	, MMaxTime(999)
+	, MPosition(Vector3(-700.0f, 450.0f, 0.0f))
 {
 	// ポジションをセット
-	SetPosition(Vector3(-700.0f, 450.0f, 0.0f));
-	/*SetPosition(Vector3::Zero);*/
+	SetPosition(MPosition);
 
 	// SpriteComponentの初期化
 	sprite = new SpriteComponent(this);
@@ -40,7 +41,7 @@ CountUp::~CountUp()
 void CountUp::UpdateGameObject(float _deltaTime)
 {
 	// ゲームスタートしたらカウント開始
-	if (countStartFlag == true)
+	if (countStartFlag == true && frameCount != MMaxTime)
 	{
 		// フレームカウントを数える
 		frameCount++;

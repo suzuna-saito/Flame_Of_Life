@@ -6,15 +6,29 @@
 class Ground :public GameObject
 {
 public:
+
+	// 床の種類
+	enum groundTag
+	{
+		// 透明になる（ｒｇｂ）
+		RGBalpha,
+		// 透明になる（固定の色）
+		alpha,
+		// 透明にならない
+		notAlpha,
+		// 長時間いたら消える床
+		stayAlpha
+	};
+
 	/*
 	@fn		コンストラクタ
 	@param	_pos ポジション
 	@param	_size サイズ
 	@param	_objectTag オブジェクトのタグ
 	@param	_sceneTag シーンタグ
-	@param	_alphaFlag 透明にする床かどうか true: 透明にする false: 透明にしない
+	@param	_tag 床の種類
 	*/
-	Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const bool _alphaFlag);
+	Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag,const groundTag& _tag);
 
 	// デストラクタ
 	~Ground() {};
@@ -26,6 +40,13 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
+
+	/*
+	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
+	@param	当たったGameObject
+	*/
+	void OnCollision(const GameObject& _hitObject)override;
+
 	//ゲームオブジェクトのメッシュポインタ変数
 	MeshComponent* mMeshComponent;
 
@@ -33,7 +54,7 @@ private:
 	BoxCollider* mSelfBoxCollider;
 
 	// α値の変わるタイミング種類&床の色
-	enum Alpha
+	enum alphaColor
 	{
 		red,
 		green,
@@ -46,9 +67,12 @@ private:
 	int mAlphaTiming;
 	// α値の変わるカウント
 	int mCount;
-
-	const int MTwoTime;
-	const int MThreeTime;
+	// 赤の床の色が変わるタイミング
+	const int MRedTime;
+	// 緑の床の色が変わるタイミング
+	const int MGreenTime;
+	// 青の床の色が変わるタイミング
+	const int MBlueTime;
 
 	// α値の最大値
 	float MAlphaMax;
@@ -59,14 +83,18 @@ private:
 
 	// 床の透明度が上がるか下がるか true: 上がる false: 下がる
 	bool mAlphaChange;
-	// 透明になる床かどうか
-	bool mAlphaGround;
 	// 処理を通るのは初めてか true: 初めて
 	bool mFirstFlag;
+	// プレイヤーと当たっているかどうか
+	bool mStayPlayer;
+
+	// 床の種類
+	groundTag mGroundTag;
 
 	/*
 	@fn		床の色、α値の変わるタイミングを設定する
 	*/
 	void mInit();
+
 };
 

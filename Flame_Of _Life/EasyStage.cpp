@@ -53,6 +53,11 @@ void EasyStage::Input(const InputState& _state)
 */
 SceneBase* EasyStage::update()
 {
+	if (Candle::mCandleCount == 2)
+	{
+		return new NormalStage(normal);
+		//return new EasyStage(easy);
+	}
 
 	CountUp::SetCountStartFlag(true);
 

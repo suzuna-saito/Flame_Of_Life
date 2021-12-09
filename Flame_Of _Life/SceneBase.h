@@ -51,7 +51,7 @@ public:
         // Normalステージ
         normal,
         // Hardステージ
-        Hard,
+        hard,
         // ゲームクリア
         gameClear,
         // ゲームオーバー
@@ -66,8 +66,6 @@ protected:
     Sprite* mSprite;
     //マップ生成
     MapCreate* mMapCreate;
-    // ろうそくの生成
-    Candle* mCandle;
     //時間のUI
     Time* mTime;
 

@@ -97,12 +97,16 @@ private:
 	//ゲームオブジェクトのポインタの可変長コンテナ
 	//カメラを格納するための可変長コンテナ
 	std::vector<GameObject*> mCameraObjects;
-	//チュートリアル時の全てのゲームオブジェクトを格納するための可変長コンテナ
+	//タイトル時の全てのゲームオブジェクトを格納するための可変長コンテナ
 	std::vector<GameObject*> mTitleObjects;
 	//チュートリアル時の全てのゲームオブジェクトを格納するための可変長コンテナ
 	std::vector<GameObject*> mTutorialObjects;
-	//ステージ1の時の全てのゲームオブジェクトを格納するための可変長コンテナ
-	std::vector<GameObject*> mStage01Objects;
+	//Easyステージの時の全てのゲームオブジェクトを格納するための可変長コンテナ
+	std::vector<GameObject*> mEasyStageObjects;
+	//Normalステージの時の全てのゲームオブジェクトを格納するための可変長コンテナ
+	std::vector<GameObject*> mNormalStageObjects;
+	//Hardステージの時の全てのゲームオブジェクトを格納するための可変長コンテナ
+	std::vector<GameObject*> mHardStageObjects;
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
 	std::vector<GameObject*> mPendingGameObjects;
 

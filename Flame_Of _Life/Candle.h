@@ -18,6 +18,9 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
+	// 火がついたろうそくの本数
+	static int mCandleCount;
+
 
 private:
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -39,12 +42,9 @@ private:
 	// ろうそくの火を描画しているかどうか
 	bool mDrawFireFlag;
 
-	// 火がついたろうそくの本数
-	static int mCandleCount;
-
 public: // セッター、ゲッター
 	// 火がついたろうそくの本数を返す
-	int mGetCandleNum() { return mCandleCount; }
+	//int mGetCandleNum() { return mCandleCount; }
 
 
 };

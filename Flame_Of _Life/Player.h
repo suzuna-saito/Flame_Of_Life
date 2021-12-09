@@ -4,6 +4,7 @@
 #pragma once
 
 class Jump;
+class LegsCollider;
 
 class Player :public GameObject
 {
@@ -50,17 +51,19 @@ private:
 
 
 	/*
-@fn		矩形と矩形の押し戻し
-@param	_myAABB	基準にするオブジェクトの矩形当たり判定
-@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
-@param	_pairTag ヒットするオブジェクトのタグ
-*/
+	@fn		矩形と矩形の押し戻し
+	@param	_myAABB	基準にするオブジェクトの矩形当たり判定
+	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
+	@param	_pairTag ヒットするオブジェクトのタグ
+	*/
 	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)override;
 
 	//ゲームオブジェクトのメッシュポインタ変数
 	MeshComponent* mMeshComponent;
 	//プレイヤーの当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
+	//プレイヤーの足元当たり判定を生成
+	BoxCollider* mLegsBoxCollider;
 	//スケルタルメッシュ
 	SkeletalMeshComponent* mSkelComp;
 	
@@ -76,14 +79,12 @@ private:
 
 	// カメラポジション
 	const Vector3 MCameraPos;
-	//プレイヤーが落ちているか比較するよう
-	float mPrevPosZ;
-
-	// 地面に接地しているどうか
-	bool mIsGround;
 
 	// ジャンプ
 	Jump* mJump;
+
+	// 足元用の当たり判定
+	LegsCollider* mLegs;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
@@ -103,6 +104,7 @@ private:
 
 ////デバック用
 //	Vector3 testPos;
+	bool mDebug;
 
 public://ゲッターセッター
 

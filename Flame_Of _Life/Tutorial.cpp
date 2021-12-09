@@ -24,7 +24,7 @@ Tutorial::Tutorial(const Scene& _nowScene)
 		mMapCreate->CreateCandle();
 	}
 
-	mCandle = nullptr;
+	//mCandle = nullptr;
 
 	// カウントアップ
 	new CountUp(_nowScene);
@@ -38,7 +38,6 @@ Tutorial::~Tutorial()
 	GAME_OBJECT_MANAGER->RemoveGameObjects(tutorial);
 
 	delete mMapCreate;
-	delete mCandle;
 }
 
 void Tutorial::Input(const InputState& _state)
@@ -55,9 +54,11 @@ void Tutorial::Input(const InputState& _state)
 */
 SceneBase* Tutorial::update()
 {
-	if (mCandle->mGetCandleNum() == 1)
+	if (Candle::mCandleCount == 1)
 	{
-		return new EasyStage(easy);
+		//return new NormalStage(normal);
+		//return new EasyStage(easy);
+		return new HardStage(hard);
 	}
 
 	CountUp::SetCountStartFlag(true);

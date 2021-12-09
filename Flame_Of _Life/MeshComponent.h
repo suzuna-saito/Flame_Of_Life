@@ -54,6 +54,12 @@ protected:
 
 public: //ゲッターセッター
 	/*
+	@fn		描画をするかどうかを設定
+	@param	_visible true : 描画する , false : 描画しない
+	*/
+	void SetVisible(bool _visible) { mVisible = _visible; }
+
+	/*
 	@fn		描画をするかどうかを取得する
 	@return	true : 描画する , false : 描画しない(bool型)
 	*/
@@ -80,11 +86,4 @@ public: //ゲッターセッター
 	@param _index テクスチャサイズ
 	*/
 	void SetTextureIndex(size_t _index) { mTextureIndex = _index; }
-
-	/*
-	@fn		描画をするかどうかを設定
-	@param	_visible true : 描画する , false : 描画しない
-	*/
-	void SetVisible(bool _visible) { mVisible = _visible; }
 };
-

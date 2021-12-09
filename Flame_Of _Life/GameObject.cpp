@@ -25,11 +25,10 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mMyObjectId(mGameObjectId)
 	, mTag(_objectTag)
 	, mSceneTag(_sceneTag)
-	, mMoveSpeed(8.0f)
-	, MGravity(10.0f)
+	, mMoveSpeed(500.0f)
+	, MGravity(300.0f)
 	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)
-	, mHitFlag(false)
 	, mRespawnFlag(false)
 	, mAlpha(1.0f)
 	, mColor(Vector3(1.0f,1.0f,1.0f))
@@ -37,6 +36,9 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	mGameObjectId++;
 	//GameObjectManager‚Éƒ|ƒCƒ“ƒ^‚ğ“n‚·
 	GAME_OBJECT_MANAGER->AddGameObject(this);
+
+	/* —”‚Ìí‚ğ‰Šú‰» */
+	srand(time(NULL));
 }
 
 GameObject::~GameObject()

@@ -13,8 +13,7 @@
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, mIsGround(false)
-	, MCameraPos(Vector3(0, -1000, 450))
+	, MCameraPos(Vector3(0, -1200, 450))
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
 {
@@ -22,9 +21,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
-
-	// 生成時のポジションｚを代入
-	mPrevPosZ = _pos.z;
 
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mSkelComp = new SkeletalMeshComponent(this);
@@ -44,7 +40,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(750.0f,-750.0f,0.0f),Vector3(-750.0f,750.0f,3500.0f) };
+	AABB box = { Vector3(750.0f,-750.0f,400.0f),Vector3(-750.0f,750.0f,3500.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
 
@@ -55,9 +51,14 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	Quaternion target = Quaternion::Concatenate(rot, inc);
 	SetRotation(target);
 
+	// 足元当たり判定の生成
+	mLegs = new LegsCollider(this, _objectTag, _sceneTag);
 
 	// ジャンプを追加
 	mJump = new Jump(this);
+
+	// でバック用 //
+	mDebug = false;
 }
 
 /*
@@ -91,8 +92,6 @@ void Player::UpdateGameObject(float _deltaTime)
 	}
 
 
-	// 座標をセット
-	mPosition += mVelocity;
 
 	// ジャンプしてたらジャンプ力を足す
 	if (mJump->GetJumpFlag())
@@ -100,15 +99,19 @@ void Player::UpdateGameObject(float _deltaTime)
 		mPosition += mJump->GetAddPos();
 	}
 
-
+	
 	// 重力
-	if (!mIsGround)
+ 	if (!mLegs->GetIsGround() && !mDebug)
 	{
-		mPosition.z -= MGravity;
+		mVelocity.z -= MGravity /** _deltaTime*/;
+	}
+	else
+	{
+		mVelocity.z = 0.0f;
 	}
 
-	mIsGround = false;
-	
+	// 座標をセット
+	mPosition += mVelocity * _deltaTime;
 
 	// 状態が切り替わったらアニメーションを開始
 	if (mNowState != mPrevState)
@@ -116,7 +119,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		mSkelComp->PlayAnimation(mAnimations[mNowState], 0.5f);
 	}
 
-	if (!mIsGround)
+	if (!mLegs->GetIsGround())
 	{
 		ComputeWorldTransform();
 	}
@@ -124,9 +127,9 @@ void Player::UpdateGameObject(float _deltaTime)
 	//このフレームのステートは1つ前のステートになる
 	mPrevState = mNowState;
 
-
 	// ポジションをセット
 	SetPosition(mPosition);
+	mLegs->SetIsGround(false);
 }
 
 /*
@@ -174,9 +177,10 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}
 
 	// スペースでジャンプ
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1 && mIsGround)
+	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_SPACE) == 1 && mLegs->GetIsGround())
 	{
 		mJump->SetJumpFlag(true);
+		//mLegs->SetIsGround(false);
 	}
 
 	// awsdのいずれかが押されていたら
@@ -197,18 +201,30 @@ void Player::GameObjectInput(const InputState& _keyState)
 	mAnimVec = inputVec;
 
 	///// でバック用 //////
-	/*if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN))
+	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == Released)
 	{
-		mVelocity.z = -mMoveSpeed;
+		if (!mDebug)
+		{
+			mDebug = true;
+		}
+		else
+		{
+			mDebug = false;
+		}
 	}
-	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP))
+
+	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
 	{
 		mVelocity.z = mMoveSpeed;
+	}
+	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN) && mDebug)
+	{
+		mVelocity.z = -mMoveSpeed;
 	}
 	else
 	{
 		mVelocity.z = 0.0f;
-	}*/
+	}
 }
 
 /*
@@ -234,21 +250,12 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// 床と設置したとき、PrevPosよりも現在のポジションの位置が上だったら
+	// 床と設置したとき
 	if (mTag == ground)
 	{
-		// 接地フラグをtrueにする
-		mIsGround = true;
-
-		// PrevPosに現在のポジションを代入
-		mPrevPosZ = mPosition.z;
-
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 	}
-
-	//// 押し戻し
-	//FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 }
 
 

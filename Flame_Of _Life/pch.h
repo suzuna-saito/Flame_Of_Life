@@ -32,7 +32,6 @@ using namespace std;
 #include <vector>
 #include <Windows.h>
 
-
 // Math
 #include "Math.h"
 
@@ -81,6 +80,10 @@ using namespace std;
 #include "FireObject.h"
 /* プレイヤー */
 #include "Player.h"
+#include "LegsCollider.h"
+/* アイテム */
+#include "Rose.h"
+#include "ItemCat.h"
 
 // ジャンプ
 #include "Jump.h"
@@ -94,7 +97,7 @@ using namespace std;
 #include "UIBase.h"
 /* タイム */
 #include "CountUp.h"
-#include "Time.h"
+#include "ItemCount.h"
 /* スプライト*/
 #include "Sprite.h"
 

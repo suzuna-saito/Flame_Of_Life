@@ -289,6 +289,9 @@ public://ゲッターセッター
 	*/
 	Texture* GetTimeTexture(int _time);
 
+	// @@@
+	// テスト　アイテムの数
+	Texture* GetItemCountTexture(int _count);
 	/*
 	@param _fileName モデルへのアドレス
 	@return スケルトンモデルの取得(class Skeleton)

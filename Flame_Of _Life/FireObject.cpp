@@ -2,7 +2,7 @@
 
 // コンストラクタ
 FireObject::FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectTag)
-	: GameObject(SceneBase::Scene::tutorial, _objectTag)
+	: GameObject(GetScene(), _objectTag)
 	, mOwner(_owner)
 	, MAddPos(160.0f)
 {

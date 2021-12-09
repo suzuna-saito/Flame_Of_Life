@@ -67,8 +67,9 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 			{
 				continue;
 			}
-
+			
 			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
 			if (hit)
 			{
 				OnCollisionFunc func = mCollisionFunction.at(_box);
@@ -77,8 +78,8 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 				func(*(_box->GetOwner()));
 				_box->Refresh();
 			}
-		}
 
+		}
 
 		for (auto itr : mSpheres)
 		{
@@ -96,6 +97,40 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 				func(*(_box->GetOwner()));
 				_box->Refresh();
 			}
+		}
+	}
+
+	if (_box->GetTag() == ColliderTag::playerLegsTag)
+	{
+		for (auto itr : mBoxes)
+		{
+			if (itr == _box)
+			{
+				continue;
+			}
+
+			if (itr->GetTag() != ColliderTag::groundTag)
+			{
+				continue;
+			}
+
+			//コライダーの親オブジェクトがActiveじゃなければ終了する
+			if (itr->GetOwner()->GetState() != State::Active)
+			{
+				continue;
+			}
+
+			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
+
+			if (hit)
+			{
+				OnCollisionFunc func = mCollisionFunction.at(_box);
+				func((*(itr->GetOwner())));
+				func = mCollisionFunction.at(itr);
+				func(*(_box->GetOwner()));
+				_box->Refresh();
+			}
+
 		}
 	}
 

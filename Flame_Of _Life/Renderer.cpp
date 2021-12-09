@@ -436,6 +436,11 @@ Texture* Renderer::GetTimeTexture(int _time)
 	return timeFontTextures[_time + 1];
 }
 
+Texture* Renderer::GetItemCountTexture(int _count)
+{
+	return timeFontTextures[_count];
+}
+
 /*
 @param _fileName モデルへのアドレス
 @return スケルトンモデルの取得(class Skeleton)

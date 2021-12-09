@@ -20,9 +20,9 @@ enum class ColliderTag : unsigned char
 	OtherTag = start,
 	CameraTag,
 	playerTag,
+	playerLegsTag,
 	groundTag,
-
-	//playerLegsTag,
+	itemTag,
 
 	end,
 };

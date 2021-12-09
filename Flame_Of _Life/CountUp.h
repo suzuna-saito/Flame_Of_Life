@@ -2,8 +2,6 @@
 
 // クラスの前方宣言
 class SpriteComponent;
-class Texture;
-class Font;
 
 /*
 @file CountUp.h
@@ -47,6 +45,10 @@ private:
 
     // 時間を1進めるタイミングを比較する定数
     const int AddTimeCount;
+    // 表示する最大の値
+    const int MMaxTime;
+    // 表示させるポジション
+    const Vector3 MPosition;
 
 public://ゲッターセッター
 
