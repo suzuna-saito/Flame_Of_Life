@@ -190,10 +190,15 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="HardStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
+    <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemCat.cpp" />
+    <ClCompile Include="ItemChair.cpp" />
+    <ClCompile Include="ItemTree.cpp" />
     <ClCompile Include="ItemCount.cpp" />
+    <ClCompile Include="ItemSword.cpp" />
     <ClCompile Include="Jump.cpp" />
     <ClCompile Include="LegsCollider.cpp" />
+    <ClCompile Include="ItemLighter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainCameraObject.cpp" />
     <ClCompile Include="MapCreate.cpp" />
@@ -217,7 +222,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="RapidJsonHelper.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Rose.cpp" />
+    <ClCompile Include="ItemChara.cpp" />
     <ClCompile Include="SandEffect.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -226,6 +231,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tutorial.cpp" />
@@ -252,10 +258,15 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Ground.h" />
     <ClInclude Include="HardStage.h" />
     <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemCat.h" />
+    <ClInclude Include="ItemChair.h" />
+    <ClInclude Include="ItemTree.h" />
     <ClInclude Include="ItemCount.h" />
+    <ClInclude Include="ItemSword.h" />
     <ClInclude Include="Jump.h" />
     <ClInclude Include="LegsCollider.h" />
+    <ClInclude Include="ItemLighter.h" />
     <ClInclude Include="MainCameraObject.h" />
     <ClInclude Include="MapCreate.h" />
     <ClInclude Include="Math.h" />
@@ -270,7 +281,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="RapidJsonHelper.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Rose.h" />
+    <ClInclude Include="ItemChara.h" />
     <ClInclude Include="SandEffect.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Shader.h" />
@@ -279,6 +290,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tutorial.h" />

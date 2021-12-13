@@ -40,10 +40,10 @@ public:
 	void CreateCandle();
 
 	/*
-	@fn	花を生成する
+	@fn	アイテムを生成する
 	@param	_objectPos 生成するポジション
 	*/
-	void CreateRose(Vector3 _objectPos);
+	void CreateItem();
 private:
 
 	bool readTiledJson(vector<vector<int>>& _mapData, const char* _fileName, const char* _layerName);
@@ -57,11 +57,8 @@ private:
 	vector<vector<int>> mPlayerMapData;
 	//ろうそくマップデータ
 	vector<vector<int>> mCandleMapData;
-
-	// 前のデータ
-	int mTmpName;
-	// 今のデータ
-	int mNowName;
+	//アイテムマップデータ
+	vector<vector<int>> mItemMapData;
 
 	//現在のシーン
 	int mScene;
@@ -87,8 +84,14 @@ private:
 	const float MCandleScale;
 	// プレイヤーのスケール
 	const float MPlayerScale;
-	// 花のスケール
-	const float MRoseScale;
+	/* アイテム関連 */
+	// 猫（アイテム）のスケール
+	const float MCatScale;
+	const float MCharaScale;
+	const float MLighterScale;
+	const float MChairScale;
+	const float MTreeScale;
+	const float MSwordScale;
 
 	const float MPlayerZPos;
 	// 地面に埋まらないためにろうそくに足してあげるポジションｚ軸

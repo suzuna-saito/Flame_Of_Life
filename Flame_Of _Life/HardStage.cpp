@@ -22,6 +22,8 @@ HardStage::HardStage(const Scene& _nowScene)
 		mMapCreate->CreatePlayer();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
+		// アイテムの生成
+		mMapCreate->CreateItem();
 	}
 
 	// カウントアップ

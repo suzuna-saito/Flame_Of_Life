@@ -13,7 +13,8 @@
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, MCameraPos(Vector3(0, -1200, 700))
+	, MCameraPos(Vector3(0, -1200, 800))
+	, MPointZ(66.0f)
 	, mNowState(IDLE)
 	, mPrevState(IDLE)
 {
@@ -25,22 +26,22 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mSkelComp = new SkeletalMeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mSkelComp->SetMesh(RENDERER->GetMesh("Assets/Player/Doll/doll.gpmesh"));
+	mSkelComp->SetMesh(RENDERER->GetMesh("Assets/Player/doll.gpmesh"));
 
 	// スケルトンの読み込み
-	mSkelComp->SetSkeleton(RENDERER->GetSkeleton("Assets/Player/Doll/doll.gpskel"));
+	mSkelComp->SetSkeleton(RENDERER->GetSkeleton("Assets/Player/doll.gpskel"));
 
 	// アニメーションの読み込み
 	mAnimations.resize(STATE_NUM); // 配列を確保（mAnimationsはvector）(STSTE_NUMはenumの中の数)
-	mAnimations[IDLE] = RENDERER->GetAnimation("Assets/Player/Doll/idle.gpanim");
-	mAnimations[RUN] = RENDERER->GetAnimation("Assets/Player/Doll/run.gpanim");
+	mAnimations[IDLE] = RENDERER->GetAnimation("Assets/Player/idle.gpanim");
+	mAnimations[RUN] = RENDERER->GetAnimation("Assets/Player/run.gpanim");
 
 	//アニメーションの再生
 	mSkelComp->PlayAnimation(mAnimations[IDLE]);
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(750.0f,-750.0f,400.0f),Vector3(-750.0f,750.0f,3500.0f) };
+	AABB box = { Vector3(750.0f,-750.0f,300.0f),Vector3(-750.0f,750.0f,3500.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
 
@@ -69,7 +70,7 @@ void Player::UpdateGameObject(float _deltaTime)
 {
 
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y,66.0f));
+	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y, MPointZ));
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用
@@ -126,10 +127,16 @@ void Player::UpdateGameObject(float _deltaTime)
 	mPrevState = mNowState;
 
 	
+	// デバックモード
+	if (mPosition.z < -300.0f)
+	{
+		mPosition.z = 300.0f;
+		mDebug = true;
+	}
+
 	// ポジションをセット
 	SetPosition(mPosition);
 	mLegs->SetIsGround(false);
-
 }
 
 /*

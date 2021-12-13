@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "ItemCount.h"
 
 ItemCount::ItemCount(SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, Tag::UI, false)
@@ -18,5 +17,5 @@ ItemCount::~ItemCount()
 
 void ItemCount::UpdateGameObject(float _deltaTime)
 {
-	sprite->SetTexture(RENDERER->GetItemCountTexture(Rose::mItemCount));
+	sprite->SetTexture(RENDERER->GetItemCountTexture(ItemBase::mItemCount));
 }

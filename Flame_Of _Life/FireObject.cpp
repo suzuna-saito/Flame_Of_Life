@@ -14,7 +14,7 @@ FireObject::FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectT
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Player/Candle/Flame_plane.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Candle/Flame_plane.gpmesh"));
 
 	//回転処理                        ↓回転する値
 	float radian = Math::ToRadians(180.0f);

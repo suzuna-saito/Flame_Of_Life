@@ -82,8 +82,14 @@ using namespace std;
 #include "Player.h"
 #include "LegsCollider.h"
 /* アイテム */
-#include "Rose.h"
+#include "ItemBase.h"
+#include "test.h"
+#include "ItemChara.h"
 #include "ItemCat.h"
+#include "ItemChair.h"
+#include "ItemTree.h"
+#include "ItemLighter.h"
+#include "ItemSword.h"
 
 // ジャンプ
 #include "Jump.h"
@@ -95,11 +101,12 @@ using namespace std;
 
 // UI
 #include "UIBase.h"
-/* タイム */
-#include "CountUp.h"
-#include "ItemCount.h"
 /* スプライト*/
 #include "Sprite.h"
+/* タイム */
+#include "CountUp.h"
+/* アイテムの数 */
+#include "ItemCount.h"
 
 // シーン
 #include "SceneBase.h"

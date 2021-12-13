@@ -11,16 +11,20 @@ MapCreate::MapCreate()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
 	, MPlayerScale(0.06f)
-	, MRoseScale(4.0f)
-	, MPlayerZPos(300.0f)
+	, MCatScale(4.0f)
+	, MCharaScale(6.0f)
+	, MLighterScale(2.0f)
+	, MChairScale(0.7f)
+	, MTreeScale(0.5f)
+	, MSwordScale(2.0f)
+	, MPlayerZPos(100.0f)
 	, MCandleZPos(90.0f)
-	, MItemZPos(100.0f)
+	, MItemZPos(110.0f)
 	, mOffsetX(265.0f)
 	, mOffsetY(-380.0f)
 	, mOffsetZ(0.0f)
 	, mChagePosY(100.0f)
 	, mHardChagePosY(90.0f)
-	, mTmpName(1)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -179,6 +183,13 @@ bool MapCreate::OpenFile()
 			printf("don't have Layer/Candle\n");
 			return true;
 		}
+
+		//アイテムデータの読み込み
+		if (!readTiledJson(mItemMapData, "Assets/Config/hard01.json", "Item"))
+		{
+			printf("don't have Layer/Item\n");
+			return true;
+		}
 	}
 
 	return false;
@@ -194,20 +205,6 @@ void MapCreate::CreateGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
-
-			/*if (mTmpName != name &&
-				(name != 0 || name != 1 || name != 35 || name != 36))
-			{
-				if (mScene != SceneBase::hard)
-				{
-					mOffsetZ -= mChagePosY;
-				}
-				else
-				{
-					mOffsetZ -= mHardChagePosY;
-				}
-				mTmpName = name;
-			}*/
 
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ);
 			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
@@ -258,19 +255,6 @@ void MapCreate::CreateGround()
 					break;
 				case(1):
 					new Ground(objectPos, objectSize, ground, SceneBase::hard, Ground::notAlpha);
-					break;
-				case(4):
-					new Ground(objectPos, objectSize, ground, SceneBase::hard, Ground::stayAlpha);
-					break;
-				case(34):
-					new Ground(objectPos, objectSize, ground, SceneBase::hard, Ground::RGBalpha);
-					// アイテムの生成
-					CreateRose(objectPos);
-					break;
-				case(35):
-					new Ground(objectPos, objectSize, ground, SceneBase::hard, Ground::alpha);
-					// アイテムの生成
-					CreateRose(objectPos);
 					break;
 				case(36):
 					new Ground(objectPos, objectSize, ground, SceneBase::hard, Ground::alpha);
@@ -408,15 +392,53 @@ void MapCreate::CreateCandle()
 /*
 @fn	アイテムを生成する
 */
-void MapCreate::CreateRose(Vector3 _objectPos)
+void MapCreate::CreateItem()
 {
-	// 引数で渡されたポジションに地面に埋まらないようにポジションを足す
-	_objectPos.z += MItemZPos;
-	Vector3 objectSize = Vector3(MRoseScale, MRoseScale, MRoseScale);
+	for (float iz = 0; iz < mSizeY; iz++)
+	{
+		for (float ix = 0; ix < mSizeX; ix++)
+		{
+			const unsigned int name = mItemMapData[(int)iz][(int)ix];
+			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
+			Vector3 objectSize = Vector3::Zero;
 
-	new ItemCat(_objectPos, objectSize, item, SceneBase::hard);
+			switch (mScene)
+			{
+			case SceneBase::hard:
 
-	Rose::mItemCount++;
+				switch (name)
+				{
+				case(18):  // いす
+					objectSize = Vector3(MChairScale, MChairScale, MChairScale);
+					new ItemChair(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				case(19):  // ライト @@@
+					objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
+					objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
+					new ItemLighter(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				case(20):  // ミニキャラ
+					objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
+					new ItemChara(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				case(21):  // 木
+					objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
+					new ItemTree(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				case(22):  // 剣
+					objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
+					new ItemSword(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				case(23):  // 猫
+					objectSize = Vector3(MCatScale, MCatScale, MCatScale);
+					new ItemCat(objectPos, objectSize, item, SceneBase::hard);
+					break;
+				}
+				break;
+			}
+		}
+	}
+
 }
 
 bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName)

@@ -1,8 +1,7 @@
 #include "pch.h"
 
 ItemCat::ItemCat(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
-	: GameObject(_sceneTag, _objectTag)
-	, mCollisionFlag(false)
+	: ItemBase(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -12,7 +11,7 @@ ItemCat::ItemCat(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Environment/Item/Cat.gpmesh"));
+	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Cat.gpmesh"));
 
 	//アイテムの当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::itemTag, GetOnCollisionFunc());
@@ -25,7 +24,6 @@ ItemCat::ItemCat(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 	Quaternion inc(Vector3::UnitZ, radian);
 	Quaternion target = Quaternion::Concatenate(rot, inc);
 	SetRotation(target);
-
 }
 
 
@@ -37,23 +35,16 @@ void ItemCat::UpdateGameObject(float _deltaTime)
 		// ステートをdisablにする
 		SetState(State::Disabling);
 
-		Rose::mItemCount--;
+		ItemBase::mItemCount--;
 	}
 }
 
 
 void ItemCat::OnCollision(const GameObject& _hitObject)
 {
-	//ヒットしたオブジェクトのタグを取得
-	mTag = _hitObject.GetTag();
+	// 当たったのでフラグを上げる
+	mCollisionFlag = true;
 
-	// プレイヤーとこのオブジェクトが当たったら
-	if (mTag == item)
-	{
-		// 当たったのでフラグを上げる
-		mCollisionFlag = true;
-
-		// 描画をやめる
-		mMeshComponent->SetVisible(false);
-	}
+	// 描画をやめる
+	mMeshComponent->SetVisible(false);
 }

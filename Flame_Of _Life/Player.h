@@ -80,6 +80,9 @@ private:
 	// カメラポジション
 	const Vector3 MCameraPos;
 
+	// カメラのZ軸注視点
+	const float MPointZ;
+
 	// ジャンプ
 	Jump* mJump;
 

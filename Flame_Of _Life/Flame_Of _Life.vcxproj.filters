@@ -139,14 +139,32 @@
     <ClCompile Include="ItemCount.cpp">
       <Filter>UI\Font</Filter>
     </ClCompile>
-    <ClCompile Include="Rose.cpp">
-      <Filter>GameObject\Item\test</Filter>
+    <ClCompile Include="ItemChara.cpp">
+      <Filter>GameObject\Item\Chara</Filter>
     </ClCompile>
     <ClCompile Include="ItemCat.cpp">
       <Filter>GameObject\Item\Cat</Filter>
     </ClCompile>
     <ClCompile Include="LegsCollider.cpp">
       <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBase.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemLighter.cpp">
+      <Filter>GameObject\Item\Lighter</Filter>
+    </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>GameObject\Item\test</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemSword.cpp">
+      <Filter>GameObject\Item\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemChair.cpp">
+      <Filter>GameObject\Item\Chair</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemTree.cpp">
+      <Filter>GameObject\Item\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,14 +308,32 @@
     <ClInclude Include="ItemCount.h">
       <Filter>UI\Font</Filter>
     </ClInclude>
-    <ClInclude Include="Rose.h">
-      <Filter>GameObject\Item\test</Filter>
+    <ClInclude Include="ItemChara.h">
+      <Filter>GameObject\Item\Chara</Filter>
     </ClInclude>
     <ClInclude Include="ItemCat.h">
       <Filter>GameObject\Item\Cat</Filter>
     </ClInclude>
     <ClInclude Include="LegsCollider.h">
       <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBase.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemLighter.h">
+      <Filter>GameObject\Item\Lighter</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>GameObject\Item\test</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemSword.h">
+      <Filter>GameObject\Item\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemChair.h">
+      <Filter>GameObject\Item\Chair</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemTree.h">
+      <Filter>GameObject\Item\Tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -367,9 +403,6 @@
     <Filter Include="UI\Font">
       <UniqueIdentifier>{42645ad2-bdbf-410b-b49d-aad475de1e85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Item\test">
-      <UniqueIdentifier>{f6e9cfa3-7c86-468e-9ab8-81fa4c044047}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Item\Cat">
       <UniqueIdentifier>{e5a35eea-07f1-4543-a4dd-d744a84d9cd4}</UniqueIdentifier>
     </Filter>
@@ -378,6 +411,24 @@
     </Filter>
     <Filter Include="GameObject\Player\Jump">
       <UniqueIdentifier>{1a3018c0-136b-4fa9-b9b4-afa6ac4f4bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Chara">
+      <UniqueIdentifier>{f6e9cfa3-7c86-468e-9ab8-81fa4c044047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Lighter">
+      <UniqueIdentifier>{302f0578-1d25-4fe5-a027-18d55e21f68a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\test">
+      <UniqueIdentifier>{e8aa1c65-4b45-434e-a415-f6cb2ea5674f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Sword">
+      <UniqueIdentifier>{107be9f1-a3a3-438f-885d-485a927d8c95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Chair">
+      <UniqueIdentifier>{094370f9-ee43-48b0-93ad-c20cb6356723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Item\Tree">
+      <UniqueIdentifier>{9da50e72-9b40-4a4f-8c2b-fa535d78a57f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
