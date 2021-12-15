@@ -13,7 +13,7 @@ class BoxCollider;
 @enum	GameObjectステート
 @brief	ゲームオブジェクトの状態
 */
-enum State
+enum class State :unsigned char
 {
 	//アクティブ
 	Active,
@@ -28,7 +28,7 @@ enum State
 @enum	GameObjectタグ
 @brief	衝突相手を判別するために使用
 */
-enum Tag
+enum class Tag :unsigned char
 {
 	Other,
 	Camera,

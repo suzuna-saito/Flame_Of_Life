@@ -30,7 +30,7 @@ ItemCat::ItemCat(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 void ItemCat::UpdateGameObject(float _deltaTime)
 {
 	// フラグが上がっていたら
-	if (mCollisionFlag && GetState() != Disabling)
+	if (mCollisionFlag && GetState() != State::Disabling)
 	{
 		// ステートをdisablにする
 		SetState(State::Disabling);

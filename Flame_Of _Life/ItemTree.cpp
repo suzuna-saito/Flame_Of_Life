@@ -23,7 +23,7 @@ ItemTree::ItemTree(const Vector3& _pos, const Vector3& _size, const Tag& _object
 void ItemTree::UpdateGameObject(float _deltaTime)
 {
 	// フラグが上がっていたら
-	if (mCollisionFlag && GetState() != Disabling)
+	if (mCollisionFlag && GetState() != State::Disabling)
 	{
 		// ステートをdisablにする
 		SetState(State::Disabling);

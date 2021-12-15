@@ -23,7 +23,7 @@ ItemLighter::ItemLighter(const Vector3& _pos, const Vector3& _size, const Tag& _
 void ItemLighter::UpdateGameObject(float _deltaTime)
 {
 	// フラグが上がっていたら
-	if (mCollisionFlag && GetState() != Disabling)
+	if (mCollisionFlag && GetState() != State::Disabling)
 	{
 		// ステートをdisablにする
 		SetState(State::Disabling);

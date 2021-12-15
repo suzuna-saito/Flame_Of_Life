@@ -228,13 +228,13 @@ void PhysicsWorld::SphereAndSphere()
 {
 	for (size_t i = 0; i < mSpheres.size(); i++)
 	{
-		if (mSpheres[i]->GetOwner()->GetState() != Active)
+		if (mSpheres[i]->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
 		for (size_t j = i + 1; j < mSpheres.size(); j++)
 		{
-			if (mSpheres[j]->GetOwner()->GetState() != Active)
+			if (mSpheres[j]->GetOwner()->GetState() != State::Active)
 			{
 				continue;
 			}
@@ -254,13 +254,13 @@ void PhysicsWorld::BoxAndBox()
 {
 	for (size_t i = 0; i < mBoxes.size(); i++)
 	{
-		if (mBoxes[i]->GetOwner()->GetState() != Active)
+		if (mBoxes[i]->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
 		for (size_t j = i + 1; j < mBoxes.size(); j++)
 		{
-			if (mBoxes[j]->GetOwner()->GetState() != Active)
+			if (mBoxes[j]->GetOwner()->GetState() != State::Active)
 			{
 				continue;
 			}
@@ -279,13 +279,13 @@ void PhysicsWorld::SphereAndBox()
 {
 	for (size_t i = 0; i < mSpheres.size(); i++)
 	{
-		if (mSpheres[i]->GetOwner()->GetState() != Active)
+		if (mSpheres[i]->GetOwner()->GetState() != State::Active)
 		{
 			continue;
 		}
 		for (size_t j = 0; j < mBoxes.size(); j++)
 		{
-			if (mBoxes[j]->GetOwner()->GetState() != Active)
+			if (mBoxes[j]->GetOwner()->GetState() != State::Active)
 			{
 				continue;
 			}

@@ -14,8 +14,9 @@ PauzingEvent GameObject::mPauzingEvent = PauzingEvent::NoneEvent;
 @param	ゲームクラスのポインタ
 */
 GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _reUseGameObject)
-	: mState(Active)
+	: mState(State::Active)
 	, mWorldTransform()
+	, mBoxCollider()
 	, mPosition(Vector3::Zero)
 	, mVelocity(Vector3::Zero)
 	, mAabb(Vector3::Zero, Vector3::Zero)
@@ -61,7 +62,7 @@ void GameObject::Update(float _deltaTime)
 	//更新停止のイベント中でないか(ポーズ画面など)
 	if (mPauzingEvent == PauzingEvent::NoneEvent)
 	{
-		if (mState != Dead)
+		if (mState != State::Dead)
 		{
 			//Transformのワールド変換
 			ComputeWorldTransform();
@@ -91,7 +92,7 @@ void GameObject::Update(float _deltaTime)
 */
 void GameObject::UpdateComponents(float _deltaTime)
 {
-	if (mState != Dead)
+	if (mState != State::Dead)
 	{
 		for (auto itr : mComponents)
 		{
@@ -119,7 +120,7 @@ void GameObject::PausingUpdateGameObject()
 */
 void GameObject::ProcessInput(const InputState& _keyState)
 {
-	if (mState == Active)
+	if (mState == State::Active)
 	{
 		//コンポーネントの入力関数にコントローラーの入力状態を
 		for (auto comp : mComponents)

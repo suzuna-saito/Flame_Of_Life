@@ -135,7 +135,7 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 	{
 		switch (_object->GetTag())
 		{
-		case Camera:
+		case Tag::Camera:
 			mCameraObjects.emplace_back(_object);
 			break;
 		}

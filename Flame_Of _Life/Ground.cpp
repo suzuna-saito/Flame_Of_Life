@@ -114,7 +114,7 @@ void Ground::OnCollision(const GameObject& _hitObject)
 	mTag = _hitObject.GetTag();
 
 	// 床と設置したとき
-	if (mTag == ground)
+	if (mTag == Tag::ground)
 	{
 		// 接地フラグをtrueにする
 		mStayPlayer = true;

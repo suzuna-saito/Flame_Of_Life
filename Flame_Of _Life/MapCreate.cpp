@@ -226,10 +226,10 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::easy, Ground::groundTag::notAlpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::easy, Ground::groundTag::notAlpha);
 					break;
 				default:
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::easy, Ground::groundTag::RGBalpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::easy, Ground::groundTag::RGBalpha);
 					break;
 				}
 				break;
@@ -239,10 +239,10 @@ void MapCreate::CreateGround()
 				switch (name)
 				{
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::normal, Ground::groundTag::notAlpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::normal, Ground::groundTag::notAlpha);
 					break;
 				default:
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::normal, Ground::groundTag::RGBalpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::normal, Ground::groundTag::RGBalpha);
 					break;
 				}
 				break;
@@ -254,13 +254,13 @@ void MapCreate::CreateGround()
 				case(0):
 					break;
 				case(1):
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::hard, Ground::groundTag::notAlpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::hard, Ground::groundTag::notAlpha);
 					break;
 				case(36):
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::hard, Ground::groundTag::alpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::hard, Ground::groundTag::alpha);
 					break;
 				default:
-					new Ground(objectPos, objectSize, ground, SceneBase::Scene::hard, Ground::groundTag::RGBalpha);
+					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::hard, Ground::groundTag::RGBalpha);
 					break;
 				}
 				break;
@@ -289,7 +289,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(2):
-					new Player(objectPos, objectSize, player, SceneBase::Scene::tutorial);
+					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::tutorial);
 					break;
 				}
 				break;
@@ -299,7 +299,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(2):
-					new Player(objectPos, objectSize, player, SceneBase::Scene::easy);
+					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::easy);
 					break;
 				}
 				break;
@@ -309,7 +309,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(2):
-					new Player(objectPos, objectSize, player, SceneBase::Scene::normal);
+					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::normal);
 					break;
 				}
 				break;
@@ -319,7 +319,7 @@ void MapCreate::CreatePlayer()
 				switch (name)
 				{
 				case(2):
-					new Player(objectPos, objectSize, player, SceneBase::Scene::hard);
+					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::hard);
 					break;
 				}
 				break;
@@ -349,7 +349,7 @@ void MapCreate::CreateCandle()
 				switch (name)
 				{
 				case(3):
-					new Candle(objectPos, objectSize, candle, SceneBase::Scene::tutorial);
+					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::tutorial);
 					break;
 				}
 				break;
@@ -359,7 +359,7 @@ void MapCreate::CreateCandle()
 				switch (name)
 				{
 				case(3):
-					new Candle(objectPos, objectSize, candle, SceneBase::Scene::easy);
+					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::easy);
 					break;
 				}
 				break;
@@ -369,7 +369,7 @@ void MapCreate::CreateCandle()
 				switch (name)
 				{
 				case(3):
-					new Candle(objectPos, objectSize, candle, SceneBase::Scene::normal);
+					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::normal);
 					break;
 				}
 				break;
@@ -379,7 +379,7 @@ void MapCreate::CreateCandle()
 				switch (name)
 				{
 				case(3):
-					new Candle(objectPos, objectSize, candle, SceneBase::Scene::hard);
+					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::hard);
 					break;
 				}
 				break;
@@ -410,28 +410,28 @@ void MapCreate::CreateItem()
 				{
 				case(18):  // いす
 					objectSize = Vector3(MChairScale, MChairScale, MChairScale);
-					new ItemChair(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				case(19):  // ライト @@@
 					objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
 					objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
-					new ItemLighter(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				case(20):  // ミニキャラ
 					objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
-					new ItemChara(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				case(21):  // 木
 					objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
-					new ItemTree(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				case(22):  // 剣
 					objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
-					new ItemSword(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				case(23):  // 猫
 					objectSize = Vector3(MCatScale, MCatScale, MCatScale);
-					new ItemCat(objectPos, objectSize, item, SceneBase::Scene::hard);
+					new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
 					break;
 				}
 				break;

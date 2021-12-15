@@ -40,12 +40,12 @@ public:
 
 private:
 	// プレイヤーの行動の状態
-	typedef enum PLAYER_STATE :unsigned char
+	typedef enum class playerState :unsigned char
 	{
-		IDLE,         // 待機
-		RUN,          // 走り
+		idle,         // 待機
+		run,          // 走り
 
-		STATE_NUM           // state_num　必ず最後に書く
+		stateNum           // state_num　必ず最後に書く
 							// ステートの個数
 	};
 
@@ -58,19 +58,16 @@ private:
 	*/
 	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)override;
 
-	//ゲームオブジェクトのメッシュポインタ変数
-	MeshComponent* mMeshComponent;
+	
 	//プレイヤーの当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
-	//プレイヤーの足元当たり判定を生成
-	BoxCollider* mLegsBoxCollider;
 	//スケルタルメッシュ
 	SkeletalMeshComponent* mSkelComp;
 	
 	// 現在の状態
-	PLAYER_STATE  mNowState;
+	playerState  mNowState;
 	// 1つ前の状態
-	PLAYER_STATE  mPrevState;
+	playerState  mPrevState;
 
 	// アニメーション
 	vector<const class Animation*> mAnimations;

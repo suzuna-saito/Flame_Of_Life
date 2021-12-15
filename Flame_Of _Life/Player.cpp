@@ -15,8 +15,8 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	: GameObject(_sceneTag, _objectTag)
 	, MCameraPos(Vector3(0, -1200, 800))
 	, MPointZ(66.0f)
-	, mNowState(IDLE)
-	, mPrevState(IDLE)
+	, mNowState(playerState::idle)
+	, mPrevState(playerState::idle)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -32,12 +32,12 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSkelComp->SetSkeleton(RENDERER->GetSkeleton("Assets/Player/doll.gpskel"));
 
 	// アニメーションの読み込み
-	mAnimations.resize(STATE_NUM); // 配列を確保（mAnimationsはvector）(STSTE_NUMはenumの中の数)
-	mAnimations[IDLE] = RENDERER->GetAnimation("Assets/Player/idle.gpanim");
-	mAnimations[RUN] = RENDERER->GetAnimation("Assets/Player/run.gpanim");
+	mAnimations.resize((int)playerState::stateNum); // 配列を確保（mAnimationsはvector）(STSTE_NUMはenumの中の数)
+	mAnimations[(int)playerState::idle] = RENDERER->GetAnimation("Assets/Player/idle.gpanim");
+	mAnimations[(int)playerState::run] = RENDERER->GetAnimation("Assets/Player/run.gpanim");
 
 	//アニメーションの再生
-	mSkelComp->PlayAnimation(mAnimations[IDLE]);
+	mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle]);
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -80,11 +80,11 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 現在の状態からそれぞれのふるまいを行う関数にジャンプ
 	switch (mNowState)
 	{
-	case IDLE:
+	case playerState::idle:
 		mIdleBehavior();
 		break;
 
-	case RUN:
+	case playerState::run:
 		mRunBehavior();
 		break;
 
@@ -115,7 +115,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	// 状態が切り替わったらアニメーションを開始
 	if (mNowState != mPrevState)
 	{
-		mSkelComp->PlayAnimation(mAnimations[mNowState], 0.5f);
+		mSkelComp->PlayAnimation(mAnimations[(int)mNowState], 0.5f);
 	}
 
 	if (!mLegs->GetIsGround())
@@ -194,11 +194,11 @@ void Player::GameObjectInput(const InputState& _keyState)
 	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
 		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
 	{
-		mNowState = RUN;
+		mNowState = playerState::run;
 	}
 	else
 	{
-		mNowState = IDLE;
+		mNowState = playerState::idle;
 		mVelocity = Vector3::Zero;
 	}
 
@@ -258,8 +258,8 @@ void Player::OnCollision(const GameObject& _hitObject)
 	mTag = _hitObject.GetTag();
 
 	//// アイテム、ろうそく以外と設置したとき
-	if (mTag != item &&
-		mTag != candle)
+	if (mTag != Tag::item &&
+		mTag != Tag::candle)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
@@ -279,7 +279,7 @@ void Player::mIdleBehavior()
 	{
 		// 待機アニメーション再生開始
 		mPrevState = mNowState;
-		mSkelComp->PlayAnimation(mAnimations[IDLE], 0.5f);
+		mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle], 0.5f);
 	}
 }
 
@@ -290,7 +290,7 @@ void Player::mRunBehavior()
 	if (mNowState != mPrevState)
 	{
 		mPrevState = mNowState;
-		mSkelComp->PlayAnimation(mAnimations[RUN], 1.0f);
+		mSkelComp->PlayAnimation(mAnimations[(int)playerState::run], 1.0f);
 	}
 
 	// 回転処理
