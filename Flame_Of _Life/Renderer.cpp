@@ -829,13 +829,13 @@ void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType
 {
 	switch (_blendType)
 	{
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ADD:
+	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_ALPHA:
+	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM_MULT:
+	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_MULT:
 		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
 		break;
 	default:

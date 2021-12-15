@@ -223,6 +223,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ItemChara.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="SandEffect.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -231,7 +232,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tutorial.cpp" />
@@ -282,6 +282,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ItemChara.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="SandEffect.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Shader.h" />
@@ -290,7 +291,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="test.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tutorial.h" />

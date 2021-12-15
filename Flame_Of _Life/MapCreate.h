@@ -61,7 +61,7 @@ private:
 	vector<vector<int>> mItemMapData;
 
 	//現在のシーン
-	int mScene;
+	SceneBase::Scene mScene;
 	//幅のマップデータ
 	int	mSizeX;
 	//高さのマップデータ

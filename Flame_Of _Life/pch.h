@@ -18,6 +18,7 @@ using namespace std;
 #include <limits.h>
 #include <memory.h>
 #include <map>
+#include <set>
 #include <stdio.h>
 #include <string>
 #include <sstream>
@@ -83,7 +84,6 @@ using namespace std;
 #include "LegsCollider.h"
 /* アイテム */
 #include "ItemBase.h"
-#include "test.h"
 #include "ItemChara.h"
 #include "ItemCat.h"
 #include "ItemChair.h"
@@ -115,6 +115,7 @@ using namespace std;
 #include "EasyStage.h"
 #include "NormalStage.h"
 #include "HardStage.h"
+#include "Result.h"
 
 
 // コリジョン *

@@ -37,7 +37,7 @@ HardStage::HardStage(const Scene& _nowScene)
 */
 HardStage::~HardStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(hard);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::hard);
 
 	delete mMapCreate;
 }
@@ -57,6 +57,24 @@ void HardStage::Input(const InputState& _state)
 */
 SceneBase* HardStage::update()
 {
+	// プレイヤーがろうそくにたどり着いたら
+	if (Candle::mCandleCount == 2)
+	{
+		// 遷移フラグをtrueにする
+		mGameSceneFlag = true;
+	}
+
+	// 遷移フラグがtrueだったら
+	if (mGameSceneFlag)
+	{
+		// カウントを減らす
+		mNextSceneCount--;
+		// カウントが0以下になったら
+		if (mNextSceneCount <= 0)
+		{
+			return new Result(Scene::result);
+		}
+	}
 
 	CountUp::SetCountStartFlag(true);
 

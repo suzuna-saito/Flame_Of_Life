@@ -38,7 +38,7 @@ public:
     /*
     @enum シーンの種類
     */
-    enum Scene
+    enum class Scene:unsigned char
     {
         // その他
         other,
@@ -52,6 +52,8 @@ public:
         normal,
         // Hardステージ
         hard,
+        // リザルト
+        result,
         // ゲームクリア
         gameClear,
         // ゲームオーバー
@@ -80,17 +82,17 @@ protected:
 private:
 
     //現在のシーン
-    static int   mIsScene;
+    static Scene mIsScene;
 
 public://ゲッターセッター
 
     /*
     @return 現在のシーン(int型)
     */
-    static int  GetScene() { return mIsScene; };
+    static Scene GetScene() { return mIsScene; };
 
     /*
     @param _isScene 現在のシーン
     */
-    virtual void SetScene(int _isScene) { mIsScene = _isScene; };
+    virtual void SetScene(Scene _isScene) { mIsScene = _isScene; };
 };

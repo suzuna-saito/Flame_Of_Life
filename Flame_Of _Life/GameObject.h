@@ -42,7 +42,7 @@ enum Tag
 /*
 @enum	ゲームオブジェクトの更新を停止するイベント名
 */
-enum PauzingEvent
+enum class PauzingEvent:unsigned char
 {
 	//ポーズ画面中
 	PausingEvent,

@@ -49,13 +49,13 @@ void Ground::UpdateGameObject(float _deltaTime)
 	if (mFirstFlag)
 	{
 		// タグがRGBalphaだったら
-		if (mGroundTag == RGBalpha)
+		if (mGroundTag == groundTag::RGBalpha)
 		{
 			// 床の色などを設定する
 			mInit();
 		}
 		// タグがalphaだったら
-		else if (mGroundTag == alpha)
+		else if (mGroundTag == groundTag::alpha)
 		{
 			// 色を紫に設定する
 			mColor = Vector3(1.0f,0.0f,1.0f);
@@ -63,7 +63,7 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// 透明になる床だったらかつ、タイミングとカウントが一致したら
-	if ((mGroundTag != notAlpha && mGroundTag != stayAlpha) && mAlphaTiming <= mCount)
+	if ((mGroundTag != groundTag::notAlpha && mGroundTag != groundTag::stayAlpha) && mAlphaTiming <= mCount)
 	{
 		// mAlphaChangeフラグを見てα値を上げるか下げるか変える
 		if (mAlphaChange)
@@ -80,7 +80,7 @@ void Ground::UpdateGameObject(float _deltaTime)
 		{
 			mAlphaChange = false;
 		}
-		else if (mAlpha >= MAlphaMax && mGroundTag != stayAlpha)
+		else if (mAlpha >= MAlphaMax && mGroundTag != groundTag::stayAlpha)
 		{
 			mAlphaChange = true;
 		}
@@ -92,7 +92,7 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}*/
 
 	// α値が0.0以下になったら、かつ、RGBの色がついている床だったら
-	if (mAlpha <= 0.0f &&( mGroundTag == RGBalpha/* || mGroundTag == stayAlpha*/))
+	if (mAlpha <= 0.0f &&( mGroundTag == groundTag::RGBalpha/* || mGroundTag == stayAlpha*/))
 	{
 		// ステートをdisablにする
 		SetState(State::Disabling);

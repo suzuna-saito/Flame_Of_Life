@@ -28,7 +28,10 @@ void ItemTree::UpdateGameObject(float _deltaTime)
 		// ステートをdisablにする
 		SetState(State::Disabling);
 
+		// アイテムカウントを減らす
 		ItemBase::mItemCount--;
+		// 取得したアイテムをデータ構造に格納する
+		SetItemNames(itemNames::tree);
 	}
 }
 

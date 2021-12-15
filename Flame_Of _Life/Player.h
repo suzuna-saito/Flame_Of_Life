@@ -40,7 +40,7 @@ public:
 
 private:
 	// プレイヤーの行動の状態
-	typedef enum PLAYER_STATE
+	typedef enum PLAYER_STATE :unsigned char
 	{
 		IDLE,         // 待機
 		RUN,          // 走り

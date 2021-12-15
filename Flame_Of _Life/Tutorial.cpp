@@ -35,7 +35,7 @@ Tutorial::Tutorial(const Scene& _nowScene)
 */
 Tutorial::~Tutorial()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(tutorial);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::tutorial);
 
 	delete mMapCreate;
 }
@@ -69,7 +69,7 @@ SceneBase* Tutorial::update()
 		// ƒJƒEƒ“ƒg‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
 		if (mNextSceneCount <= 0)
 		{
-			return new HardStage(hard);
+			return new HardStage(Scene::hard);
 		}
 	}
 

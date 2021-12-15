@@ -142,19 +142,19 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 
 		switch (_object->GetScene())
 		{
-		case SceneBase::title:
+		case SceneBase::Scene::title:
 			mTitleObjects.emplace_back(_object);
 			break;
-		case SceneBase::tutorial:
+		case SceneBase::Scene::tutorial:
 			mTutorialObjects.emplace_back(_object);
 			break;
-		case SceneBase::easy:
+		case SceneBase::Scene::easy:
 			mEasyStageObjects.emplace_back(_object);
 			break;
-		case SceneBase::normal:
+		case SceneBase::Scene::normal:
 			mNormalStageObjects.emplace_back(_object);
 			break;
-		case SceneBase::hard:
+		case SceneBase::Scene::hard:
 			mHardStageObjects.emplace_back(_object);
 			break;
 		}
@@ -216,7 +216,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 {
 	switch (_scene)
 	{
-	case SceneBase::title:
+	case SceneBase::Scene::title:
 
 		while (!mTitleObjects.empty())
 		{
@@ -224,7 +224,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::tutorial:
+	case SceneBase::Scene::tutorial:
 
 		while (!mTutorialObjects.empty())
 		{
@@ -232,7 +232,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::easy:
+	case SceneBase::Scene::easy:
 
 		while (!mEasyStageObjects.empty())
 		{
@@ -240,7 +240,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::normal:
+	case SceneBase::Scene::normal:
 
 		while (!mNormalStageObjects.empty())
 		{
@@ -248,7 +248,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::hard:
+	case SceneBase::Scene::hard:
 
 		while (!mHardStageObjects.empty())
 		{

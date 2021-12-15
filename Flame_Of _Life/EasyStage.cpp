@@ -33,7 +33,7 @@ EasyStage::EasyStage(const Scene& _nowScene)
 */
 EasyStage::~EasyStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(easy);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::easy);
 
 	delete mMapCreate;
 }
@@ -55,7 +55,7 @@ SceneBase* EasyStage::update()
 {
 	if (Candle::mCandleCount == 2)
 	{
-		return new NormalStage(normal);
+		return new NormalStage(Scene::normal);
 		//return new EasyStage(easy);
 	}
 

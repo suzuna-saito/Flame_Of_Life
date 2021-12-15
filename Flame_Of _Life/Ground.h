@@ -8,7 +8,7 @@ class Ground :public GameObject
 public:
 
 	// °‚Ìí—Ş
-	enum groundTag
+	enum class groundTag :unsigned char
 	{
 		// “§–¾‚É‚È‚éi‚’‚‡‚‚j
 		RGBalpha,

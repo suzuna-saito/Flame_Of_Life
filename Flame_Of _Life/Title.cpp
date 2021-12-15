@@ -22,7 +22,7 @@ Title::Title(const Scene& _nowScene)
 */
 Title::~Title()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(title);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::title);
 	delete mSprite;
 }
 
@@ -43,7 +43,7 @@ SceneBase* Title::update()
 
 	if (mGameSceneFlag)
 	{
-		return new Tutorial(tutorial);
+		return new Tutorial(Scene::tutorial);
 	}
 
 	return this;

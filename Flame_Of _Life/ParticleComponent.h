@@ -14,7 +14,7 @@ class ParticleComponent : public Component
 public:
 
 	//パーティクルに対するブレンドの種類
-	typedef enum PARTICLE_BLEND_ENUM
+	typedef enum class PARTICLE_BLEND_ENUM :unsigned char
 	{
 		PARTICLE_BLEND_ENUM_ALPHA,
 		PARTICLE_BLEND_ENUM_ADD,

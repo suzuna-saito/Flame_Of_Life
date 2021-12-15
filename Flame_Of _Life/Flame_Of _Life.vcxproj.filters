@@ -154,9 +154,6 @@
     <ClCompile Include="ItemLighter.cpp">
       <Filter>GameObject\Item\Lighter</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>GameObject\Item\test</Filter>
-    </ClCompile>
     <ClCompile Include="ItemSword.cpp">
       <Filter>GameObject\Item\Sword</Filter>
     </ClCompile>
@@ -165,6 +162,9 @@
     </ClCompile>
     <ClCompile Include="ItemTree.cpp">
       <Filter>GameObject\Item\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,9 +323,6 @@
     <ClInclude Include="ItemLighter.h">
       <Filter>GameObject\Item\Lighter</Filter>
     </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>GameObject\Item\test</Filter>
-    </ClInclude>
     <ClInclude Include="ItemSword.h">
       <Filter>GameObject\Item\Sword</Filter>
     </ClInclude>
@@ -334,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="ItemTree.h">
       <Filter>GameObject\Item\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -417,9 +417,6 @@
     </Filter>
     <Filter Include="GameObject\Item\Lighter">
       <UniqueIdentifier>{302f0578-1d25-4fe5-a027-18d55e21f68a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Item\test">
-      <UniqueIdentifier>{e8aa1c65-4b45-434e-a415-f6cb2ea5674f}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Item\Sword">
       <UniqueIdentifier>{107be9f1-a3a3-438f-885d-485a927d8c95}</UniqueIdentifier>

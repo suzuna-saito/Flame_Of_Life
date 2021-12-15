@@ -33,7 +33,7 @@ NormalStage::NormalStage(const Scene& _nowScene)
 */
 NormalStage::~NormalStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(normal);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::normal);
 
 	delete mMapCreate;
 }
@@ -55,7 +55,7 @@ SceneBase* NormalStage::update()
 {
 	if (Candle::mCandleCount == 3)
 	{
-		return new HardStage(hard);
+		return new HardStage(Scene::hard);
 	}
 
 	CountUp::SetCountStartFlag(true);
