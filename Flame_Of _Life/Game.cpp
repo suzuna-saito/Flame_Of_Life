@@ -166,7 +166,7 @@ void Game::ProcessInput()
 	const InputState& state = mInputSystem->GetState();
 
 	if (state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK) ||
-		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == Released)
+		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Released)
 	{
 		mRunningFlag = false;
 	}

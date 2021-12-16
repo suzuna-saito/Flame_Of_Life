@@ -2,6 +2,7 @@
 
 // Ã“I•Ï”‚Ì‰Šú‰»
 int ItemBase::mItemCount = 0;
+vector<itemNames> ItemBase::mGetNames;
 
 ItemBase::ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	: GameObject(_sceneTag, _objectTag)

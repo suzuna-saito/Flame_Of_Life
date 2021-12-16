@@ -41,14 +41,14 @@ protected:
 	bool mCollisionFlag;
 private:
 	// 取得したアイテムを格納するためのデータ構造
-	vector<itemNames> mNames;
+	static vector<itemNames> mGetNames;
 
 // ゲッター、セッター
 public:
 	// 取得したアイテムを格納
-	void SetItemNames(itemNames _itemName) { mNames.push_back(_itemName); }
-
-	const vector<itemNames> GetItemNames() const { return mNames; }
+	void SetItemNames(itemNames _itemName) { mGetNames.push_back(_itemName); }
+	// 取得したアイテムを返す
+	static const vector<itemNames> GetItemNames() { return mGetNames; }
 };
 
 //// 前置インクリメント

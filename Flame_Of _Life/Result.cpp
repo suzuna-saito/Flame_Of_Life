@@ -9,13 +9,14 @@
 */
 Result::Result(const Scene& _nowScene)
 	:SceneBase()
+	, mFirstFlag(true)
 {
 	SetScene(_nowScene);
 
 	// タイトル画像
 	mSprite = new Sprite("Assets/UI/Result.png");
 
-	//// マップをつかってアイテムと説明画像を関連付け	
+	// マップをつかってアイテムと説明画像を関連付け	
 	mItemDescription[itemNames::cat] = "Assets/UI/Cat.png";
 	mItemDescription[itemNames::chair] = "Assets/UI/Chair.png";
 	mItemDescription[itemNames::chara] = "Assets/UI/Chara.png";
@@ -36,7 +37,7 @@ Result::~Result()
 void Result::Input(const InputState& _state)
 {
 	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
-		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Released)
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
 		mGameSceneFlag = true;
 	}
@@ -47,9 +48,24 @@ void Result::Input(const InputState& _state)
 */
 SceneBase* Result::update()
 {
+	if (mFirstFlag)
+	{
+		for (int num = 0; num <= ItemBase::GetItemNames().size(); num++)
+		{
+			// 探してほしいんです。GetItemNames()は出来てるんです。で？
+			it = mItemDescription.find(ItemBase::GetItemNames()[num]);
 
+			// 見つかったって、したいんです
+			if (it != mItemDescription.end())
+			{
+				mSprite = new Sprite(mItemDescription[ItemBase::GetItemNames()[num]]);
+			}
+		}
 
-
+		mFirstFlag = false;
+	}
+	
+	
 	if (mGameSceneFlag)
 	{
 		return new Title(Scene::title);

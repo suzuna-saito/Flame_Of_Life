@@ -12,6 +12,11 @@
 class Animation
 {
 public:
+	// コンストラクタ
+	Animation();
+	// デストラクタ
+	~Animation() {};
+public:
 	/*
 	@fn アニメーション読み込み
 	@param _fileName アニメーションへのパス

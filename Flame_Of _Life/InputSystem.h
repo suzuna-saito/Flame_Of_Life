@@ -8,7 +8,7 @@
 enum ButtonState
 ƒ{ƒ^ƒ“‚Ìó‘Ô‚ğ•\‚·
 */
-enum ButtonState
+enum  class ButtonState :unsigned char
 {
 	//‰Ÿ‚³‚ê‚Ä‚¢‚È‚¢
 	None,

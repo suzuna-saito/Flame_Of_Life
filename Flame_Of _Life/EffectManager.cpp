@@ -11,6 +11,9 @@
 */
 EffectManager::EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
+	, mSandEffect(nullptr)
+	, mCreateSandEffectCount(0)
+	, mCreateDeathEffectCount(0)
 {
 	mOwner = _owner;
 	mState = ParticleState::PARTICLE_DISABLE;
@@ -39,9 +42,9 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 
 	switch (mState)
 	{
-	case PARTICLE_DISABLE:
+	case ParticleState::PARTICLE_DISABLE:
 		break;
-	case PARTICLE_ACTIVE:
+	case ParticleState::PARTICLE_ACTIVE:
 
 		mCreateSandEffectCount++;
 		mPosition = mOwner->GetPosition();

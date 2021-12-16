@@ -47,7 +47,7 @@ private:
 
 		stateNum           // state_num　必ず最後に書く
 							// ステートの個数
-	};
+	}playerState;
 
 
 	/*

@@ -42,7 +42,7 @@ NormalStage::~NormalStage()
 void NormalStage::Input(const InputState& _state)
 {
 	// “–‚½‚è”»’è•\Ž¦ƒ‚[ƒh‚ÌØ‚è‘Ö‚¦
-	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == 1)
+	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == ButtonState::Pressed)
 	{
 		PHYSICS->ToggleDebugMode();
 	}

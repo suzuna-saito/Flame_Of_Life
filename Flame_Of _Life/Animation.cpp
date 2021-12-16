@@ -8,6 +8,15 @@
 */
 #include "pch.h"
 
+// コンストラクタ
+Animation::Animation()
+	: mNumBones(0)
+	, mNumFrames(0)
+	, mDuration(0.0f)
+	, mFrameDuration(0.0f)
+{
+}
+
 /*
 @fn アニメーション読み込み
 @param アニメーションへのパス

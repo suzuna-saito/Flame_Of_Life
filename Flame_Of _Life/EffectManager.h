@@ -44,8 +44,6 @@ private:
 	Tag				 mTag;
 	//砂ぼこりエフェクト
 	SandEffect* mSandEffect;
-	//プレイヤーのポインタ
-	SamplePlayer* mPlayer;
 
 	//任意のタイミングで砂ぼこりエフェクトを生成するためのカウント
 	int				 mCreateSandEffectCount;

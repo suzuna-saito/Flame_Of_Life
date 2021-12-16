@@ -12,7 +12,7 @@
 /*
 @enum	パーティクルの状態
 */
-enum ParticleState
+enum class ParticleState :unsigned char
 {
 	//アクティブ
 	PARTICLE_ACTIVE,
@@ -67,8 +67,8 @@ protected:
 	//加速度
 	float				mSpeed;
 
-	//パーティクルの状態
-	ParticleState		mParticleState;
+	////パーティクルの状態
+	//ParticleState		mParticleState;
 
 public:
 

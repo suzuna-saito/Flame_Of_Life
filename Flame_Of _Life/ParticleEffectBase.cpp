@@ -21,6 +21,10 @@
 ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, const float& _scale)
 	: GameObject(_sceneTag, _objectTag)
 	, mLifeCount(_lifeCount)
+	, mAlpha(0.0f)
+	, mScale(0.0f)
+	, mSpeed(0.0f)
+	/*, mParticleState(ParticleState::PARTICLE_ACTIVE)*/
 {
 	mVelocity = _vel;
 	mParticle = new ParticleComponent(this);

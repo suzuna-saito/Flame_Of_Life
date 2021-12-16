@@ -184,7 +184,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 	}
 
 	// スペースでジャンプ
-	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == Pressed &&
+	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed &&
 		mLegs->GetIsGround())
 	{
 		mJump->SetJumpStart(true);
@@ -208,7 +208,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 	mAnimVec = inputVec;
 
 	///// でバック用 //////
-	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == Released)
+	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
 	{
 		if (!mDebug)
 		{

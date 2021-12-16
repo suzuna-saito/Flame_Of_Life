@@ -24,22 +24,22 @@ ButtonState KeyboardState::GetKeyState(SDL_Scancode _keyCode) const
 	{
 		if (mCurrState[_keyCode] == 0)
 		{
-			return None;
+			return ButtonState::None;
 		}
 		else
 		{
-			return Pressed;
+			return ButtonState::Pressed;
 		}
 	}
 	else // Prev state must be 1
 	{
 		if (mCurrState[_keyCode] == 0)
 		{
-			return Released;
+			return ButtonState::Released;
 		}
 		else
 		{
-			return Held;
+			return ButtonState::Held;
 		}
 	}
 }
@@ -66,22 +66,22 @@ ButtonState MouseState::GetButtonState(int _button) const
 	{
 		if ((mask & mCurrButtons) == 0)
 		{
-			return None;
+			return ButtonState::None;
 		}
 		else
 		{
-			return Pressed;
+			return ButtonState::Pressed;
 		}
 	}
 	else
 	{
 		if ((mask & mCurrButtons) == 0)
 		{
-			return Released;
+			return ButtonState::Released;
 		}
 		else
 		{
-			return Held;
+			return ButtonState::Held;
 		}
 	}
 }
@@ -107,22 +107,22 @@ ButtonState ControllerState::GetButtonState(SDL_GameControllerButton _button) co
 	{
 		if (mCurrButtons[_button] == 0)
 		{
-			return None;
+			return ButtonState::None;
 		}
 		else
 		{
-			return Pressed;
+			return ButtonState::Pressed;
 		}
 	}
 	else // Prev state must be 1
 	{
 		if (mCurrButtons[_button] == 0)
 		{
-			return Released;
+			return ButtonState::Released;
 		}
 		else
 		{
-			return Held;
+			return ButtonState::Held;
 		}
 	}
 }
