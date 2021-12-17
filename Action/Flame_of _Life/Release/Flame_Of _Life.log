@@ -1,0 +1,79 @@
+﻿  pch.cpp
+  Animation.cpp
+  BoneTransform.cpp
+  BoxCollider.cpp
+  Candle.cpp
+  ColliderComponent.cpp
+  Collision.cpp
+  Component.cpp
+  CountUp.cpp
+  EasyStage.cpp
+  EffectManager.cpp
+  FireObject.cpp
+  Font.cpp
+  FPS.cpp
+  Game.cpp
+  GameObject.cpp
+C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\GameObject.cpp(42,12): warning C4244: '引数': 'time_t' から 'unsigned int' への変換です。データが失われる可能性があります。
+  GameObjectManager.cpp
+  Ground.cpp
+  HardStage.cpp
+  InputSystem.cpp
+  ItemBase.cpp
+  コンパイル中...
+  ItemCat.cpp
+  ItemChair.cpp
+  ItemTree.cpp
+  ItemCount.cpp
+  ItemSword.cpp
+  Jump.cpp
+  LegsCollider.cpp
+  ItemLighter.cpp
+  main.cpp
+  MainCameraObject.cpp
+  MapCreate.cpp
+  Math.cpp
+  Mesh.cpp
+  MeshComponent.cpp
+  NormalStage.cpp
+  ParticleComponent.cpp
+  ParticleEffectBase.cpp
+  PhysicsWorld.cpp
+  RapidJsonHelper.cpp
+  Renderer.cpp
+  コンパイル中...
+  Player.cpp
+  ItemChara.cpp
+  Result.cpp
+C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\Result.cpp(72,11): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+  SandEffect.cpp
+  SceneBase.cpp
+  Shader.cpp
+  SkeletalMeshComponent.cpp
+  Skeleton.cpp
+  SphereCollider.cpp
+  Sprite.cpp
+  SpriteComponent.cpp
+  Texture.cpp
+  Title.cpp
+  Tutorial.cpp
+  UIBase.cpp
+  VertexArray.cpp
+  コード生成しています。
+  Previous IPDB not found, fall back to full compilation.
+  All 3420 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  コード生成が終了しました。
+  Flame_Of _Life.vcxproj -> C:\Users\suzun\Desktop\Flame_of_Life\Action\Release\Flame_Of _Life.exe
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libfreetype-6.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libogg-0.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libpng16-16.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libvorbis-0.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\SDL2.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\SDL2_image.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\SDL2_mixer.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\SDL2_ttf.dll
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\zlib1.dll
+  10 個のファイルをコピーしました
+  C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\GLEW\lib\win\x86\glew32.dll
+  1 個のファイルをコピーしました
