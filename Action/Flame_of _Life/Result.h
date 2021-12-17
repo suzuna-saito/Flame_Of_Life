@@ -1,6 +1,6 @@
 #pragma once
 
-class ItemBase;
+class Sprite;
 
 class Result :public SceneBase
 {
@@ -34,14 +34,16 @@ private:
 	// 描画する説明
 	vector<string> mDescription;
 
-	// イテレーター
-	decltype(mItemDescription)::iterator it;
-
 	// 一回だけしてほしい処理
 	bool mFirstFlag;
 	bool mDraw;
+	bool mBackDraw;
 
+	// いったん仮
 	int mCount;
 	int mNum;
+
+	Sprite* mNowDescription;
+	Sprite* mBackDescription;
 	//vector<itemNames> test;
 };

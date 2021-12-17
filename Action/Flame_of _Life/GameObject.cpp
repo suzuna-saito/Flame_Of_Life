@@ -37,9 +37,6 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	mGameObjectId++;
 	//GameObjectManager‚Éƒ|ƒCƒ“ƒ^‚ğ“n‚·
 	GAME_OBJECT_MANAGER->AddGameObject(this);
-
-	/* —”‚Ìí‚ğ‰Šú‰» */
-	srand(time(NULL));
 }
 
 GameObject::~GameObject()

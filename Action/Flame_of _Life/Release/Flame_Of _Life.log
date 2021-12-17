@@ -45,7 +45,7 @@ C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\GameObject.cpp(42,12)
   Player.cpp
   ItemChara.cpp
   Result.cpp
-C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\Result.cpp(72,11): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
+C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\Result.cpp(86,11): warning C4018: '<': signed と unsigned の数値を比較しようとしました。
   SandEffect.cpp
   SceneBase.cpp
   Shader.cpp
@@ -60,8 +60,8 @@ C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\Result.cpp(72,11): wa
   UIBase.cpp
   VertexArray.cpp
   コード生成しています。
-  Previous IPDB not found, fall back to full compilation.
-  All 3420 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Previous IPDB was built with incompatible compiler, fall back to full compilation.
+  All 3421 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   コード生成が終了しました。
   Flame_Of _Life.vcxproj -> C:\Users\suzun\Desktop\Flame_of_Life\Action\Release\Flame_Of _Life.exe
   C:\Users\suzun\Desktop\Flame_of_Life\Action\Flame_Of _Life\\..\..\external\SDL\lib\win\x86\libfreetype-6.dll

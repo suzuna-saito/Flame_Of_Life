@@ -34,6 +34,9 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
 	AABB box = { Vector3(13.0f,-20.0f,0.0f),Vector3(-13.0f,16.5f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
+	/* —”‚Ìí‚ğ‰Šú‰» */
+	srand(time(NULL));
 }
 
 void Ground::UpdateGameObject(float _deltaTime)

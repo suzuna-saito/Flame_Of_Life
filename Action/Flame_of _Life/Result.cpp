@@ -11,8 +11,10 @@ Result::Result(const Scene& _nowScene)
 	:SceneBase()
 	, mFirstFlag(true)
 	, mDraw(true)
+	, mBackDraw(false)
 	, mCount(0)
 	, mNum(0)
+	, mNowDescription(nullptr)
 {
 	SetScene(_nowScene);
 
@@ -51,8 +53,13 @@ void Result::Input(const InputState& _state)
 */
 SceneBase* Result::update()
 {
+	// 一回だけ通る処理
 	if (mFirstFlag)
 	{
+		// イテレーター
+		decltype(mItemDescription)::iterator it;
+
+		// 取得したアイテム分回す
 		for (const auto& num : ItemBase::GetItemNames())
 		{
 			// 探す
@@ -61,37 +68,54 @@ SceneBase* Result::update()
 			// 見つかった
 			if (it != mItemDescription.end())
 			{
-				// 保存
+				// mDescriptionに見つかった分だけ保存
 				mDescription.push_back(mItemDescription[num]);
+				mBackDraw = true;
 			}
+		}
+
+		if (mBackDraw)
+		{
+			mBackDescription = new Sprite("Assets/UI/ItemBack.png");
 		}
 
 		mFirstFlag = false;
 	}
 	
+	// 保存した分回す
 	if (mNum < mDescription.size())
 	{
+		// mDrawがtrueの時
 		if (mDraw)
 		{
-			mSprite = new Sprite(mDescription[mNum]);
+			// 新しい説明文を出す
+			mNowDescription = new Sprite(mDescription[mNum]);
+			// 一度newしたら、mDrawをfalseにする。
 			mDraw = false;
 		}
 		
+		// カウントを足す
 		++mCount;
 
-		if (mCount >= 100)
+		// カウントが100になったら
+		if (mCount == 180)
+		{
+			// 今表示している説明文を消す
+			mNowDescription->NotVisible();
+		}
+		if (mCount >= 200)
 		{
 			++mNum;
 
 			mDraw = true;
 			mCount = 0;
-
-			// 今表示している説明文を消す
-			mSprite->NotVisible();
 		}
 	}
+	// 保存した分表示し終わったら
 	else
 	{
+		mBackDescription->NotVisible();
+
 		mSprite = new Sprite("Assets/UI/End.png");
 	}
 	
