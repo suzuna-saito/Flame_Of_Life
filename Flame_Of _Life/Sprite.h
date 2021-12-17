@@ -25,12 +25,18 @@ public:
 	*/
 	~Sprite() {};
 
+	/*
+	@fn		指定のファイルの描画をけす
+	*/
+	void NotVisible();
 private:
 
 	//テクスチャを生成
 	Texture* mSpriteTexture;
 	//SpriteComponentを生成
 	SpriteComponent* mSpriteComponent;
+
+	
 
 };
 

@@ -29,15 +29,19 @@ public:
 
 private:
 	// マップで取得したアイテムと説明を関連付ける
-	map<itemNames, const char*> mItemDescription;
+	map<itemNames, string> mItemDescription;
 
 	// 描画する説明
-	vector<const char*> mDescription;
+	vector<string> mDescription;
 
 	// イテレーター
 	decltype(mItemDescription)::iterator it;
 
+	// 一回だけしてほしい処理
 	bool mFirstFlag;
+	bool mDraw;
 
+	int mCount;
+	int mNum;
 	//vector<itemNames> test;
 };

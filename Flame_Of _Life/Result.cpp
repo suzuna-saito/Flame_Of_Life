@@ -10,6 +10,9 @@
 Result::Result(const Scene& _nowScene)
 	:SceneBase()
 	, mFirstFlag(true)
+	, mDraw(true)
+	, mCount(0)
+	, mNum(0)
 {
 	SetScene(_nowScene);
 
@@ -50,19 +53,46 @@ SceneBase* Result::update()
 {
 	if (mFirstFlag)
 	{
-		for (int num = 0; num <= ItemBase::GetItemNames().size(); num++)
+		for (const auto& num : ItemBase::GetItemNames())
 		{
-			// 探してほしいんです。GetItemNames()は出来てるんです。で？
-			it = mItemDescription.find(ItemBase::GetItemNames()[num]);
+			// 探す
+			it = mItemDescription.find(num);
 
-			// 見つかったって、したいんです
+			// 見つかった
 			if (it != mItemDescription.end())
 			{
-				mSprite = new Sprite(mItemDescription[ItemBase::GetItemNames()[num]]);
+				// 保存
+				mDescription.push_back(mItemDescription[num]);
 			}
 		}
 
 		mFirstFlag = false;
+	}
+	
+	if (mNum < mDescription.size())
+	{
+		if (mDraw)
+		{
+			mSprite = new Sprite(mDescription[mNum]);
+			mDraw = false;
+		}
+		
+		++mCount;
+
+		if (mCount >= 100)
+		{
+			++mNum;
+
+			mDraw = true;
+			mCount = 0;
+
+			// 今表示している説明文を消す
+			mSprite->NotVisible();
+		}
+	}
+	else
+	{
+		mSprite = new Sprite("Assets/UI/End.png");
 	}
 	
 	
