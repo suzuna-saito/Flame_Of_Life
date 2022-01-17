@@ -18,10 +18,12 @@ EasyStage::EasyStage(const Scene& _nowScene)
 	{
 		// 床の生成
 		mMapCreate->CreateGround();
-		// プレイヤーの生成
-		mMapCreate->CreatePlayer();
+		// スイッチの生成
+		mMapCreate->CreateSwitch();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
+		// プレイヤーの生成
+		mMapCreate->CreatePlayer();
 	}
 
 	// カウントアップ
@@ -56,7 +58,6 @@ SceneBase* EasyStage::update()
 	if (Candle::mCandleCount == 2)
 	{
 		return new NormalStage(Scene::normal);
-		//return new EasyStage(easy);
 	}
 
 	CountUp::SetCountStartFlag(true);

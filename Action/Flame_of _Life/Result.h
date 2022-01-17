@@ -42,6 +42,8 @@ private:
 	// ‚¢‚Á‚½‚ñ‰¼
 	int mCount;
 	int mNum;
+	/*const int MNotVisibleTime;
+	const int mScondTime;*/
 
 	Sprite* mNowDescription;
 	Sprite* mBackDescription;

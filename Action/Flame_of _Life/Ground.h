@@ -16,8 +16,14 @@ public:
 		alpha,
 		// 透明にならない
 		notAlpha,
-		// 長時間いたら消える床
-		stayAlpha
+	};
+
+	// α値の変わるタイミング種類&床の色
+	enum class alphaColor :unsigned char
+	{
+		red,
+		green,
+		yellow
 	};
 
 	/*
@@ -39,6 +45,9 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
+	// シーンによって床の色の種類の数が異なる
+	static int mTypeNum;
+
 private:
 
 	/*
@@ -53,26 +62,22 @@ private:
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 
-	// α値の変わるタイミング種類&床の色
-	enum alphaColor
-	{
-		red,
-		green,
-		blue
-	};
-
 	// α値の変わるタイミング種類
 	int mAlphaNum;
 	// α値の変わるタイミング
 	int mAlphaTiming;
 	// α値の変わるカウント
 	int mCount;
-	// 赤の床の色が変わるタイミング
-	const int MRedTime;
-	// 緑の床の色が変わるタイミング
-	const int MGreenTime;
-	// 青の床の色が変わるタイミング
-	const int MBlueTime;
+	
+	// α値の変わっていく速度
+	const float MAlphaAddSpeed;
+	const float MAlphaSubSpeed;
+	//// 赤の床の色が変わるタイミング
+	//const int MRedTime;
+	//// 緑の床の色が変わるタイミング
+	//const int MGreenTime;
+	//// 青の床の色が変わるタイミング
+	//const int MYellowTime;
 
 	// α値の最大値
 	float MAlphaMax;
@@ -90,6 +95,9 @@ private:
 
 	// 床の種類
 	groundTag mGroundTag;
+
+	// 床の色の種類
+	alphaColor mAlphaColorTag;
 
 	/*
 	@fn		床の色、α値の変わるタイミングを設定する

@@ -26,7 +26,7 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mMyObjectId(mGameObjectId)
 	, mTag(_objectTag)
 	, mSceneTag(_sceneTag)
-	, mMoveSpeed(650.0f)
+	, mMoveSpeed(700.0f)
 	, MGravity(600.0f)
 	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)

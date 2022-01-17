@@ -10,11 +10,12 @@ SceneBase::Scene SceneBase::mIsScene = Scene::other;
 @fn	コンストラクタ
 */
 SceneBase::SceneBase()
-	:/* mSprite(nullptr)
-	, */mMapCreate(nullptr)
+	: mSprite(nullptr)
+	, mMapCreate(nullptr)
+	, mTime(nullptr)
 	, mClearFlag(false)
 	, mGameSceneFlag(false)
-	, mNextSceneCount(40)
+	, mNextSceneCount(0)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));

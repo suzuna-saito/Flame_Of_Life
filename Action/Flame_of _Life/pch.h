@@ -75,6 +75,8 @@ using namespace std;
 #include "MainCameraObject.h"
 /* 床 */
 #include "Ground.h"
+/* スイッチ */
+#include "Switch.h"
 /* ろうそく */
 #include "Candle.h"
 /* ろうそくについてるオブジェクト */
@@ -84,6 +86,7 @@ using namespace std;
 #include "LegsCollider.h"
 /* アイテム */
 #include "ItemBase.h"
+#include "ItemTest.h"
 #include "ItemChara.h"
 #include "ItemCat.h"
 #include "ItemChair.h"

@@ -35,6 +35,7 @@ enum class Tag :unsigned char
 	player,
 	ground,
 	candle,
+	Switch,
 	item,
 	UI,
 };

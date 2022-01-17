@@ -9,6 +9,7 @@
 */
 Result::Result(const Scene& _nowScene)
 	:SceneBase()
+	, mDescription()
 	, mFirstFlag(true)
 	, mDraw(true)
 	, mBackDraw(false)

@@ -193,6 +193,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ItemBase.cpp" />
     <ClCompile Include="ItemCat.cpp" />
     <ClCompile Include="ItemChair.cpp" />
+    <ClCompile Include="ItemTest.cpp" />
     <ClCompile Include="ItemTree.cpp" />
     <ClCompile Include="ItemCount.cpp" />
     <ClCompile Include="ItemSword.cpp" />
@@ -229,6 +230,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkeletalMeshComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
+    <ClCompile Include="Switch.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
@@ -261,6 +263,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ItemBase.h" />
     <ClInclude Include="ItemCat.h" />
     <ClInclude Include="ItemChair.h" />
+    <ClInclude Include="ItemTest.h" />
     <ClInclude Include="ItemTree.h" />
     <ClInclude Include="ItemCount.h" />
     <ClInclude Include="ItemSword.h" />
@@ -288,6 +291,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
     <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Switch.h" />
     <ClInclude Include="SphereCollider.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />

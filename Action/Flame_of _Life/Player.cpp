@@ -3,6 +3,8 @@
 */
 #include "pch.h"
 
+// 静的メンバ変数の初期化
+Vector3 Player::mNowPosition = Vector3::Zero;
 
 /*
 @fn		コンストラクタ
@@ -13,7 +15,7 @@
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, MCameraPos(Vector3(0, -1200, 800))
+	, MCameraPos(Vector3(0, -1300, 1100))
 	, MPointZ(66.0f)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
@@ -58,8 +60,13 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	// ジャンプを追加
 	mJump = new Jump(this);
 
+	// 透明度
+	
+	mAlpha = 0.1f;
+
 	// でバック用 //
 	mDebug = false;
+
 }
 
 /*
@@ -68,7 +75,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 */
 void Player::UpdateGameObject(float _deltaTime)
 {
-
 	//プレイヤーを見下ろす位置にカメラをセット
 	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y, MPointZ));
 	//プレイヤーを横から見る位置にカメラをセット
@@ -137,6 +143,9 @@ void Player::UpdateGameObject(float _deltaTime)
 	// ポジションをセット
 	SetPosition(mPosition);
 	mLegs->SetIsGround(false);
+
+	// ゲッター用にmNowPositionを更新
+	mNowPosition = mPosition;
 }
 
 /*
@@ -257,7 +266,7 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	//// アイテム、ろうそく以外と設置したとき
+	// アイテム、ろうそく以外と設置したとき
 	if (mTag != Tag::item &&
 		mTag != Tag::candle)
 	{

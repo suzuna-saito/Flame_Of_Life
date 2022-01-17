@@ -77,6 +77,9 @@ private:
 	// カメラポジション
 	const Vector3 MCameraPos;
 
+	// 現在のプレイヤーポジジョン
+	static Vector3 mNowPosition;
+
 	// カメラのZ軸注視点
 	const float MPointZ;
 
@@ -107,6 +110,6 @@ private:
 	bool mDebug;
 
 public://ゲッターセッター
-
+	static const Vector3& mGetPos() { return mNowPosition; }
 };
 

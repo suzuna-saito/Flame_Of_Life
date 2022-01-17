@@ -21,7 +21,10 @@ enum class ColliderTag : unsigned char
 	CameraTag,
 	playerTag,
 	playerLegsTag,
+	candleTag,
 	groundTag,
+	switchTag,
+
 	itemTag,
 
 	end,

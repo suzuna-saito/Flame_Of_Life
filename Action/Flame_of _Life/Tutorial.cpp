@@ -18,13 +18,13 @@ Tutorial::Tutorial(const Scene& _nowScene)
 	{
 		// 床の生成
 		mMapCreate->CreateGround();
-		// プレイヤーの生成
-		mMapCreate->CreatePlayer();
+		// スイッチの生成
+		mMapCreate->CreateSwitch();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
+		// プレイヤーの生成
+		mMapCreate->CreatePlayer();
 	}
-
-	//mCandle = nullptr;
 
 	// カウントアップ
 	new CountUp(_nowScene);
@@ -69,7 +69,7 @@ SceneBase* Tutorial::update()
 		// カウントが0以下になったら
 		if (mNextSceneCount <= 0)
 		{
-			return new HardStage(Scene::hard);
+			return new HardStage(Scene::easy);
 		}
 	}
 

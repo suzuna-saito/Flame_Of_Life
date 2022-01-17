@@ -23,7 +23,7 @@ Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Candle/Candle_2.gpmesh"));
 
 	//‚ë‚¤‚»‚­‚Ì“–‚½‚è”»’è
-	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
+	mSelfBoxCollider = new BoxCollider(this, ColliderTag::candleTag, GetOnCollisionFunc());
 	AABB box = { Vector3(-3.0f,-1.0f,0.0f),Vector3(3.0f,1.0f,10.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 }

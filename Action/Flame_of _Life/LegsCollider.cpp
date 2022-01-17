@@ -24,11 +24,18 @@ void LegsCollider::OnCollision(const GameObject& _hitObject)
 {
 	// 接地フラグをtrueにする
 	mIsGround = true;
-	////ヒットしたオブジェクトのタグを取得
+	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	//// 床と設置したとき
-	//if (mTag == ground)
-	//{
-	//}
+	// スイッチと当たった時かつ、スイッチフラグがfalseの時
+	if (mTag == Tag::Switch && !Switch::mSwitchFlag)
+	{
+		// フラグをtrueにする
+		Switch::mSwitchFlag = true;
+	}
+	// スイッチと当たってない時かつ、スイッチフラグがtrueの時
+	else if (mTag != Tag::Switch && Switch::mSwitchFlag)
+	{
+		Switch::mSwitchFlag = false;
+	}
 }

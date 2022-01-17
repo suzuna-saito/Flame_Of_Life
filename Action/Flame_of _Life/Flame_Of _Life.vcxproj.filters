@@ -44,7 +44,7 @@
       <Filter>Components\Collision</Filter>
     </ClCompile>
     <ClCompile Include="MainCameraObject.cpp">
-      <Filter>GameObject\CameraObject</Filter>
+      <Filter>GameObject\Camera</Filter>
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>Components</Filter>
@@ -166,6 +166,12 @@
     <ClCompile Include="Result.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Switch.cpp">
+      <Filter>GameObject\Switch</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemTest.cpp">
+      <Filter>GameObject\Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -210,7 +216,7 @@
       <Filter>Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="MainCameraObject.h">
-      <Filter>GameObject\CameraObject</Filter>
+      <Filter>GameObject\Camera</Filter>
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
@@ -335,6 +341,12 @@
     <ClInclude Include="Result.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Switch.h">
+      <Filter>GameObject\Switch</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemTest.h">
+      <Filter>GameObject\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -363,9 +375,6 @@
     </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{6d792814-2013-4291-afca-00619534d179}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\CameraObject">
-      <UniqueIdentifier>{46f381bd-6df4-4bb8-8f1f-8f954124a17d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{cc7d518f-0e42-4e76-b75d-d775472751f3}</UniqueIdentifier>
@@ -426,6 +435,12 @@
     </Filter>
     <Filter Include="GameObject\Item\Tree">
       <UniqueIdentifier>{9da50e72-9b40-4a4f-8c2b-fa535d78a57f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Camera">
+      <UniqueIdentifier>{46f381bd-6df4-4bb8-8f1f-8f954124a17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Switch">
+      <UniqueIdentifier>{5387ce1f-80d6-4fe4-9677-2028c2cd11f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

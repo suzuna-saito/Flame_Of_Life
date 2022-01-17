@@ -37,15 +37,24 @@ protected:
 	// 四角の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 
+	// アイテムの動き
+	float mMove;
+	float mMaxMove;
+	float mMinMove;
+	bool mUpFlag;
+
 	// プレイヤーと当たったかどうかの判定
 	bool mCollisionFlag;
-private:
+
+	// アイテムの種類
+	itemNames mItemName;
+
 	// 取得したアイテムを格納するためのデータ構造
 	static vector<itemNames> mGetNames;
 
 // ゲッター、セッター
 public:
-	// 取得したアイテムを格納
+	// 取得したアイテムを格納 @@@ いらなくね
 	void SetItemNames(itemNames _itemName) { mGetNames.push_back(_itemName); }
 	// 取得したアイテムを返す
 	static const vector<itemNames> GetItemNames() { return mGetNames; }

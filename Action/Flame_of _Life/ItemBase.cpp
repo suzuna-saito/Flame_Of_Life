@@ -8,7 +8,12 @@ ItemBase::ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mMeshComponent(0)
 	, mSelfBoxCollider(0)
+	, mMove(1.0f)
+	, mMaxMove(200.0f)
+	, mMinMove(0.0f)
+	, mUpFlag(true)
 	, mCollisionFlag(false)
+	, mItemName(itemNames::first)
 {
 	// アイテムが生成されるたびにカウントを取る。
 	mItemCount++;

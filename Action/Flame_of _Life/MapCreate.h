@@ -40,8 +40,12 @@ public:
 	void CreateCandle();
 
 	/*
+	@fn	スイッチ（球体）を生成する
+	*/
+	void CreateSwitch();
+
+	/*
 	@fn	アイテムを生成する
-	@param	_objectPos 生成するポジション
 	*/
 	void CreateItem();
 private:
@@ -57,6 +61,8 @@ private:
 	vector<vector<int>> mPlayerMapData;
 	//ろうそくマップデータ
 	vector<vector<int>> mCandleMapData;
+	//スイッチ（球体）マップデータ
+	vector<vector<int>> mSwitchMapData;
 	//アイテムマップデータ
 	vector<vector<int>> mItemMapData;
 
@@ -84,6 +90,9 @@ private:
 	const float MCandleScale;
 	// プレイヤーのスケール
 	const float MPlayerScale;
+	// スイッチ（球体）のスケール
+	const float MSwitchScale;
+
 	/* アイテム関連 */
 	// 猫（アイテム）のスケール
 	const float MCatScale;
@@ -92,6 +101,8 @@ private:
 	const float MChairScale;
 	const float MTreeScale;
 	const float MSwordScale;
+	
+	int mItemCount;
 
 	const float MPlayerZPos;
 	// 地面に埋まらないためにろうそくに足してあげるポジションｚ軸

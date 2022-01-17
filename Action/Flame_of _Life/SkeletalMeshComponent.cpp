@@ -43,7 +43,12 @@ void SkeletalMeshComponent::Draw(Shader* _shader)
 			_shader->SetFloatUniform("uSpecPower", 100);
 
 			// プレイヤーの色変更@@@
-			//_shader->SetVectorUniform("uColor", Vector3(0.8f, 0.1f, 0.5f));
+			_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
+			_shader->SetVectorUniform("uColor", mOwner->GetColor());
+
+			// メッシュに定義されているテクスチャをセット
+			SetTextureToShader(_shader);
+
 			//  テクスチャをセット 
 			Texture* t = mMesh->GetTexture(mTextureIndex);
 			if (t)
