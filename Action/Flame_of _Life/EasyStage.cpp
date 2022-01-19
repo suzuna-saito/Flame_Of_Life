@@ -24,6 +24,8 @@ EasyStage::EasyStage(const Scene& _nowScene)
 		mMapCreate->CreateCandle();
 		// プレイヤーの生成
 		mMapCreate->CreatePlayer();
+		// アイテムの生成
+		mMapCreate->CreateItem();
 	}
 
 	// カウントアップ

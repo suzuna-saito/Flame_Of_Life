@@ -69,7 +69,7 @@ SceneBase* Tutorial::update()
 		// ƒJƒEƒ“ƒg‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç
 		if (mNextSceneCount <= 0)
 		{
-			return new HardStage(Scene::easy);
+			return new EasyStage(Scene::easy);
 		}
 	}
 

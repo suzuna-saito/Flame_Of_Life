@@ -172,6 +172,9 @@
     <ClCompile Include="ItemTest.cpp">
       <Filter>GameObject\Item</Filter>
     </ClCompile>
+    <ClCompile Include="SwitchCollider.cpp">
+      <Filter>GameObject\Switch</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -346,6 +349,9 @@
     </ClInclude>
     <ClInclude Include="ItemTest.h">
       <Filter>GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchCollider.h">
+      <Filter>GameObject\Switch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

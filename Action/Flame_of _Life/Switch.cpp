@@ -11,6 +11,9 @@ Ground::alphaColor Switch::mSwitchColor = Ground::alphaColor::red;
 
 Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag,const Ground::alphaColor& _tag)
 	:GameObject(_sceneTag, _objectTag)
+	/*, mRedSwitchFlag(false)
+	, mGreenSwitchFlag(false)
+	, mYellowSwitchFlag(false)*/
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -28,10 +31,12 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	case Ground::alphaColor::red:
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/RedSwitch.gpmesh"));
+		/*mRedSwitchFlag = true;*/
 		break;
 	case Ground::alphaColor::green:
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/GreenSwitch.gpmesh"));
+		/*mGreenSwitchFlag = true;*/
 		break;
 	case Ground::alphaColor::yellow:
 		break;
@@ -41,13 +46,29 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
-	AABB box = { Vector3(13.0f,-20.0f,0.0f),Vector3(-13.0f,16.5f,9.0f) };
+	AABB box = { Vector3(14.0f,-20.0f,0.0f),Vector3(-14.0f,16.5f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
+	// スイッチ中心当たり判定の生成
+	mSwitchCenter = new SwitchCollider(this, _objectTag, _sceneTag);
 }
 
 void Switch::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
+
+
+	// スイッチを押している状態だったら
+	/*if (mSwitchFlag)
+	{
+		switch (mSwitchColor)
+		{
+		case(Ground::alphaColor::red):
+
+		default:
+			break;
+		}
+	}*/
 
 	//// プレイヤーと、スイッチの距離を計算
 	//if (Player::mGetPos().x >= mPosition.x)  // プレイヤーの値の方が大きければ

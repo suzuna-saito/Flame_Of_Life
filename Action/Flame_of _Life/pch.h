@@ -77,6 +77,7 @@ using namespace std;
 #include "Ground.h"
 /* スイッチ */
 #include "Switch.h"
+#include "SwitchCollider.h"
 /* ろうそく */
 #include "Candle.h"
 /* ろうそくについてるオブジェクト */

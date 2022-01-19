@@ -79,8 +79,18 @@ void Ground::UpdateGameObject(float _deltaTime)
 		mFirstFlag = false;
 	}
 
+	//// スイッチの色と床の色が一緒だったら
+	//if (Switch::mSwitchFlag && mAlphaColorTag == Switch::mSwitchColor)
+	//{
+	//	// 少しずつ透明度をあげる
+	//	if (mAlpha <= 1.0f)
+	//	{
+	//		mAlpha += MAlphaAddSpeed;
+	//	}
+	//}
+
 	// スイッチの色と床の色が一緒だったら
-	if (Switch::mGetSwitchTag() == mAlphaColorTag && mGroundTag == groundTag::RGBalpha)
+	if (mGroundTag == groundTag::RGBalpha)
 	{
 		// スイッチを押していたら
 		if (Switch::mSwitchFlag)
@@ -152,6 +162,8 @@ void Ground::mInit()
 		break;
 	case (int)alphaColor::green:
 		mColor = Color::Green;
+		// 何色の床なのかを設定
+		mAlphaColorTag = alphaColor::green;
 		break;
 	case (int)alphaColor::yellow:
 		mColor = Color::Yellow;

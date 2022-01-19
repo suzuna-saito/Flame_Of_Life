@@ -10,7 +10,7 @@ public:
 	// 床の種類
 	enum class groundTag :unsigned char
 	{
-		// 透明になる（ｒｇｂ）
+		// 透明になる（ｒｇy）
 		RGBalpha,
 		// 透明になる（固定の色）
 		alpha,
@@ -18,7 +18,7 @@ public:
 		notAlpha,
 	};
 
-	// α値の変わるタイミング種類&床の色
+	// α値の変わる床の色
 	enum class alphaColor :unsigned char
 	{
 		red,

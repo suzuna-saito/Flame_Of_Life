@@ -1,6 +1,8 @@
 #pragma once
 
-// 球体のオブジェクト
+class SwitchCollider;
+
+// スイッチのオブジェクト
 class Switch :public GameObject
 {
 public:
@@ -18,6 +20,9 @@ public:
 
 	// スイッチを押しているかのフラグ
 	static bool mSwitchFlag;
+
+	// スイッチと連携している床の色
+	static Ground::alphaColor mSwitchColor;
 private:
 
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -26,11 +31,13 @@ private:
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 
+	// それぞれの色のフラグ
+	/*bool mRedSwitchFlag;
+	bool mGreenSwitchFlag;
+	bool mYellowSwitchFlag;*/
+
 	// プレイヤーとスイッチの距離
 	static float mDistance;
-
-	// スイッチと連携している床の色
-	static Ground::alphaColor mSwitchColor;
 
 	/// <summary>
 	/// プレイヤーと各スイッチの距離の計算
@@ -45,12 +52,15 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+	// スイッチ中心の当たり判定
+	SwitchCollider* mSwitchCenter;
+
 public: // ゲッター、セッター
 	// プレイヤーとスイッチの距離を取得
 	static const float mGetDistance() { return mDistance; }
 
 	// スイッチのカラータグを取得
-	static const Ground::alphaColor mGetSwitchTag() { return mSwitchColor; }
+	//static const Ground::alphaColor mGetSwitchTag() { return mSwitchColor; }
 
 	//static const bool mGetSwitchFlag() { return mSwitchFlag; }
 };

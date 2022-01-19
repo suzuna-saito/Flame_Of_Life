@@ -101,7 +101,8 @@ private:
 	const float MChairScale;
 	const float MTreeScale;
 	const float MSwordScale;
-	
+
+	const float MItemScale;
 	int mItemCount;
 
 	const float MPlayerZPos;

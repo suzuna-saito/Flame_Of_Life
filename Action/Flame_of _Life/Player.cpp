@@ -3,9 +3,6 @@
 */
 #include "pch.h"
 
-// 静的メンバ変数の初期化
-Vector3 Player::mNowPosition = Vector3::Zero;
-
 /*
 @fn		コンストラクタ
 @param	_pos プレイヤーの座標
@@ -16,7 +13,15 @@ Vector3 Player::mNowPosition = Vector3::Zero;
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, MCameraPos(Vector3(0, -1300, 1100))
-	, MPointZ(66.0f)
+	, mReturnPos(_pos)
+	, MCameraPointZ(66.0f)
+	, MRedoingPosZ(-400.0f)
+	, MReturnAddZ(150.0f)
+	, MPosAdjustmentXY(0.1f)
+	, MPosAdjustmentZ(50.0f)
+	, MSpeedAdjustmentXY(1000.0f)
+	, MSpeedAdjustmentZ(4000.0f)
+	, mOperable(true)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
 {
@@ -76,7 +81,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 void Player::UpdateGameObject(float _deltaTime)
 {
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y, MPointZ));
+	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y, MCameraPointZ));
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用
@@ -106,7 +111,7 @@ void Player::UpdateGameObject(float _deltaTime)
 
 	
 	// 重力
- 	if (!mLegs->GetIsGround() && !mDebug)
+ 	if (!mLegs->GetIsGround() && !mDebug && mOperable)
 	{
 		mVelocity.z -= MGravity/* * _deltaTime*/;
 	}
@@ -133,19 +138,33 @@ void Player::UpdateGameObject(float _deltaTime)
 	mPrevState = mNowState;
 
 	
-	// デバックモード
-	if (mPosition.z < -300.0f)
+	// プレイヤーが落ちたら
+	if (mPosition.z <= MRedoingPosZ && mOperable)
 	{
-		mPosition.z = 300.0f;
-		mDebug = true;
+		// 動作が出来なくする
+		mOperable = false;
+
+		mVelocity = Vector3::Zero;
+	}
+	if (!mOperable)
+	{
+		// 復帰位置まで移動させる
+		mRedoing(mPosition, mReturnPos);
+	}
+
+	// スイッチ中心に触れていたら
+	if (Switch::mSwitchFlag == true && mOperable)
+	{
+		// 復帰位置を更新
+		mReturnPos = mPosition;
+
+		// z軸だけ少し高く
+		mReturnPos.z += MReturnAddZ;
 	}
 
 	// ポジションをセット
 	SetPosition(mPosition);
 	mLegs->SetIsGround(false);
-
-	// ゲッター用にmNowPositionを更新
-	mNowPosition = mPosition;
 }
 
 /*
@@ -159,87 +178,92 @@ void Player::GameObjectInput(const InputState& _keyState)
 	// 向いてほしい向きのベクトル
 	Vector3 inputVec = Vector3::Zero;
 
-	// Wで奥に移動
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
+	if (mOperable)
 	{
-		inputVec.y = 1.0f;
-		mVelocity.y = mMoveSpeed;
-	}
-	// Sで手前に移動
-	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
-	{
-		inputVec.y = -1.0f;
-		mVelocity.y = -mMoveSpeed;
-	}
-	else
-	{
-		mVelocity.y = 0.0f;
-	}
-	// Aで左に移動
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
-	{
-		inputVec.x = 1.0f;
-		mVelocity.x = mMoveSpeed;
-	}
-	// Dで右に移動
-	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
-	{
-		inputVec.x = -1.0f;
-		mVelocity.x = -mMoveSpeed;
-	}
-	else
-	{
-		mVelocity.x = 0.0f;
-	}
-
-	// スペースでジャンプ
-	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed &&
-		mLegs->GetIsGround())
-	{
-		mJump->SetJumpStart(true);
-	}
-
-	// awsdのいずれかが押されていたら
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
-		_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
-	{
-		mNowState = playerState::run;
-	}
-	else
-	{
-		mNowState = playerState::idle;
 		mVelocity = Vector3::Zero;
-	}
 
-	// 入力ベクトルの正規化
-	inputVec.Normalize();
-
-	mAnimVec = inputVec;
-
-	///// でバック用 //////
-	if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
-	{
-		if (!mDebug)
+		// Wで奥に移動
+		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
 		{
-			mDebug = true;
+			inputVec.y = 1.0f;
+			mVelocity.y = mMoveSpeed;
+		}
+		// Sで手前に移動
+		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
+		{
+			inputVec.y = -1.0f;
+			mVelocity.y = -mMoveSpeed;
 		}
 		else
 		{
-			mDebug = false;
+			mVelocity.y = 0.0f;
 		}
-	}
+		// Aで左に移動
+		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
+		{
+			inputVec.x = 1.0f;
+			mVelocity.x = mMoveSpeed;
+		}
+		// Dで右に移動
+		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
+		{
+			inputVec.x = -1.0f;
+			mVelocity.x = -mMoveSpeed;
+		}
+		else
+		{
+			mVelocity.x = 0.0f;
+		}
 
-	if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
-	{
-		mVelocity.z = mMoveSpeed;
-	}
-	else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN) && mDebug)
-	{
-		mVelocity.z = -mMoveSpeed;
-	}
-	else
-	{
-		mVelocity.z = 0.0f;
+		// スペースでジャンプ
+		if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed &&
+			mLegs->GetIsGround())
+		{
+			mJump->SetJumpStart(true);
+		}
+
+		// awsdのいずれかが押されていたら
+		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
+		{
+			mNowState = playerState::run;
+		}
+		else
+		{
+			mNowState = playerState::idle;
+			mVelocity = Vector3::Zero;
+		}
+
+		// 入力ベクトルの正規化
+		inputVec.Normalize();
+
+		mAnimVec = inputVec;
+
+		///// でバック用 //////
+		if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+		{
+			if (!mDebug)
+			{
+				mDebug = true;
+			}
+			else
+			{
+				mDebug = false;
+			}
+		}
+
+		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
+		{
+			mVelocity.z = mMoveSpeed;
+		}
+		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN) && mDebug)
+		{
+			mVelocity.z = -mMoveSpeed;
+		}
+		else
+		{
+			mVelocity.z = 0.0f;
+		}
 	}
 }
 
@@ -266,13 +290,60 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// アイテム、ろうそく以外と設置したとき
+	// アイテム、ろうそく、スイッチ中心以外と設置したとき
 	if (mTag != Tag::item &&
-		mTag != Tag::candle)
+		mTag != Tag::candle &&
+		mTag != Tag::SwitchCenter &&
+		mOperable)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 	}
+}
+
+
+// 復帰位置まで移動させる
+void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
+{
+	// 今のポジションと、復帰位置までの差
+	Vector3 difference = _returnPos - _nowPos;
+
+	//mPosition = _returnPos;
+
+	difference.Normalize();
+
+
+	if (mPosition.z < _returnPos.z- MPosAdjustmentZ)
+	{
+		mVelocity.z = difference.z*MSpeedAdjustmentZ;
+	}
+	else
+	{
+		mVelocity.z = 0.0f;
+
+		if (mPosition.x > _returnPos.x + MPosAdjustmentXY || mPosition.x < _returnPos.x - MPosAdjustmentXY)
+		{
+			mVelocity.x = difference.x * MSpeedAdjustmentXY;
+		}
+		else
+		{
+			mVelocity.x = 0.0f;
+		}
+		if (mPosition.y > _returnPos.y + MPosAdjustmentXY || mPosition.y < _returnPos.y - MPosAdjustmentXY)
+		{
+			mVelocity.y = difference.y * MSpeedAdjustmentXY;
+		}
+		else
+		{
+			mVelocity.y= 0.0f;
+		}
+	}
+	
+	if (mVelocity == Vector3::Zero)
+	{
+		mOperable = true;
+	}
+	
 }
 
 

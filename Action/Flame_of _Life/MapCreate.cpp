@@ -19,9 +19,10 @@ MapCreate::MapCreate()
 	, MChairScale(0.7f)
 	, MTreeScale(0.5f)
 	, MSwordScale(2.0f)
-	, MPlayerZPos(100.0f)
+	, MItemScale(0.5f)
+	, MPlayerZPos(200.0f)
 	, MCandleZPos(90.0f)
-	, MItemZPos(110.0f)
+	, MItemZPos(200.0f)
 	, mOffsetX(265.0f)
 	, mOffsetY(-380.0f)
 	, mOffsetZ(0.0f)
@@ -128,6 +129,13 @@ bool MapCreate::OpenFile()
 		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy.json", "Switch"))
 		{
 			printf("don't have Layer/Switch\n");
+			return true;
+		}
+
+		//アイテムデータの読み込み
+		if (!readTiledJson(mItemMapData, "Assets/Config/easy.json", "Item"))
+		{
+			printf("don't have Layer/Item\n");
 			return true;
 		}
 	}
@@ -471,7 +479,7 @@ void MapCreate::CreateItem()
 		{
 			const unsigned int name = mItemMapData[(int)iz][(int)ix];
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
-			Vector3 objectSize = Vector3(MSwitchScale, MSwitchScale, MSwitchScale);
+			Vector3 objectSize = Vector3(MItemScale, MItemScale, MItemScale);
 
 			switch (mScene)
 			{

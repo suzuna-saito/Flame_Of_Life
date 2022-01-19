@@ -74,14 +74,30 @@ private:
 	// 回転目標方向
 	Vector3 mAnimVec; 
 
+	// プレイヤーの復帰ポジション
+	Vector3 mReturnPos;
+
 	// カメラポジション
 	const Vector3 MCameraPos;
 
-	// 現在のプレイヤーポジジョン
-	static Vector3 mNowPosition;
-
 	// カメラのZ軸注視点
-	const float MPointZ;
+	const float MCameraPointZ;
+
+	// プレイヤーのリスポーンするタイミングｚ軸
+	const float MRedoingPosZ;
+	// プレイヤーのリスポーン位置に足すｚ軸
+	const float MReturnAddZ;
+
+	// リスポーン位置の細かい調整
+	const float MPosAdjustmentXY;
+	const float MPosAdjustmentZ;
+
+	// リスポーン時の速度調整
+	const float MSpeedAdjustmentXY;
+	const float MSpeedAdjustmentZ;
+
+	// プレイヤーが動作可能状態か
+	bool mOperable;
 
 	// ジャンプ
 	Jump* mJump;
@@ -95,6 +111,12 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+	/*
+	@fn		プレイヤーが落ちた際の処理
+	@param	_nowPos	現在のポジション
+	@param	_returnPos 復帰位置
+	*/
+	void mRedoing(Vector3 _nowPos, const Vector3 _returnPos);
 	
 	
 	// アニメーション関係
@@ -108,8 +130,5 @@ private:
 ////デバック用
 //	Vector3 testPos;
 	bool mDebug;
-
-public://ゲッターセッター
-	static const Vector3& mGetPos() { return mNowPosition; }
 };
 
