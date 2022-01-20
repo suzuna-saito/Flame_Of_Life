@@ -77,6 +77,9 @@ private:
 	// プレイヤーの復帰ポジション
 	Vector3 mReturnPos;
 
+	// 落ちた時のポジションと、復帰ポジションの距離
+	Vector3 mDifference;
+
 	// カメラポジション
 	const Vector3 MCameraPos;
 
@@ -85,16 +88,12 @@ private:
 
 	// プレイヤーのリスポーンするタイミングｚ軸
 	const float MRedoingPosZ;
-	// プレイヤーのリスポーン位置に足すｚ軸
-	const float MReturnAddZ;
 
-	// リスポーン位置の細かい調整
-	const float MPosAdjustmentXY;
-	const float MPosAdjustmentZ;
+	// リスポーン位置を少し高くする
+	float MReturnAddZ;
 
-	// リスポーン時の速度調整
-	const float MSpeedAdjustmentXY;
-	const float MSpeedAdjustmentZ;
+	// リスポーン時の速度
+	const float MRedoingSpeedZ;
 
 	// プレイヤーが動作可能状態か
 	bool mOperable;

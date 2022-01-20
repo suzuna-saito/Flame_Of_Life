@@ -2,6 +2,7 @@
 @brief	インクルード
 */
 #include "pch.h"
+#include <iostream>
 
 // 静的メンバ変数
 float Switch::mDistance = 0.0f;

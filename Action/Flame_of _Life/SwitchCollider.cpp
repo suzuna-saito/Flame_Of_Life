@@ -11,7 +11,7 @@ SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const Scene
 
 	//スイッチ中心の当たり判定(ボックス)
 	mSwitchBoxCollider = new BoxCollider(_owner, ColliderTag::switchTag, GetOnCollisionFunc());
-	AABB Switchbox = { Vector3(2.0f,-4.0f,15.0f),Vector3(-2.0f,4.0f,16.0f) };
+	AABB Switchbox = { Vector3(1.6f,-4.0f,15.0f),Vector3(-1.6f,4.0f,16.0f) };
 	mSwitchBoxCollider->SetObjectBox(Switchbox);
 }
 

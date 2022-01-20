@@ -14,13 +14,11 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	: GameObject(_sceneTag, _objectTag)
 	, MCameraPos(Vector3(0, -1300, 1100))
 	, mReturnPos(_pos)
+	, mDifference(Vector3::Zero)
 	, MCameraPointZ(66.0f)
 	, MRedoingPosZ(-400.0f)
-	, MReturnAddZ(150.0f)
-	, MPosAdjustmentXY(0.1f)
-	, MPosAdjustmentZ(50.0f)
-	, MSpeedAdjustmentXY(1000.0f)
-	, MSpeedAdjustmentZ(4000.0f)
+	, MReturnAddZ(100.0f)
+	, MRedoingSpeedZ(700.0f)
 	, mOperable(true)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
@@ -305,42 +303,31 @@ void Player::OnCollision(const GameObject& _hitObject)
 // 復帰位置まで移動させる
 void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 {
-	// 今のポジションと、復帰位置までの差
-	Vector3 difference = _returnPos - _nowPos;
-
-	//mPosition = _returnPos;
-
-	difference.Normalize();
-
-
-	if (mPosition.z < _returnPos.z- MPosAdjustmentZ)
+	// 浮上するとき
+	if (mPosition.z < _returnPos.z)
 	{
-		mVelocity.z = difference.z*MSpeedAdjustmentZ;
+		mVelocity.z = MRedoingSpeedZ;
 	}
+	// 浮上した後
 	else
 	{
 		mVelocity.z = 0.0f;
 
-		if (mPosition.x > _returnPos.x + MPosAdjustmentXY || mPosition.x < _returnPos.x - MPosAdjustmentXY)
-		{
-			mVelocity.x = difference.x * MSpeedAdjustmentXY;
-		}
-		else
-		{
-			mVelocity.x = 0.0f;
-		}
-		if (mPosition.y > _returnPos.y + MPosAdjustmentXY || mPosition.y < _returnPos.y - MPosAdjustmentXY)
-		{
-			mVelocity.y = difference.y * MSpeedAdjustmentXY;
-		}
-		else
-		{
-			mVelocity.y= 0.0f;
-		}
+		// 現在のポジションとリスポーン地点の座標を用いて線形補間を行い、次の座標を計算する
+		mDifference = Vector3::Lerp(_nowPos, _returnPos, 0.05f);
+
+		mPosition = mDifference;
 	}
 	
-	if (mVelocity == Vector3::Zero)
+	Vector3 distance = Vector3::Zero;
+
+	// 向きベクトル
+	distance = _returnPos - mPosition;
+
+	// 1に近かったら
+	if (Math::NearZero(distance.Length(),5.0f))
 	{
+		// 行動を可能にする
 		mOperable = true;
 	}
 	

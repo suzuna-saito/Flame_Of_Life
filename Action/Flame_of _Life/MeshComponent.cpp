@@ -51,6 +51,7 @@ void MeshComponent::Draw(Shader* _shader)
 			_shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
 
 			_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
+
 			_shader->SetVectorUniform("uColor", mOwner->GetColor());
 			// Set the active texture
 

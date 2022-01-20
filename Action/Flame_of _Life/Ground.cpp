@@ -43,57 +43,47 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	/* 乱数の種を初期化 */
 	srand(time(NULL));
 
-	// 透明度
+	// 床の色などを設定する
 	if (mGroundTag == groundTag::RGBalpha)
 	{
-		mAlpha = 0.0f;
+		mInit();
 	}
+
+	// 透明度
+	/*if (mGroundTag == groundTag::RGBalpha)
+	{
+		mAlpha = 0.0f;
+	}*/
 }
 
 void Ground::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
-	/*if (MYellowTime >= mCount)
-	{
-		mCount++;
-	}*/
-
-	// 一回目の処理
-	if (mFirstFlag)
-	{
-		// タグがRGBalphaだったら
-		if (mGroundTag == groundTag::RGBalpha)
-		{
-			// 床の色などを設定する
-			mInit();
-		}
-		// タグがalphaだったら
-		else if (mGroundTag == groundTag::alpha)
-		{
-			// 色を紫に設定する
-			mColor = Vector3(1.0f,0.0f,1.0f);
-		}
-
-		//　ファーストフラグをfalseにする
-		mFirstFlag = false;
-	}
-
-	//// スイッチの色と床の色が一緒だったら
-	//if (Switch::mSwitchFlag && mAlphaColorTag == Switch::mSwitchColor)
+	//// 一回目の処理
+	//if (mFirstFlag)
 	//{
-	//	// 少しずつ透明度をあげる
-	//	if (mAlpha <= 1.0f)
+	//	// タグがRGBalphaだったら
+	//	if (mGroundTag == groundTag::RGBalpha)
 	//	{
-	//		mAlpha += MAlphaAddSpeed;
+	//		// 床の色などを設定する
+	//		mInit();
 	//	}
+	//	// タグがalphaだったら
+	//	else if (mGroundTag == groundTag::alpha)
+	//	{
+	//		// 色を紫に設定する
+	//		mColor = Vector3(1.0f,0.0f,1.0f);
+	//	}
+
+	//	//　ファーストフラグをfalseにする
+	//	mFirstFlag = false;
 	//}
 
-	// スイッチの色と床の色が一緒だったら
-	if (mGroundTag == groundTag::RGBalpha)
+	
+	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha)
 	{
-		// スイッチを押していたら
-		if (Switch::mSwitchFlag)
+		if (mAlphaColorTag == Switch::mSwitchColor)
 		{
 			// 少しずつ透明度をあげる
 			if (mAlpha <= 1.0f)
@@ -101,46 +91,24 @@ void Ground::UpdateGameObject(float _deltaTime)
 				mAlpha += MAlphaAddSpeed;
 			}
 		}
-		else
-		{
-			// 少しずつ透明度を下げる
-			if (mAlpha >= 0.0f)
-			{
-				mAlpha -= MAlphaSubSpeed;
-			}
-		}
-		/*mAlpha -= Switch::mGetDistance()*0.005;
-
-		if (mAlpha <= 0.0f)
-		{
-			mAlpha = 0.0f;
-		}*/
 	}
-
-	
-	//// 透明になる床だったらかつ、タイミングとカウントが一致したら
-	//if (mGroundTag != groundTag::notAlpha && mAlphaTiming <= mCount)
+	//else if(mGroundTag != groundTag::notAlpha)
 	//{
-	//	// mAlphaChangeフラグを見てα値を上げるか下げるか変える
-	//	if (mAlphaChange)
+	//	// 少しずつ透明度を下げる
+	//	if (mAlpha >= 0.0f)
 	//	{
-	//		mAlpha -= MAlphaValue;
-	//	}
-	//	else
-	//	{
-	//		mAlpha += MAlphaValue;
-	//	}
-
-	//	// 一定数までいったらフラグを変更する
-	//	if (mAlpha <= MAlphaMin)
-	//	{
-	//		mAlphaChange = false;
-	//	}
-	//	else if (mAlpha >= MAlphaMax)
-	//	{
-	//		mAlphaChange = true;
+	//		mAlpha -= MAlphaSubSpeed;
 	//	}
 	//}
+
+	if (mAlphaColorTag == alphaColor::red)
+	{
+		printf("1");
+	}
+	else
+	{
+		printf("0");
+	}
 }
 
 void Ground::OnCollision(const GameObject& _hitObject)
