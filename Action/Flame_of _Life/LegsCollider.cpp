@@ -7,8 +7,8 @@ LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBas
 	, mOwner(_owner)
 {
 	//プレイヤー足元の当たり判定(ボックス)
-	mLegsBoxCollider = new BoxCollider(_owner, ColliderTag::playerLegsTag, GetOnCollisionFunc());
-	AABB Legsbox = { Vector3(500.0f,-500.0f,0.0f),Vector3(-500.0f,500.0f,100.0f) };
+	mLegsBoxCollider = new BoxCollider(this, ColliderTag::playerLegsTag, GetOnCollisionFunc());
+	AABB Legsbox = { Vector3(-30.0f,-30.0f,-10.0f),Vector3(30.0f,30.0f,5.0f) };
 	mLegsBoxCollider->SetObjectBox(Legsbox);
 }
 
@@ -22,8 +22,18 @@ void LegsCollider::UpdateGameObject(float _deltaTime)
 // 当たり判定
 void LegsCollider::OnCollision(const GameObject& _hitObject)
 {
-	// 接地フラグをtrueにする
-	mIsGround = true;
 	//ヒットしたオブジェクトのタグを取得
-	mTag = _hitObject.GetTag();
+	Tag hitObjectTag = _hitObject.GetTag();
+	
+	if (hitObjectTag == Tag::ground ||
+		hitObjectTag == Tag::Switch)
+	{
+		// 接地フラグをtrueにする
+		mIsGround = true;
+	}
+
+	if (hitObjectTag == Tag::SwitchCenter)
+	{
+		mOwner->SetReturnPos(_hitObject.GetPosition());
+	}
 }

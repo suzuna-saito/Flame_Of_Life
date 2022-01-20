@@ -43,8 +43,8 @@ SceneBase* Title::update()
 
 	if (mGameSceneFlag)
 	{
-		return new EasyStage(Scene::easy);
-		//return new Tutorial(Scene::tutorial);
+		//return new EasyStage(Scene::easy);
+		return new Tutorial(Scene::tutorial);
 		//return new HardStage(Scene::hard);
 	}
 

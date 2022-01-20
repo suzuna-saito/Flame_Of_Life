@@ -68,6 +68,11 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 				continue;
 			}
 			
+			/*if (itr->GetTag() == ColliderTag::switchTag)
+			{
+				continue;
+			}*/
+
 			bool hit = Intersect(itr->GetWorldBox(), _box->GetWorldBox());
 
 			if (hit)
@@ -109,7 +114,8 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 				continue;
 			}
 
-			if (itr->GetTag() != ColliderTag::groundTag)
+			if (itr->GetTag() != ColliderTag::groundTag &&
+				itr->GetTag() != ColliderTag::switchTag)
 			{
 				continue;
 			}
@@ -416,6 +422,11 @@ void PhysicsWorld::DrawCollisions(std::vector<class BoxCollider*>& boxes, const 
 	mLineShader->SetVectorUniform("uColor", color);
 	for (auto item : boxes)
 	{
+
+		if (item->GetTag() == ColliderTag::groundTag)
+		{
+			continue;
+		}
 		//// Box‚¾‚Á‚½ê‡‚Ì•`‰æ
 		//if (item->GetColliderType() == ColliderTypeEnum::Box)
 		//{

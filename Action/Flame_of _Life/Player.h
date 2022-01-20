@@ -38,6 +38,8 @@ public:
 	*/
 	void GameObjectInput(const InputState& _keyState)override;
 
+
+	void SetReturnPos(Vector3 _returnPos) { mReturnPos = _returnPos; }
 private:
 	// プレイヤーの行動の状態
 	typedef enum class playerState :unsigned char

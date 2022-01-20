@@ -59,7 +59,8 @@ SceneBase* EasyStage::update()
 {
 	if (Candle::mCandleCount == 2)
 	{
-		return new NormalStage(Scene::normal);
+		//return new NormalStage(Scene::normal);
+		return new Result(Scene::result);
 	}
 
 	CountUp::SetCountStartFlag(true);

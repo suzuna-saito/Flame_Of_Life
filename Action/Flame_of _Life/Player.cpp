@@ -63,9 +63,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	// ジャンプを追加
 	mJump = new Jump(this);
 
-	// 透明度
-	
-	mAlpha = 0.1f;
 
 	// でバック用 //
 	mDebug = false;
@@ -79,7 +76,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 void Player::UpdateGameObject(float _deltaTime)
 {
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x,mPosition.y, MCameraPointZ));
+	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x, mPosition.y, MCameraPointZ));
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用
@@ -104,19 +101,19 @@ void Player::UpdateGameObject(float _deltaTime)
 	// ジャンプしてたらジャンプ力を足す
 	if (mJump->GetJumpFlag())
 	{
- 		mVelocity.z += mJump->GetVelocity();
+		mVelocity.z += mJump->GetVelocity();
 	}
 
-	
+
 	// 重力
- 	if (!mLegs->GetIsGround() && !mDebug && mOperable)
+	if (!mLegs->GetIsGround() && !mDebug && mOperable)
 	{
 		mVelocity.z -= MGravity/* * _deltaTime*/;
 	}
-	/*else
+	if (mVelocity.z >= 1700.0f)
 	{
-		mVelocity.z = 0.0f;
-	}*/
+		mJump->SetEndJump(true);
+	}
 
 	// 座標をセット
 	mPosition += mVelocity * _deltaTime;
@@ -150,15 +147,6 @@ void Player::UpdateGameObject(float _deltaTime)
 		mRedoing(mPosition, mReturnPos);
 	}
 
-	// スイッチ中心に触れていたら
-	if (Switch::mSwitchFlag == true && mOperable)
-	{
-		// 復帰位置を更新
-		mReturnPos = mPosition;
-
-		// z軸だけ少し高く
-		mReturnPos.z += MReturnAddZ;
-	}
 
 	// ポジションをセット
 	SetPosition(mPosition);
@@ -288,14 +276,20 @@ void Player::OnCollision(const GameObject& _hitObject)
 	//ヒットしたオブジェクトのタグを取得
 	mTag = _hitObject.GetTag();
 
-	// アイテム、ろうそく、スイッチ中心以外と設置したとき
+	// アイテム、ろうそく、スイッチ中心以外と接地したとき
 	if (mTag != Tag::item &&
 		mTag != Tag::candle &&
 		mTag != Tag::SwitchCenter &&
+		mTag != Tag::Camera &&
+		mTag != Tag::Other &&
+		mTag != Tag::player &&
+		mTag != Tag::UI &&
 		mOperable)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
+
+		mJump->SetEndJump(true);
 	}
 }
 
@@ -303,8 +297,12 @@ void Player::OnCollision(const GameObject& _hitObject)
 // 復帰位置まで移動させる
 void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 {
+	Vector3 returnPos = Vector3::Zero;
+
+	returnPos = _returnPos;
+	returnPos.z += MReturnAddZ;
 	// 浮上するとき
-	if (mPosition.z < _returnPos.z)
+	if (mPosition.z < returnPos.z)
 	{
 		mVelocity.z = MRedoingSpeedZ;
 	}
@@ -314,7 +312,7 @@ void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 		mVelocity.z = 0.0f;
 
 		// 現在のポジションとリスポーン地点の座標を用いて線形補間を行い、次の座標を計算する
-		mDifference = Vector3::Lerp(_nowPos, _returnPos, 0.05f);
+		mDifference = Vector3::Lerp(_nowPos, returnPos, 0.05f);
 
 		mPosition = mDifference;
 	}
@@ -322,7 +320,7 @@ void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 	Vector3 distance = Vector3::Zero;
 
 	// 距離ベクトル
-	distance = _returnPos - mPosition;
+	distance = returnPos - mPosition;
 
 	// 1に近かったら
 	if (Math::NearZero(distance.Length(),5.0f))

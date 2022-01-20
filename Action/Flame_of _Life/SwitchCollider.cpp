@@ -13,13 +13,19 @@ SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const Scene
 	mTag = Tag::SwitchCenter;
 
 	//スイッチ中心の当たり判定(ボックス)
-	mSwitchBoxCollider = new BoxCollider(_owner, ColliderTag::switchTag, GetOnCollisionFunc());
-	AABB Switchbox = { Vector3(1.6f,-4.0f,15.0f),Vector3(-1.6f,4.0f,16.0f) };
+	mSwitchBoxCollider = new BoxCollider(this, ColliderTag::switchTag, GetOnCollisionFunc());
+	AABB Switchbox = { Vector3(-50.0f,-50.0f,0.0f),Vector3(50.0f,50.0f,100.0f) };
 	mSwitchBoxCollider->SetObjectBox(Switchbox);
 }
 
 void SwitchCollider::UpdateGameObject(float _deltaTime)
 {
+	/*AABB test = mSwitchBoxCollider->GetWorldBox();
+
+	printf("minX : %f\n minY : %f\n minZ : %f\n maxX : %f\n maxY : %f\n maxZ : %f\n", 
+		test.m_min.x, test.m_min.y, test.m_min.z,
+		test.m_max.x, test.m_max.y, test.m_max.z );*/
+
 	// スイッチのフラグをfalseに戻す
 	Switch::mSwitchFlag = false;
 }
@@ -27,10 +33,10 @@ void SwitchCollider::UpdateGameObject(float _deltaTime)
 void SwitchCollider::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	mTag = _hitObject.GetTag();
+	Tag hitObjectTag = _hitObject.GetTag();
 
 	// スイッチと当たった時かつ、スイッチフラグがfalseの時
-	if (mTag == Tag::Switch && !Switch::mSwitchFlag)
+	if (hitObjectTag == Tag::player && !Switch::mSwitchFlag)
 	{
 		// フラグをtrueにする
 		Switch::mSwitchFlag = true;

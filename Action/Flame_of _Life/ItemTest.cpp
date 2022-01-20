@@ -16,12 +16,26 @@ ItemTest::ItemTest(const Vector3& _pos, const Vector3& _size, const Tag& _object
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+	//mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Sphere.gpmesh"));
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Puzzle.gpmesh"));
 
 	//当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::itemTag, GetOnCollisionFunc());
-	AABB box = { Vector3(100.0f,-100.0f,-100.0f),Vector3(-100.0f,100.0f,100.0f) };
+	AABB box = { Vector3(3.0f,-3.0f,-3.0f),Vector3(-3.0f,4.0f,3.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
+
+	//回転処理                        ↓回転する値
+	float radianZ = Math::ToRadians(90.0f);
+	Quaternion rot = this->GetRotation();
+	Quaternion incZ(Vector3::UnitZ, radianZ);
+	Quaternion target = Quaternion::Concatenate(rot, incZ);
+	SetRotation(target);
+
+	float radianY = Math::ToRadians(-30.0f*_num);
+	rot = this->GetRotation();
+	Quaternion incY(Vector3::UnitY, radianY);
+	target = Quaternion::Concatenate(rot, incY);
+	SetRotation(target);
 
 	// 生成が何番目かによって種類を変える
 	switch (_num)
@@ -39,7 +53,7 @@ ItemTest::ItemTest(const Vector3& _pos, const Vector3& _size, const Tag& _object
 		break;
 	}
 
-	mColor = Vector3(0.5f, 0.5f, 1.5f);
+	mColor = Vector3(0.5f, 0.5f, 1.0f);
 }
 
 

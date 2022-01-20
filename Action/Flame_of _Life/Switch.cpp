@@ -46,18 +46,23 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 		break;
 	}
 
+	// スイッチ中心当たり判定の生成
+	mSwitchCenter = new SwitchCollider(this, Tag::SwitchCenter, _sceneTag);
+
 	//当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
-	AABB box = { Vector3(14.0f,-20.0f,0.0f),Vector3(-14.0f,16.5f,9.0f) };
+	AABB box = { Vector3(14.5f,-21.5f,0.0f),Vector3(-14.5f,20.0f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
-	// スイッチ中心当たり判定の生成
-	mSwitchCenter = new SwitchCollider(this, _objectTag, _sceneTag);
 }
 
 void Switch::UpdateGameObject(float _deltaTime)
 {
-	mAabb = mSelfBoxCollider->GetWorldBox();
+	if (mTag == Tag::Switch)
+	{
+		mAabb = mSelfBoxCollider->GetWorldBox();
+	}
+	
 
 	// スイッチを押している状態だったら
 	/*if (mSwitchFlag)

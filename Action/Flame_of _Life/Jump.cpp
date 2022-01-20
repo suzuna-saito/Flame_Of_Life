@@ -4,8 +4,8 @@
 Jump::Jump(GameObject* _owner)
 	: Component(_owner)
 	, mVelocity(0.0f)
-	, mJumpAccel(600.0f)
-	, mJumpSpeed(170.0f)
+	, mJumpAccel(900.0f)
+	, mJumpSpeed(80.0f)
 	, mMaxJumpHeight(3000.0f)
 	, mStartFlag(false)
 	, mJumpNow(false)
@@ -43,11 +43,6 @@ void Jump::Update(float _deltaTime)
 		{
 			mVelocity += mJumpSpeed;
 		}
-		else
-		{
-			mEndFlag = true;
-		}
-
 	}
 	// ÉWÉÉÉìÉvèIóπ
 	if (mEndFlag)
