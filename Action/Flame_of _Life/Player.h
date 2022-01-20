@@ -76,22 +76,18 @@ private:
 
 	// プレイヤーの復帰ポジション
 	Vector3 mReturnPos;
-
-	// 落ちた時のポジションと、復帰ポジションの距離
+	// 落ちたときに保管する次のポジション
 	Vector3 mDifference;
 
 	// カメラポジション
 	const Vector3 MCameraPos;
-
 	// カメラのZ軸注視点
 	const float MCameraPointZ;
 
 	// プレイヤーのリスポーンするタイミングｚ軸
 	const float MRedoingPosZ;
-
 	// リスポーン位置を少し高くする
 	float MReturnAddZ;
-
 	// リスポーン時の速度
 	const float MRedoingSpeedZ;
 

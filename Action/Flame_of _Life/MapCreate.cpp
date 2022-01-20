@@ -18,7 +18,7 @@ MapCreate::MapCreate()
 	, MLighterScale(2.0f)
 	, MChairScale(0.7f)
 	, MTreeScale(0.5f)
-	, MSwordScale(2.0f)
+	, MSwordScale(10.0f)
 	, MItemScale(0.5f)
 	, MPlayerZPos(200.0f)
 	, MCandleZPos(90.0f)
@@ -317,12 +317,18 @@ void MapCreate::CreatePlayer()
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MPlayerZPos);
 			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
-			switch (name)
+			if (name == 2)
+			{
+				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
+				break;
+			}
+
+			/*switch (name)
 			{
 			case(2):
 				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
 				break;
-			}
+			}*/
 			/*switch (mScene)
 			{
 			case SceneBase::Scene::tutorial:
@@ -377,12 +383,18 @@ void MapCreate::CreateCandle()
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos);
 			Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
-			switch (name)
+			if (name == 3)
+			{
+				new Candle(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
+				break;
+			}
+
+			/*switch (name)
 			{
 			case(3):
 				new Candle(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
 				break;
-			}
+			}*/
 
 			/*switch (mScene)
 			{
@@ -445,7 +457,7 @@ void MapCreate::CreateSwitch()
 				switch (name)
 				{
 				case(18):
-					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::tutorial, Ground::alphaColor::red);
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::tutorial, Switch::switchColor::red);
 					break;
 				}
 				break;
@@ -455,10 +467,10 @@ void MapCreate::CreateSwitch()
 				switch (name)
 				{
 				case(18):
-					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::easy, Ground::alphaColor::red);
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::easy, Switch::switchColor::red);
 					break;
 				case(24):
-					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::easy, Ground::alphaColor::green);
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::easy, Switch::switchColor::green);
 					break;
 				}
 				break;
@@ -501,39 +513,39 @@ void MapCreate::CreateItem()
 					break;
 				}
 				break;
-			}
-			//case SceneBase::Scene::hard:
 
-			//	switch (name)
-			//	{
-			//	case(18):  // いす
-			//		objectSize = Vector3(MChairScale, MChairScale, MChairScale);
-			//		new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(19):  // ライト @@@
-			//		objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
-			//		objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
-			//		new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(20):  // ミニキャラ
-			//		objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
-			//		new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(21):  // 木
-			//		objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
-			//		new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(22):  // 剣
-			//		objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
-			//		new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(23):  // 猫
-			//		objectSize = Vector3(MCatScale, MCatScale, MCatScale);
-			//		new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	}
-			//	break;
-			//}
+			case SceneBase::Scene::hard:
+
+				switch (name)
+				{
+				case(18):  // いす
+					objectSize = Vector3(MChairScale, MChairScale, MChairScale);
+					new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				case(19):  // ライト @@@
+					objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
+					objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
+					new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				case(20):  // ミニキャラ
+					objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
+					new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				case(21):  // 木
+					objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
+					new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				case(22):  // 剣
+					objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
+					new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				case(23):  // 猫
+					objectSize = Vector3(MCatScale, MCatScale, MCatScale);
+					new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+					break;
+				}
+				break;
+			}
 		}
 	}
 

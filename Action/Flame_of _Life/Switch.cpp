@@ -7,10 +7,9 @@
 // 静的メンバ変数
 float Switch::mDistance = 0.0f;
 bool Switch::mSwitchFlag = false;
-Ground::alphaColor Switch::mSwitchColor = Ground::alphaColor::red;
+Switch::switchColor Switch::mSwitchColor = Switch::switchColor::red;
 
-
-Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag,const Ground::alphaColor& _tag)
+Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const switchColor& _color)
 	:GameObject(_sceneTag, _objectTag)
 	/*, mRedSwitchFlag(false)
 	, mGreenSwitchFlag(false)
@@ -21,25 +20,27 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	SetScale(_size);
 	SetPosition(_pos);
 
-	mSwitchColor = _tag;
+	// スイッチの色を設定
+	mSwitchColor = _color;
+	//mSwitchColor = _tag;
 
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 
 	// タグによってgpmeshを変更
-	switch (_tag)
+	switch (_color)
 	{
-	case Ground::alphaColor::red:
+	case switchColor::red:
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/RedSwitch.gpmesh"));
 		/*mRedSwitchFlag = true;*/
 		break;
-	case Ground::alphaColor::green:
+	case switchColor::green:
 		//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/GreenSwitch.gpmesh"));
 		/*mGreenSwitchFlag = true;*/
 		break;
-	case Ground::alphaColor::yellow:
+	case switchColor::yellow:
 		break;
 	default:
 		break;
@@ -58,7 +59,6 @@ void Switch::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
-
 	// スイッチを押している状態だったら
 	/*if (mSwitchFlag)
 	{
@@ -71,32 +71,6 @@ void Switch::UpdateGameObject(float _deltaTime)
 		}
 	}*/
 
-	//// プレイヤーと、スイッチの距離を計算
-	//if (Player::mGetPos().x >= mPosition.x)  // プレイヤーの値の方が大きければ
-	//{
-	//	mDistance = Player::mGetPos().x - mPosition.x;
-	//}
-	//else
-	//{
-	//	mDistance = mPosition.x - Player::mGetPos().x ;
-	//}
-
-
-	//// mDistance がマイナスだったら
-	//if (mDistance < 0.0f)
-	//{
-	//	// 正の数にする
-	//	mDistance *= -1;
-	//}
-
-
-}
-
-void Switch::mSubtraction(Vector3 _pPos, Vector3 _sPos)
-{
-	//(_pPos.x - _sPos.x)* (_pPos.x - _sPos.x);
-
-	
 }
 
 void Switch::OnCollision(const GameObject& _hitObject)

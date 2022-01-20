@@ -1,5 +1,8 @@
 #include "pch.h"
 
+// 静的メンバ　
+Ground::alphaColor SwitchCollider::mLinkageColor = Ground::alphaColor::red;
+
 // コンストラクタ
 SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
@@ -31,5 +34,24 @@ void SwitchCollider::OnCollision(const GameObject& _hitObject)
 	{
 		// フラグをtrueにする
 		Switch::mSwitchFlag = true;
+	}
+
+	// スイッチの色が
+	switch (Switch::mSwitchColor)
+	{
+	case(Switch::switchColor::red):  // 赤だったら
+		// 床と連携させる色を赤に設定
+		mLinkageColor = Ground::alphaColor::red;
+		break;
+	case(Switch::switchColor::green):  // 緑だったら
+		// 床と連携させる色を緑に設定
+		mLinkageColor = Ground::alphaColor::green;
+		break;
+	case(Switch::switchColor::yellow):  // 黄色だったら
+		// 床と連携させる色を黄色に設定
+		mLinkageColor = Ground::alphaColor::yellow;
+		break;
+	default:
+		break;
 	}
 }

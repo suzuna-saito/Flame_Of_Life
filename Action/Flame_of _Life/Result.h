@@ -34,18 +34,19 @@ private:
 	// 描画する説明
 	vector<string> mDescription;
 
+	// 次の説明を表示するか
+	bool mNextFlag;
+	// 最後の説明を表示し終わったか
+	bool mEndFlag;
 	// 一回だけしてほしい処理
-	bool mFirstFlag;
 	bool mDraw;
-	bool mBackDraw;
 
-	// いったん仮
-	int mCount;
+	// 出す説明のナンバー
 	int mNum;
-	/*const int MNotVisibleTime;
-	const int mScondTime;*/
 
 	Sprite* mNowDescription;
 	Sprite* mBackDescription;
-	//vector<itemNames> test;
+
+	// どのアイテムを取っているか検索する
+	void mInit();
 };

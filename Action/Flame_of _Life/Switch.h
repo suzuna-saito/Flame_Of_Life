@@ -7,8 +7,16 @@ class Switch :public GameObject
 {
 public:
 
+	// スイッチの色
+	enum class switchColor :unsigned char
+	{
+		red,
+		green,
+		yellow,
+	};
+
 	// コンストラクタ
-	Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const Ground::alphaColor& _tag);
+	Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const switchColor& _color);
 
 	/*
 	@fn	デストラクタ
@@ -21,8 +29,9 @@ public:
 	// スイッチを押しているかのフラグ
 	static bool mSwitchFlag;
 
-	// スイッチと連携している床の色
-	static Ground::alphaColor mSwitchColor;
+	// スイッチの色
+	static switchColor mSwitchColor;
+
 private:
 
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -39,13 +48,6 @@ private:
 	// プレイヤーとスイッチの距離
 	static float mDistance;
 
-	/// <summary>
-	/// プレイヤーと各スイッチの距離の計算
-	/// </summary>
-	/// <param name="_pPos">プレイヤーのポジション</param>
-	/// <param name="_sPos">スイッチのポジション</param>
-	void mSubtraction(Vector3 _pPos,Vector3 _sPos);
-
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
 	@param	当たったGameObject
@@ -56,12 +58,5 @@ private:
 	SwitchCollider* mSwitchCenter;
 
 public: // ゲッター、セッター
-	// プレイヤーとスイッチの距離を取得
-	static const float mGetDistance() { return mDistance; }
-
-	// スイッチのカラータグを取得
-	//static const Ground::alphaColor mGetSwitchTag() { return mSwitchColor; }
-
-	//static const bool mGetSwitchFlag() { return mSwitchFlag; }
 };
 

@@ -53,6 +53,16 @@ void MeshComponent::Draw(Shader* _shader)
 			_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
 
 			_shader->SetVectorUniform("uColor", mOwner->GetColor());
+
+			//// @@@ test
+			//if (mOwner->GetColor() == Color::Red)
+			//{
+			//	printf("赤  ");
+			//}
+			//else
+			//{
+			//	printf("緑  ");
+			//}
 			// Set the active texture
 
 			// メッシュに定義されているテクスチャをセット

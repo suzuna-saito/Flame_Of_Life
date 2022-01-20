@@ -321,7 +321,7 @@ void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 	
 	Vector3 distance = Vector3::Zero;
 
-	// 向きベクトル
+	// 距離ベクトル
 	distance = _returnPos - mPosition;
 
 	// 1に近かったら

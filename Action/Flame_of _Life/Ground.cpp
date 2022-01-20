@@ -43,11 +43,11 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	/* 乱数の種を初期化 */
 	srand(time(NULL));
 
-	// 床の色などを設定する
-	if (mGroundTag == groundTag::RGBalpha)
-	{
-		mInit();
-	}
+	//// 床の色などを設定する
+	//if (mGroundTag == groundTag::RGBalpha)
+	//{
+	//	mInit();
+	//}
 
 	// 透明度
 	/*if (mGroundTag == groundTag::RGBalpha)
@@ -60,30 +60,31 @@ void Ground::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
-	//// 一回目の処理
-	//if (mFirstFlag)
-	//{
-	//	// タグがRGBalphaだったら
-	//	if (mGroundTag == groundTag::RGBalpha)
-	//	{
-	//		// 床の色などを設定する
-	//		mInit();
-	//	}
-	//	// タグがalphaだったら
-	//	else if (mGroundTag == groundTag::alpha)
-	//	{
-	//		// 色を紫に設定する
-	//		mColor = Vector3(1.0f,0.0f,1.0f);
-	//	}
+	// 一回目の処理
+	if (mFirstFlag)
+	{
+		// タグがRGBalphaだったら
+		if (mGroundTag == groundTag::RGBalpha)
+		{
+			// 床の色などを設定する
+			mInit();
+		}
+		// タグがalphaだったら
+		else if (mGroundTag == groundTag::alpha)
+		{
+			// 色を紫に設定する
+			mColor = Vector3(1.0f,0.0f,1.0f);
+		}
 
-	//	//　ファーストフラグをfalseにする
-	//	mFirstFlag = false;
-	//}
+		//　ファーストフラグをfalseにする
+		mFirstFlag = false;
+	}
 
-	
+	// スイッチを押していたら
 	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha)
 	{
-		if (mAlphaColorTag == Switch::mSwitchColor)
+		// 今踏んでるスイッチの色と床の色が一緒だったら
+		if (mAlphaColorTag == SwitchCollider::mLinkageColor)
 		{
 			// 少しずつ透明度をあげる
 			if (mAlpha <= 1.0f)
@@ -92,23 +93,23 @@ void Ground::UpdateGameObject(float _deltaTime)
 			}
 		}
 	}
-	//else if(mGroundTag != groundTag::notAlpha)
-	//{
-	//	// 少しずつ透明度を下げる
-	//	if (mAlpha >= 0.0f)
-	//	{
-	//		mAlpha -= MAlphaSubSpeed;
-	//	}
-	//}
+	else if(mGroundTag != groundTag::notAlpha)
+	{
+		// 少しずつ透明度を下げる
+		if (mAlpha >= 0.0f)
+		{
+			mAlpha -= MAlphaSubSpeed;
+		}
+	}
 
-	if (mAlphaColorTag == alphaColor::red)
+	/*if (mAlphaColorTag == alphaColor::red)
 	{
 		printf("1");
 	}
 	else
 	{
 		printf("0");
-	}
+	}*/
 }
 
 void Ground::OnCollision(const GameObject& _hitObject)

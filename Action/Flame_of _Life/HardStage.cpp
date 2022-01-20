@@ -58,7 +58,7 @@ void HardStage::Input(const InputState& _state)
 SceneBase* HardStage::update()
 {
 	// プレイヤーがろうそくにたどり着いたら
-	if (Candle::mCandleCount == 2)
+	if (Candle::mCandleCount == 1)
 	{
 		// 遷移フラグをtrueにする
 		mGameSceneFlag = true;
@@ -67,13 +67,15 @@ SceneBase* HardStage::update()
 	// 遷移フラグがtrueだったら
 	if (mGameSceneFlag)
 	{
-		// カウントを減らす
-		mNextSceneCount--;
-		// カウントが0以下になったら
-		if (mNextSceneCount <= 0)
-		{
-			return new Result(Scene::result);
-		}
+		return new Result(Scene::result);
+
+		//// カウントを減らす
+		//mNextSceneCount--;
+		//// カウントが0以下になったら
+		//if (mNextSceneCount <= 0)
+		//{
+		//	return new Result(Scene::result);
+		//}
 	}
 
 	CountUp::SetCountStartFlag(true);
