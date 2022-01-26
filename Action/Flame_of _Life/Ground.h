@@ -62,36 +62,20 @@ private:
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 
-	// α値の変わるタイミング種類
+	// α値の変わる種類
 	int mAlphaNum;
-	// α値の変わるタイミング
-	int mAlphaTiming;
-	// α値の変わるカウント
-	int mCount;
 	
 	// α値の変わっていく速度
 	const float MAlphaAddSpeed;
 	const float MAlphaSubSpeed;
-	//// 赤の床の色が変わるタイミング
-	//const int MRedTime;
-	//// 緑の床の色が変わるタイミング
-	//const int MGreenTime;
-	//// 青の床の色が変わるタイミング
-	//const int MYellowTime;
 
 	// α値の最大値
 	float MAlphaMax;
 	// α値の最小値
 	float MAlphaMin;
-	// α値の変わる速度
-	float MAlphaValue;
 
-	// 床の透明度が上がるか下がるか true: 上がる false: 下がる
-	bool mAlphaChange;
 	// 処理を通るのは初めてか true: 初めて
 	bool mFirstFlag;
-	// プレイヤーと当たっているかどうか
-	bool mStayPlayer;
 
 	// 床の種類
 	groundTag mGroundTag;

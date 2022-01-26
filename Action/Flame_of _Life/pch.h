@@ -29,6 +29,7 @@ using namespace std;
 #include <SDL_mouse.h>
 #include <SDL_scancode.h>
 #include <SDL_ttf.h>
+#include <time.h>
 #include <unordered_map>
 #include <vector>
 #include <Windows.h>

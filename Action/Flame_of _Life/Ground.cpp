@@ -9,19 +9,10 @@ int Ground::mTypeNum = 0;
 Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const groundTag& _tag)
 	:GameObject(_sceneTag, _objectTag)
 	, mAlphaNum(0)
-	, mAlphaTiming(0)
-	/*, MRedTime(100)
-	, MGreenTime(300)
-	, MYellowTime(500)*/
-	, mCount(1)
-	, MAlphaAddSpeed(0.05f)
-	, MAlphaSubSpeed(0.01f)
+	, MAlphaAddSpeed(4.5f)
+	, MAlphaSubSpeed(0.6f)
 	, MAlphaMax(1.2f)
-	, MAlphaMin(-0.5f)
-	, MAlphaValue(0.01f)
-	, mAlphaChange(true)
 	, mFirstFlag(true)
-	, mStayPlayer(false)
 	, mGroundTag(_tag)
 	, mAlphaColorTag(alphaColor::red)
 {
@@ -37,7 +28,7 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//地面の当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
-	AABB box = { Vector3(14.5f,-21.5f,0.0f),Vector3(-14.5f,20.0f,9.0f) };
+	AABB box = { Vector3(-14.5f,-21.5f,0.0f),Vector3(14.5f,20.0f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
 	/* 乱数の種を初期化 */
@@ -50,10 +41,10 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	//}
 
 	// 透明度
-	/*if (mGroundTag == groundTag::RGBalpha)
+	if (mGroundTag == groundTag::RGBalpha)
 	{
 		mAlpha = 0.0f;
-	}*/
+	}
 }
 
 void Ground::UpdateGameObject(float _deltaTime)
@@ -80,17 +71,14 @@ void Ground::UpdateGameObject(float _deltaTime)
 		mFirstFlag = false;
 	}
 
-	// スイッチを押していたら
-	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha)
+	// スイッチを押していたらかつ、今踏んでるスイッチの色と床の色が一緒だったら
+	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha &&
+		mAlphaColorTag == SwitchCollider::mLinkageColor)
 	{
-		// 今踏んでるスイッチの色と床の色が一緒だったら
-		if (mAlphaColorTag == SwitchCollider::mLinkageColor)
+		// 少しずつ透明度をあげる
+		if (mAlpha <= MAlphaMax)
 		{
-			// 少しずつ透明度をあげる
-			if (mAlpha <= 1.0f)
-			{
-				mAlpha += MAlphaAddSpeed;
-			}
+			mAlpha += MAlphaAddSpeed* _deltaTime;
 		}
 	}
 	else if(mGroundTag != groundTag::notAlpha)
@@ -98,18 +86,9 @@ void Ground::UpdateGameObject(float _deltaTime)
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
 		{
-			mAlpha -= MAlphaSubSpeed;
+			mAlpha -= MAlphaSubSpeed * _deltaTime;
 		}
 	}
-
-	/*if (mAlphaColorTag == alphaColor::red)
-	{
-		printf("1");
-	}
-	else
-	{
-		printf("0");
-	}*/
 }
 
 void Ground::OnCollision(const GameObject& _hitObject)

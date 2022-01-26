@@ -2,18 +2,13 @@
 @brief	インクルード
 */
 #include "pch.h"
-#include <iostream>
 
 // 静的メンバ変数
-float Switch::mDistance = 0.0f;
+// スイッチをおしているかどうか
 bool Switch::mSwitchFlag = false;
-Switch::switchColor Switch::mSwitchColor = Switch::switchColor::red;
 
 Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const switchColor& _color)
 	:GameObject(_sceneTag, _objectTag)
-	/*, mRedSwitchFlag(false)
-	, mGreenSwitchFlag(false)
-	, mYellowSwitchFlag(false)*/
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -22,7 +17,6 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	// スイッチの色を設定
 	mSwitchColor = _color;
-	//mSwitchColor = _tag;
 
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -46,36 +40,19 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 		break;
 	}
 
-	// スイッチ中心当たり判定の生成
-	mSwitchCenter = new SwitchCollider(this, Tag::SwitchCenter, _sceneTag);
-
 	//当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
 	AABB box = { Vector3(14.5f,-21.5f,0.0f),Vector3(-14.5f,20.0f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
+	// スイッチ中心当たり判定の生成
+	mSwitchCenter = new SwitchCollider(this, Tag::SwitchCenter, _sceneTag);
+
 }
 
 void Switch::UpdateGameObject(float _deltaTime)
 {
-	if (mTag == Tag::Switch)
-	{
-		mAabb = mSelfBoxCollider->GetWorldBox();
-	}
-	
-
-	// スイッチを押している状態だったら
-	/*if (mSwitchFlag)
-	{
-		switch (mSwitchColor)
-		{
-		case(Ground::alphaColor::red):
-
-		default:
-			break;
-		}
-	}*/
-
+	mAabb = mSelfBoxCollider->GetWorldBox();
 }
 
 void Switch::OnCollision(const GameObject& _hitObject)

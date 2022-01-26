@@ -2,6 +2,7 @@
 
 ItemTest::ItemTest(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
+	, ItemNumber(_num)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -37,22 +38,9 @@ ItemTest::ItemTest(const Vector3& _pos, const Vector3& _size, const Tag& _object
 	target = Quaternion::Concatenate(rot, incY);
 	SetRotation(target);
 
-	// 生成が何番目かによって種類を変える
-	switch (_num)
-	{
-	case(1):
-		mItemName = itemNames::cat;
-		break;
-	case(2):
-		mItemName = itemNames::chair;
-		break;
-	case(3):
-		mItemName = itemNames::chara;
-		break;
-	default:
-		break;
-	}
-
+	// アイテムの種類を決定
+	mItemType();
+	
 	mColor = Vector3(0.5f, 0.5f, 1.0f);
 }
 
@@ -102,9 +90,33 @@ void ItemTest::UpdateGameObject(float _deltaTime)
 
 void ItemTest::OnCollision(const GameObject& _hitObject)
 {
-	// 当たったのでフラグを上げる
-	mCollisionFlag = true;
+	// プレイヤーが操作可能状態の時に当たったら
+	if (Player::mOperable)
+	{
+		// 当たったのでフラグを上げる
+		mCollisionFlag = true;
 
-	// 描画をやめる
-	mMeshComponent->SetVisible(false);
+		// 描画をやめる
+		mMeshComponent->SetVisible(false);
+	}
+}
+
+void ItemTest::mItemType()
+{
+	// 生成が何番目かによって種類を変える
+	switch (ItemNumber)
+	{
+	case(0):
+		mItemName = itemNames::cat;
+		break;
+	case(1):
+		mItemName = itemNames::chair;
+		break;
+	case(2):
+		mItemName = itemNames::chara;
+		break;
+	default:
+		break;
+	}
+
 }

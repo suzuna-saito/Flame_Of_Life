@@ -99,7 +99,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::Scene::easy)
 	{
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/easy.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/easy02.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
@@ -112,35 +112,34 @@ bool MapCreate::OpenFile()
 
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy02.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/easy.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/easy02.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
 		}
 
 		//スイッチデータの読み込み
-		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy.json", "Switch"))
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy02.json", "Switch"))
 		{
 			printf("don't have Layer/Switch\n");
 			return true;
 		}
 
 		//アイテムデータの読み込み
-		if (!readTiledJson(mItemMapData, "Assets/Config/easy.json", "Item"))
+		if (!readTiledJson(mItemMapData, "Assets/Config/easy02.json", "Item"))
 		{
 			printf("don't have Layer/Item\n");
 			return true;
 		}
 	}
-
-
+	
 	//-----------------------------------------------
 	//----------------NormalStage--------------------
 	//-----------------------------------------------
@@ -173,6 +172,19 @@ bool MapCreate::OpenFile()
 			return true;
 		}
 
+		//スイッチデータの読み込み
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/normal.json", "Switch"))
+		{
+			printf("don't have Layer/Switch\n");
+			return true;
+		}
+
+		//アイテムデータの読み込み
+		if (!readTiledJson(mItemMapData, "Assets/Config/normal.json", "Item"))
+		{
+			printf("don't have Layer/Item\n");
+			return true;
+		}
 	}
 
 	//-----------------------------------------------
@@ -272,6 +284,8 @@ void MapCreate::CreateGround()
 
 				switch (name)
 				{
+				case(0):
+					break;
 				case(1):
 					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::normal, Ground::groundTag::notAlpha);
 					break;
@@ -322,49 +336,6 @@ void MapCreate::CreatePlayer()
 				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
 				break;
 			}
-
-			/*switch (name)
-			{
-			case(2):
-				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
-				break;
-			}*/
-			/*switch (mScene)
-			{
-			case SceneBase::Scene::tutorial:
-				
-				break;
-
-			case SceneBase::Scene::easy:
-
-				switch (name)
-				{
-				case(2):
-					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::easy);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::normal:
-
-				switch (name)
-				{
-				case(2):
-					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::normal);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::hard:
-
-				switch (name)
-				{
-				case(2):
-					new Player(objectPos, objectSize, Tag::player, SceneBase::Scene::hard);
-					break;
-				}
-				break;*/
-			/*}*/
 		}
 	}
 
@@ -389,50 +360,6 @@ void MapCreate::CreateCandle()
 				break;
 			}
 
-			/*switch (name)
-			{
-			case(3):
-				new Candle(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
-				break;
-			}*/
-
-			/*switch (mScene)
-			{
-			case SceneBase::Scene::tutorial:
-
-				
-				break;
-
-			case SceneBase::Scene::easy:
-
-				switch (name)
-				{
-				case(3):
-					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::easy);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::normal:
-
-				switch (name)
-				{
-				case(3):
-					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::normal);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::hard:
-
-				switch (name)
-				{
-				case(3):
-					new Candle(objectPos, objectSize, Tag::candle, SceneBase::Scene::hard);
-					break;
-				}
-				break;
-			}*/
 		}
 	}
 
@@ -474,6 +401,19 @@ void MapCreate::CreateSwitch()
 					break;
 				}
 				break;
+
+			case SceneBase::Scene::normal:
+
+				switch (name)
+				{
+				case(18):
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::normal, Switch::switchColor::red);
+					break;
+				case(24):
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::normal, Switch::switchColor::green);
+					break;
+				}
+				break;
 			}
 		}
 	}
@@ -493,59 +433,58 @@ void MapCreate::CreateItem()
 			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
 			Vector3 objectSize = Vector3(MItemScale, MItemScale, MItemScale);
 
-			switch (mScene)
+			if (name == 7)
 			{
-			case SceneBase::Scene::easy:
-
-				switch (name)
-				{
-				case(7):
-					new ItemTest(objectPos, objectSize, Tag::item, SceneBase::Scene::easy,mItemCount);
-					mItemCount++;
-					break;
-				case(8):
-					new ItemTest(objectPos, objectSize, Tag::item, SceneBase::Scene::easy, mItemCount);
-					mItemCount++;
-					break;
-				case(9):
-					new ItemTest(objectPos, objectSize, Tag::item, SceneBase::Scene::easy, mItemCount);
-					mItemCount++;
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::hard:
-
-				switch (name)
-				{
-				case(18):  // いす
-					objectSize = Vector3(MChairScale, MChairScale, MChairScale);
-					new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				case(19):  // ライト @@@
-					objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
-					objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
-					new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				case(20):  // ミニキャラ
-					objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
-					new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				case(21):  // 木
-					objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
-					new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				case(22):  // 剣
-					objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
-					new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				case(23):  // 猫
-					objectSize = Vector3(MCatScale, MCatScale, MCatScale);
-					new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-					break;
-				}
+				new ItemTest(objectPos, objectSize, Tag::item, SceneBase::GetScene(), mItemCount);
+				mItemCount++;
 				break;
 			}
+
+			//switch (mScene)
+			//{
+			//case SceneBase::Scene::easy:
+
+			//	switch (name)
+			//	{
+			//	case(7):
+			//		new ItemTest(objectPos, objectSize, Tag::item, SceneBase::Scene::easy,mItemCount);
+			//		mItemCount++;
+			//		break;
+			//	}
+			//	break;
+
+			//case SceneBase::Scene::hard:
+
+			//	switch (name)
+			//	{
+			//	case(18):  // いす
+			//		objectSize = Vector3(MChairScale, MChairScale, MChairScale);
+			//		new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	case(19):  // ライト @@@
+			//		objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
+			//		objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
+			//		new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	case(20):  // ミニキャラ
+			//		objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
+			//		new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	case(21):  // 木
+			//		objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
+			//		new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	case(22):  // 剣
+			//		objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
+			//		new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	case(23):  // 猫
+			//		objectSize = Vector3(MCatScale, MCatScale, MCatScale);
+			//		new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
+			//		break;
+			//	}
+			//	break;
+			//}
 		}
 	}
 

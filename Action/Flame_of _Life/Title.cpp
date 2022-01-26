@@ -15,6 +15,7 @@ Title::Title(const Scene& _nowScene)
 	// ƒ^ƒCƒgƒ‹‰æ‘œ
 	mSprite = new Sprite("Assets/UI/Title.png");
 
+	Candle::mCandleCount = 0;
 }
 
 /*
@@ -43,8 +44,8 @@ SceneBase* Title::update()
 
 	if (mGameSceneFlag)
 	{
-		//return new EasyStage(Scene::easy);
-		return new Tutorial(Scene::tutorial);
+		return new EasyStage(Scene::easy);
+		//return new Tutorial(Scene::tutorial);
 		//return new HardStage(Scene::hard);
 	}
 

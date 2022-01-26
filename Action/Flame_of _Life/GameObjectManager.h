@@ -107,6 +107,8 @@ private:
 	std::vector<GameObject*> mNormalStageObjects;
 	//Hardステージの時の全てのゲームオブジェクトを格納するための可変長コンテナ
 	std::vector<GameObject*> mHardStageObjects;
+	//リザルト時の全てのゲームオブジェクトを格納するための可変長コンテナ
+	std::vector<GameObject*> mResultObjects;
 	//Update中に追加されたゲームオブジェクトのポインタを一時的に保存する可変長コンテナ
 	std::vector<GameObject*> mPendingGameObjects;
 

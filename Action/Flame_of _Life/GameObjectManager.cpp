@@ -65,6 +65,11 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	{
 		hardstageObject->Update(_deltaTime);
 	}
+	// リザルトステージを更新する
+	for (auto resultObject : mResultObjects)
+	{
+		resultObject->Update(_deltaTime);
+	}
 
 	mUpdatingGameObject = false;
 
@@ -118,6 +123,11 @@ void GameObjectManager::ProcessInput(const InputState& _state)
 		hardstageObject->ProcessInput(_state);
 	}
 
+	for (auto resultObject : mResultObjects)
+	{
+		resultObject->ProcessInput(_state);
+	}
+
 	mUpdatingGameObject = false;
 }
 
@@ -156,6 +166,9 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 			break;
 		case SceneBase::Scene::hard:
 			mHardStageObjects.emplace_back(_object);
+			break;
+		case SceneBase::Scene::result:
+			mResultObjects.emplace_back(_object);
 			break;
 		}
 	}
@@ -209,6 +222,13 @@ void GameObjectManager::RemoveGameObject(GameObject* _object)
 		std::iter_swap(iter, mHardStageObjects.end() - 1);
 		mHardStageObjects.pop_back();
 	}
+	// リザルトシーン
+	iter = std::find(mResultObjects.begin(), mResultObjects.end(), _object);
+	if (iter != mResultObjects.end())
+	{
+		std::iter_swap(iter, mResultObjects.end() - 1);
+		mResultObjects.pop_back();
+	}
 
 }
 
@@ -253,6 +273,14 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		while (!mHardStageObjects.empty())
 		{
 			delete mHardStageObjects.back();
+		}
+		break;
+
+	case SceneBase::Scene::result:
+
+		while (!mResultObjects.empty())
+		{
+			delete mResultObjects.back();
 		}
 		break;
 	}

@@ -30,8 +30,7 @@ public:
 	static bool mSwitchFlag;
 
 	// スイッチの色
-	static switchColor mSwitchColor;
-
+	switchColor mSwitchColor;
 private:
 
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -39,14 +38,6 @@ private:
 
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
-
-	// それぞれの色のフラグ
-	/*bool mRedSwitchFlag;
-	bool mGreenSwitchFlag;
-	bool mYellowSwitchFlag;*/
-
-	// プレイヤーとスイッチの距離
-	static float mDistance;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -58,5 +49,7 @@ private:
 	SwitchCollider* mSwitchCenter;
 
 public: // ゲッター、セッター
+	// スイッチの色を返す
+	switchColor GetSwitchColor() { return mSwitchColor; }
 };
 

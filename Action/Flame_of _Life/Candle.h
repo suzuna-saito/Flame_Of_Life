@@ -36,6 +36,8 @@ private:
 	*/
 	void OnCollision(const GameObject& _hitObject)override;
 
+	// ‰Š‚ÌƒXƒP[ƒ‹
+	Vector3 mFireScele;
 
 	// ‚ë‚¤‚»‚­‚Ì‰Î‚ª‚Â‚­‚©‚Ç‚¤‚©
 	bool mFireFlag;

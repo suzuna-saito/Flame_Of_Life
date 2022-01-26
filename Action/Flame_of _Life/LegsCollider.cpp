@@ -32,7 +32,7 @@ void LegsCollider::OnCollision(const GameObject& _hitObject)
 		mIsGround = true;
 	}
 
-	if (hitObjectTag == Tag::SwitchCenter)
+	if (hitObjectTag == Tag::SwitchCenter && Player::mOperable)
 	{
 		mOwner->SetReturnPos(_hitObject.GetPosition());
 	}

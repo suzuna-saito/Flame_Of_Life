@@ -38,8 +38,11 @@ public:
 	*/
 	void GameObjectInput(const InputState& _keyState)override;
 
-
+	// 復帰位置を設定
 	void SetReturnPos(Vector3 _returnPos) { mReturnPos = _returnPos; }
+
+	// プレイヤーが動作可能状態か
+	static bool mOperable;
 private:
 	// プレイヤーの行動の状態
 	typedef enum class playerState :unsigned char
@@ -93,8 +96,8 @@ private:
 	// リスポーン時の速度
 	const float MRedoingSpeedZ;
 
-	// プレイヤーが動作可能状態か
-	bool mOperable;
+	// ジャンプ時の最大Velocity
+	const float MMaxJumpVel;
 
 	// ジャンプ
 	Jump* mJump;

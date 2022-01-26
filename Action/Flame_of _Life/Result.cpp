@@ -18,9 +18,6 @@ Result::Result(const Scene& _nowScene)
 {
 	SetScene(_nowScene);
 
-	// タイトル画像
-	mSprite = new Sprite("Assets/UI/Result.png");
-
 	// マップをつかってアイテムと説明画像を関連付け	
 	mItemDescription[itemNames::cat] = "Assets/UI/Cat.png";
 	mItemDescription[itemNames::chair] = "Assets/UI/Chair.png";
@@ -41,8 +38,10 @@ Result::Result(const Scene& _nowScene)
 */
 Result::~Result()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::result);
 	delete mSprite;
+	delete mNowDescription;
+	delete mBackDescription;
+	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::result);
 }
 
 void Result::Input(const InputState& _state)
@@ -62,6 +61,7 @@ void Result::Input(const InputState& _state)
 			// シーン遷移フラグをtrueにする
 			mGameSceneFlag = true;
 		}
+		
 	}
 }
 
@@ -96,6 +96,10 @@ SceneBase* Result::update()
 		// mDrawがtrueの時
 		if (mDraw)
 		{
+			if (mNowDescription != nullptr)
+			{
+				delete mNowDescription;
+			}
 			// 新しい説明文を出す
 			mNowDescription = new Sprite(mDescription[mNum]);
 			// 一度newしたら、mDrawをfalseにする。
@@ -115,7 +119,7 @@ SceneBase* Result::update()
 		}
 	}
 	// 保存した分表示し終わったら
-	else
+	else if(!mEndFlag)
 	{
 		mBackDescription->NotVisible();
 
@@ -127,6 +131,7 @@ SceneBase* Result::update()
 	
 	if (mGameSceneFlag)
 	{
+
 		return new Title(Scene::title);
 	}
 

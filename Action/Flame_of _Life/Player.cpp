@@ -3,6 +3,10 @@
 */
 #include "pch.h"
 
+// 静的メンバ
+// プレイヤーが操作可能かどうか
+bool Player::mOperable = true;
+
 /*
 @fn		コンストラクタ
 @param	_pos プレイヤーの座標
@@ -16,10 +20,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
 	, MCameraPointZ(66.0f)
-	, MRedoingPosZ(-400.0f)
+	, MRedoingPosZ(-500.0f)
 	, MReturnAddZ(100.0f)
-	, MRedoingSpeedZ(700.0f)
-	, mOperable(true)
+	, MRedoingSpeedZ(900.0f)
+	, MMaxJumpVel(1500.0f)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
 {
@@ -102,17 +106,23 @@ void Player::UpdateGameObject(float _deltaTime)
 	if (mJump->GetJumpFlag())
 	{
 		mVelocity.z += mJump->GetVelocity();
+		mLegs->SetIsGround(false);
 	}
 
 
 	// 重力
 	if (!mLegs->GetIsGround() && !mDebug && mOperable)
 	{
-		mVelocity.z -= MGravity/* * _deltaTime*/;
+		mVelocity.z -= MGravity;
 	}
-	if (mVelocity.z >= 1700.0f)
+	else if(mOperable)
 	{
-		mJump->SetEndJump(true);
+		mVelocity.z = 0.0f;
+	}
+	// velocityが一定数まで行ったら、ジャンプ力をなくす
+	if (mVelocity.z >= MMaxJumpVel)
+	{
+ 		mJump->SetEndJump(true);
 	}
 
 	// 座標をセット
@@ -141,6 +151,7 @@ void Player::UpdateGameObject(float _deltaTime)
 
 		mVelocity = Vector3::Zero;
 	}
+
 	if (!mOperable)
 	{
 		// 復帰位置まで移動させる
@@ -166,7 +177,6 @@ void Player::GameObjectInput(const InputState& _keyState)
 
 	if (mOperable)
 	{
-		mVelocity = Vector3::Zero;
 
 		// Wで奥に移動
 		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
@@ -217,7 +227,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 		else
 		{
 			mNowState = playerState::idle;
-			mVelocity = Vector3::Zero;
+			//mVelocity = Vector3::Zero;
 		}
 
 		// 入力ベクトルの正規化
@@ -238,7 +248,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 			}
 		}
 
-		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
+		/*if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
 		{
 			mVelocity.z = mMoveSpeed;
 		}
@@ -249,7 +259,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 		else
 		{
 			mVelocity.z = 0.0f;
-		}
+		}*/
 	}
 }
 
@@ -274,22 +284,16 @@ void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag&
 void Player::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	mTag = _hitObject.GetTag();
+	Tag hitObjectTag = _hitObject.GetTag();
 
-	// アイテム、ろうそく、スイッチ中心以外と接地したとき
-	if (mTag != Tag::item &&
-		mTag != Tag::candle &&
-		mTag != Tag::SwitchCenter &&
-		mTag != Tag::Camera &&
-		mTag != Tag::Other &&
-		mTag != Tag::player &&
-		mTag != Tag::UI &&
-		mOperable)
+	if (mOperable &&
+		(hitObjectTag == Tag::ground ||
+		hitObjectTag == Tag::Switch))
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
 
-		mJump->SetEndJump(true);
+	/*	mJump->SetEndJump(true);*/
 	}
 }
 

@@ -18,10 +18,14 @@ NormalStage::NormalStage(const Scene& _nowScene)
 	{
 		// 床の生成
 		mMapCreate->CreateGround();
+		// スイッチを生成
+		mMapCreate->CreateSwitch();
 		// プレイヤーの生成
 		mMapCreate->CreatePlayer();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
+		// アイテムを生成
+		mMapCreate->CreateItem();
 	}
 
 	// カウントアップ
@@ -55,7 +59,7 @@ SceneBase* NormalStage::update()
 {
 	if (Candle::mCandleCount == 3)
 	{
-		return new HardStage(Scene::hard);
+		//return new HardStage(Scene::hard);
 	}
 
 	CountUp::SetCountStartFlag(true);

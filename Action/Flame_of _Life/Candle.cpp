@@ -9,6 +9,7 @@ int Candle::mCandleCount = 0; // 火がついてるろうそくの本数
 
 Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
+	, mFireScele(Vector3(10.0f,10.0f,10.0f))
 	, mFireFlag(false)
 	, mDrawFireFlag(false)
 {
@@ -37,7 +38,7 @@ void Candle::UpdateGameObject(float _deltaTime)
 	if (mFireFlag && !mDrawFireFlag)
 	{
 		// ろうそくの火を生成
-		new FireObject(this, Vector3(5.0f, 5.0f, 5.0f), mTag, GetScene());
+		new FireObject(this, mFireScele, mTag, GetScene());
 
 		mDrawFireFlag = true;
 
@@ -52,12 +53,4 @@ void Candle::UpdateGameObject(float _deltaTime)
 void Candle::OnCollision(const GameObject& _hitObject)
 {
 	mFireFlag = true;
-	////ヒットしたオブジェクトのタグを取得
-	//mTag = _hitObject.GetTag();
-
-	//// タグがろうそくになったら
-	//if (mTag == candle && !mFireFlag)
-	//{
-	//	
-	//}
 }

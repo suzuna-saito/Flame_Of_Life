@@ -4,13 +4,11 @@
 Jump::Jump(GameObject* _owner)
 	: Component(_owner)
 	, mVelocity(0.0f)
-	, mJumpAccel(900.0f)
-	, mJumpSpeed(80.0f)
-	, mMaxJumpHeight(3000.0f)
+	, MJumpAccel(150.0f)
+	, MJumpSpeed(30.0f)
 	, mStartFlag(false)
 	, mJumpNow(false)
 	, mEndFlag(false)
-	, mMaxFlag(false)
 {
 }
 
@@ -25,32 +23,21 @@ void Jump::Update(float _deltaTime)
 	// ジャンプを始めた瞬間
 	if (mStartFlag)
 	{
-		mVelocity += mJumpAccel;
+		mVelocity += MJumpAccel;
 		mStartFlag = false;
 		mEndFlag = false;
 		mJumpNow = true;
 	}
 
-	if (mVelocity >= mMaxJumpHeight)
-	{
-		mMaxFlag = true;
-	}
-
 	// ジャンプ中
-	if (mJumpNow)
+	if (!mEndFlag && mJumpNow)
 	{
-		if (!mMaxFlag)
-		{
-			mVelocity += mJumpSpeed;
-		}
+		mVelocity += MJumpSpeed;
 	}
 	// ジャンプ終了
-	if (mEndFlag)
+	if(mEndFlag)
 	{
 		mJumpNow = false;
-		mMaxFlag = false;
 		mVelocity = 0.0f;
-
-		/*mJumpSpeed = 450.0f;*/
 	}
 }
