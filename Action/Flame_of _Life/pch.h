@@ -76,6 +76,8 @@ using namespace std;
 #include "MainCameraObject.h"
 /* 床 */
 #include "Ground.h"
+/* 背景 */
+#include "BackGround.h"
 /* スイッチ */
 #include "Switch.h"
 #include "SwitchCollider.h"

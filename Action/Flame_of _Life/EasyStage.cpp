@@ -16,14 +16,16 @@ EasyStage::EasyStage(const Scene& _nowScene)
 
 	if (!mMapCreate->OpenFile())
 	{
+		// 背景の生成
+		mMapCreate->CreateBackGround();
+		// プレイヤーの生成
+		mMapCreate->CreatePlayer();
 		// 床の生成
 		mMapCreate->CreateGround();
 		// スイッチの生成
 		mMapCreate->CreateSwitch();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
-		// プレイヤーの生成
-		mMapCreate->CreatePlayer();
 		// アイテムの生成
 		mMapCreate->CreateItem();
 	}

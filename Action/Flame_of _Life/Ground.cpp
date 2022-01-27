@@ -10,7 +10,7 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	:GameObject(_sceneTag, _objectTag)
 	, mAlphaNum(0)
 	, MAlphaAddSpeed(4.5f)
-	, MAlphaSubSpeed(0.6f)
+	, MAlphaSubSpeed(0.7f)
 	, MAlphaMax(1.2f)
 	, mFirstFlag(true)
 	, mGroundTag(_tag)
@@ -88,6 +88,11 @@ void Ground::UpdateGameObject(float _deltaTime)
 		{
 			mAlpha -= MAlphaSubSpeed * _deltaTime;
 		}
+	}
+
+	if (!Player::mOperable && mAlpha <= 1.0f)
+	{
+		mAlpha += MAlphaAddSpeed * _deltaTime;
 	}
 }
 

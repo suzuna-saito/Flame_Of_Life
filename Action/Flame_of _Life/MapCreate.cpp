@@ -12,7 +12,7 @@ MapCreate::MapCreate()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
 	, MPlayerScale(0.06f)
-	, MSwitchScale(1.0f)
+	, MSphereScale(5.0f)
 	, MCatScale(4.0f)
 	, MCharaScale(6.0f)
 	, MLighterScale(2.0f)
@@ -28,7 +28,8 @@ MapCreate::MapCreate()
 	, mOffsetZ(0.0f)
 	, mChagePosY(100.0f)
 	, mHardChagePosY(90.0f)
-	, mItemCount(0)
+	, mItemNum(0)
+	, count(0)
 {
 	mSizeX = 0;
 	mSizeY = 0;
@@ -40,10 +41,12 @@ MapCreate::MapCreate()
 */
 MapCreate::~MapCreate()
 {
+	mBackGroundMapData.clear();
 	mGroundMapData.clear();
 	mPlayerMapData.clear();
 	mCandleMapData.clear();
 	mSwitchMapData.clear();
+	mItemMapData.clear();
 }
 
 /*
@@ -98,18 +101,24 @@ bool MapCreate::OpenFile()
 	//-----------------------------------------------
 	if (mScene == SceneBase::Scene::easy)
 	{
+		//背景データの読み込み
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/easy02.json", "BackGround"))
+		{
+			printf("don't have Layer/BackGround\n");
+			return true;
+		}
+
+		mSizeX = mBackGroundMapData[0].size();
+		mSizeY = mBackGroundMapData.size();
+		//mSizeZ = mGroundMapData.size();
+
+		
 		//床データの読み込み
 		if (!readTiledJson(mGroundMapData, "Assets/Config/easy02.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
 		}
-		
-
-		mSizeX = mGroundMapData[0].size();
-		mSizeY = mGroundMapData.size();
-		//mSizeZ = mGroundMapData.size();
-
 
 		//プレイヤーデータの読み込み
 		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy02.json", "Player"))
@@ -319,6 +328,32 @@ void MapCreate::CreateGround()
 }
 
 /*
+@fn	背景を生成する
+*/
+void MapCreate::CreateBackGround()
+{
+	for (float iz = 0; iz < mSizeY; iz++)
+	{
+		for (float ix = 0; ix < mSizeX; ix++)
+		{
+			const unsigned int name = mBackGroundMapData[(int)iz][(int)ix];
+			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, -600.0f);
+			Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, -1000.0f);
+			Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
+			
+			if (name == 35)
+			{
+				new BackGround(objectPos, objectSize, Tag::Other, SceneBase::GetScene(), name);
+			}
+			else if (name == 36)
+			{
+				new BackGround(objectPos02, objectSize, Tag::Other, SceneBase::GetScene(), name);
+			}
+		}
+	}
+}
+
+/*
 @fn	プレイヤーを生成する
 */
 void MapCreate::CreatePlayer()
@@ -334,7 +369,6 @@ void MapCreate::CreatePlayer()
 			if (name == 2)
 			{
 				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
-				break;
 			}
 		}
 	}
@@ -357,7 +391,6 @@ void MapCreate::CreateCandle()
 			if (name == 3)
 			{
 				new Candle(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
-				break;
 			}
 
 		}
@@ -435,56 +468,10 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new ItemTest(objectPos, objectSize, Tag::item, SceneBase::GetScene(), mItemCount);
-				mItemCount++;
+				new ItemTest(objectPos, objectSize, Tag::item, SceneBase::GetScene(), mItemNum);
+				mItemNum++;
 				break;
 			}
-
-			//switch (mScene)
-			//{
-			//case SceneBase::Scene::easy:
-
-			//	switch (name)
-			//	{
-			//	case(7):
-			//		new ItemTest(objectPos, objectSize, Tag::item, SceneBase::Scene::easy,mItemCount);
-			//		mItemCount++;
-			//		break;
-			//	}
-			//	break;
-
-			//case SceneBase::Scene::hard:
-
-			//	switch (name)
-			//	{
-			//	case(18):  // いす
-			//		objectSize = Vector3(MChairScale, MChairScale, MChairScale);
-			//		new ItemChair(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(19):  // ライト @@@
-			//		objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos+200.0f);
-			//		objectSize = Vector3(MLighterScale, MLighterScale, MLighterScale);
-			//		new ItemLighter(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(20):  // ミニキャラ
-			//		objectSize = Vector3(MCharaScale, MCharaScale, MCharaScale);
-			//		new ItemChara(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(21):  // 木
-			//		objectSize = Vector3(MTreeScale, MTreeScale, MTreeScale);
-			//		new ItemTree(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(22):  // 剣
-			//		objectSize = Vector3(MSwordScale, MSwordScale, MSwordScale);
-			//		new ItemSword(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	case(23):  // 猫
-			//		objectSize = Vector3(MCatScale, MCatScale, MCatScale);
-			//		new ItemCat(objectPos, objectSize, Tag::item, SceneBase::Scene::hard);
-			//		break;
-			//	}
-			//	break;
-			//}
 		}
 	}
 

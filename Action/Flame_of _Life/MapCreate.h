@@ -30,6 +30,11 @@ public:
 	void CreateGround();
 
 	/*
+	@fn	背景を生成する
+	*/
+	void CreateBackGround();
+
+	/*
 	@fn	プレイヤーを生成する
 	*/
 	void CreatePlayer();
@@ -54,6 +59,8 @@ private:
 
 	int  findLayerIndex(rapidjson::GenericArray<false, rapidjson::Value>& _layer, string& _layerName);
 
+	// 背景のマップデータ
+	vector<vector<int>> mBackGroundMapData;
 	//床マップデータ
 	vector<vector<int>> mGroundMapData;
 
@@ -75,6 +82,10 @@ private:
 	//奥行のマップデータ
 	int	mSizeZ;
 
+	// アイテムの種類
+	int mItemNum;
+
+
 	// 床の高さをずらす
 	float mChagePosY;
 	float mHardChagePosY;
@@ -91,7 +102,7 @@ private:
 	// プレイヤーのスケール
 	const float MPlayerScale;
 	// スイッチ（球体）のスケール
-	const float MSwitchScale;
+	const float MSphereScale;
 
 	/* アイテム関連 */
 	// 猫（アイテム）のスケール
@@ -103,12 +114,15 @@ private:
 	const float MSwordScale;
 
 	const float MItemScale;
-	int mItemCount;
 
 	const float MPlayerZPos;
 	// 地面に埋まらないためにろうそくに足してあげるポジションｚ軸
 	const float MCandleZPos;
 	// 地面に埋まらないためにアイテムに足してあげるポジションｚ軸
 	const float MItemZPos;
+
+
+	// デバック用
+	int count;
 };
 

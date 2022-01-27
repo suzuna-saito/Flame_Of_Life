@@ -16,7 +16,7 @@ bool Player::mOperable = true;
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, MCameraPos(Vector3(0, -1300, 1100))
+	, MCameraPos(Vector3(0, -1300, 1250))
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
 	, MCameraPointZ(66.0f)
@@ -80,7 +80,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 void Player::UpdateGameObject(float _deltaTime)
 {
 	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x, mPosition.y, MCameraPointZ));
+	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x, mPosition.y+50.0f, MCameraPointZ));
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用

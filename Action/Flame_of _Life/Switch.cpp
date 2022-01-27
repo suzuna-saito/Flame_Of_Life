@@ -53,6 +53,7 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 void Switch::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
+
 }
 
 void Switch::OnCollision(const GameObject& _hitObject)

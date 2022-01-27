@@ -175,6 +175,9 @@
     <ClCompile Include="SwitchCollider.cpp">
       <Filter>GameObject\Switch</Filter>
     </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>GameObject\BackGround</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -353,6 +356,9 @@
     <ClInclude Include="SwitchCollider.h">
       <Filter>GameObject\Switch</Filter>
     </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>GameObject\BackGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="FPS">
@@ -447,6 +453,9 @@
     </Filter>
     <Filter Include="GameObject\Switch">
       <UniqueIdentifier>{5387ce1f-80d6-4fe4-9677-2028c2cd11f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\BackGround">
+      <UniqueIdentifier>{c2c651b9-dc82-46de-b36a-cdab403f2304}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
