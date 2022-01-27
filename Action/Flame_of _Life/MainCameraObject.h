@@ -31,6 +31,12 @@ public:
 
 private:
 
+	/*
+	@brief ゲーム中の移動処理
+	@param	_deltaTime 前のフレームでかかった時間
+	*/
+	void InGameMovableProcess(float _deltaTime);
+
 	//親オブジェクトとの差
 	Vector3 mOffsetPos;
 	//追従先のオブジェクト座標

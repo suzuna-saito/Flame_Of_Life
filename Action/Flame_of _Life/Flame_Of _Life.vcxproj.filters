@@ -178,6 +178,12 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>GameObject\BackGround</Filter>
     </ClCompile>
+    <ClCompile Include="FallEffect.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="FallEffectManager.cpp">
+      <Filter>ParticleEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -358,6 +364,12 @@
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>GameObject\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="FallEffect.h">
+      <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="FallEffectManager.h">
+      <Filter>ParticleEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -46,6 +46,13 @@ public://ゲッターセッター
 	bool GetKeyValue(SDL_Scancode _keyCode) const;
 
 	/*
+@brief	指定したキーが押されたタイミングを判定する
+@param	SDL_Scancodeのキーコード
+@return	true : 押された , false : 押されていない
+*/
+	bool GetKeyDownValue(SDL_Scancode _keyCode) const;
+
+	/*
 	@fn		現在と1フレーム前の状態からButtonStateを返す
 	@param	_keyCode SDL_Scancodeのキーコード
 	@return	ButtonState型の現在の状態(bool型)
@@ -133,7 +140,17 @@ private:
 
 	//両スティックの情報
 	float mAxisValues[SDL_CONTROLLER_AXIS_MAX];
+	//float mAxisValueX;
+
 	Vector2 mLAxis;
+
+	// 入力情報を元に左右のスティックの情報をベクトル化した情報を保存する変数
+	Vector2 lAxisLeft;
+	Vector2 lAxisRight;
+
+	// 左右のトリガーの入力情報
+	float leftTriggerAxis;
+	float rightTriggerAxis;
 
 public://ゲッターセッター
 
@@ -158,6 +175,18 @@ public://ゲッターセッター
 	@return スティックの入力情報(float型)
 	*/
 	float GetAxisValue(const SDL_GameControllerAxis _iAxis) const;
+
+	/*
+	@brief 左スティックの入力を0~1で返す
+	@return 左スティックの入力情報
+	*/
+	const Vector2& GetLAxisLeftVec() const { return lAxisLeft; }
+
+	/*
+	@brief 右スティックの入力を0~1で返す
+	@return 右スティックの入力情報
+	*/
+	const Vector2& GetLAxisRightVec() const { return lAxisRight; }
 
 	/*
 	@fn		スティックの入力を0~1で返す

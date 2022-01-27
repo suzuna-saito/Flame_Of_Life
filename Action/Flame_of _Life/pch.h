@@ -105,6 +105,9 @@ using namespace std;
 #include "ParticleEffectBase.h"
 #include "EffectManager.h"
 #include "SandEffect.h"
+/*プレイヤーが落ちた時のエフェクト*/
+#include "FallEffectManager.h"
+#include "FallEffect.h"
 
 // UI
 #include "UIBase.h"

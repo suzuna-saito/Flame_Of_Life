@@ -63,16 +63,23 @@ bool MapCreate::OpenFile()
 
 	if (mScene == SceneBase::Scene::tutorial)
 	{
+		//背景データの読み込み
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/tutorial.json", "BackGround"))
+		{
+			printf("don't have Layer/BackGround\n");
+			return true;
+		}
+
+		mSizeX = mBackGroundMapData[0].size();
+		mSizeY = mBackGroundMapData.size();
+		//mSizeZ = mGroundMapData.size();
+		// 
 		//床データの読み込み
 		if (!readTiledJson(mGroundMapData, "Assets/Config/tutorial.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
 		}
-
-		mSizeX = mGroundMapData[0].size();
-		mSizeY = mGroundMapData.size();
-		//mSizeZ = mGroundMapData.size();
 
 		//プレイヤーデータの読み込み
 		if (!readTiledJson(mPlayerMapData, "Assets/Config/tutorial.json", "Player"))
@@ -102,7 +109,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::Scene::easy)
 	{
 		//背景データの読み込み
-		if (!readTiledJson(mBackGroundMapData, "Assets/Config/easy02.json", "BackGround"))
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/easy.json", "BackGround"))
 		{
 			printf("don't have Layer/BackGround\n");
 			return true;
@@ -114,35 +121,35 @@ bool MapCreate::OpenFile()
 
 		
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/easy02.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/easy.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
 		}
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy02.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/easy02.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/easy.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
 		}
 
 		//スイッチデータの読み込み
-		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy02.json", "Switch"))
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy.json", "Switch"))
 		{
 			printf("don't have Layer/Switch\n");
 			return true;
 		}
 
 		//アイテムデータの読み込み
-		if (!readTiledJson(mItemMapData, "Assets/Config/easy02.json", "Item"))
+		if (!readTiledJson(mItemMapData, "Assets/Config/easy.json", "Item"))
 		{
 			printf("don't have Layer/Item\n");
 			return true;
@@ -337,8 +344,9 @@ void MapCreate::CreateBackGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mBackGroundMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, -600.0f);
-			Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, -1000.0f);
+			// @@@ マジックナンバー直せ
+			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, -850.0f);
+			Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, -1200.0f);
 			Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 			
 			if (name == 35)

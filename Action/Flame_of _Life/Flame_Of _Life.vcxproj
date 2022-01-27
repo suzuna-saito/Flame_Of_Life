@@ -182,6 +182,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="CountUp.cpp" />
     <ClCompile Include="EasyStage.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="FallEffect.cpp" />
+    <ClCompile Include="FallEffectManager.cpp" />
     <ClCompile Include="FireObject.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
@@ -254,6 +256,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="CountUp.h" />
     <ClInclude Include="EasyStage.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="FallEffect.h" />
+    <ClInclude Include="FallEffectManager.h" />
     <ClInclude Include="FireObject.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />

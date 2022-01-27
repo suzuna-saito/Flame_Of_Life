@@ -14,6 +14,21 @@ bool KeyboardState::GetKeyValue(SDL_Scancode _keyCode) const
 }
 
 /*
+@brief	指定したキーが押されたタイミングを判定する
+@param	SDL_Scancodeのキーコード
+@return	true : 押された , false : 押されていない
+*/
+bool KeyboardState::GetKeyDownValue(SDL_Scancode _keyCode) const
+{
+	if (mPrevState[_keyCode] == 0 && mCurrState[_keyCode] == 1)
+	{
+		return true;
+	}
+	return false;
+}
+
+
+/*
 @fn		現在と1フレーム前の状態からButtonStateを返す
 @param	_keyCode SDL_Scancodeのキーコード
 @return	ButtonState型の現在の状態(enum型 ButtonState)

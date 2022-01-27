@@ -67,9 +67,6 @@ protected:
 	//加速度
 	float				mSpeed;
 
-	////パーティクルの状態
-	//ParticleState		mParticleState;
-
 public:
 
 	/*

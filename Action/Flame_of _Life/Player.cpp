@@ -17,10 +17,12 @@ bool Player::mOperable = true;
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, MCameraPos(Vector3(0, -1300, 1250))
+	, mRightVec(Vector3(0.0f, 1.0f, 0.0f))
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
 	, MCameraPointZ(66.0f)
-	, MRedoingPosZ(-500.0f)
+	, MChagePosZ(70.0f)
+	, MRedoingPosZ(-700.0f)
 	, MReturnAddZ(100.0f)
 	, MRedoingSpeedZ(900.0f)
 	, MMaxJumpVel(1500.0f)
@@ -47,6 +49,10 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//アニメーションの再生
 	mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle]);
+
+	// エフェクト
+	// プレイヤーが落ちた時のエフェクト
+	mFallEffectManager = new FallEffectManager(_objectTag, _sceneTag, this);
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -79,8 +85,16 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 */
 void Player::UpdateGameObject(float _deltaTime)
 {
-	//プレイヤーを見下ろす位置にカメラをセット
-	mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x, mPosition.y+50.0f, MCameraPointZ));
+	if (mPosition.z >= MChagePosZ)
+	{
+		//プレイヤーを見下ろす位置にカメラをセット
+		mMainCamera->SetViewMatrixLerpObject(MCameraPos, Vector3(mPosition.x, mPosition.y + 50.0f, MCameraPointZ));
+	}
+	else
+	{
+		//プレイヤーを見下ろす位置にカメラをセット
+		mMainCamera->SetViewMatrixLerpObject(MCameraPos, mPosition);
+	}
 	//プレイヤーを横から見る位置にカメラをセット
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
 	// デバック用
@@ -109,6 +123,11 @@ void Player::UpdateGameObject(float _deltaTime)
 		mLegs->SetIsGround(false);
 	}
 
+	// velocityが一定数まで行ったら、ジャンプ力をなくす
+	if (mVelocity.z >= MMaxJumpVel)
+	{
+		mJump->SetEndJump(true);
+	}
 
 	// 重力
 	if (!mLegs->GetIsGround() && !mDebug && mOperable)
@@ -119,11 +138,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		mVelocity.z = 0.0f;
 	}
-	// velocityが一定数まで行ったら、ジャンプ力をなくす
-	if (mVelocity.z >= MMaxJumpVel)
-	{
- 		mJump->SetEndJump(true);
-	}
+	
 
 	// 座標をセット
 	mPosition += mVelocity * _deltaTime;
@@ -175,17 +190,46 @@ void Player::GameObjectInput(const InputState& _keyState)
 	// 向いてほしい向きのベクトル
 	Vector3 inputVec = Vector3::Zero;
 
+	
 	if (mOperable)
 	{
+		float VecX = 0.0f;
+		float VecY = 0.0f;
 
+		// コントローラー
+		if (_keyState.m_controller.GetLAxisVec().x < 0.0f)
+		{
+			// ｘ軸の入力
+			VecX = 1.0f;
+		}
+		else if(_keyState.m_controller.GetLAxisVec().x > 0.0f)
+		{
+			// ｘ軸の入力
+			VecX = -1.0f;
+		}
+	
+		if (_keyState.m_controller.GetLAxisVec().y > 0.0f)
+		{
+			// ｘ軸の入力
+			VecY = 1.0f;
+		}
+		else if (_keyState.m_controller.GetLAxisVec().y < 0.0f)
+		{
+			// ｘ軸の入力
+			VecY = -1.0f;
+		}
+		
+		
 		// Wで奥に移動
-		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
+		if (VecY < 0.0f ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
 		{
 			inputVec.y = 1.0f;
 			mVelocity.y = mMoveSpeed;
 		}
 		// Sで手前に移動
-		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
+		else if (VecY > 0.0f ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
 		{
 			inputVec.y = -1.0f;
 			mVelocity.y = -mMoveSpeed;
@@ -195,13 +239,15 @@ void Player::GameObjectInput(const InputState& _keyState)
 			mVelocity.y = 0.0f;
 		}
 		// Aで左に移動
-		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
+		if (VecX > 0.0f ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
 		{
 			inputVec.x = 1.0f;
 			mVelocity.x = mMoveSpeed;
 		}
 		// Dで右に移動
-		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
+		else if (VecX < 0.0f ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
 		{
 			inputVec.x = -1.0f;
 			mVelocity.x = -mMoveSpeed;
@@ -211,15 +257,31 @@ void Player::GameObjectInput(const InputState& _keyState)
 			mVelocity.x = 0.0f;
 		}
 
-		// スペースでジャンプ
-		if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed &&
+		// Aボタンかスペースでジャンプ
+		if ((_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Pressed ||
+			_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Pressed) &&
 			mLegs->GetIsGround())
 		{
 			mJump->SetJumpStart(true);
 		}
-
-		// awsdのいずれかが押されていたら
-		if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
+		else if(_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A)!= ButtonState::None)
+		{
+			if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Pressed)
+			{
+				printf("押した\n");
+			}
+			else if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Held)
+			{
+				printf("押されている\n");
+			}
+			else if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Released)
+			{
+				printf("離した\n");
+			}
+		}
+		// いずれかが押されていたら
+		if (VecX != 0.0f || VecY != 0.0f ||
+			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
 		{
 			mNowState = playerState::run;
@@ -236,7 +298,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 		mAnimVec = inputVec;
 
 		///// でバック用 //////
-		if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+		/*if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
 		{
 			if (!mDebug)
 			{
@@ -246,7 +308,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 			{
 				mDebug = false;
 			}
-		}
+		}*/
 
 		/*if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
 		{

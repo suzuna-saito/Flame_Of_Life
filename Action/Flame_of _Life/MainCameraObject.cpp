@@ -49,3 +49,33 @@ void MainCameraObject::SetViewMatrixLerpObject(const Vector3& _offset, const Vec
 	mOffsetPos = _offset;
 	mLerpObject = _parentPos;
 }
+
+/*
+@brief ゲーム中の移動処理
+@param	_deltaTime 前のフレームでかかった時間
+*/
+void MainCameraObject::InGameMovableProcess(float _deltaTime)
+{
+	//// カメラ半径の補正関数
+	//CorrectionRadius();
+
+	//// ポジション計算関数
+	//CalculationPosition(_deltaTime);
+
+	//// ビュー行列計算関数
+	//CalculationViewMatrix();
+
+	//// プレイヤー側に渡す前方ベクトルを生成
+	//mForwardVec = lerpObjectPos - position;
+	//// 正規化
+	//mForwardVec.Normalize();
+	//// Z軸を固定
+	//mForwardVec.z = 0.0f;
+
+	//// 当たり判定を行うオブジェクトと当たったポジションを保存
+	//tmpHitFlag = hitFlag;
+
+	//// 当たり判定を行う際に利用する変数の初期化
+	//hitPosition = Vector3::Zero;
+	//hitFlag = false;
+}

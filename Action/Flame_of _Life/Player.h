@@ -3,8 +3,12 @@
 */
 #pragma once
 
+/*
+@brief 前方宣言
+*/
 class Jump;
 class LegsCollider;
+class FallEffectManager;
 
 class Player :public GameObject
 {
@@ -69,6 +73,11 @@ private:
 	//スケルタルメッシュ
 	SkeletalMeshComponent* mSkelComp;
 	
+	// エフェクト
+	//プレイヤーが落ちた時のエフェクト
+	FallEffectManager* mFallEffectManager;
+
+
 	// 現在の状態
 	playerState  mNowState;
 	// 1つ前の状態
@@ -78,6 +87,9 @@ private:
 	vector<const class Animation*> mAnimations;
 	// 回転目標方向
 	Vector3 mAnimVec; 
+
+	//右方向ベクトル
+	Vector3 mRightVec;
 
 	// プレイヤーの復帰ポジション
 	Vector3 mReturnPos;
@@ -89,6 +101,9 @@ private:
 	// カメラのZ軸注視点
 	const float MCameraPointZ;
 
+	// カメラがプレイヤーを追うようになるプレイヤーのｚ軸の高さ
+	const float MChagePosZ;
+
 	// プレイヤーのリスポーンするタイミングｚ軸
 	const float MRedoingPosZ;
 	// リスポーン位置を少し高くする
@@ -98,6 +113,9 @@ private:
 
 	// ジャンプ時の最大Velocity
 	const float MMaxJumpVel;
+
+	// 入力制限の値を格納するための変数
+	float mInputDeadSpace;
 
 	// ジャンプ
 	Jump* mJump;
