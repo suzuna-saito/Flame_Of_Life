@@ -17,7 +17,8 @@ FallEffect::FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Objec
 	mScale = 200.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetColor(Color::LightBlue);
+	//mParticle->SetColor(Color::LightBlue);
+	mParticle->SetColor(Color::Red);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA);
 	mVelocity = _Vel;
 }

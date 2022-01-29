@@ -59,10 +59,10 @@ void EasyStage::Input(const InputState& _state)
 */
 SceneBase* EasyStage::update()
 {
-	if (Candle::mCandleCount == 2)
+	if (Candle::mCandleCount == 1)
 	{
-		return new NormalStage(Scene::normal);
-		//return new Result(Scene::result);
+		//return new NormalStage(Scene::normal);
+		return new testResult(Scene::result);
 	}
 
 	CountUp::SetCountStartFlag(true);

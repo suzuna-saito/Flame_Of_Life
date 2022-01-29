@@ -264,21 +264,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 		{
 			mJump->SetJumpStart(true);
 		}
-		else if(_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A)!= ButtonState::None)
-		{
-			if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Pressed)
-			{
-				printf("‰Ÿ‚µ‚½\n");
-			}
-			else if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Held)
-			{
-				printf("‰Ÿ‚³‚ê‚Ä‚¢‚é\n");
-			}
-			else if (_keyState.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Released)
-			{
-				printf("—£‚µ‚½\n");
-			}
-		}
+		
 		// ‚¢‚¸‚ê‚©‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚ç
 		if (VecX != 0.0f || VecY != 0.0f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||

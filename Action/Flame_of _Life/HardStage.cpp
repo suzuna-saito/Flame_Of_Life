@@ -67,7 +67,7 @@ SceneBase* HardStage::update()
 	// 遷移フラグがtrueだったら
 	if (mGameSceneFlag)
 	{
-		return new Result(Scene::result);
+		//return new Result(Scene::result);
 
 		//// カウントを減らす
 		//mNextSceneCount--;

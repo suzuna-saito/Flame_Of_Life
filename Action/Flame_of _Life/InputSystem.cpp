@@ -269,7 +269,7 @@ void InputSystem::Update()
 	if (mController != NULL)
 	{
 		// 前のフレームのコントローラの状態をコピーする
-		memcpy(&mState.m_controller.mPrevButtons, &mState.m_controller.mCurrButtons, sizeof(Uint8) * SDL_CONTROLLER_BUTTON_MAX);
+		//memcpy(&mState.m_controller.mPrevButtons, &mState.m_controller.mCurrButtons, sizeof(Uint8) * SDL_CONTROLLER_BUTTON_MAX);
 
 		// コントローラの状態を更新する
 		SDL_GameControllerUpdate();

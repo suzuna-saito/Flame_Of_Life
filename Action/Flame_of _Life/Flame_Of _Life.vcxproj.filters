@@ -184,6 +184,9 @@
     <ClCompile Include="FallEffectManager.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
+    <ClCompile Include="testResult.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -370,6 +373,9 @@
     </ClInclude>
     <ClInclude Include="FallEffectManager.h">
       <Filter>ParticleEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="testResult.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

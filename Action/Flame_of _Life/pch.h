@@ -126,6 +126,7 @@ using namespace std;
 #include "NormalStage.h"
 #include "HardStage.h"
 #include "Result.h"
+#include "testResult.h"
 
 
 // ƒRƒŠƒWƒ‡ƒ“ *
