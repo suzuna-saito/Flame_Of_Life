@@ -25,7 +25,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, MRedoingPosZ(-700.0f)
 	, MReturnAddZ(100.0f)
 	, MRedoingSpeedZ(900.0f)
-	, MMaxJumpVel(1500.0f)
+	, MMaxJumpVel(1000.0f)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
 {
