@@ -20,12 +20,9 @@ Result::Result(const Scene& _nowScene)
 	SetScene(_nowScene);
 
 	// マップをつかってアイテムと説明画像を関連付け	
-	mItemDescription[itemNames::cat] = "Assets/UI/FarstThree.png";
-	mItemDescription[itemNames::chair] = "Assets/UI/FarstTwo.png";
-	mItemDescription[itemNames::chara] = "Assets/UI/FarstOne.png";
-	/*mItemDescription[itemNames::lighter] = "Assets/UI/Lighter.png";
-	mItemDescription[itemNames::sword] = "Assets/UI/Sword.png";
-	mItemDescription[itemNames::tree] = "Assets/UI/Tree.png";*/
+	mItemDescription[ItemNum::one] = "Assets/UI/FarstThree.png";
+	mItemDescription[ItemNum::two] = "Assets/UI/FarstTwo.png";
+	mItemDescription[ItemNum::three] = "Assets/UI/FarstOne.png";
 
 	// どのアイテムを取っているか検索
 	mSearch();
@@ -40,9 +37,9 @@ Result::Result(const Scene& _nowScene)
 Result::~Result()
 {
 	// 取得したアイテムの中にデータが入っていれば
-	if (ItemBase::mGetNames.size() != 0)
+	if (ItemBase::mGetNumber.size() != 0)
 	{
-		ItemBase::mGetNames.clear();
+		ItemBase::mGetNumber.clear();
 	}
 
 	// 消したいデータが入っていたら
@@ -88,7 +85,7 @@ void Result::mSearch()
 	decltype(mItemDescription)::iterator it;
 
 	// 取得したアイテム分回す
-	for (const auto& num : ItemBase::mGetNames)
+	for (const auto& num : ItemBase::mGetNumber)
 	{
 		// 探す
 		it = mItemDescription.find(num);

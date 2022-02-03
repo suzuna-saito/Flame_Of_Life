@@ -30,7 +30,7 @@ void SwitchCollider::OnCollision(const GameObject& _hitObject)
 	Tag hitObjectTag = _hitObject.GetTag();
 
 	// スイッチと当たった時かつ、スイッチフラグがfalseの時
-	if (hitObjectTag == Tag::player && !Switch::mSwitchFlag)
+	if (hitObjectTag == Tag::playerLegs && !Switch::mSwitchFlag)
 	{
 		// フラグをtrueにする
 		Switch::mSwitchFlag = true;

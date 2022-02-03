@@ -178,6 +178,22 @@ public:
 		return Vector2(_vec.x * _scalar, _vec.y * _scalar);
 	}
 
+	friend bool operator!=(const Vector2& _vec1, const Vector2& _vec2)
+	{
+		bool clear = false;
+		if (_vec1.x != _vec2.x)
+		{
+			clear = true;
+		}
+		if (_vec1.y != _vec2.y)
+		{
+			clear = true;
+
+		}
+		return clear;
+	}
+
+
 	// Scalar *=
 	Vector2& operator*=(float _scalar)
 	{

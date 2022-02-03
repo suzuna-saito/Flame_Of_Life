@@ -19,6 +19,7 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mBoxCollider()
 	, mPosition(Vector3::Zero)
 	, mVelocity(Vector3::Zero)
+	, mInputSpeed(Vector3::Zero)
 	, mAabb(Vector3::Zero, Vector3::Zero)
 	, mScale(Vector3(1.0f, 1.0f, 1.0f))
 	, mDirection(Vector3::Zero)

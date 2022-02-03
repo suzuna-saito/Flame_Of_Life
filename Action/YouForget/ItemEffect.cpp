@@ -40,8 +40,8 @@ void ItemEffect::UpdateGameObject(float _deltaTime)
 
 	//if(mAlpha>0.)
 
-	//アイテムを取ったら見えなくする
-	if (mItem->mGetItemFlag())
+	//アイテムが存在してなかったら見えなくする
+	if (!mItem->mGetItemExistsFlag())
 	{
 		if (mAlpha >= 0.0f)
 		{

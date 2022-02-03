@@ -2,7 +2,16 @@
 
 Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
-	, ItemNumber(_num)
+	, mItemExistsTime(0)
+	/*, MItemExistsOneTime(2100)
+	, MItemExistsTwoTime(1700)
+	, MItemExistsThreeTime(800)*/
+	, MItemExistsOneTime(3000)
+	, MItemExistsTwoTime(2000)
+	, MItemExistsThreeTime(1000)
+	, mItemFlashingTime(200)
+	, mItemExistsFlag(true)
+	, mAlphaDownFlag(true)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -36,7 +45,7 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	Quaternion target = Quaternion::Concatenate(rot, incZ);
 	SetRotation(target);
 
-	float radianY = Math::ToRadians(-80.0f*_num);
+	float radianY = Math::ToRadians(-80.0f*(int)_num);
 	rot = this->GetRotation();
 	Quaternion incY(Vector3::UnitY, radianY);
 	target = Quaternion::Concatenate(rot, incY);
@@ -48,10 +57,12 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	target = Quaternion::Concatenate(rot, incX);
 	SetRotation(target);
 
-	// アイテムの種類を決定
-	mItemType();
-	
-	mColor = Vector3 (1.0f, 1.0f, 2.0f);
+	// アイテムのナンバー、アイテムの存在時間
+	mItemType(_num);
+
+	// 色
+	mColor = Vector3(0.68f, 0.85f, 1.2f);
+
 }
 
 
@@ -81,11 +92,17 @@ void Item::UpdateGameObject(float _deltaTime)
 			
 		}
 
+		// アイテムの生存時間の計算処理
+		mItemExists();
+
 		SetPosition(mPosition);
 	}
 	// プレイヤーと当たってたら
-	else if (mCollisionFlag && GetState() != State::Disabling)
+	else if (mCollisionFlag && GetState() != State::Disabling && mItemExistsFlag)
 	{
+		// アイテムが存在してないとする
+		mItemExistsFlag = false;
+
 		// ステートをdisablにする
 		SetState(State::Disabling);
 
@@ -93,7 +110,17 @@ void Item::UpdateGameObject(float _deltaTime)
 		ItemBase::mItemCount--;
 
 		// 取得したアイテムをデータ構造に格納する
-		mGetNames.push_back(mItemName);
+		mGetNumber.push_back(mItemNum);
+	}
+
+	// 生存フラグがfalseだったら
+	if (!mItemExistsFlag)
+	{
+		// 描画をやめる
+		mMeshComponent->SetVisible(false);
+
+		// ステートをdisablにする
+		SetState(State::Disabling);
 	}
 }
 
@@ -111,22 +138,61 @@ void Item::OnCollision(const GameObject& _hitObject)
 	}
 }
 
-void Item::mItemType()
+void Item::mItemType(int _num)
 {
 	// 生成が何番目かによって種類を変える
-	switch (ItemNumber)
+	switch (_num)
 	{
-	case(0):
-		mItemName = itemNames::cat;
+	case((int)ItemNum::one):
+		mItemNum = ItemNum::one;
+		mItemExistsTime = MItemExistsOneTime;
 		break;
-	case(1):
-		mItemName = itemNames::chair;
+	case((int)ItemNum::two):
+		mItemNum = ItemNum::two;
+		mItemExistsTime = MItemExistsTwoTime;
 		break;
-	case(2):
-		mItemName = itemNames::chara;
+	case((int)ItemNum::three):
+		mItemNum = ItemNum::three;
+		mItemExistsTime = MItemExistsThreeTime;
 		break;
 	default:
 		break;
 	}
 
+}
+
+void Item::mItemExists()
+{
+	if (mAlpha <= 0.0f && mAlphaDownFlag)
+	{
+		mAlphaDownFlag = false;
+	}
+	if (mAlpha >= 1.0f && !mAlphaDownFlag)
+	{
+		mAlphaDownFlag = true;
+	}
+
+	// アイテムの生存時間を引いてく
+	mItemExistsTime--;
+
+	// 残りの生存時間が200よりも小さくなったら
+	if (mItemExistsTime <= mItemFlashingTime)
+	{
+		// 点滅させる
+		if (mAlphaDownFlag)
+		{
+			mAlpha -= 0.05f;
+		}
+		else
+		{
+			mAlpha += 0.05f;
+		}
+	}
+
+	// 残りの生存時間が0よりも小さくなったら
+	if (mItemExistsTime <= 0)
+	{
+		// 生存フラグをfalseにする
+		mItemExistsFlag = false;
+	}
 }

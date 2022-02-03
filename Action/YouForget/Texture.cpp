@@ -66,7 +66,7 @@ bool Texture::Load(const std::string& _fileName)
 
 	glGenTextures(1, &mTextureID);
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
-
+	// @@@
 	glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format, GL_UNSIGNED_BYTE, surf->pixels);
 
 	SDL_FreeSurface(surf);

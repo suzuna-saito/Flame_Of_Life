@@ -2,7 +2,7 @@
 
 // 静的変数の初期化
 int ItemBase::mItemCount = 0;
-vector<itemNames> ItemBase::mGetNames;
+vector<ItemNum> ItemBase::mGetNumber;
 
 ItemBase::ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	: GameObject(_sceneTag, _objectTag)
@@ -13,20 +13,20 @@ ItemBase::ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag)
 	, mMinMove(0.0f)
 	, mUpFlag(true)
 	, mCollisionFlag(false)
-	, mItemName(itemNames::first)
+	, mItemNum(ItemNum::first)
 {
 	// アイテムが生成されるたびにカウントを取る。
 	mItemCount++;
 }
 
 // 前置インクリメント
-//itemNames& operator++(itemNames& rhs)
+//ItemNum& operator++(ItemNum& rhs)
 //{
-//	if (rhs == itemNames::end)
+//	if (rhs == ItemNum::end)
 //	{
 //		throw std::out_of_range("for outof range Tag& operator ++ (Tag&)");
 //	}
-//	rhs = itemNames(static_cast<std::underlying_type<itemNames>::type>(rhs) + 1);
+//	rhs = ItemNum(static_cast<std::underlying_type<ItemNum>::type>(rhs) + 1);
 //
 //	return rhs;
 //}

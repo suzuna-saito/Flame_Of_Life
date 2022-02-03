@@ -4,7 +4,7 @@
 #include "pch.h"
 
 // 静的メンバ
-// プレイヤーが操作可能かどうか
+// プレイヤーが操作可能かどうか　true _可能 false _不可能
 bool Player::mOperable = true;
 
 /*
@@ -28,6 +28,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	, MRedoingSpeedZ(900.0f)
 	, MMaxJumpVel(1700.0f)
 	, mStartFlag(true)
+	, mVibrationFlag(false)
 	, mNowState(playerState::idle)
 	, mPrevState(playerState::idle)
 {
@@ -58,7 +59,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
-	AABB box = { Vector3(750.0f,-750.0f,300.0f),Vector3(-750.0f,750.0f,3500.0f) };
+	AABB box = { Vector3(750.0f,-750.0f,0.0f),Vector3(-750.0f,750.0f,3500.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
 
@@ -70,7 +71,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	SetRotation(target);
 
 	// 足元当たり判定の生成
-	mLegs = new LegsCollider(this, _objectTag, _sceneTag);
+	mLegs = new LegsCollider(this, Tag::playerLegs, _sceneTag);
 
 	// ジャンプを追加
 	mJump = new Jump(this);
@@ -155,7 +156,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	
 
 	// 座標をセット
-	mPosition += mVelocity * _deltaTime;
+	mPosition += (mVelocity + mInputSpeed) * _deltaTime;
 
 	// 状態が切り替わったらアニメーションを開始
 	if (mNowState != mPrevState)
@@ -175,6 +176,8 @@ void Player::UpdateGameObject(float _deltaTime)
 	// プレイヤーが落ちたら
 	if (mPosition.z <= MRedoingPosZ && mOperable)
 	{
+		// 振動フラグをtrueにする
+		mVibrationFlag = true;
 		// 動作が出来なくする
 		mOperable = false;
 
@@ -203,72 +206,34 @@ void Player::GameObjectInput(const InputState& _keyState)
 {
 	// 向いてほしい向きのベクトル
 	Vector3 inputVec = Vector3::Zero;
+	mInputSpeed = Vector3::Zero;
 
-	
 	if (mOperable)
 	{
-		float VecX = 0.0f;
-		float VecY = 0.0f;
-
-		// コントローラー
-		if (_keyState.m_controller.GetLAxisVec().x < 0.0f)
-		{
-			// ｘ軸の入力
-			VecX = 1.0f;
-		}
-		else if(_keyState.m_controller.GetLAxisVec().x > 0.0f)
-		{
-			// ｘ軸の入力
-			VecX = -1.0f;
-		}
-	
-		if (_keyState.m_controller.GetLAxisVec().y > 0.0f)
-		{
-			// ｘ軸の入力
-			VecY = 1.0f;
-		}
-		else if (_keyState.m_controller.GetLAxisVec().y < 0.0f)
-		{
-			// ｘ軸の入力
-			VecY = -1.0f;
-		}
-		
-		
 		// Wで奥に移動
-		if (VecY < 0.0f ||
+		if (_keyState.m_controller.GetLAxisVec().y < 0.0f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
 		{
 			inputVec.y = 1.0f;
-			mVelocity.y = mMoveSpeed;
 		}
 		// Sで手前に移動
-		else if (VecY > 0.0f ||
+		else if (_keyState.m_controller.GetLAxisVec().y > 0.0f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
 		{
 			inputVec.y = -1.0f;
-			mVelocity.y = -mMoveSpeed;
 		}
-		else
-		{
-			mVelocity.y = 0.0f;
-		}
+
 		// Aで左に移動
-		if (VecX > 0.0f ||
+		if (_keyState.m_controller.GetLAxisVec().x < 0.0f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
 		{
 			inputVec.x = 1.0f;
-			mVelocity.x = mMoveSpeed;
 		}
 		// Dで右に移動
-		else if (VecX < 0.0f ||
+		else if (_keyState.m_controller.GetLAxisVec().x > 0.0f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
 		{
 			inputVec.x = -1.0f;
-			mVelocity.x = -mMoveSpeed;
-		}
-		else
-		{
-			mVelocity.x = 0.0f;
 		}
 
 		// Aボタンかスペースでジャンプ
@@ -278,51 +243,30 @@ void Player::GameObjectInput(const InputState& _keyState)
 		{
 			mJump->SetJumpStart(true);
 		}
-		
+
 		// いずれかが押されていたら
-		if (VecX != 0.0f || VecY != 0.0f ||
-			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S) ||
-			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A) || _keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
+		if (inputVec != Vector3::Zero)
 		{
-			mNowState = playerState::run;
+ 			mNowState = playerState::run;
+
+			// 入力ベクトルの正規化
+			inputVec.Normalize();
+			// 移動
+			mInputSpeed = inputVec * mMoveSpeed;
 		}
 		else
-		{
+		{ 
 			mNowState = playerState::idle;
-			//mVelocity = Vector3::Zero;
 		}
 
-		// 入力ベクトルの正規化
-		inputVec.Normalize();
-
+		
+		// アニメーションする方向
 		mAnimVec = inputVec;
-
-		///// でバック用 //////
-		/*if (_keyState.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
-		{
-			if (!mDebug)
-			{
-				mDebug = true;
-			}
-			else
-			{
-				mDebug = false;
-			}
-		}*/
-
-		/*if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_UP) && mDebug)
-		{
-			mVelocity.z = mMoveSpeed;
-		}
-		else if (_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_DOWN) && mDebug)
-		{
-			mVelocity.z = -mMoveSpeed;
-		}
-		else
-		{
-			mVelocity.z = 0.0f;
-		}*/
 	}
+	/*else if (mVibrationFlag)
+	{
+		SDL_GameControllerRumble(_keyState.m_controller)
+	}*/
 }
 
 /*
@@ -354,8 +298,6 @@ void Player::OnCollision(const GameObject& _hitObject)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
-
-	/*	mJump->SetEndJump(true);*/
 	}
 }
 

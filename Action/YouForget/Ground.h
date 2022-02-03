@@ -74,6 +74,11 @@ private:
 	// α値の最小値
 	float MAlphaMin;
 
+	// プレイヤーと接地しているかどうか
+	bool mIsPlayer;
+	// プレイヤーと接地していたかどうか
+	bool mBeforeIsPlayer;
+
 	// 床の種類
 	groundTag mGroundTag;
 	// 床の色の種類

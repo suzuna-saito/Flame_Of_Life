@@ -109,7 +109,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::Scene::first)
 	{
 		//背景データの読み込み
-		if (!readTiledJson(mBackGroundMapData, "Assets/Config/easy.json", "BackGround"))
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/first.json", "BackGround"))
 		{
 			printf("don't have Layer/BackGround\n");
 			return true;
@@ -121,35 +121,35 @@ bool MapCreate::OpenFile()
 
 		
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/easy.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/first.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
 		}
 
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/first.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/easy.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/first.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
 		}
 
 		//スイッチデータの読み込み
-		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy.json", "Switch"))
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/first.json", "Switch"))
 		{
 			printf("don't have Layer/Switch\n");
 			return true;
 		}
 
 		//アイテムデータの読み込み
-		if (!readTiledJson(mItemMapData, "Assets/Config/easy.json", "Item"))
+		if (!readTiledJson(mItemMapData, "Assets/Config/first.json", "Item"))
 		{
 			printf("don't have Layer/Item\n");
 			return true;
@@ -161,42 +161,47 @@ bool MapCreate::OpenFile()
 	//-----------------------------------------------
 	if (mScene == SceneBase::Scene::second)
 	{
+		//背景データの読み込み
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/second.json", "BackGround"))
+		{
+			printf("don't have Layer/BackGround\n");
+			return true;
+		}
+
+		mSizeX = mBackGroundMapData[0].size();
+		mSizeY = mBackGroundMapData.size();
+		//mSizeZ = mGroundMapData.size();]
+		
 		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/normal.json", "Ground"))
+		if (!readTiledJson(mGroundMapData, "Assets/Config/second.json", "Ground"))
 		{
 			printf("don't have Layer/Ground\n");
 			return true;
 		}
 
-
-		mSizeX = mGroundMapData[0].size();
-		mSizeY = mGroundMapData.size();
-		//mSizeZ = mGroundMapData.size();
-
-
 		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/normal.json", "Player"))
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/second.json", "Player"))
 		{
 			printf("don't have Layer/player\n");
 			return true;
 		}
 
 		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/normal.json", "Candle"))
+		if (!readTiledJson(mCandleMapData, "Assets/Config/second.json", "Candle"))
 		{
 			printf("don't have Layer/Candle\n");
 			return true;
 		}
 
 		//スイッチデータの読み込み
-		if (!readTiledJson(mSwitchMapData, "Assets/Config/normal.json", "Switch"))
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/second.json", "Switch"))
 		{
 			printf("don't have Layer/Switch\n");
 			return true;
 		}
 
 		//アイテムデータの読み込み
-		if (!readTiledJson(mItemMapData, "Assets/Config/normal.json", "Item"))
+		if (!readTiledJson(mItemMapData, "Assets/Config/second.json", "Item"))
 		{
 			printf("don't have Layer/Item\n");
 			return true;
@@ -283,7 +288,7 @@ void MapCreate::CreateGround()
 				break;
 
 			case SceneBase::Scene::first:
-				Ground::mTypeNum = 2;
+				Ground::mTypeNum = 1;
 
 				switch (name)
 				{
@@ -469,6 +474,7 @@ void MapCreate::CreateSwitch()
 */
 void MapCreate::CreateItem()
 {
+	int ItemNumber = 0;
 	for (float iz = 0; iz < mSizeY; iz++)
 	{
 		for (float ix = 0; ix < mSizeX; ix++)
@@ -479,8 +485,8 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos, objectSize, Tag::item, SceneBase::GetScene(), mItemNum);
-				mItemNum++;
+				new Item(objectPos, objectSize, Tag::item, SceneBase::GetScene(), ItemNumber);
+				ItemNumber++;
 				break;
 			}
 		}

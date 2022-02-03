@@ -56,10 +56,10 @@ void FirstStage::Input(const InputState& _state)
 */
 SceneBase* FirstStage::update()
 {
-	if (Candle::mCandleCount == 2)
+	if (Candle::mCandleCount == 1)
 	{
-		//return new NormalStage(Scene::normal);
-		return new Result(Scene::result);
+		return new SecondStage(Scene::second);
+		//return new Result(Scene::result);
 	}
 
 	return this;

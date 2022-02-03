@@ -10,10 +10,12 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	:GameObject(_sceneTag, _objectTag)
 	, mAlphaNum(0)
 	, MAlphaAddSpeed(4.5f)
-	, MAlphaSubSpeed(0.7f)
+	, MAlphaSubSpeed(0.8f)
 	, MAlphaMax(1.2f)
 	, mGroundTag(_tag)
 	, mAlphaColorTag(alphaColor::red)
+	, mIsPlayer(false)
+	, mBeforeIsPlayer(false)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
@@ -35,6 +37,10 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	{
 		mInit();
 	}
+	else
+	{
+		mColor = Vector3(1.0f,1.0f,1.0f);
+	}
 
 	// 透明度
 	if (mGroundTag == groundTag::RGBalpha)
@@ -47,6 +53,13 @@ void Ground::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
+	// 床の透明度が0より小さかったらまたは、スイッチが押されたら
+	if (mAlpha <= 0.0f || Switch::mSwitchFlag)
+	{
+		// プレイヤーが乗っていなかった判定にする
+		mBeforeIsPlayer = false;
+	}
+
 	// スイッチを押していたらかつ、今踏んでるスイッチの色と床の色が一緒だったら
 	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha &&
 		mAlphaColorTag == SwitchCollider::mLinkageColor)
@@ -57,7 +70,18 @@ void Ground::UpdateGameObject(float _deltaTime)
 			mAlpha += MAlphaAddSpeed* _deltaTime;
 		}
 	}
-	else if(mGroundTag != groundTag::notAlpha)
+	// プレイヤーが乗っている床だったら
+	else if (mIsPlayer)
+	{
+		// 少しずつ透明度をあげる
+		if (mAlpha <= MAlphaMax-0.7f)
+		{
+			mAlpha += (MAlphaAddSpeed * 1.5f)*_deltaTime;
+		}
+	}
+
+	// スイッチを押していないかつ、プレイヤーが乗っていなかったら
+	if(!Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer)
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
@@ -65,15 +89,42 @@ void Ground::UpdateGameObject(float _deltaTime)
 			mAlpha -= MAlphaSubSpeed * _deltaTime;
 		}
 	}
+	else if (mGroundTag != groundTag::notAlpha && !mIsPlayer && mBeforeIsPlayer)
+	{
+		// 少しずつ透明度を下げる
+		if (mAlpha >= 0.0f)
+		{
+			mAlpha -= (MAlphaSubSpeed*1.9f) * _deltaTime;
+		}
+	}
 
+	// プレイヤーが落ちたら
 	if (!Player::mOperable && mAlpha <= 1.0f)
 	{
+		// 床が見えるようにする
 		mAlpha += MAlphaAddSpeed * _deltaTime;
 	}
+
+
+	// プレイヤーが前乗っていなくてかつ、今乗っていたら
+	if (mBeforeIsPlayer != mIsPlayer && !mBeforeIsPlayer)
+	{
+		mBeforeIsPlayer = mIsPlayer;
+	}
+	
+
+	mIsPlayer = false;
 }
 
 void Ground::OnCollision(const GameObject& _hitObject)
 {
+	//ヒットしたオブジェクトのタグを取得
+	Tag hitObjectTag = _hitObject.GetTag();
+
+	if (hitObjectTag == Tag::playerLegs)
+	{
+		mIsPlayer = true;
+	}
 }
 
 // 床の色、α値の変わるタイミングを設定する

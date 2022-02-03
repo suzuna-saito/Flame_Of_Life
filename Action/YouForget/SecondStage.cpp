@@ -16,15 +16,17 @@ SecondStage::SecondStage(const Scene& _nowScene)
 
 	if (!mMapCreate->OpenFile())
 	{
-		// 床の生成
-		mMapCreate->CreateGround();
-		// スイッチを生成
-		mMapCreate->CreateSwitch();
 		// プレイヤーの生成
 		mMapCreate->CreatePlayer();
+		// 背景の生成
+		mMapCreate->CreateBackGround();
+		// 床の生成
+		mMapCreate->CreateGround();
+		// スイッチの生成
+		mMapCreate->CreateSwitch();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
-		// アイテムを生成
+		// アイテムの生成
 		mMapCreate->CreateItem();
 	}
 }

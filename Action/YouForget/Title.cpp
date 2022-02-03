@@ -43,12 +43,11 @@ void Title::Input(const InputState& _state)
 */
 SceneBase* Title::update()
 {
-
 	if (mGameSceneFlag)
 	{
 		return new FirstStage(Scene::first);
 		//return new Tutorial(Scene::tutorial);
-		//return new HardStage(Scene::hard);
+		//return new SecondStage(Scene::second);
 	}
 
 	return this;

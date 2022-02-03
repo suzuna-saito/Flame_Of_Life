@@ -29,7 +29,7 @@ public:
 
 private:
 	// マップで取得したアイテムと説明を関連付ける
-	map<itemNames, string> mItemDescription;
+	map<ItemNum, string> mItemDescription;
 
 	// 描画する画像
 	vector<string> mDescription;

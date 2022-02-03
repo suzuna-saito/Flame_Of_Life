@@ -1,16 +1,13 @@
 #pragma once
 
-// アイテムの名前
-enum class itemNames : unsigned char
+// アイテムのナンバー
+enum class ItemNum : unsigned char
 {
 	first,
 
-	cat = first,      // 猫
-	chair,    // いす
-	chara,    // ミニキャラ
-	lighter,  // ライト
-	sword,    // 剣
-	tree,      // 木
+	one = first,
+	two,
+	three,
 
 	end
 };
@@ -31,7 +28,7 @@ public:
 	static int mItemCount;
 
 	// 取得したアイテムを格納するためのデータ構造
-	static vector<itemNames> mGetNames;
+	static vector<ItemNum> mGetNumber;
 
 protected:
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -50,17 +47,15 @@ protected:
 	bool mCollisionFlag;
 
 	// アイテムの種類
-	itemNames mItemName;
+	ItemNum mItemNum;
 
 	
 
 // ゲッター、セッター
 public:
-	// 取得したアイテムを格納 @@@ いらなくね
-	void SetItemNames(itemNames _itemName) { mGetNames.push_back(_itemName); }
-	// 取得したアイテムを返す
-	//static const vector<itemNames> GetItemNames() { return mGetNames; }
+	// 取得したアイテムを格納
+	//void SetItemNames(ItemNum _itemName) { mGetNames.push_back(_itemName); }
 };
 
 //// 前置インクリメント
-//itemNames& operator ++(itemNames& rhs);
+//ItemNum& operator ++(ItemNum& rhs);

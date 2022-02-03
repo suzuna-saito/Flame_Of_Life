@@ -45,7 +45,7 @@ public:
 	// 復帰位置を設定
 	void SetReturnPos(Vector3 _returnPos) { mReturnPos = _returnPos; }
 
-	// プレイヤーが動作可能状態か
+	// プレイヤーが動作可能状態か true _可能　false _不可能
 	static bool mOperable;
 private:
 	// プレイヤーの行動の状態
@@ -116,6 +116,9 @@ private:
 
 	// ゲームがスタートしたかどうか
 	bool mStartFlag;
+
+	// 振動させるかどうか
+	bool mVibrationFlag;
 
 	// ジャンプ
 	Jump* mJump;

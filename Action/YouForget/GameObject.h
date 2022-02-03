@@ -33,6 +33,7 @@ enum class Tag :unsigned char
 	Other,
 	Camera,
 	player,
+	playerLegs,
 	ground,
 	candle,
 	Switch,
@@ -200,6 +201,7 @@ protected:
 	//Transform
 	Vector3 mPosition;
 	Vector3 mVelocity;
+	Vector3 mInputSpeed;
 	Vector3 mScale;
 	Vector3 mDirection;
 	Vector3 mForwardVec;

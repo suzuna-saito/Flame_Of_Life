@@ -22,14 +22,23 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
+
 	// エフェクト
 	// アイテムの後ろのエフェクト
 	ItemEffectManager* mItemEffectManager;
 
+	// アイテムがまだ存在しているかのフラグ true _存在する false _存在しない
+	bool mItemExistsFlag;
 
-	// アイテムナンバー
-	const int ItemNumber;
-
+	// アイテムの透明度をさげるかどうか true _下げる false _下げない
+	bool mAlphaDownFlag;
+	// アイテムが点滅し始める時間
+	int mItemFlashingTime;
+	// アイテムのそれぞれの生存時間
+	int mItemExistsTime;
+	int MItemExistsOneTime;
+	int MItemExistsTwoTime;
+	int MItemExistsThreeTime;
 
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数
@@ -38,11 +47,14 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 
 	// アイテムの種類を決定
-	void mItemType();
+	void mItemType(int _num);
+
+	// アイテムの生存時間の処理
+	void mItemExists();
 
 	// ゲッター、セッター
 public:
-	// アイテムを取得したかどうかをかえす
-	bool mGetItemFlag() { return mCollisionFlag; }
+	// アイテムが存在してるかどうかをかえす
+	bool mGetItemExistsFlag() { return mItemExistsFlag; }
 };
 
