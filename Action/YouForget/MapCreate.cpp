@@ -162,7 +162,7 @@ bool MapCreate::OpenFile()
 	if (mScene == SceneBase::Scene::second)
 	{
 		//背景データの読み込み
-		if (!readTiledJson(mBackGroundMapData, "Assets/Config/second.json", "BackGround"))
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/easy.json", "BackGround"))
 		{
 			printf("don't have Layer/BackGround\n");
 			return true;
@@ -172,6 +172,59 @@ bool MapCreate::OpenFile()
 		mSizeY = mBackGroundMapData.size();
 		//mSizeZ = mGroundMapData.size();]
 		
+		//床データの読み込み
+		if (!readTiledJson(mGroundMapData, "Assets/Config/easy.json", "Ground"))
+		{
+			printf("don't have Layer/Ground\n");
+			return true;
+		}
+
+		//プレイヤーデータの読み込み
+		if (!readTiledJson(mPlayerMapData, "Assets/Config/easy.json", "Player"))
+		{
+			printf("don't have Layer/player\n");
+			return true;
+		}
+
+		//ろうそくデータの読み込み
+		if (!readTiledJson(mCandleMapData, "Assets/Config/easy.json", "Candle"))
+		{
+			printf("don't have Layer/Candle\n");
+			return true;
+		}
+
+		//スイッチデータの読み込み
+		if (!readTiledJson(mSwitchMapData, "Assets/Config/easy.json", "Switch"))
+		{
+			printf("don't have Layer/Switch\n");
+			return true;
+		}
+
+		//アイテムデータの読み込み
+		if (!readTiledJson(mItemMapData, "Assets/Config/easy.json", "Item"))
+		{
+			printf("don't have Layer/Item\n");
+			return true;
+		}
+	}
+
+	//-----------------------------------------------
+	//----------------ThirdStage---------------------
+	//-----------------------------------------------
+	if (mScene == SceneBase::Scene::third)
+	{
+		//背景データの読み込み
+		if (!readTiledJson(mBackGroundMapData, "Assets/Config/second.json", "BackGround"))
+		{
+			printf("don't have Layer/BackGround\n");
+			return true;
+		}
+
+		mSizeX = mBackGroundMapData[0].size();
+		mSizeY = mBackGroundMapData.size();
+		//mSizeZ = mGroundMapData.size();
+
+
 		//床データの読み込み
 		if (!readTiledJson(mGroundMapData, "Assets/Config/second.json", "Ground"))
 		{
@@ -202,46 +255,6 @@ bool MapCreate::OpenFile()
 
 		//アイテムデータの読み込み
 		if (!readTiledJson(mItemMapData, "Assets/Config/second.json", "Item"))
-		{
-			printf("don't have Layer/Item\n");
-			return true;
-		}
-	}
-
-	//-----------------------------------------------
-	//----------------ThirdStage---------------------
-	//-----------------------------------------------
-	if (mScene == SceneBase::Scene::third)
-	{
-		//床データの読み込み
-		if (!readTiledJson(mGroundMapData, "Assets/Config/hard01.json", "Ground"))
-		{
-			printf("don't have Layer/Ground\n");
-			return true;
-		}
-
-
-		mSizeX = mGroundMapData[0].size();
-		mSizeY = mGroundMapData.size();
-		//mSizeZ = mGroundMapData.size();
-
-
-		//プレイヤーデータの読み込み
-		if (!readTiledJson(mPlayerMapData, "Assets/Config/hard01.json", "Player"))
-		{
-			printf("don't have Layer/player\n");
-			return true;
-		}
-
-		//ろうそくデータの読み込み
-		if (!readTiledJson(mCandleMapData, "Assets/Config/hard01.json", "Candle"))
-		{
-			printf("don't have Layer/Candle\n");
-			return true;
-		}
-
-		//アイテムデータの読み込み
-		if (!readTiledJson(mItemMapData, "Assets/Config/hard01.json", "Item"))
 		{
 			printf("don't have Layer/Item\n");
 			return true;
@@ -320,7 +333,7 @@ void MapCreate::CreateGround()
 				break;
 
 			case SceneBase::Scene::third :
-				Ground::mTypeNum = 3;
+				Ground::mTypeNum = 2;
 
 				switch (name)
 				{
@@ -328,9 +341,6 @@ void MapCreate::CreateGround()
 					break;
 				case(1):
 					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::third, Ground::groundTag::notAlpha);
-					break;
-				case(36):
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::third, Ground::groundTag::alpha);
 					break;
 				default:
 					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::third, Ground::groundTag::RGBalpha);
@@ -460,6 +470,19 @@ void MapCreate::CreateSwitch()
 					break;
 				case(24):
 					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::second, Switch::switchColor::green);
+					break;
+				}
+				break;
+
+			case SceneBase::Scene::third :
+
+				switch (name)
+				{
+				case(18):
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::third, Switch::switchColor::red);
+					break;
+				case(24):
+					new Switch(objectPos, objectSize, Tag::Switch, SceneBase::Scene::third, Switch::switchColor::green);
 					break;
 				}
 				break;

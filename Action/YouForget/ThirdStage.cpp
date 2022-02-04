@@ -16,10 +16,14 @@ ThirdStage::ThirdStage(const Scene& _nowScene)
 
 	if (!mMapCreate->OpenFile())
 	{
-		// 床の生成
-		mMapCreate->CreateGround();
 		// プレイヤーの生成
 		mMapCreate->CreatePlayer();
+		// 背景の生成
+		mMapCreate->CreateBackGround();
+		// 床の生成
+		mMapCreate->CreateGround();
+		// スイッチの生成
+		mMapCreate->CreateSwitch();
 		// ろうそくの生成
 		mMapCreate->CreateCandle();
 		// アイテムの生成

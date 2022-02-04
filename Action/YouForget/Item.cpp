@@ -3,12 +3,12 @@
 Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
 	, mItemExistsTime(0)
-	/*, MItemExistsOneTime(2100)
+	, MItemExistsOneTime(2100)
 	, MItemExistsTwoTime(1700)
-	, MItemExistsThreeTime(800)*/
-	, MItemExistsOneTime(3000)
+	, MItemExistsThreeTime(800)
+	/*, MItemExistsOneTime(3000)
 	, MItemExistsTwoTime(2000)
-	, MItemExistsThreeTime(1000)
+	, MItemExistsThreeTime(1000)*/
 	, mItemFlashingTime(200)
 	, mItemExistsFlag(true)
 	, mAlphaDownFlag(true)

@@ -56,9 +56,9 @@ void SecondStage::Input(const InputState& _state)
 */
 SceneBase* SecondStage::update()
 {
-	if (Candle::mCandleCount == 3)
+	if (Candle::mCandleCount == 2)
 	{
-		//return new HardStage(Scene::hard);
+		return new ThirdStage(Scene::third);
 	}
 
 	return this;
