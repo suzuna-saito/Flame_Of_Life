@@ -81,7 +81,8 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// スイッチを押していないかつ、プレイヤーが乗っていなかったら
-	if(!Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer)
+	if(!Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer ||
+		Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
