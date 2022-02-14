@@ -68,7 +68,7 @@ private:
 	vector<vector<int>> mPlayerMapData;
 	//ろうそくマップデータ
 	vector<vector<int>> mCandleMapData;
-	//スイッチ（球体）マップデータ
+	//スイッチマップデータ
 	vector<vector<int>> mSwitchMapData;
 	//アイテムマップデータ
 	vector<vector<int>> mItemMapData;
@@ -77,18 +77,14 @@ private:
 	SceneBase::Scene mScene;
 	//幅のマップデータ
 	int	mSizeX;
-	//高さのマップデータ
-	int	mSizeY;
 	//奥行のマップデータ
+	int	mSizeY;
+	//高さのマップデータ
 	int	mSizeZ;
 
-	// アイテムの種類
-	int mItemNum;
-
-
-	// 床の高さをずらす
-	float mChagePosY;
-	float mHardChagePosY;
+	// 背景用の床の高さ
+	const float MBackGroundPosZ;
+	const float MBackGroundInsidePosZ;
 
 	//オブジェクトごとの距離
 	float mOffsetX;
@@ -101,28 +97,16 @@ private:
 	const float MCandleScale;
 	// プレイヤーのスケール
 	const float MPlayerScale;
-	// スイッチ（球体）のスケール
+	// スイッチのスケール
 	const float MSphereScale;
-
-	/* アイテム関連 */
-	// 猫（アイテム）のスケール
-	const float MCatScale;
-	const float MCharaScale;
-	const float MLighterScale;
-	const float MChairScale;
-	const float MTreeScale;
-	const float MSwordScale;
-
+	//アイテム（パズル）のスケール
 	const float MItemScale;
 
+	// 地面に埋まらないためにプレイヤーに足してあげるポジションｚ軸
 	const float MPlayerZPos;
 	// 地面に埋まらないためにろうそくに足してあげるポジションｚ軸
 	const float MCandleZPos;
 	// 地面に埋まらないためにアイテムに足してあげるポジションｚ軸
 	const float MItemZPos;
-
-
-	// デバック用
-	int count;
 };
 

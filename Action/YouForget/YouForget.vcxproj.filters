@@ -178,6 +178,9 @@
     <ClCompile Include="ThirdResult.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -359,6 +362,9 @@
     <ClInclude Include="ThirdResult.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BasicMesh.frag">
@@ -515,6 +521,9 @@
     </Filter>
     <Filter Include="UI\Count">
       <UniqueIdentifier>{7a500c8c-1e3f-445e-a6b5-06c1d02c8689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{865cd5a4-700d-4047-a8c7-e657a02a086a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

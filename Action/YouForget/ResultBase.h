@@ -27,6 +27,9 @@ protected:
 	// 表示した画像をvectorに保存し、デストラクタでまとめて消す
 	vector <Sprite*> mDeleteDescription;
 
+	// シーンによって最後に出す画像を変える
+	string mEndSprite;
+
 	// 次の画像を表示するか
 	bool mNextFlag;
 	// 最後の画像を表示し終わったか

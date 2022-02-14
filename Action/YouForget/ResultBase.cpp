@@ -15,11 +15,22 @@ ResultBase::ResultBase(const Scene& _nowScene)
 	, mEndFlag(false)
 	, mDraw(false)
 	, mNowDescription(nullptr)
+	, mNum(0)
 {
 	SetScene(_nowScene);
 
 	// 一番後ろの画像
 	mBackDescription = new Sprite("Assets/UI/BackPicture.png");
+
+	// シーンによって最後に描画する画像を変える
+	if (_nowScene == Scene::thirdResult)
+	{
+		mEndSprite = "Assets/UI/End.png";
+	}
+	else
+	{
+		mEndSprite = "Assets/UI/TitleB.png";
+	}
 }
 
 /*
@@ -87,6 +98,8 @@ void ResultBase::mResultUpdate()
 	// 保存した分表示し終わったら
 	if (mEndFlag)
 	{
+		mBackDescription->NotVisible();
+
 		// 消さなきゃいけない画像があれば
 		if (mDeleteDescription.size() != 0)
 		{
@@ -97,12 +110,10 @@ void ResultBase::mResultUpdate()
 			}
 		}
 
-		mBackDescription->NotVisible();
-
 		//　終わりの画像を表示してなければ
 		if (mSprite == nullptr)
 		{
-			mSprite = new Sprite("Assets/UI/End.png");
+			mSprite = new Sprite(mEndSprite);
 		}
 	}
 

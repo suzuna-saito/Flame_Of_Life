@@ -13,27 +13,19 @@ MapCreate::MapCreate()
 	, MCandleScale(6.0f)
 	, MPlayerScale(0.06f)
 	, MSphereScale(5.0f)
-	, MCatScale(4.0f)
-	, MCharaScale(6.0f)
-	, MLighterScale(2.0f)
-	, MChairScale(0.7f)
-	, MTreeScale(0.5f)
-	, MSwordScale(10.0f)
 	, MItemScale(18.0f)
+	, MBackGroundPosZ(-850.0f)
+	, MBackGroundInsidePosZ(-1200.0f)
 	, MPlayerZPos(200.0f)
 	, MCandleZPos(90.0f)
 	, MItemZPos(200.0f)
 	, mOffsetX(265.0f)
 	, mOffsetY(-380.0f)
 	, mOffsetZ(0.0f)
-	, mChagePosY(100.0f)
-	, mHardChagePosY(90.0f)
-	, mItemNum(0)
-	, count(0)
+	, mSizeX(0)
+	, mSizeY(0)
+	, mSizeZ(0)
 {
-	mSizeX = 0;
-	mSizeY = 0;
-	mSizeZ = 0;
 }
 
 /*
@@ -134,96 +126,6 @@ bool MapCreate::OpenFile()
 }
 
 /*
-@fn	床を生成する
-*/
-void MapCreate::CreateGround()
-{
-	/* 乱数の種を初期化 */
-	srand((unsigned)time(NULL));
-
-	//if(mScene == )
-
-	for (float iz = 0; iz < mSizeY; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
-
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ);
-			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
-
-			switch (mScene)
-			{
-			case SceneBase::Scene::tutorial:
-				// 床の種類の数を設定 @@@ マジックナンバー
-				Ground::mTypeNum = 1;
-
-				switch (name)
-				{
-				case(0):
-					break;
-				case(1):
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::tutorial, Ground::groundTag::notAlpha);
-					break;
-				default:
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::tutorial, Ground::groundTag::RGBalpha);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::first:
-				Ground::mTypeNum = 1;
-
-				switch (name)
-				{
-				case(0):
-					break;
-				case(1):
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::first, Ground::groundTag::notAlpha);
-					break;
-				default:
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::first, Ground::groundTag::RGBalpha);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::second:
-				Ground::mTypeNum = 2;
-
-				switch (name)
-				{
-				case(0):
-					break;
-				case(1):
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::second, Ground::groundTag::notAlpha);
-					break;
-				default:
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::second, Ground::groundTag::RGBalpha);
-					break;
-				}
-				break;
-
-			case SceneBase::Scene::third :
-				Ground::mTypeNum = 2;
-
-				switch (name)
-				{
-				case(0):
-					break;
-				case(1):
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::third, Ground::groundTag::notAlpha);
-					break;
-				default:
-					new Ground(objectPos, objectSize, Tag::ground, SceneBase::Scene::third, Ground::groundTag::RGBalpha);
-					break;
-				}
-				break;
-			}
-		}
-	}
-}
-
-/*
 @fn	背景を生成する
 */
 void MapCreate::CreateBackGround()
@@ -233,11 +135,11 @@ void MapCreate::CreateBackGround()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mBackGroundMapData[(int)iz][(int)ix];
-			// @@@ マジックナンバー直せ
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, -850.0f);
-			Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, -1200.0f);
-			Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 			
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MBackGroundPosZ);
+			const Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, MBackGroundInsidePosZ);
+			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
+
 			if (name == 35)
 			{
 				new BackGround(objectPos, objectSize, Tag::Other, SceneBase::GetScene(), name);
@@ -250,6 +152,51 @@ void MapCreate::CreateBackGround()
 	}
 }
 
+
+/*
+@fn	床を生成する
+*/
+void MapCreate::CreateGround()
+{
+	/* 乱数の種を初期化 */
+	srand((unsigned)time(NULL));
+
+	// 床の種類の数をステージによって設定
+	if (mScene == SceneBase::Scene::tutorial ||
+		mScene == SceneBase::Scene::first)
+	{
+		// 床の種類が1つ
+		Ground::mTypeNum = 1;
+	}
+	else if (mScene == SceneBase::Scene::second ||
+		mScene == SceneBase::Scene::third)
+	{
+		// 床の種類が2つ
+		Ground::mTypeNum = 2;
+	}
+
+	for (float iz = 0; iz < mSizeY; iz++)
+	{
+		for (float ix = 0; ix < mSizeX; ix++)
+		{
+			const unsigned int name = mGroundMapData[(int)iz][(int)ix];
+
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, mOffsetZ);
+			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
+
+			if (name == 1)
+			{
+				new Ground(objectPos, objectSize, Tag::ground, SceneBase::GetScene(), Ground::groundTag::notAlpha);
+			}
+			else if (name == 4)
+			{
+				new Ground(objectPos, objectSize, Tag::ground, SceneBase::GetScene(), Ground::groundTag::RGBalpha);
+			}
+		}
+	}
+}
+
+
 /*
 @fn	プレイヤーを生成する
 */
@@ -260,8 +207,9 @@ void MapCreate::CreatePlayer()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mPlayerMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MPlayerZPos);
-			Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
+
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MPlayerZPos);
+			const Vector3 objectSize = Vector3(MPlayerScale, MPlayerScale, MPlayerScale);
 
 			if (name == 2)
 			{
@@ -269,7 +217,6 @@ void MapCreate::CreatePlayer()
 			}
 		}
 	}
-
 }
 
 /*
@@ -282,8 +229,9 @@ void MapCreate::CreateCandle()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos);
-			Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
+
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos);
+			const Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
 			if (name == 3)
 			{
@@ -292,8 +240,8 @@ void MapCreate::CreateCandle()
 
 		}
 	}
-
 }
+
 /*
 @fn	スイッチを生成する
 */
@@ -304,8 +252,9 @@ void MapCreate::CreateSwitch()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mSwitchMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, 0.0f);
-			Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
+
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, 0.0f);
+			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 
 			if (name == 18)
 			{
@@ -332,8 +281,9 @@ void MapCreate::CreateItem()
 		for (float ix = 0; ix < mSizeX; ix++)
 		{
 			const unsigned int name = mItemMapData[(int)iz][(int)ix];
-			Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
-			Vector3 objectSize = Vector3(MItemScale, MItemScale, MItemScale);
+
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
+			const Vector3 objectSize = Vector3(MItemScale, MItemScale, MItemScale);
 
 			if (name == 7)
 			{

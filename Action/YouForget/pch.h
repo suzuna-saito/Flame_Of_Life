@@ -26,6 +26,7 @@ using namespace std;
 #include <SDL_gamecontroller.h>
 #include <SDL_image.h>
 #include <SDL_log.h>
+#include <SDL_mixer.h>
 #include <SDL_mouse.h>
 #include <SDL_scancode.h>
 #include <SDL_ttf.h>
@@ -42,6 +43,9 @@ using namespace std;
 
 // インプットシステム
 #include "InputSystem.h"
+
+// サウンド
+#include "Sound.h"
 
 // アニメーション
 #include "MatrixPalette.h"
