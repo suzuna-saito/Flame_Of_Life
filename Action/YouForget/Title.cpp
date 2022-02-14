@@ -48,6 +48,7 @@ SceneBase* Title::update()
 		return new FirstStage(Scene::first);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
+		//return new Result(Scene::result);
 	}
 
 	return this;

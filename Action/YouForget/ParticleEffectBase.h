@@ -34,7 +34,7 @@ public:
 	@param	_sceneTag シーンのタグ
 	@param	_scale 画像の拡大サイズ
 	*/
-	ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, const float& _scale = 10);
+	ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag , bool _billFlag ,const float& _scale = 10);
 
 	/*
 	@fn	デストラクタ

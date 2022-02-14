@@ -6,7 +6,13 @@
 class Candle :public GameObject
 {
 public:
-	// コンストラクタ
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_pos">ポジション</param>
+	/// <param name="_size">サイズ</param>
+	/// <param name="_objectTag">自身のタグ</param>
+	/// <param name="_sceneTag">現在のシーンタグ</param>
 	Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	// デストラクタ

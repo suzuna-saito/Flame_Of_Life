@@ -145,9 +145,6 @@
     <ClCompile Include="SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Result.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
     <ClCompile Include="Title.cpp">
       <Filter>Scene\Title</Filter>
     </ClCompile>
@@ -168,6 +165,18 @@
     </ClCompile>
     <ClCompile Include="FireObject.cpp">
       <Filter>GameObJect\GoalObj</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstResult.cpp">
+      <Filter>Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="ResultBase.cpp">
+      <Filter>Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondResult.cpp">
+      <Filter>Scene\Result</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdResult.cpp">
+      <Filter>Scene\Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -317,9 +326,6 @@
     <ClInclude Include="SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Result.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
     <ClInclude Include="Title.h">
       <Filter>Scene\Title</Filter>
     </ClInclude>
@@ -340,6 +346,18 @@
     </ClInclude>
     <ClInclude Include="FireObject.h">
       <Filter>GameObJect\GoalObj</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstResult.h">
+      <Filter>Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="ResultBase.h">
+      <Filter>Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondResult.h">
+      <Filter>Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdResult.h">
+      <Filter>Scene\Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

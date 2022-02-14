@@ -120,7 +120,10 @@ using namespace std;
 #include "FirstStage.h"
 #include "SecondStage.h"
 #include "ThirdStage.h"
-#include "Result.h"
+#include "ResultBase.h"
+#include "FirstResult.h"
+#include "SecondResult.h"
+#include "ThirdResult.h"
 
 // ƒRƒŠƒWƒ‡ƒ“ *
 #include "PhysicsWorld.h"

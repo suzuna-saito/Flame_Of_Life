@@ -111,7 +111,7 @@ void Player::UpdateGameObject(float _deltaTime)
 		mMainCamera->SetViewMatrixLerpObject(mCameraPos, mPosition);
 	}
 	//プレイヤーを横から見る位置にカメラをセット
-	//mMainCamera->SetViewMatrixLerpObject(Vector3(300, 0, 200), mPosition);
+	//mMainCamera->SetViewMatrixLerpObject(Vector3(1000, 0, 200), mPosition);
 	// デバック用
 	//mMainCamera->SetViewMatrixLerpObject(Vector3(0, -1000, 200), mPosition + testPos);
 

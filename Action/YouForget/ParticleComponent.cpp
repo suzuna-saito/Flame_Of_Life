@@ -20,7 +20,7 @@ Vector3 ParticleComponent::mStaticCameraWorldPos;
 @param	_scale 画像の描画サイズ
 @param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 */
-ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset, float _scale, int _updateOrder)
+ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag ,const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
 	, mBlendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
 	, mOffset(_offset)
@@ -31,7 +31,7 @@ ParticleComponent::ParticleComponent(GameObject* _owner, const Vector3& _offset,
 	, mReverce(false)
 	, mDrawOrder(_updateOrder)
 	, mTextureID(0)
-
+	, mBillboardFlag(_billFlag)
 {
 	//レンダラーにポインターを送る
 	RENDERER->AddParticle(this);
@@ -59,15 +59,32 @@ void ParticleComponent::Draw(Shader* _shader)
 	}
 	Matrix4 mat, matScale;
 	Vector3 reverceVec = Vector3(1, 1, 1);
+
 	//サイズを反転させる
 	if (mReverce)
 	{
 		reverceVec.x *= -1;
 	}
+
 	matScale = Matrix4::CreateScale(mScale * reverceVec * mOwner->GetScale());
 	mat = Matrix4::CreateTranslation(mOffset + mOwner->GetPosition());
 
-	_shader->SetMatrixUniform("uWorldTransform", matScale * mStaticBillboardMat * mat);
+	// カメラの方向に向かせるかどうかで分岐
+	// 向かせる
+	if (mBillboardFlag)
+	{
+		_shader->SetMatrixUniform("uWorldTransform", matScale * mStaticBillboardMat * mat);
+	}
+	// 向かせない
+	else
+	{
+		// 全てのパーティクルのビルボード行列をセット
+		Matrix4 matRotation;
+		matRotation = Matrix4::CreateRotationX(-0.5f * 3.14159f);
+
+		_shader->SetMatrixUniform("uWorldTransform", matScale * matRotation * mat);
+	}
+	
 	_shader->SetFloatUniform("uAlpha", mAlpha);
 	_shader->SetVectorUniform("uColor", mColor);
 
@@ -97,3 +114,20 @@ bool ParticleComponent::operator>(const ParticleComponent& _rhs) const
 	return lenThis > lenRhs;
 }
 
+/*
+@return ビルボード行列(Matrix4)
+*/
+Matrix4 GetBillboardMatrix()
+{
+	Matrix4 ret;
+	ret = RENDERER->GetViewMatrix();
+	ret.mat[3][0] = ret.mat[3][1] = ret.mat[3][2] = 0.0f;
+	ret.Transpose();
+	ret.mat[2][2] *= -1;
+
+	Matrix4 rot;
+	rot = Matrix4::CreateRotationX(-0.5f * 3.14159f);
+	ret = rot * ret;
+
+	return Matrix4(ret);
+}

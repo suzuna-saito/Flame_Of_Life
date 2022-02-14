@@ -58,8 +58,8 @@ SceneBase* FirstStage::update()
 {
 	if (Candle::mCandleCount == 1)
 	{
-		return new SecondStage(Scene::second);
-		//return new Result(Scene::result);
+		//return new SecondStage(Scene::second);
+		return new FirstResult(Scene::firstResult);
 	}
 
 	return this;

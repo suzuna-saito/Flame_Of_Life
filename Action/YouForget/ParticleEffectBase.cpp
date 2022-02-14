@@ -18,7 +18,7 @@
 @param	_sceneTag シーンのタグ
 @param	_scale 画像の拡大サイズ
 */
-ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, const float& _scale)
+ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _billFlag, const float& _scale)
 	: GameObject(_sceneTag, _objectTag)
 	, mLifeCount(_lifeCount)
 	, mAlpha(0.0f)
@@ -27,7 +27,7 @@ ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel,
 	/*, mParticleState(ParticleState::PARTICLE_ACTIVE)*/
 {
 	mVelocity = _vel;
-	mParticle = new ParticleComponent(this);
+	mParticle = new ParticleComponent(this, _billFlag);
 	mParticle->SetTextureID(RENDERER->GetTexture(_particleFileName)->GetTextureID());
 	mParticle->SetColor(Vector3(1.0f, 1.0f, 1.0f));
 	mParticle->SetScale(_scale);

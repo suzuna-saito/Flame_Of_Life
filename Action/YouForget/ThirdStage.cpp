@@ -58,25 +58,12 @@ void ThirdStage::Input(const InputState& _state)
 SceneBase* ThirdStage::update()
 {
 	// プレイヤーがろうそくにたどり着いたら
-	if (Candle::mCandleCount == 1)
+	if (Candle::mCandleCount == 3)
 	{
-		// 遷移フラグをtrueにする
-		mGameSceneFlag = true;
+		
+		return new ThirdResult(Scene::thirdResult);
 	}
 
-	// 遷移フラグがtrueだったら
-	if (mGameSceneFlag)
-	{
-		//return new Result(Scene::result);
-
-		//// カウントを減らす
-		//mNextSceneCount--;
-		//// カウントが0以下になったら
-		//if (mNextSceneCount <= 0)
-		//{
-		//	return new Result(Scene::result);
-		//}
-	}
-
+	
 	return this;
 }

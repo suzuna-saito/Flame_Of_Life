@@ -16,6 +16,9 @@ SceneBase::SceneBase()
 	, mGameSceneFlag(false)
 	, mNextSceneCount(0)
 {
+	//ŠÂ‹«Œõ
+	const Vector3 AmbientLight = Vector3(0.4f, 0.4f, 0.4f);
+
 	// ƒ‰ƒCƒg‚ðÝ’è(Ý’è‚µ‚È‚¢‚Æ‰½‚à‰f‚ç‚È‚¢)
 	RENDERER->SetAmbientLight(Vector3(0.8f, 0.8f, 0.8f));
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();

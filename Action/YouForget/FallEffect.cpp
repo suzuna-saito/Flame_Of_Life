@@ -9,7 +9,7 @@
 */
 
 FallEffect::FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/Effect/Ripple.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/Effect/Ripple.png", _SceneTag, _ObjectTag,false)
 	, MAlphaReductionVal(0.03f)
 	, MScaleAddVal(10.0f)
 {

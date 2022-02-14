@@ -28,7 +28,7 @@ public:
 	@param	_scale 画像の描画サイズ
 	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 	*/
-	ParticleComponent(GameObject* _owner, const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
+	ParticleComponent(GameObject* _owner, bool _billFlag = false ,const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
 
 	/*
 	@fn	デストラクタ
@@ -73,6 +73,8 @@ private:
 	int mDrawOrder;
 	//反転を行うか
 	bool mReverce;
+	// カメラの方向を向くかどうか _true 向く,_false 向かない
+	bool mBillboardFlag;
 public: //ゲッターセッター
 	/*
 	@return テクスチャID(int型)
@@ -147,3 +149,7 @@ public: //ゲッターセッター
 	void SetReverce(bool _flag) { mReverce = _flag; }
 };
 
+/*
+@return ビルボード行列(Matrix4)
+*/
+Matrix4 GetBillboardMatrix();

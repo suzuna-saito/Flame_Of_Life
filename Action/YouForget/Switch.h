@@ -15,7 +15,14 @@ public:
 		yellow,
 	};
 
-	// コンストラクタ
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_pos">ポジション</param>
+	/// <param name="_size">サイズ</param>
+	/// <param name="_objectTag">自身のタグ</param>
+	/// <param name="_sceneTag">現在のシーンタグ</param>
+	/// <param name="_color">生成したい色の種類</param>
 	Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const switchColor& _color);
 
 	/*

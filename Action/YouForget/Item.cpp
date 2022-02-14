@@ -6,9 +6,6 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	, MItemExistsOneTime(2100)
 	, MItemExistsTwoTime(1700)
 	, MItemExistsThreeTime(800)
-	/*, MItemExistsOneTime(3000)
-	, MItemExistsTwoTime(2000)
-	, MItemExistsThreeTime(1000)*/
 	, mItemFlashingTime(200)
 	, mItemExistsFlag(true)
 	, mAlphaDownFlag(true)
@@ -26,7 +23,6 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
 	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
-	//mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Sphere.gpmesh"));
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Puzzle.gpmesh"));
 
 	// エフェクト

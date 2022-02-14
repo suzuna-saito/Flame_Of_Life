@@ -14,7 +14,7 @@ SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const Scene
 
 	//スイッチ中心の当たり判定(ボックス)
 	mSwitchBoxCollider = new BoxCollider(this, ColliderTag::switchTag, GetOnCollisionFunc());
-	AABB Switchbox = { Vector3(-50.0f,-80.0f,0.0f),Vector3(50.0f,80.0f,100.0f) };
+	AABB Switchbox = { Vector3(-70.0f,-100.0f,0.0f),Vector3(70.0f,100.0f,100.0f) };
 	mSwitchBoxCollider->SetObjectBox(Switchbox);
 }
 
@@ -54,13 +54,4 @@ void SwitchCollider::OnCollision(const GameObject& _hitObject)
 	default:
 		break;
 	}
-
-	/*if (mOwner->GetSwitchColor() == Switch::switchColor::green)
-	{
-		printf("緑\n");
-	}
-	else
-	{
-		printf("赤\n");
-	}*/
 }

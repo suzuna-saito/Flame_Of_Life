@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Item* _ItemPtr)
-	:ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag)
+	:ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag,false)
 	, mItemVisible(true)
 {
 	mAlpha = 0.7f;

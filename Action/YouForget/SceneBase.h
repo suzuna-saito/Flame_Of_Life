@@ -51,8 +51,12 @@ public:
         second,
         // Thirdステージ
         third,
-        // リザルト
-        result,
+        // Firstリザルト
+        firstResult,
+        // Secondリザルト
+        secondResult,
+        // Thirdリザルト
+        thirdResult,
         // ゲームクリア
         gameClear,
         // ゲームオーバー
