@@ -1,6 +1,7 @@
 #pragma once
 
 class Sprite;
+class ButtonUI;
 
 // リザルトのベースクラス
 class ResultBase :public SceneBase
@@ -18,22 +19,36 @@ public:
 	*/
 	~ResultBase();
 
+	/*
+	@fn	タイトルシーン時に毎フレーム更新処理をする
+	*/
+	SceneBase* update() override;
+
+	// エンドの分岐フラグ
+	static bool mTrueEndFlag;
+
+	// @@@
+	//static Sprite* mEndSprite;
+
 protected:
+	
 	// マップで取得したアイテムと説明を関連付ける
 	map<ItemNum, string> mItemDescription;
+
+	// どのアイテムを取っているか検索する
+	void mSearch();
+	// 次の画像を出す処理
+	void mDrawUpdate();
+	// 次のシーンに移るか、まだ画像を出すかUpdate処理
+	void mResultUpdate();
+
+private:
 
 	// 描画する画像
 	vector<string> mDescription;
 	// 表示した画像をvectorに保存し、デストラクタでまとめて消す
 	vector <Sprite*> mDeleteDescription;
 
-	// シーンによって最後に出す画像を変える
-	string mEndSprite;
-
-	// 次の画像を表示するか
-	bool mNextFlag;
-	// 最後の画像を表示し終わったか
-	bool mEndFlag;
 	// 表示処理をするかどうか
 	bool mDraw;
 
@@ -42,13 +57,9 @@ protected:
 
 	// 今表示している画像
 	Sprite* mNowDescription;
-	// 後ろの画像
-	Sprite* mBackDescription;
+	// ボタンの画像
+	Sprite* mButtonSprite;
 
-	// どのアイテムを取っているか検索する
-	void mSearch();
-	// 次の画像を出す処理
-	void mDrawUpdate();
-	// 次のシーンに移るか、まだ画像を出すかUpdate処理
-	void mResultUpdate();
+	////ボタン画像のUI
+	//ButtonUI* mButtonUI;
 };

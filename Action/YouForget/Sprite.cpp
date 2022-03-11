@@ -15,11 +15,3 @@ Sprite::Sprite(const std::string _fileName)
 	mSpriteTexture = RENDERER->GetTexture(_fileName);
 	mSpriteComponent->SetTexture(mSpriteTexture);
 }
-
-/*
-@fn		指定のファイルの描画をけす
-*/
-void Sprite::NotVisible()
-{
-	mSpriteComponent->SetVisible(false);
-}

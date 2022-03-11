@@ -75,11 +75,17 @@ protected:
     // 次のシーンに遷移するか
     bool mGameSceneFlag;
 
+    // タイトルシーンに遷移するか
+    bool mReturnTitleFlag;
+
     //ゲームクリアしたか
     bool mClearFlag;
 
     //次のシーンに遷移する時の待機時間
     int mNextSceneCount;
+
+    // 説明画像のα値
+    float mThisSpriteAlpha;
 private:
 
     //現在のシーン

@@ -176,6 +176,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
+    <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Candle.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
@@ -192,6 +193,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultBase.cpp" />
     <ClCompile Include="SecondResult.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -202,12 +204,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ItemEffect.cpp" />
     <ClCompile Include="ItemEffectManager.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemCount.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Jump.cpp" />
     <ClCompile Include="LegsCollider.cpp" />
     <ClCompile Include="main.cpp" />
@@ -247,6 +243,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UIBase.cpp" />
+    <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -254,6 +251,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
+    <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Candle.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
@@ -270,6 +268,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="Result.h" />
     <ClInclude Include="ResultBase.h" />
     <ClInclude Include="SecondResult.h" />
     <ClInclude Include="Sound.h" />
@@ -280,12 +279,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ItemEffect.h" />
     <ClInclude Include="ItemEffectManager.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemCount.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Jump.h" />
     <ClInclude Include="LegsCollider.h" />
     <ClInclude Include="MainCameraObject.h" />
@@ -316,6 +309,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Title.h" />
     <ClInclude Include="Tutorial.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="UIComponent.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>

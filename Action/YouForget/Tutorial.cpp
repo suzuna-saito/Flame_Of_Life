@@ -47,6 +47,12 @@ void Tutorial::Input(const InputState& _state)
 	{
 		PHYSICS->ToggleDebugMode();
 	}
+
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		mReturnTitleFlag = true;
+	}
 }
 
 /*
@@ -58,13 +64,12 @@ SceneBase* Tutorial::update()
 	if (Candle::mCandleCount == 1)
 	{
 		// ‘JˆÚƒtƒ‰ƒO‚ðtrue‚É‚·‚é
-		mGameSceneFlag = true;
+		return new FirstStage(Scene::first);
 	}
 
-	// ‘JˆÚƒtƒ‰ƒO‚ªtrue‚¾‚Á‚½‚ç
-	if (mGameSceneFlag)
+	if (mReturnTitleFlag)
 	{
-		return new FirstStage(Scene::first);
+		return new Title(Scene::title);
 	}
 
 	return this;

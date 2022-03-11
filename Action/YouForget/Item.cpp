@@ -3,9 +3,9 @@
 Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
 	, mItemExistsTime(0)
-	, MItemExistsOneTime(2100)
+	, MItemExistsOneTime(2000)
 	, MItemExistsTwoTime(1700)
-	, MItemExistsThreeTime(800)
+	, MItemExistsThreeTime(400)
 	, mItemFlashingTime(200)
 	, mItemExistsFlag(true)
 	, mAlphaDownFlag(true)
@@ -58,7 +58,6 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 
 	// êF
 	mColor = Vector3(0.68f, 0.85f, 1.2f);
-
 }
 
 
@@ -136,6 +135,22 @@ void Item::OnCollision(const GameObject& _hitObject)
 
 void Item::mItemType(int _num)
 {
+	switch (GetScene())
+	{
+	case SceneBase::Scene::second:
+		MItemExistsOneTime = 2700;
+		MItemExistsTwoTime = 800;
+		MItemExistsThreeTime = 400;
+		break;
+	case SceneBase::Scene::third:
+		MItemExistsOneTime = 4800;
+		MItemExistsTwoTime = 3600;
+		MItemExistsThreeTime = 1600;
+		break;
+	default:
+		break;
+	}
+	
 	// ê∂ê¨Ç™âΩî‘ñ⁄Ç©Ç…ÇÊÇ¡ÇƒéÌóﬁÇïœÇ¶ÇÈ
 	switch (_num)
 	{

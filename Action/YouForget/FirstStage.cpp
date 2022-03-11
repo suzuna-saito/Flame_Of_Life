@@ -29,6 +29,8 @@ FirstStage::FirstStage(const Scene& _nowScene)
 		// ƒAƒCƒeƒ€‚Ì¶¬
 		mMapCreate->CreateItem();
 	}
+
+	mSprite = new Sprite("Assets/UI/Description.png");
 }
 
 /*
@@ -38,6 +40,7 @@ FirstStage::~FirstStage()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::first);
 
+	delete mSprite;
 	delete mMapCreate;
 }
 
@@ -48,6 +51,12 @@ void FirstStage::Input(const InputState& _state)
 	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == ButtonState::Pressed)
 	{
 		PHYSICS->ToggleDebugMode();
+	}
+
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		mReturnTitleFlag = true;
 	}
 }
 
@@ -60,6 +69,22 @@ SceneBase* FirstStage::update()
 	{
 		//return new SecondStage(Scene::second);
 		return new FirstResult(Scene::firstResult);
+	}
+
+	if (mReturnTitleFlag)
+	{
+		return new Title(Scene::title);
+	}
+
+
+	// @@@
+	if (!Player::mMoveFlag)
+	{
+		mSprite->SetThisVisible(true);
+	}
+	else
+	{
+		mSprite->SetThisVisible(false);
 	}
 
 	return this;

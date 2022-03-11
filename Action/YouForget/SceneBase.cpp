@@ -14,7 +14,9 @@ SceneBase::SceneBase()
 	, mMapCreate(nullptr)
 	, mClearFlag(false)
 	, mGameSceneFlag(false)
+	, mReturnTitleFlag(false)
 	, mNextSceneCount(0)
+	, mThisSpriteAlpha(1.0f)
 {
 	//ŠÂ‹«Œõ
 	const Vector3 AmbientLight = Vector3(0.4f, 0.4f, 0.4f);

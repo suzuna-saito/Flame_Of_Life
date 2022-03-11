@@ -62,6 +62,7 @@ using namespace std;
 #include "ParticleComponent.h"
 #include "SpriteComponent.h"
 #include "SkeletalMeshComponent.h"
+#include "UIComponent.h"
 
 // レンダラー
 #include "Shader.h"
@@ -112,10 +113,10 @@ using namespace std;
 
 // UI
 #include "UIBase.h"
-/* スプライト*/
+/* ボタンのUI */
+#include "ButtonUI.h"
+/* スプライト */
 #include "Sprite.h"
-/* アイテムの数 */
-#include "ItemCount.h"
 
 // シーン
 #include "SceneBase.h"
@@ -128,6 +129,7 @@ using namespace std;
 #include "FirstResult.h"
 #include "SecondResult.h"
 #include "ThirdResult.h"
+#include "Result.h"
 
 // コリジョン *
 #include "PhysicsWorld.h"

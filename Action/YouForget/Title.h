@@ -31,8 +31,5 @@ public:
 	void Input(const InputState& _inputState)override;
 
 private:
-
-	//îwåi
-	Sprite* mButtonSprite;
 };
 

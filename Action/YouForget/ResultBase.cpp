@@ -3,6 +3,9 @@
 */
 #include "pch.h"
 
+bool ResultBase::mTrueEndFlag = true;
+//Sprite* ResultBase::mEndSprite;
+
 /*
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
@@ -11,26 +14,24 @@ ResultBase::ResultBase(const Scene& _nowScene)
 	:SceneBase()
 	, mDescription()
 	, mDeleteDescription()
-	, mNextFlag(false)
-	, mEndFlag(false)
 	, mDraw(false)
 	, mNowDescription(nullptr)
+	, mButtonSprite(nullptr)
 	, mNum(0)
 {
 	SetScene(_nowScene);
 
-	// 一番後ろの画像
-	mBackDescription = new Sprite("Assets/UI/BackPicture.png");
-
-	// シーンによって最後に描画する画像を変える
-	if (_nowScene == Scene::thirdResult)
+	/*if (GetScene() == Scene::gameClear)
 	{
-		mEndSprite = "Assets/UI/End.png";
-	}
-	else
-	{
-		mEndSprite = "Assets/UI/TitleB.png";
-	}
+		if (mTrueEndFlag)
+		{
+			mSprite = new Sprite("Assets/UI/EndResult/Clear_1.png");
+		}
+		else
+		{
+			mSprite = new Sprite("Assets/UI/EndResult/Clear_4.png");
+		}
+	}*/
 }
 
 /*
@@ -51,72 +52,15 @@ ResultBase::~ResultBase()
 		delete mDeleteDescription[i];
 	}
 
-	delete mSprite;
-	delete mBackDescription;
+	delete mButtonSprite;
 }
 
-void ResultBase::mDrawUpdate()
+/*
+@fn	現在のシーン時に毎フレーム更新処理をする
+*/
+SceneBase* ResultBase::update()
 {
-	// 最後の説明まで言ってたら
-	if (mEndFlag)
-	{
-		// シーン遷移フラグをtrueにする
-		mGameSceneFlag = true;
-	}
-
-	// 最後の説明まで描画できてなかったら
-	if (mNum < mDescription.size())
-	{
-		// 次の説明を出すようにする
-		mDraw = true;
-	}
-	else
-	{
-		mEndFlag = true;
-	}
-}
-
-void ResultBase::mResultUpdate()
-{
-	// 保存した分回す
-	if (mNum < mDescription.size())
-	{
-		// mDrawがtrueの時
-		if (mDraw)
-		{
-			// 新しい画像を出す
-			mNowDescription = new Sprite(mDescription[mNum]);
-			// 一度newしたら、mDrawをfalseにする。
-			mDraw = false;
-
-			++mNum;
-
-			// デストラクタで削除するようにvectorに保存しておく
-			mDeleteDescription.push_back(mNowDescription);
-		}
-	}
-	// 保存した分表示し終わったら
-	if (mEndFlag)
-	{
-		mBackDescription->NotVisible();
-
-		// 消さなきゃいけない画像があれば
-		if (mDeleteDescription.size() != 0)
-		{
-			for (unsigned int i = 0; i < mDeleteDescription.size(); i++)
-			{
-				// 表示した画像を全て透明にする
-				mDeleteDescription[i]->NotVisible();
-			}
-		}
-
-		//　終わりの画像を表示してなければ
-		if (mSprite == nullptr)
-		{
-			mSprite = new Sprite(mEndSprite);
-		}
-	}
-
+	return nullptr;
 }
 
 void ResultBase::mSearch()
@@ -137,4 +81,96 @@ void ResultBase::mSearch()
 			mDescription.push_back(mItemDescription[num]);
 		}
 	}
+
+	// 全てのピースを回収できてなかったら
+	if (GetScene() != Scene::gameClear &&
+		mDescription.size() != 3)
+	{
+		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
+		mTrueEndFlag = false;
+	}
+	else
+	{
+		// シーンによって更に画像を追加
+		switch (GetScene())
+		{
+		case Scene::firstResult:
+			mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
+			mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
+			break;
+		case Scene::secondResult:
+			mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
+			mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
+			break;
+		case Scene::thirdResult:
+			mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
+			mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
+			break;
+		case Scene::gameClear:
+			if (mTrueEndFlag)
+			{
+				mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
+				mDescription.push_back("Assets/UI/EndResult/Clear_3.png");
+			}
+			break;
+		default:
+			break;
+		}
+	}
 }
+
+void ResultBase::mDrawUpdate()
+{
+	// 次の説明を出すようにする
+	mDraw = true;
+
+	if (GetScene() == Scene::gameClear)
+	{
+		if (GetScene() == Scene::gameClear && mSprite != nullptr)
+		{
+			mSprite->SetThisVisible(false);
+		}
+
+		if (mNowDescription != nullptr)
+		{
+			mNowDescription->SetThisVisible(false);
+		}
+	}
+}
+
+void ResultBase::mResultUpdate()
+{
+	// mDrawがtrueの時
+	if (mDraw)
+	{
+		if (mNum == mDescription.size())
+		{
+			// シーン遷移フラグをtrueにする
+			mGameSceneFlag = true;
+		}
+		else
+		{
+			// @@@
+			if (mNum == 4)
+			{
+				mNowDescription->SetThisVisible(false);
+			}
+			// 新しい画像を出す
+			mNowDescription = new Sprite(mDescription[mNum]);
+			// 一度newしたら、mDrawをfalseにする。
+			mDraw = false;
+
+			++mNum;
+
+			// デストラクタで削除するようにvectorに保存しておく
+			mDeleteDescription.push_back(mNowDescription);
+		}
+	}
+
+	
+	if (mButtonSprite == nullptr && GetScene() != Scene::gameClear)
+	{
+		mButtonSprite = new Sprite("Assets/UI/ResultBase/Button.png");
+	}
+}
+

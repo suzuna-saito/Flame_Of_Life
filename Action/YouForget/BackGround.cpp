@@ -30,6 +30,4 @@ BackGround::BackGround(const Vector3& _pos, const Vector3& _size, const Tag& _ob
 	}
 	
 
-	/* —”‚Ìí‚ğ‰Šú‰» */
-	//srand(time(NULL));
 }

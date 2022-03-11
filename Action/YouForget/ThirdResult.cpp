@@ -10,10 +10,12 @@
 ThirdResult::ThirdResult(const Scene& _nowScene)
 	:ResultBase(_nowScene)
 {
+	mSprite = new Sprite("Assets/UI/ThirdResult/ThirdResultBase.png");
+
 	// マップをつかってアイテムと説明画像を関連付け	
-	mItemDescription[ItemNum::one] = "Assets/UI/FarstThree.png";
-	mItemDescription[ItemNum::two] = "Assets/UI/FarstTwo.png";
-	mItemDescription[ItemNum::three] = "Assets/UI/FarstOne.png";
+	mItemDescription[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
+	mItemDescription[ItemNum::two] = "Assets/UI/ThirdResult/Puzzles_2.png";
+	mItemDescription[ItemNum::three] = "Assets/UI/ThirdResult/Puzzles_3.png";
 
 	// どのアイテムを取っているか検索
 	mSearch();
@@ -24,15 +26,22 @@ ThirdResult::ThirdResult(const Scene& _nowScene)
 */
 ThirdResult::~ThirdResult()
 {
+	delete mSprite;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::thirdResult);
 }
 
 void ThirdResult::Input(const InputState& _state)
 {
-	if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_B) == ButtonState::Released ||
+	if (_state.m_controller.GetButtonState(SDL_CONTROLLER_BUTTON_A) == ButtonState::Released ||
 		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
 		mDrawUpdate();
+	}
+
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		mReturnTitleFlag = true;
 	}
 }
 
@@ -45,6 +54,11 @@ SceneBase* ThirdResult::update()
 	mResultUpdate();
 
 	if (mGameSceneFlag)
+	{
+		return new Result(Scene::gameClear);
+	}
+
+	if (mReturnTitleFlag)
 	{
 		return new Title(Scene::title);
 	}

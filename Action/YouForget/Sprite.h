@@ -25,10 +25,6 @@ public:
 	*/
 	~Sprite() {};
 
-	/*
-	@fn		指定のファイルの描画をけす
-	*/
-	void NotVisible();
 private:
 
 	//テクスチャを生成
@@ -36,7 +32,9 @@ private:
 	//SpriteComponentを生成
 	SpriteComponent* mSpriteComponent;
 
-	
+public:
+	void SetThisVisible(bool _flag) { mSpriteComponent->SetVisible(_flag); }
 
+	bool GetThisVisible() { return mSpriteComponent->GetVisible(); }
 };
 

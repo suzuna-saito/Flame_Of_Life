@@ -334,6 +334,40 @@ void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
 	mSprites.erase(iter);
 }
 
+/*
+@fn		UIの追加
+@param	_ui　追加するUIクラスのポインタ
+*/
+void Renderer::AddUI(UIComponent* _ui)
+{
+	// 今あるスプライトから挿入する場所の検索
+	// (DrawOrderが小さい順番に描画するため)
+	int myUiDrawOrder = _ui->GetDrawOrder();
+	auto iterUi = mUis.begin();
+	for (;
+		iterUi != mUis.end();
+		++iterUi)
+	{
+		if (myUiDrawOrder < (*iterUi)->GetDrawOrder())
+		{
+			break;
+		}
+	}
+
+	// 検索した場所のiterの場所に挿入
+	mUis.insert(iterUi, _ui);
+}
+
+/*
+@fn		UIの削除
+@param	_ui　削除するUIクラスのポインタ
+*/
+void Renderer::RemoveUI(UIComponent* _ui)
+{
+	auto iterUi = std::find(mUis.begin(), mUis.end(), _ui);
+	mUis.erase(iterUi);
+}
+
 
 /*
 @fn		パーティクルの追加

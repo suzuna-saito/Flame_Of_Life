@@ -7,6 +7,8 @@
 // プレイヤーが操作可能かどうか　true _可能 false _不可能
 bool Player::mOperable = true;
 
+bool Player::mMoveFlag = false;
+
 /*
 @fn		コンストラクタ
 @param	_pos プレイヤーの座標
@@ -79,7 +81,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	// でバック用 //
 	mDebug = false;
-
+	mCount = 0;
 }
 
 /*
@@ -211,26 +213,26 @@ void Player::GameObjectInput(const InputState& _keyState)
 	if (mOperable)
 	{
 		// Wで奥に移動
-		if (_keyState.m_controller.GetLAxisVec().y < 0.0f ||
+		if (_keyState.m_controller.GetLAxisVec().y < -0.5f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_W))
 		{
 			inputVec.y = 1.0f;
 		}
 		// Sで手前に移動
-		else if (_keyState.m_controller.GetLAxisVec().y > 0.0f ||
+		else if (_keyState.m_controller.GetLAxisVec().y > 0.5f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_S))
 		{
 			inputVec.y = -1.0f;
 		}
 
 		// Aで左に移動
-		if (_keyState.m_controller.GetLAxisVec().x < 0.0f ||
+		if (_keyState.m_controller.GetLAxisVec().x < -0.5f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_A))
 		{
 			inputVec.x = 1.0f;
 		}
 		// Dで右に移動
-		else if (_keyState.m_controller.GetLAxisVec().x > 0.0f ||
+		else if (_keyState.m_controller.GetLAxisVec().x > 0.5f ||
 			_keyState.m_keyboard.GetKeyValue(SDL_SCANCODE_D))
 		{
 			inputVec.x = -1.0f;
@@ -253,15 +255,35 @@ void Player::GameObjectInput(const InputState& _keyState)
 			inputVec.Normalize();
 			// 移動
 			mInputSpeed = inputVec * mMoveSpeed;
+			mMoveFlag = true;
+			mCount = 0;
 		}
 		else
 		{ 
 			mNowState = playerState::idle;
+			if (mCount < 80)
+			{
+				mCount++;
+			}
+			else
+			{
+				mMoveFlag = false;
+			}
 		}
-
 		
 		// アニメーションする方向
 		mAnimVec = inputVec;
+	}
+	else
+	{
+		if (mCount < 80)
+		{
+			mCount++;
+		}
+		else
+		{
+			mMoveFlag = false;
+		}
 	}
 	/*else if (mVibrationFlag)
 	{

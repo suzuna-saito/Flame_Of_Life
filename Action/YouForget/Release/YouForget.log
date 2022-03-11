@@ -1,0 +1,20 @@
+﻿  main.cpp
+  コード生成しています。
+  1 of 3531 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    19 functions had inline decision re-evaluated but remain unchanged
+  コード生成が終了しました。
+  YouForget.vcxproj -> C:\Users\suzun\Desktop\YouForget\Action\Release\YouForget.exe
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\libfreetype-6.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\libogg-0.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\libpng16-16.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\libvorbis-0.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\libvorbisfile-3.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\SDL2.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\SDL2_image.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\SDL2_mixer.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\SDL2_ttf.dll
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\SDL\lib\win\x86\zlib1.dll
+  10 個のファイルをコピーしました
+  C:\Users\suzun\Desktop\YouForget\Action\YouForget\\..\..\external\GLEW\lib\win\x86\glew32.dll
+  1 個のファイルをコピーしました

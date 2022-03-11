@@ -57,6 +57,4 @@ void ItemEffect::UpdateGameObject(float _deltaTime)
 	//ライフカウントが0より大きかったら速度、透明度、スケールの値を更新
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-
-
 }

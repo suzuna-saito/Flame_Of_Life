@@ -88,6 +88,18 @@ public:
 	void RemoveSprite(SpriteComponent* _spriteComponent);
 
 	/*
+	@fn		UIの追加
+	@param	_ui　追加するUIクラスのポインタ
+	*/
+	void AddUI(UIComponent* _ui);
+
+	/*
+	@fn		UIの削除
+	@param	_ui　削除するUIクラスのポインタ
+	*/
+	void RemoveUI(UIComponent* _ui);
+
+	/*
 	@fn		パーティクルの追加
 	@param	_particleComponent　追加するParticleObjectクラスのポインタ
 	*/
@@ -200,6 +212,8 @@ private:
 	std::vector<MeshComponent*> mMeshComponents;
 	//スプライトコンポーネントのポインタの可変長コンテナ
 	std::vector<SpriteComponent*> mSprites;
+	//UIのポインタの可変長コンテナ
+	std::vector<UIComponent*> mUis;
 	//パーティクルのポインタ
 	std::vector<ParticleComponent*> mParticles;
 	//ファイル名でテクスチャを取得するための連想配列

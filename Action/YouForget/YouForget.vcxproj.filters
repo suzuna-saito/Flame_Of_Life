@@ -151,9 +151,6 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>Scene\Tutorial</Filter>
     </ClCompile>
-    <ClCompile Include="ItemCount.cpp">
-      <Filter>UI\Count</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>UI\Sprite</Filter>
     </ClCompile>
@@ -180,6 +177,15 @@
     </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Result.cpp">
+      <Filter>Scene\Result</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -335,9 +341,6 @@
     <ClInclude Include="Tutorial.h">
       <Filter>Scene\Tutorial</Filter>
     </ClInclude>
-    <ClInclude Include="ItemCount.h">
-      <Filter>UI\Count</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>UI\Sprite</Filter>
     </ClInclude>
@@ -364,6 +367,15 @@
     </ClInclude>
     <ClInclude Include="Sound.h">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Result.h">
+      <Filter>Scene\Result</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -510,20 +522,17 @@
     <Filter Include="Scene\Tutorial">
       <UniqueIdentifier>{1a440f1d-1f0a-4295-a9d8-0f8c3a18fe64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{4ce84b84-0ad6-442f-adfa-6f5ef9646908}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{ebc1c022-9a40-46e5-bce4-c7abeb287161}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI\Sprite">
       <UniqueIdentifier>{d7f47d83-b23d-4350-bda0-568f8d1a674f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Count">
-      <UniqueIdentifier>{7a500c8c-1e3f-445e-a6b5-06c1d02c8689}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{865cd5a4-700d-4047-a8c7-e657a02a086a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{4ce84b84-0ad6-442f-adfa-6f5ef9646908}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

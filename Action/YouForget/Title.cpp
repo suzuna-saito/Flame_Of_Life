@@ -13,11 +13,17 @@ Title::Title(const Scene& _nowScene)
 	SetScene(_nowScene);
 
 	// タイトル画像
-	mSprite = new Sprite("Assets/UI/TitleB.png");
-
-	//mButtonSprite = new Sprite("Assets/UI/TitleB.png");
+	mSprite = new Sprite("Assets/UI/Title/TitleB.png");
 
 	Candle::mCandleCount = 0;
+
+	ResultBase::mTrueEndFlag = true;
+
+	// 取得したアイテムの中にデータが入っていれば
+	if (ItemBase::mGetNumber.size() != 0)
+	{
+		ItemBase::mGetNumber.clear();
+	}
 }
 
 /*
@@ -36,6 +42,7 @@ void Title::Input(const InputState& _state)
 	{
 		mGameSceneFlag = true;
 	}
+
 }
 
 /*
@@ -48,6 +55,7 @@ SceneBase* Title::update()
 		return new FirstStage(Scene::first);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
+		//return new ThirdStage(Scene::third);
 		//return new Result(Scene::result);
 	}
 

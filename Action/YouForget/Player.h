@@ -47,6 +47,8 @@ public:
 
 	// プレイヤーが動作可能状態か true _可能　false _不可能
 	static bool mOperable;
+	// プレイヤーが動いてるかどうか
+	static bool mMoveFlag;
 private:
 	// プレイヤーの行動の状態
 	typedef enum class playerState :unsigned char
@@ -151,6 +153,7 @@ private:
 ////デバック用
 //	Vector3 testPos;
 	bool mDebug;
+	int mCount;
 
 public:
 	// ゲームがスタートしてるかどうか

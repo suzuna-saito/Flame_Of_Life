@@ -30,5 +30,6 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 protected:
-
+	//UI‚Ì•`‰æƒNƒ‰ƒX
+	UIComponent* mUI;
 };
