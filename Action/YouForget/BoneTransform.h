@@ -1,32 +1,26 @@
-/*
- @file BoneTransform.h
- @brief モデルのボーン変換
-*/
-
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
+/*
+* モデルのボーン変換
+*/
 class BoneTransform
 {
 public:
-	//回転
-	Quaternion mRotation;
-	//移動
-	Vector3 mTranslation;
+	Quaternion mRotation; //回転
+	Vector3 mTranslation; //移動
 
-	/*
-	@fn 行列を出力
-	@return 回転と平行移動から、行列を返す
-	*/
+	/// <summary>
+	/// 行列を出力
+	/// </summary>
+	/// <returns>回転と平行移動から行列を返す</returns>
 	Matrix4 ToMatrix() const;
 
-	/*
-	@fn		ボーン補間
-	@param	_nowFrameBone	現在のフレームのポーズ
-	@param	_nextFrameBone	次のフレームのポーズ
-	@param	_interpolation	補間値
-	*/
+	/// <summary>
+	/// ボーン補間
+	/// </summary>
+	/// <param name="_nowFramePone">現在のフレームのポーズ</param>
+	/// <param name="_nextFramePose">次のフレームのポーズ</param>
+	/// <param name="_interpolation">補間値</param>
+	/// <returns>補間された値</returns>
 	static BoneTransform Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, float _interpolation);
 };

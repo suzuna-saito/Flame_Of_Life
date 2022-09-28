@@ -9,6 +9,7 @@
 class Jump;
 class LegsCollider;
 class FallEffectManager;
+class CircledShadowManager;
 
 class Player :public GameObject
 {
@@ -69,16 +70,16 @@ private:
 	*/
 	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)override;
 
-	
+
 	//プレイヤーの当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 	//スケルタルメッシュ
 	SkeletalMeshComponent* mSkelComp;
-	
+
 	// エフェクト
 	//プレイヤーが落ちた時のエフェクト
 	FallEffectManager* mFallEffectManager;
-
+	CircledShadowManager* mCircledShadowManager;
 
 	// 現在の状態
 	playerState  mNowState;
@@ -88,7 +89,7 @@ private:
 	// アニメーション
 	vector<const class Animation*> mAnimations;
 	// 回転目標方向
-	Vector3 mAnimVec; 
+	Vector3 mAnimVec;
 
 	// プレイヤーの復帰ポジション
 	Vector3 mReturnPos;
@@ -140,18 +141,18 @@ private:
 	@param	_returnPos 復帰位置
 	*/
 	void mRedoing(Vector3 _nowPos, const Vector3 _returnPos);
-	
-	
+
+
 	// アニメーション関係
-	
+
 	// アイドル状態
 	void mIdleBehavior();
 	// ラン状態
 	void mRunBehavior();
 
 
-////デバック用
-//	Vector3 testPos;
+	////デバック用
+	//	Vector3 testPos;
 	bool mDebug;
 	int mCount;
 

@@ -45,7 +45,7 @@ enum class Tag :unsigned char
 /*
 @enum	ゲームオブジェクトの更新を停止するイベント名
 */
-enum class PauzingEvent:unsigned char
+enum class PauzingEvent :unsigned char
 {
 	//ポーズ画面中
 	PausingEvent,
@@ -67,7 +67,7 @@ public:
 	@param	_objectTag ゲームオブジェクトのタグ
 	@param	_reUseGameObject
 	*/
-	GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _reUseGameObject = false);
+	GameObject(const SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _reUseGameObject = false);
 
 	/*
 	@fn	デストラクタ
@@ -212,7 +212,7 @@ protected:
 	//移動速度
 	float mMoveSpeed;
 	//重力
-	const float MGravity;
+	float mGravity;
 	//ワールド変換の処理を行う必要性があるか
 	bool mRecomputeWorldTransform;
 	// リスポーンしたか

@@ -164,9 +164,6 @@ bool Renderer::Initialize(float _screenWidth, float _screenHeight, bool _fullScr
 	// UIの初期座標に加算される座標
 	mAddPosition = Vector2::Zero;
 
-	// カウントダウンタイム用texture生成
-	CreateTimeFontTexture(MaxTimeFontTextures, TimeFontSize);
-
 	return true;
 }
 
@@ -183,6 +180,7 @@ void Renderer::Shutdown()
 	mBasicShader->Unload();
 	delete mBasicShader;
 	SDL_GL_DeleteContext(mContext);
+	SDL_DestroyRenderer(mSdlRenderer);
 	SDL_DestroyWindow(mWindow);
 }
 
@@ -435,37 +433,6 @@ void Renderer::RemoveMeshComponent(MeshComponent* _meshComponent)
 	}
 }
 
-/*
-@brief  フォントの取得
-@param	_fileName　取得したいフォントのファイル名
-@return Fontクラスのポインタ
-*/
-Font* Renderer::GetFont(const std::string& _fileName)
-{
-	Font* font = nullptr;
-	//すでに作成されてないか調べる
-	auto itr = fonts.find(_fileName);
-	if (itr != fonts.end())
-	{
-		font = itr->second;
-	}
-	//作成済みでない場合、新しくフォントを作成
-	else
-	{
-		font = new Font();
-		if (font->Load(_fileName))
-		{
-			fonts.emplace(_fileName, font);
-		}
-		else
-		{
-			delete font;
-			font = nullptr;
-		}
-	}
-
-	return font;
-}
 
 // @@@
 Texture* Renderer::GetTimeTexture(int _time)
@@ -695,28 +662,6 @@ void Renderer::CreateParticleVerts()
 	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
-/*
-@brief	時間制限用textureの生成
-@param	_value　最大値
-@param _fontSize　フォントサイズ
-*/
-void Renderer::CreateTimeFontTexture(int _value, int _fontSize)
-{
-	// フォントの生成
-	// @@@
-	Font* font = GetFont("Assets/Fonts/impact.ttf");
-	// 格納する可変長配列をリサイズ
-	timeFontTextures.resize(_value);
-
-	// 最大値を用いてフォントの色ごとにその枚数textureを生成
-	// 白色
-	for (int i = 0; i < _value; i++)
-	{
-		std::string str;
-		str = std::to_string(i);
-		timeFontTextures[i] = font->RenderText(str, Color::White, _fontSize);
-	}
-}
 
 /*
 @fn	Particleの描画

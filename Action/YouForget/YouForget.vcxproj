@@ -178,6 +178,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="ButtonUI.cpp" />
     <ClCompile Include="Candle.cpp" />
+    <ClCompile Include="CircledShadow.cpp" />
+    <ClCompile Include="CircledShadowManager.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -187,7 +189,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="FallEffect.cpp" />
     <ClCompile Include="FallEffectManager.cpp" />
     <ClCompile Include="FireObject.cpp" />
-    <ClCompile Include="Font.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -196,7 +197,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="ResultBase.cpp" />
     <ClCompile Include="SecondResult.cpp" />
-    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="ThirdResult.cpp" />
     <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -229,7 +229,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="RapidJsonHelper.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="SandEffect.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkeletalMeshComponent.cpp" />
@@ -241,7 +240,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="SwitchCollider.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
-    <ClCompile Include="Tutorial.cpp" />
     <ClCompile Include="UIBase.cpp" />
     <ClCompile Include="UIComponent.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -253,6 +251,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="ButtonUI.h" />
     <ClInclude Include="Candle.h" />
+    <ClInclude Include="CircledShadow.h" />
+    <ClInclude Include="CircledShadowManager.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
@@ -262,7 +262,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="FallEffect.h" />
     <ClInclude Include="FallEffectManager.h" />
     <ClInclude Include="FireObject.h" />
-    <ClInclude Include="Font.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
@@ -271,7 +270,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Result.h" />
     <ClInclude Include="ResultBase.h" />
     <ClInclude Include="SecondResult.h" />
-    <ClInclude Include="Sound.h" />
     <ClInclude Include="ThirdResult.h" />
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="InputSystem.h" />
@@ -295,7 +293,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="RapidJsonHelper.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="SandEffect.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
@@ -307,7 +304,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="SwitchCollider.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
-    <ClInclude Include="Tutorial.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="UIComponent.h" />
     <ClInclude Include="VertexArray.h" />

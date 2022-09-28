@@ -18,7 +18,7 @@ public:
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
-	@param	_skelton スケルトンデータを用いるか。
+	@param	_skelton スケルトンデータを用いるか。(デフォはfalse)
 	@sa		SkeletalMeshComponent.h
 	*/
 	MeshComponent(GameObject* _owner, bool _skelton = false);

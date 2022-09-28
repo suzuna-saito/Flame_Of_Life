@@ -9,7 +9,7 @@
 #pragma once
 
 
-#define RENDERER Renderer::GetInstance()
+#define RENDERER Renderer::mRenderer
 
 //平行光源用の構造体
 struct DirectionalLight
@@ -37,7 +37,7 @@ enum class TextureStage
 class SpriteComponent;
 class Texture;
 class Shader;
-class VertexArray;
+//class VertexArray;
 class Font;
 
 class Renderer
@@ -123,6 +123,9 @@ public:
 	*/
 	void RemoveMeshComponent(MeshComponent* _meshComponent);
 
+	//自分のインスタンス
+	static Renderer* mRenderer;
+
 private:
 
 	//コンストラクタ、デストラクタの隠蔽
@@ -136,8 +139,6 @@ private:
 	// スケルトンメッシュの描画に使われる
 	std::vector<class SkeletalMeshComponent*>       mSkeletalMeshes;
 
-	//自分のインスタンス
-	static Renderer* mRenderer;
 	//レンダラーの状態を含む構造体
 	SDL_Renderer* mSdlRenderer;
 
@@ -164,14 +165,6 @@ private:
 	@fn	Particle用の頂点バッファとインデックスバッファの作成
 	*/
 	void CreateParticleVerts();
-
-	/*
-	* @@@
-	@brief	時間制限用textureの生成
-	@param	_value　最大値
-	@param _fontSize　フォントサイズ
-	*/
-	void CreateTimeFontTexture(int _value, int _fontSize);
 
 	/*
 	@fn	Particleの描画
@@ -231,7 +224,7 @@ private:
 	Shader* mSpriteShader;
 
 	//スプライト用頂点
-	VertexArray* mSpriteVerts;
+	class VertexArray* mSpriteVerts;
 
 	//メッシュ
 	Shader* mMeshShader;
@@ -242,7 +235,7 @@ private:
 	//パーティクル
 	Shader* mParticleShader;
 	//パーティクル用頂点
-	VertexArray* mParticleVertex;
+	class VertexArray* mParticleVertex;
 
 	//ビュー行列
 	Matrix4 mView;
@@ -287,13 +280,6 @@ public://ゲッターセッター
 	@return Textureクラスのポインタ(class Texture)
 	*/
 	Texture* GetTexture(const std::string& _fileName);
-
-	/*
-	@brief  フォントの取得
-	@param	_fileName　取得したいフォントのファイル名
-	@return Fontクラスのポインタ
-	*/
-	Font* GetFont(const std::string& _fileName);
 
 	/*
 	* @@@

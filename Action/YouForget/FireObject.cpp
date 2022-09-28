@@ -1,14 +1,15 @@
 #include "pch.h"
 
 // コンストラクタ
-FireObject::FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+FireObject::FireObject(Candle* _owner, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mOwner(_owner)
+	, MFireSize(10.0f)
 	, MAddPos(160.0f)
 {
 	//GameObjectメンバ変数の初期化
 	mTag = _objectTag;
-	SetScale(_size);
+	SetScale(Vector3(MFireSize, MFireSize, MFireSize));
 	SetPosition(mOwner->GetPosition());
 
 	//生成したPlayerの生成時と同じくComponent基底クラスは自動で管理クラスに追加され自動で解放される

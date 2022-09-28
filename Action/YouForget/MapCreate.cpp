@@ -299,7 +299,7 @@ bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const cha
 {
 	//RapidJsonドキュメントとして開けるか？
 	rapidjson::Document doc;
-	if (!openJsonFile(doc, _fileName))
+	if (!OpenJsonFile(doc, _fileName))
 	{
 		return false;
 	}

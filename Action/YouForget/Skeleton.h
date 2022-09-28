@@ -1,28 +1,17 @@
-/*
-@file	Skeleton.h
-@brief	骨格
-*/
-
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
-
+/*
+* 骨格
+*/
 class Skeleton
 {
 public:
-	/*
-	@struct それぞれのボーンの骨格定義
-	*/
+	// それぞれのボーンの骨格定義(構造体)
 	struct Bone
 	{
-		//ローカルバインドポーズ
-		BoneTransform mLocalBindPose;
-		//ボーン名
-		std::string mName;
-		//親ID
-		int mParent;
+		BoneTransform mLocalBindPose; //ローカルバインドポーズ
+		string mName;                 //ボーン名
+		int mParent;                  //親ID
 	};
 
 	/*
@@ -30,7 +19,7 @@ public:
 	@param _filename ファイルの名前
 	@return 成功、失敗
 	*/
-	bool Load(const std::string& _filename);
+	bool Load(const string& _filename);
 protected:
 	/*
 	@fn スケルトンがロードされたときに自動的に呼び出され各ボーンのグローバル逆バインドポーズを計算

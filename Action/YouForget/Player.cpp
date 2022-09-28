@@ -18,7 +18,7 @@ bool Player::mMoveFlag = false;
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, mCameraPos(Vector3(0, -1300, 1320))
+	, mCameraPos(Vector3(0, -1300, 1600))
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
 	, MStartCameraPos(2000.0f)
@@ -56,6 +56,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle]);
 
 	// エフェクト
+	mCircledShadowManager = new CircledShadowManager(_objectTag, _sceneTag, this);
 	// プレイヤーが落ちた時のエフェクト
 	mFallEffectManager = new FallEffectManager(_objectTag, _sceneTag, this);
 
@@ -136,6 +137,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	// ジャンプしてたらジャンプ力を足す
 	if (mJump->GetJumpFlag())
 	{
+		mMoveSpeed = 830.0f;
 		mVelocity.z += mJump->GetVelocity();
 		mLegs->SetIsGround(false);
 	}
@@ -143,19 +145,26 @@ void Player::UpdateGameObject(float _deltaTime)
 	// velocityが一定数まで行ったら、ジャンプ力をなくす
 	if (mVelocity.z >= MMaxJumpVel)
 	{
+		mGravity = 50.0f;
+
 		mJump->SetEndJump(true);
+	}
+
+	if (mGravity <= 90.0f)
+	{
+		mGravity += 1.0f;
 	}
 
 	// 重力
 	if (!mLegs->GetIsGround() && !mDebug && mOperable)
 	{
-		mVelocity.z -= MGravity;
+		mVelocity.z -= mGravity;
 	}
-	else if(mOperable)
+	else if (mOperable)
 	{
 		mVelocity.z = 0.0f;
 	}
-	
+
 
 	// 座標をセット
 	mPosition += (mVelocity + mInputSpeed) * _deltaTime;
@@ -174,7 +183,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	//このフレームのステートは1つ前のステートになる
 	mPrevState = mNowState;
 
-	
+
 	// プレイヤーが落ちたら
 	if (mPosition.z <= MRedoingPosZ && mOperable)
 	{
@@ -196,6 +205,7 @@ void Player::UpdateGameObject(float _deltaTime)
 	// ポジションをセット
 	SetPosition(mPosition);
 	mLegs->SetIsGround(false);
+
 }
 
 /*
@@ -249,7 +259,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 		// いずれかが押されていたら
 		if (inputVec != Vector3::Zero)
 		{
- 			mNowState = playerState::run;
+			mNowState = playerState::run;
 
 			// 入力ベクトルの正規化
 			inputVec.Normalize();
@@ -259,7 +269,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 			mCount = 0;
 		}
 		else
-		{ 
+		{
 			mNowState = playerState::idle;
 			if (mCount < 80)
 			{
@@ -270,7 +280,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 				mMoveFlag = false;
 			}
 		}
-		
+
 		// アニメーションする方向
 		mAnimVec = inputVec;
 	}
@@ -316,10 +326,12 @@ void Player::OnCollision(const GameObject& _hitObject)
 
 	if (mOperable &&
 		(hitObjectTag == Tag::ground ||
-		hitObjectTag == Tag::Switch))
+			hitObjectTag == Tag::Switch))
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);
+
+		mMoveSpeed = 800.0f;
 	}
 }
 
@@ -346,19 +358,19 @@ void Player::mRedoing(Vector3 _nowPos, const Vector3 _returnPos)
 
 		mPosition = mDifference;
 	}
-	
+
 	Vector3 distance = Vector3::Zero;
 
 	// 距離ベクトル
 	distance = returnPos - mPosition;
 
 	// 1に近かったら
-	if (Math::NearZero(distance.Length(),5.0f))
+	if (Math::NearZero(distance.Length(), 5.0f))
 	{
 		// 行動を可能にする
 		mOperable = true;
 	}
-	
+
 }
 
 

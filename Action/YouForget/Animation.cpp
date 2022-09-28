@@ -1,14 +1,5 @@
-/*
-@file	Animation.h
-@brief	Skeletonを用いたアニメーションのデータクラス
-*/
-
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-// コンストラクタ
 Animation::Animation()
 	: mNumBones(0)
 	, mNumFrames(0)
@@ -17,88 +8,72 @@ Animation::Animation()
 {
 }
 
-/*
-@fn アニメーション読み込み
-@param アニメーションへのパス
-*/
-bool Animation::Load(const std::string& _fileName)
+bool Animation::Load(const char* _fileName)
 {
-	// filenameからテキストファイルとして読み込み、rapidJSONに解析させる
-	std::ifstream file(_fileName);
-	if (!file.is_open())
-	{
-		SDL_Log("File not found: Animation %s", _fileName.c_str());
-		return false;
-	}
-
-	std::stringstream fileStream;
-	fileStream << file.rdbuf();
-	std::string contents = fileStream.str();
-	rapidjson::StringStream jsonStr(contents.c_str());
+	// 解析オブジェクト作成
 	rapidjson::Document doc;
-	doc.ParseStream(jsonStr);
-
-	// JSONオブジェクトか？
-	if (!doc.IsObject())
+	// filenameからテキストファイルとして読み込み、rapidJSONに解析させる
+	// ファイルが開けなかったら
+	if (!OpenJsonFile(doc, _fileName))
 	{
-		SDL_Log("Animation %s is not valid json", _fileName.c_str());
-		return false;
+		printf("アニメーションファイルです\n");
+		return false;   // falseを返す
 	}
 
+	// versionをintで取得する
 	int ver = doc["version"].GetInt();
-
-	// Check the metadata　メタデータのチェック。バージョンは１か？
+	// メタデータのチェック。バージョンが１じゃなかったら
 	if (ver != 1)
 	{
-		SDL_Log("Animation %s unknown format", _fileName.c_str());
-		return false;
+		printf("アニメーション %s のフォーマットが不明です", _fileName);
+		return false;   // falseを返す
 	}
 
-	// "sequece"情報読み込めるか？
+	// sequece情報読み込めるか？
 	const rapidjson::Value& sequence = doc["sequence"];
+	// オブジェクト変数を表していなかったら
 	if (!sequence.IsObject())
 	{
-		SDL_Log("Animation %s doesn't have a sequence.", _fileName.c_str());
-		return false;
+		printf("アニメーション %s はシーケンスを持ちません", _fileName);
+		return false;   // falseを返す
 	}
 
-	// "frames" "length" "bonecount"はあるか？
+	// frames,length,bonecount,はあるか？
 	const rapidjson::Value& frames = sequence["frames"];
 	const rapidjson::Value& length = sequence["length"];
 	const rapidjson::Value& bonecount = sequence["bonecount"];
-
+	// なかったら
 	if (!frames.IsUint() || !length.IsDouble() || !bonecount.IsUint())
 	{
-		SDL_Log("Sequence %s has invalid frames, length, or bone count.", _fileName.c_str());
-		return false;
+		printf("シーケンス %s はフレーム、長さ、またはボーン数が無効です", _fileName);
+		return false;   // falseを返す
 	}
 
-	// フレーム数、アニメーション時間、ボーン数、フレームあたりの時間を取得
-	mNumFrames = frames.GetUint();
-	mDuration = static_cast<float>(length.GetDouble());
-	mNumBones = bonecount.GetUint();
-	mFrameDuration = mDuration / (mNumFrames - 1);
+	// フレーム数、アニメーション時間、ボーン数、フレーム間の時間を取得
+	mNumFrames = frames.GetUint();                     // フレーム数
+	mDuration = static_cast<float>(length.GetDouble());// アニメーション時間
+	mNumBones = bonecount.GetUint();                   // ボーン数
+	mFrameDuration = mDuration / (mNumFrames - 1);     // フレーム間の時間(アニメーションの再生時間/(フレーム数 - 1))
 
 	// トラック配列を確保
 	mTracks.resize(mNumBones);
-
 	// トラック配列が取得できるか？
 	const rapidjson::Value& tracks = sequence["tracks"];
-
+	// 配列が取得できなければ
 	if (!tracks.IsArray())
 	{
-		SDL_Log("Sequence %s missing a tracks array.", _fileName.c_str());
-		return false;
+		printf("シーケンス %s にトラック配列がありません", _fileName);
+		return false;   // falseを返す
 	}
 
 	// トラック数分ループ
-	for (rapidjson::SizeType i = 0; i < tracks.Size(); i++)
+	for (rapidjson::SizeType i = 0; i < tracks.Size(); ++i)
 	{
-		// tracs[i]はオブジェクトか？
+		// tracs[i]がオブジェクトじゃなかったら
 		if (!tracks[i].IsObject())
 		{
-			SDL_Log("Animation %s: Track element %d is invalid.", _fileName.c_str(), i);
-			return false;
+			printf("アニメーション %s。トラック要素 %d は無効です", _fileName, i);
+			return false;   // falseを返す
 		}
 
 		// tracks[i]の中の "bone"をuintで読み込み。ボーン番号を取得
@@ -106,33 +81,34 @@ bool Animation::Load(const std::string& _fileName)
 
 		// tracks[i]の中の "transforms"が取得できるか？
 		const rapidjson::Value& transforms = tracks[i]["transforms"];
+		// transformsが配列じゃなかったら
 		if (!transforms.IsArray())
 		{
-			SDL_Log("Animation %s: Track element %d is missing transforms.", _fileName.c_str(), i);
-			return false;
+			printf("アニメーション %s。トラック要素 %d にトランスフォームがありません", _fileName, i);
+			return false;   // falseを返す
 		}
 
-		BoneTransform temp;
-		// transformのサイズとアニメーションフレーム数が不具合ないか？
+		// transformsのサイズがアニメーションのフレーム数より小さかったら
 		if (transforms.Size() < mNumFrames)
 		{
-			SDL_Log("Animation %s: Track element %d has fewer frames than expected.", _fileName.c_str(), i);
-			return false;
+			printf("アニメーション %s。トラック要素 %d は予想より少ないフレーム数です", _fileName, i);
+			return false;   // falseを返す
 		}
 
 		// transformsのサイズ分ループ。ボーン番号boneIndexの変換情報として取り込む
-		for (rapidjson::SizeType j = 0; j < transforms.Size(); j++)
+		for (rapidjson::SizeType j = 0; j < transforms.Size(); ++j)
 		{
 			// ローテーション(quaternion)とtrans(平行移動成分)を読み込む
 			const rapidjson::Value& rot = transforms[j]["rot"];
 			const rapidjson::Value& trans = transforms[j]["trans"];
-
+			// ローテーションが配列じゃなかったら、またはtransformsが配列じゃなかったら
 			if (!rot.IsArray() || !trans.IsArray())
 			{
-				SDL_Log("Skeleton %s: Bone %d is invalid.", _fileName.c_str(), i);
-				return false;
+				printf("ローテーション(quaternion)、またはtrans(平行移動成分)が読み込めませんでした");
+				return false;   // falseを返す
 			}
 
+			BoneTransform temp; // BoneTransform … モデルのボーン変換
 			// temp.mRotationに　quaternionとしてコピー、
 			temp.mRotation.x = static_cast<float>(rot[0].GetDouble());
 			temp.mRotation.y = static_cast<float>(rot[1].GetDouble());
@@ -152,33 +128,31 @@ bool Animation::Load(const std::string& _fileName)
 	return true;
 }
 
-// inTime時刻時点のグローバルポーズ配列の取得
 void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, float _inTime) const
 {
+	// アニメーションのためのボーン数と値が違っていたら
 	if (_outPoses.size() != mNumBones)
 	{
-		_outPoses.resize(mNumBones);
+		_outPoses.resize(mNumBones); // ポーズマトリックス配列を確保
 	}
 
-	// Figure out the current frame index and next frame
-	// (This assumes inTime is bounded by [0, AnimDuration]
+	// @@@
 	// 現在のフレームと次のフレームを見つけ出す。
 	// これはinTimeが [0～AnimDuration] の間にいることを前提としています。
-	size_t frame = static_cast<size_t>(_inTime / mFrameDuration);
+	size_t frame = static_cast<size_t>(_inTime / mFrameDuration); // フレーム = 指定時間 / アニメーションのフレーム間の時間
 	size_t nextFrame = frame + 1;
-	// Calculate fractional value between frame and next frame
 	// フレームと次のフレームの間の小数値を計算します。
-	float pct = _inTime / mFrameDuration - frame;
+	float pct = _inTime / mFrameDuration - frame;                 // pct = 指定時間 / アニメーションのフレーム間の時間 - frame
 
+	// アニメーションのフレーム数がnextFrameよりも大きければ
 	if (mNumFrames <= nextFrame)
 	{
-		--nextFrame;
+		--nextFrame;  // nextFrameを減らす
 	}
-	// Setup the pose for the root
-	// ルートのポーズをセットアップ
+
+	// ポーズをセットアップ
 	if (mTracks[0].size() > 0)
 	{
-		// Interpolate between the current frame's pose and the next frame
 		// 現在のフレームのポーズと次のフレームの間を補間する
 		BoneTransform interp = BoneTransform::Interpolate(mTracks[0][frame],
 			mTracks[0][nextFrame], pct);
@@ -189,18 +163,19 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 		_outPoses[0] = Matrix4::Identity;
 	}
 
-	const std::vector<Skeleton::Bone>& bones = _inSkeleton->GetBones();
-	// Now setup the poses for the rest
+	// ボーン配列
+	const vector<Skeleton::Bone>& bones = _inSkeleton->GetBones();
 	// 残りのポーズを設定します
-	for (size_t bone = 1; bone < mNumBones; bone++)
+	for (size_t bone = 1; bone < mNumBones; ++bone)
 	{
-		Matrix4 localMat; // (Defaults to identity)　（デフォルトは単位行列）
+		Matrix4 localMat; // デフォルトは単位行列
 		if (mTracks[bone].size() > 0)
 		{
-			// [bone][frame]のボーン姿勢と[bone][nextframe]を 小数点以下の pctで補間した姿勢を interpに算出
+			// [bone][frame]のボーン姿勢と[bone][nextframe]を小数点以下のpctで補間した姿勢をinterpに算出
 			BoneTransform interp = BoneTransform::Interpolate(mTracks[bone][frame],
 				mTracks[bone][nextFrame], pct);
-			// interp を行列に変換して、localMatに変換する
+
+			// interpを行列に変換してlocalMatに代入する
 			localMat = interp.ToMatrix();
 		}
 

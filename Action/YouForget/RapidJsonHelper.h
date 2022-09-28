@@ -1,46 +1,42 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
+/* json関連 */
 
+/// <summary>
+/// jsonファイルのオープン
+/// </summary>
+/// <param name="_inputDocument">rapidJsonオブジェクト</param>
+/// <param name="_inFileName">開きたいJsonファイルパス</param>
+/// <returns>treu : ファイルが開けた , false : ファイルが開けなかった</returns>
+bool OpenJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName);
 
-/*
-@fn		jsonファイルのオープン
-@param	_inputDocument rapidJsonオブジェクト
-@param	_inFileName オープンしたいJsonファイルパス
-return	ファイルを開くことができたか(bool型)
-*/
-bool openJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName);
+/// <summary>
+/// Doc内にそのメンバーは存在するか
+/// </summary>
+/// <param name="_inputDocument">rapidJsonオブジェクト</param>
+/// <param name="_memberName">メンバ名</param>
+/// <returns>treu : 存在した , false : 存在しなかった</returns>
+bool IsExistMember(const rapidjson::Document& _inputDocument, const char* _memberName);
 
-/*
-@fn		Doc内にそのメンバーは存在するか？
-@param	_inDocument rapidJsonオブジェクト
-@param	_memberName メンバ名
-@return	Documentにメンバ名が含まれていたかどうか(bool型)
-*/
-bool IsExistMember(const rapidjson::Document& _inDoc, const char* _memberName);
+/// <summary>
+/// そのメンバーが存在し、かつ値が一致するか？
+/// </summary>
+/// <param name="_inputDocument">rapidJsonオブジェクト</param>
+/// <param name="_memberName">メンバ名</param>
+/// <param name="_matchValue">調べたいメンバ名にマッチする値</param>
+/// <returns>treu : 一致した , false : 一致しなかった</returns>
+bool IsExistMemberAndValue(const rapidjson::Document& _inputDocument, const char* _memberName, const char* _matchValue);
 
-/*
-@fn		そのメンバーが存在し、かつ値が一致するか？
-@param	_inDocument ドキュメント
-@param	_menberName メンバー名
-@param	_matchValue 調べたいメンバー名にマッチする値
-@return	memberNameに対応する値がmatchValueだったときのみtrueを返す(bool型)
-*/
-bool IsExistMemberAndValue(const rapidjson::Document& _inDoc, const char* _memberName, const char* _matchValue);
+/// <summary>
+/// ドキュメントにメンバ名が含まれるか
+/// </summary>
+/// <param name="_inputDocument">ドキュメント</param>
+/// <param name="_memberName">メンバ名</param>
+/// <returns>, false : 含まれない</returns>
+bool IsExistArrayName(const rapidjson::Document& _inputDocument, const char* _memberName);
 
-/*
-@param	_inDocument ドキュメント
-@param	_menberName メンバー名
-@return	Document内にメンバ名が含まれるか(bool型)
-*/
-bool IsExistArrayName(const rapidjson::Document& _inDoc, const char* _memberName);
-
-
-/*
-@fn		Value値を強制的にfloat値として取得
-@brief	JSON値を内容がintでも強制的にfloat値として取得
-@param	_val Value値
-@return	JSON値(float型)
-*/
+/// <summary>
+/// 値を強制的にfloat値として取得
+/// </summary>
+/// <param name="_val">Value値</param>
+/// <returns>JSON値(float型)</returns>
 float ForceGetFloat(const rapidjson::Value& _val);

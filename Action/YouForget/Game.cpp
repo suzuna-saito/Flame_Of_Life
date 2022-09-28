@@ -147,6 +147,7 @@ void Game::ProcessInput()
 	mInputSystem->PrepareForUpdate();
 
 	SDL_Event event;
+	// キューにイベントがあれば繰り返す
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -163,8 +164,10 @@ void Game::ProcessInput()
 	}
 
 	mInputSystem->Update();
+	// 現在の状態が格納された配列
 	const InputState& state = mInputSystem->GetState();
 
+	// ESCキーか、コントローラーの終了が押されたら
 	if (state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK) ||
 		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Released)
 	{

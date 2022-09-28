@@ -1,13 +1,11 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
-
-#include "Math.h"
 
 //ボーンの最大数
 const size_t MAX_SKELETON_BONES = 196;
 
+// @@@
+// SkeletalMeshComponentでしかつかわれてない
+// てかこれなんだ
 struct MatrixPalette
 {
 	//行列パレット

@@ -65,7 +65,7 @@ void SecondStage::Input(const InputState& _state)
 */
 SceneBase* SecondStage::update()
 {
-	if (Candle::mCandleCount == 2)
+	if (Candle::mGoalFlag)
 	{
 		return new SecondResult(Scene::secondResult);
 	}

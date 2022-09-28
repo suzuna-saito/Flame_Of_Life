@@ -1,22 +1,19 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
 // 静的メンバ変数
-
-int Candle::mCandleCount = 0; // 火がついてるろうそくの本数
+bool Candle::mGoalFlag = false; // ゴールしたかどうか
 
 Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, mFireScele(Vector3(10.0f,10.0f,10.0f))
-	, mFireFlag(false)
 	, mDrawFireFlag(false)
 {
+	// ゴールしたかどうかフラグをfalseにする
+	mGoalFlag = false;
+
 	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
-	SetScale(_size);
-	SetPosition(_pos);
+	mTag = _objectTag;   // オブジェクトタグ
+	SetScale(_size);     // オブジェクトサイズ
+	SetPosition(_pos);   // オブジェクトのポジション
 
 	//Component基底クラスは自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
@@ -35,14 +32,13 @@ Candle::Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 */
 void Candle::UpdateGameObject(float _deltaTime)
 {
-	if (mFireFlag && !mDrawFireFlag)
+	// ゴールして、火を描画していなかったら
+	if (mGoalFlag && !mDrawFireFlag)
 	{
 		// ろうそくの火を生成
-		new FireObject(this, mFireScele, mTag, GetScene());
-
+		new FireObject(this, mTag, GetScene());
+		// 描画しているのでフラグをfalseにする
 		mDrawFireFlag = true;
-
-		mCandleCount++;
 	}
 }
 
@@ -52,5 +48,6 @@ void Candle::UpdateGameObject(float _deltaTime)
 */
 void Candle::OnCollision(const GameObject& _hitObject)
 {
-	mFireFlag = true;
+	// ゴールしたかどうかフラグをtrueにする
+	mGoalFlag = true;
 }

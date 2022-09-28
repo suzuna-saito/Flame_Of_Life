@@ -35,93 +35,62 @@ using namespace std;
 #include <vector>
 #include <Windows.h>
 
-// Math
+// System @ インプットシステム
 #include "Math.h"
-
-// FPS
 #include "FPS.h"
-
-// インプットシステム
+#include "RapidJsonHelper.h"
 #include "InputSystem.h"
 
-// サウンド
-#include "Sound.h"
-
-// アニメーション
-#include "MatrixPalette.h"
-#include "BoneTransform.h"
-#include "Skeleton.h"
+// Animation @ スケルトン
 #include "Animation.h"
+#include "BoneTransform.h"
+#include "MatrixPalette.h"
+#include "Skeleton.h"
 
-// コリジョン
-#include "Collision.h"
-
-// コンポーネント
+// Component @ 全部
 #include "Component.h"
 #include "MeshComponent.h"
 #include "ParticleComponent.h"
-#include "SpriteComponent.h"
 #include "SkeletalMeshComponent.h"
+#include "SpriteComponent.h"
 #include "UIComponent.h"
+/* Collision */ // @ 全部
+#include "Collision.h"
+#include "ColliderComponent.h"
+#include "PhysicsWorld.h"
+#include "BoxCollider.h"
+#include "SphereCollider.h"
 
-// レンダラー
-#include "Shader.h"
-#include "VertexArray.h"
-#include "Texture.h"
-#include "Mesh.h"
+// Renderer
 #include "Renderer.h"
-#include "SceneBase.h"
-/* TTF */
-#include "Font.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "VertexArray.h"
 
-// ゲームオブジェクト
+// シーン @ 終わってない
+#include "SceneBase.h"
+
+// GameObject @ 全部
 #include "GameObject.h"
 #include "GameObjectManager.h"
-/* カメラ */
-#include "MainCameraObject.h"
-/* 床 */
-#include "Ground.h"
-/* 背景 */
 #include "BackGround.h"
-/* スイッチ */
-#include "Switch.h"
-#include "SwitchCollider.h"
-/* ろうそく */
+#include "MainCameraObject.h"
 #include "Candle.h"
-/* ろうそくについてるオブジェクト */
 #include "FireObject.h"
-/* プレイヤー */
+#include "Ground.h"
 #include "Player.h"
 #include "LegsCollider.h"
-/* アイテム */
+#include "Switch.h"
+#include "SwitchCollider.h"
 #include "ItemBase.h"
 #include "Item.h"
 
-// ジャンプ
+// ジャンプ @コンポーネントか？
 #include "Jump.h"
 
-// パーティクルエフェクト
-#include "ParticleEffectBase.h"
-#include "EffectManager.h"
-#include "SandEffect.h"
-/* プレイヤーが落ちた時のエフェクト */
-#include "FallEffectManager.h"
-#include "FallEffect.h"
-/* アイテムの後ろにあるエフェクト */
-#include "ItemEffectManager.h"
-#include "ItemEffect.h"
-
-// UI
-#include "UIBase.h"
-/* ボタンのUI */
-#include "ButtonUI.h"
-/* スプライト */
-#include "Sprite.h"
-
-// シーン
-#include "SceneBase.h"
+// シーン @ 全部
 #include "Title.h"
-#include "Tutorial.h"
 #include "FirstStage.h"
 #include "SecondStage.h"
 #include "ThirdStage.h"
@@ -131,19 +100,25 @@ using namespace std;
 #include "ThirdResult.h"
 #include "Result.h"
 
-// コリジョン *
-#include "PhysicsWorld.h"
-#include "ColliderComponent.h"
-#include "SphereCollider.h"
-#include "BoxCollider.h"
+// ParticleEffect @ 全部
+#include "ParticleEffectBase.h"
+#include "EffectManager.h"
+#include "FallEffect.h"
+#include "FallEffectManager.h"
+#include "ItemEffect.h"
+#include "ItemEffectManager.h"
+#include "CircledShadow.h"
+#include "CircledShadowManager.h"
 
-// RapidJson
-#include "RapidJsonHelper.h"
+// UI @ 全部
+#include "UIBase.h"
+#include "ButtonUI.h"
+#include "Sprite.h"
 
-// マップ
+// Map @ 全部
 #include "MapCreate.h"
 
-// Game
+// Game @ 全部
 #include "Game.h"
 
 

@@ -54,7 +54,7 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 		{
 
 			vel = Vector3(0.0f, 0.0f, -1.0);
-			mSandEffect = new SandEffect(mPosition, vel, mSceneTag, mTag);
+			//mSandEffect = new SandEffect(mPosition, vel, mSceneTag, mTag);
 
 		}
 		break;

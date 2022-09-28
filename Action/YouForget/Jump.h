@@ -1,6 +1,6 @@
 #pragma once
 
-class Jump:public Component
+class Jump :public Component
 {
 public:
 	// コンストラクタ
@@ -16,7 +16,7 @@ private:
 	float MJumpSpeed;
 	// ジャンプの加速度
 	float MJumpAccel;
-	
+
 	// ジャンプが開始した瞬間かどうか
 	bool mStartFlag;
 	// ジャンプ中かどうか

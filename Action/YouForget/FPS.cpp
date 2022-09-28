@@ -1,69 +1,36 @@
-/*
-@file	FPS.h
-@brief	フレームにかかった時間を計測し上限を設けるクラス
-*/
-
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-/*
-@fn	コンストラクタ
-*/
 FPS::FPS()
-	: mSetFps(60)
-	, mOneFrameTickCount(1000 / mSetFps)
-	, mFpsCount(0)
-	, mFrameStartTickTime(0)
-	, mFps(0)
+	: MSetFps(60)
+	, MOneFrameTickCount(1000 / MSetFps)
 	, mBeforetickCount(0)
 	, mDeltaTime(0)
 {
-
 }
 
-/*
-@fn	デストラクタ
-*/
-FPS::~FPS()
-{
-}
-
-/*
-@fn	フレーム毎の処理
-*/
 void FPS::Update()
 {
 	Wait();
+
+	// 現在のフレームにかかった時間
 	mDeltaTime = (SDL_GetTicks() - mBeforetickCount) / 1000.0f;
+	// mDeltaTimeの値が大きくなりすぎないように制御
 	if (mDeltaTime >= 0.10f)
 	{
 		mDeltaTime = 0.10f;
 	}
+
+	// 前フレームにかかった時間
 	mBeforetickCount = SDL_GetTicks();
-	//1フレーム目の時刻を保存
-	if (mFpsCount == 0)
-	{
-		mFrameStartTickTime = SDL_GetTicks();
-	}
-	//設定したフレーム数が経過したら
-	if (mFpsCount == mSetFps)
-	{
-		int nowTickTime = SDL_GetTicks();
-		mFps = 1000 / ((nowTickTime - mFrameStartTickTime) / mSetFps);
-		mFpsCount = 0;
-	}
-	else
-	{
-		mFpsCount++;
-	}
 }
 
-/*
-@fn	FPSが設定値より大きくならないための制御
-*/
 void FPS::Wait()
 {
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mBeforetickCount + mOneFrameTickCount));
+	//経過時間を比較して1フレームにかける時間を越すまで待つ
+	/*
+	 SDL_GetTicks()(SDLが初期化されてから経過した時間)が
+	 mBeforetickCount + MOneFrameTickCount(前フレームにかかった時間+1フレームにかける時間)を
+	 超えれば真を返す。
+	*/
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mBeforetickCount + MOneFrameTickCount));
 }

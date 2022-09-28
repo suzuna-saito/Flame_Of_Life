@@ -11,7 +11,7 @@ class FireObject :public GameObject
 public:
 
 	// コンストラクタ
-	FireObject(Candle* _owner, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	FireObject(Candle* _owner, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
 
 	/*
 	@fn	デストラクタ
@@ -28,6 +28,7 @@ private:
 
 	Candle* mOwner;
 
+	const float MFireSize;    // 炎のサイズ
 	const float MAddPos;
 public://ゲッターセッター
 

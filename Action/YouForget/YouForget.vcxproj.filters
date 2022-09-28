@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Animation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
@@ -41,7 +40,7 @@
       <Filter>Components\Collision</Filter>
     </ClCompile>
     <ClCompile Include="FPS.cpp">
-      <Filter>FPS</Filter>
+      <Filter>System\FPS</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>GameObJect\BackGround</Filter>
@@ -77,10 +76,10 @@
       <Filter>GameObJect\Switch</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
-      <Filter>InputSystem</Filter>
+      <Filter>System\InputSystem</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
-      <Filter>Math</Filter>
+      <Filter>System\Math</Filter>
     </ClCompile>
     <ClCompile Include="MapCreate.cpp">
       <Filter>MapCreate</Filter>
@@ -103,14 +102,8 @@
     <ClCompile Include="ItemEffectManager.cpp">
       <Filter>ParticleEffect\ItemEffect</Filter>
     </ClCompile>
-    <ClCompile Include="SandEffect.cpp">
-      <Filter>ParticleEffect\SandEffect</Filter>
-    </ClCompile>
     <ClCompile Include="RapidJsonHelper.cpp">
-      <Filter>RapidJson</Filter>
-    </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Renderer\TTF</Filter>
+      <Filter>System\RapidJson</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Renderer</Filter>
@@ -148,9 +141,6 @@
     <ClCompile Include="Title.cpp">
       <Filter>Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Tutorial.cpp">
-      <Filter>Scene\Tutorial</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>UI\Sprite</Filter>
     </ClCompile>
@@ -175,9 +165,6 @@
     <ClCompile Include="ThirdResult.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
     <ClCompile Include="ButtonUI.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -187,10 +174,18 @@
     <ClCompile Include="Result.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>System\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="CircledShadow.cpp">
+      <Filter>ParticleEffect\CircledShadow</Filter>
+    </ClCompile>
+    <ClCompile Include="CircledShadowManager.cpp">
+      <Filter>ParticleEffect\CircledShadow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Animation.h">
       <Filter>Animation</Filter>
     </ClInclude>
@@ -231,7 +226,7 @@
       <Filter>Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="FPS.h">
-      <Filter>FPS</Filter>
+      <Filter>System\FPS</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>GameObJect\BackGround</Filter>
@@ -267,10 +262,10 @@
       <Filter>GameObJect\Switch</Filter>
     </ClInclude>
     <ClInclude Include="InputSystem.h">
-      <Filter>InputSystem</Filter>
+      <Filter>System\InputSystem</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>Math</Filter>
+      <Filter>System\Math</Filter>
     </ClInclude>
     <ClInclude Include="MapCreate.h">
       <Filter>MapCreate</Filter>
@@ -293,14 +288,8 @@
     <ClInclude Include="ItemEffectManager.h">
       <Filter>ParticleEffect\ItemEffect</Filter>
     </ClInclude>
-    <ClInclude Include="SandEffect.h">
-      <Filter>ParticleEffect\SandEffect</Filter>
-    </ClInclude>
     <ClInclude Include="RapidJsonHelper.h">
-      <Filter>RapidJson</Filter>
-    </ClInclude>
-    <ClInclude Include="Font.h">
-      <Filter>Renderer\TTF</Filter>
+      <Filter>System\RapidJson</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Renderer</Filter>
@@ -338,9 +327,6 @@
     <ClInclude Include="Title.h">
       <Filter>Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="Tutorial.h">
-      <Filter>Scene\Tutorial</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>UI\Sprite</Filter>
     </ClInclude>
@@ -365,9 +351,6 @@
     <ClInclude Include="ThirdResult.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>Sound</Filter>
-    </ClInclude>
     <ClInclude Include="ButtonUI.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -376,6 +359,15 @@
     </ClInclude>
     <ClInclude Include="Result.h">
       <Filter>Scene\Result</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>System\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="CircledShadow.h">
+      <Filter>ParticleEffect\CircledShadow</Filter>
+    </ClInclude>
+    <ClInclude Include="CircledShadowManager.h">
+      <Filter>ParticleEffect\CircledShadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -441,9 +433,6 @@
     <Filter Include="Components\Collision">
       <UniqueIdentifier>{e1441a80-be11-43a1-bf67-4c4aac764695}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FPS">
-      <UniqueIdentifier>{ef626fb1-184a-4851-9806-ca804a78f8d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObJect">
       <UniqueIdentifier>{2b882f3a-dfb0-4919-ad80-1a7d6c231986}</UniqueIdentifier>
     </Filter>
@@ -471,12 +460,6 @@
     <Filter Include="GameObJect\Switch">
       <UniqueIdentifier>{681a86dd-23f0-4f94-a099-d9253064a06e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="InputSystem">
-      <UniqueIdentifier>{9b51cda0-7143-4086-b801-44fa1957022a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math">
-      <UniqueIdentifier>{9c79b792-dbcc-4f37-8915-722de7dafbff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MapCreate">
       <UniqueIdentifier>{c4bba193-022a-47a8-acf4-85c61ac16af1}</UniqueIdentifier>
     </Filter>
@@ -489,17 +472,8 @@
     <Filter Include="ParticleEffect\ItemEffect">
       <UniqueIdentifier>{84029283-e826-48c7-8f92-b6ff1bf0e3b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleEffect\SandEffect">
-      <UniqueIdentifier>{c3f47ac4-8492-452f-82c1-22652f96fe40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RapidJson">
-      <UniqueIdentifier>{cfff18e0-96f1-44fa-a08c-0c498c2ae991}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{894cef72-2412-4b0e-ab28-0af240abfa5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\TTF">
-      <UniqueIdentifier>{895abf91-c509-4d79-8de5-12bdd9543480}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{4b1fd414-4578-49ea-9e48-8fc38cb89b3e}</UniqueIdentifier>
@@ -519,20 +493,35 @@
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{c3c3589f-bb0a-4ce6-91de-8d7a025e468b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Tutorial">
-      <UniqueIdentifier>{1a440f1d-1f0a-4295-a9d8-0f8c3a18fe64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{ebc1c022-9a40-46e5-bce4-c7abeb287161}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI\Sprite">
       <UniqueIdentifier>{d7f47d83-b23d-4350-bda0-568f8d1a674f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sound">
-      <UniqueIdentifier>{865cd5a4-700d-4047-a8c7-e657a02a086a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{4ce84b84-0ad6-442f-adfa-6f5ef9646908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{7c814268-bf4e-45f8-a4d5-7ea6b091030e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\FPS">
+      <UniqueIdentifier>{ef626fb1-184a-4851-9806-ca804a78f8d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\Math">
+      <UniqueIdentifier>{9c79b792-dbcc-4f37-8915-722de7dafbff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\RapidJson">
+      <UniqueIdentifier>{cfff18e0-96f1-44fa-a08c-0c498c2ae991}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\pch">
+      <UniqueIdentifier>{382f8363-c243-41b3-bb81-296ea468eec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System\InputSystem">
+      <UniqueIdentifier>{9b51cda0-7143-4086-b801-44fa1957022a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleEffect\CircledShadow">
+      <UniqueIdentifier>{efbb653c-2331-425e-9620-53493b062e19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,8 +1,8 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
+/*
+* ゴールオブジェクトの処理
+*/
 class Candle :public GameObject
 {
 public:
@@ -14,46 +14,29 @@ public:
 	/// <param name="_objectTag">自身のタグ</param>
 	/// <param name="_sceneTag">現在のシーンタグ</param>
 	Candle(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
-
 	// デストラクタ
 	~Candle() {};
 
-	/*
-	@fn		ろうそくのアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
+	/// <summary>
+	/// ゴールオブジェクトの更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
-	// 火がついたろうそくの本数
-	static int mCandleCount;
-
+	static bool mGoalFlag;          // ゴールしたかどうか
 
 private:
-	//ゲームオブジェクトのメッシュポインタ変数
-	MeshComponent* mMeshComponent;
+	MeshComponent* mMeshComponent;  //ゲームオブジェクトのメッシュポインタ変数
+	BoxCollider* mSelfBoxCollider;  // 当たり判定(四角)
 
-	// 四角の地面の当たり判定を生成
-	BoxCollider* mSelfBoxCollider;
-
-
-	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
-	@param	当たったGameObject
-	*/
+	/// <summary>
+	/// 当たり判定が行われHitした際に呼ばれる関数
+	/// </summary>
+	/// <param name="_hitObject">Hitした対象のゲームオブジェクトのアドレス</param>
 	void OnCollision(const GameObject& _hitObject)override;
 
-	// 炎のスケール
-	Vector3 mFireScele;
-
-	// ろうそくの火がつくかどうか
-	bool mFireFlag;
-	// ろうそくの火を描画しているかどうか
-	bool mDrawFireFlag;
+	bool mDrawFireFlag;    // ろうそくの火を描画しているかどうか
 
 public: // セッター、ゲッター
-	// 火がついたろうそくの本数を返す
-	//int mGetCandleNum() { return mCandleCount; }
-
-
 };
 

@@ -28,12 +28,12 @@ GameObject::GameObject(SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _
 	, mTag(_objectTag)
 	, mSceneTag(_sceneTag)
 	, mMoveSpeed(800.0f)
-	, MGravity(90.0f)
+	, mGravity(90.0f)
 	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)
 	, mRespawnFlag(false)
 	, mAlpha(1.0f)
-	, mColor(Vector3(1.0f,1.0f,1.0f))
+	, mColor(Vector3(1.0f, 1.0f, 1.0f))
 {
 	mGameObjectId++;
 	//GameObjectManagerにポインタを渡す
@@ -144,7 +144,9 @@ void GameObject::GameObjectInput(const InputState& _keyState)
 */
 void GameObject::AddComponent(Component* _component)
 {
+	// ここでコンポーネントの配列をソート？
 	int order = _component->GetUpdateOder();
+
 	auto itr = mComponents.begin();
 	for (;
 		itr != mComponents.end();

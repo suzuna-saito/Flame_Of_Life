@@ -15,8 +15,6 @@ Title::Title(const Scene& _nowScene)
 	// タイトル画像
 	mSprite = new Sprite("Assets/UI/Title/TitleB.png");
 
-	Candle::mCandleCount = 0;
-
 	ResultBase::mTrueEndFlag = true;
 
 	// 取得したアイテムの中にデータが入っていれば

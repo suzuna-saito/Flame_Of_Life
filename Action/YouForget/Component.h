@@ -68,6 +68,6 @@ public: //ゲッターセッター
 	/*
 	@return アタッチしているゲームオブジェクトへのポインタ(GameObject型)
 	*/
-	GameObject* GetOwner() { return mOwner; };
+	GameObject* GetOwner() { return mOwner; }
 };
 
