@@ -59,6 +59,8 @@ private:
 	float mScale;
 	//透明度
 	float mAlpha;
+	// 角度
+	float mAngle;
 	//テクスチャID
 	int mTextureID;
 	//ブレンドタイプ
@@ -111,6 +113,11 @@ public: //ゲッターセッター
 	@param _alfa 透明度0~1
 	*/
 	void SetAlpha(float _alpha) { mAlpha = _alpha; }
+
+	/*
+	@param _alfa 角度（ｘ軸）
+	*/
+	void SetAngle(float _angle) { mAngle = _angle; }
 
 	/*
 	@param _scale スケール

@@ -3,7 +3,7 @@
 CircledShadow::CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _PlayerPtr)
 	: ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag, false)
 {
-	mAlpha = 0.7f;
+	mAlpha = 1.0f;
 	mScale = 300.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);

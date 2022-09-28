@@ -230,12 +230,12 @@ void MapCreate::CreateCandle()
 		{
 			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
 
-			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos);
+			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos+450.0f);
 			const Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
 			if (name == 3)
 			{
-				new Candle(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
+				new GoalObj(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
 			}
 
 		}

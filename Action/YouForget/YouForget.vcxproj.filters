@@ -183,6 +183,15 @@
     <ClCompile Include="CircledShadowManager.cpp">
       <Filter>ParticleEffect\CircledShadow</Filter>
     </ClCompile>
+    <ClCompile Include="GoalObj.cpp">
+      <Filter>GameObJect\GoalObj</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalEffect.cpp">
+      <Filter>ParticleEffect\GoalEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalEffectManager.cpp">
+      <Filter>ParticleEffect\GoalEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -369,6 +378,15 @@
     <ClInclude Include="CircledShadowManager.h">
       <Filter>ParticleEffect\CircledShadow</Filter>
     </ClInclude>
+    <ClInclude Include="GoalObj.h">
+      <Filter>GameObJect\GoalObj</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalEffect.h">
+      <Filter>ParticleEffect\GoalEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalEffectManager.h">
+      <Filter>ParticleEffect\GoalEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BasicMesh.frag">
@@ -522,6 +540,9 @@
     </Filter>
     <Filter Include="ParticleEffect\CircledShadow">
       <UniqueIdentifier>{efbb653c-2331-425e-9620-53493b062e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleEffect\GoalEffect">
+      <UniqueIdentifier>{e060a8b2-24bb-408a-a802-7a52d995683b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

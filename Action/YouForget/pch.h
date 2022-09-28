@@ -76,6 +76,7 @@ using namespace std;
 #include "GameObjectManager.h"
 #include "BackGround.h"
 #include "MainCameraObject.h"
+#include "GoalObj.h"
 #include "Candle.h"
 #include "FireObject.h"
 #include "Ground.h"
@@ -109,6 +110,8 @@ using namespace std;
 #include "ItemEffectManager.h"
 #include "CircledShadow.h"
 #include "CircledShadowManager.h"
+#include "GoalEffect.h"
+#include "GoalEffectManager.h"
 
 // UI @ ‘S•”
 #include "UIBase.h"

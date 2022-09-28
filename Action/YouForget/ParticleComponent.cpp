@@ -27,6 +27,7 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag ,const V
 	, mColor(Vector3(1, 1, 1))
 	, mScale(_scale)
 	, mAlpha(1.0f)
+	, mAngle(0.5f)
 	, mVisible(true)
 	, mReverce(false)
 	, mDrawOrder(_updateOrder)
@@ -80,7 +81,7 @@ void ParticleComponent::Draw(Shader* _shader)
 	{
 		// 全てのパーティクルのビルボード行列をセット
 		Matrix4 matRotation;
-		matRotation = Matrix4::CreateRotationX(-0.5f * 3.14159f);
+		matRotation = Matrix4::CreateRotationX(mAngle * 3.14159f);
 
 		_shader->SetMatrixUniform("uWorldTransform", matScale * matRotation * mat);
 	}

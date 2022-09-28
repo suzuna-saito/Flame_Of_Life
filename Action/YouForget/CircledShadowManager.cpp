@@ -21,7 +21,7 @@ CircledShadowManager::CircledShadowManager(const Tag& _ObjectTag, const SceneBas
 	mPlayer = _mPlayer;
 
 	mPosition = mPlayer->GetPosition();
-	mPosition.z = mPlayer->GetPosition().z - 100.0f;
+	mPosition.z = mPlayer->GetPosition().z ;
 
 	mCircledShadowEffect = new CircledShadow(mPosition, Vector3::Zero, mTag, mSceneTag, mPlayer);
 }

@@ -66,7 +66,7 @@ void ThirdStage::Input(const InputState& _state)
 SceneBase* ThirdStage::update()
 {
 	// ƒvƒŒƒCƒ„[‚ª‚ë‚¤‚»‚­‚É‚½‚Ç‚è’…‚¢‚½‚ç
-	if (Candle::mGoalFlag)
+	if (GoalObj::mGoalFlag)
 	{
 		
 		return new ThirdResult(Scene::thirdResult);
