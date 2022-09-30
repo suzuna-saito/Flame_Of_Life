@@ -61,6 +61,8 @@ private:
 	float mAlpha;
 	// 角度
 	float mAngle;
+	// 回転
+	float mRot;
 	//テクスチャID
 	int mTextureID;
 	//ブレンドタイプ
@@ -115,9 +117,14 @@ public: //ゲッターセッター
 	void SetAlpha(float _alpha) { mAlpha = _alpha; }
 
 	/*
-	@param _alfa 角度（ｘ軸）
+	@param mAngle 角度（ｘ軸）
 	*/
 	void SetAngle(float _angle) { mAngle = _angle; }
+
+	/*
+	@param _alfa 角度（ｘ軸）
+	*/
+	void SetRot(float _rot) { mRot = _rot; }
 
 	/*
 	@param _scale スケール

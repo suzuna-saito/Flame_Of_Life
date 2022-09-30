@@ -66,6 +66,8 @@ protected:
 	float				mScale;
 	//‰Á‘¬“x
 	float				mSpeed;
+	// ‰ñ“]
+	float               mRot;
 
 public:
 

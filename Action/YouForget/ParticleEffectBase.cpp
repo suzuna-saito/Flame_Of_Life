@@ -24,6 +24,7 @@ ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel,
 	, mAlpha(0.0f)
 	, mScale(0.0f)
 	, mSpeed(0.0f)
+	, mRot(0.0f)
 	/*, mParticleState(ParticleState::PARTICLE_ACTIVE)*/
 {
 	mVelocity = _vel;

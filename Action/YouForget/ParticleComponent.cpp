@@ -28,6 +28,7 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag ,const V
 	, mScale(_scale)
 	, mAlpha(1.0f)
 	, mAngle(0.5f)
+	, mRot(0.0f)
 	, mVisible(true)
 	, mReverce(false)
 	, mDrawOrder(_updateOrder)
@@ -84,6 +85,13 @@ void ParticleComponent::Draw(Shader* _shader)
 		matRotation = Matrix4::CreateRotationX(mAngle * 3.14159f);
 
 		_shader->SetMatrixUniform("uWorldTransform", matScale * matRotation * mat);
+
+		if (mRot > 0.0f)
+		{
+			Matrix4 addRot;
+			addRot = Matrix4::CreateRotationY(mRot * 3.14159f);
+			_shader->SetMatrixUniform("uWorldTransform", matScale * addRot * mat);
+		}
 	}
 	
 	_shader->SetFloatUniform("uAlpha", mAlpha);

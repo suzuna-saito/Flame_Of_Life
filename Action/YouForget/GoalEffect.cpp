@@ -22,9 +22,14 @@ void GoalEffect::UpdateGameObject(float _deltaTime)
 		mSpeed *= -1.0f;
 	}
 
+	if (mRot >= 2.0f)
+	{
+		mRot = 0.0f;
+	}
 
-	
+	mRot += 0.002f;
 	mAlpha += mSpeed;
 
 	mParticle->SetAlpha(mAlpha);
+	mParticle->SetRot(mRot);
 }
