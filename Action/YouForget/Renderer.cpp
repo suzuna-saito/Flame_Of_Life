@@ -460,7 +460,7 @@ const Skeleton* Renderer::GetSkeleton(const char* _fileName)
 	else
 	{
 		Skeleton* sk = new Skeleton();
-		if (sk->Load(file))
+		if (sk->Load(_fileName))
 		{
 			mSkeletons.emplace(file, sk);
 		}

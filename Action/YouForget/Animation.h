@@ -19,10 +19,10 @@ public:
 	bool Load(const char* _fileName);
 
 private:
-	size_t mNumBones;     //アニメーションのためのボーン数
-	size_t mNumFrames;    //アニメーションのフレーム数
-	float mDuration;      //アニメーションの再生時間
-	float mFrameDuration; //アニメーションのフレーム間の時刻
+	size_t mNumBones;		//アニメーションのためのボーン数
+	size_t mNumFrames;		//アニメーションのフレーム数
+	float mDuration;		//アニメーションの再生時間
+	float mFrameDuration;	//アニメーションのフレーム間の時刻
 
 	/*
 	 トラック上の各フレームの変換情報
@@ -33,7 +33,7 @@ private:
 
 public: //ゲッターセッター
 	// 再生時間を返す
-	float GetDuration() const { return mDuration; }
+	const float GetDuration() const { return mDuration; }
 
 	/// <summary>
 	/// 指定された配列をアニメーションの指定された時間に
@@ -43,5 +43,5 @@ public: //ゲッターセッター
 	/// <param name="_outPoses">ポーズマトリックス</param>
 	/// <param name="_inSkeleton">ボーン</param>
 	/// <param name="_inTime">指定時間</param>
-	void GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
+	const void GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
 };

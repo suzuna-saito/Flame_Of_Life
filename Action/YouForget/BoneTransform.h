@@ -6,8 +6,8 @@
 class BoneTransform
 {
 public:
-	Quaternion mRotation; //‰ñ“]
-	Vector3 mTranslation; //ˆÚ“®
+	Quaternion mRotation;	//‰ñ“]
+	Vector3 mTranslation;	//ˆÚ“®
 
 	/// <summary>
 	/// s—ñ‚ğo—Í

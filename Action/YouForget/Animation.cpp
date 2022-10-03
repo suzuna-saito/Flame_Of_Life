@@ -17,7 +17,7 @@ bool Animation::Load(const char* _fileName)
 	if (!OpenJsonFile(doc, _fileName))
 	{
 		printf("アニメーションファイルです\n");
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	// versionをintで取得する
@@ -26,7 +26,7 @@ bool Animation::Load(const char* _fileName)
 	if (ver != 1)
 	{
 		printf("アニメーション %s のフォーマットが不明です", _fileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	// sequece情報読み込めるか？
@@ -35,7 +35,7 @@ bool Animation::Load(const char* _fileName)
 	if (!sequence.IsObject())
 	{
 		printf("アニメーション %s はシーケンスを持ちません", _fileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	// frames,length,bonecount,はあるか？
@@ -46,14 +46,14 @@ bool Animation::Load(const char* _fileName)
 	if (!frames.IsUint() || !length.IsDouble() || !bonecount.IsUint())
 	{
 		printf("シーケンス %s はフレーム、長さ、またはボーン数が無効です", _fileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	// フレーム数、アニメーション時間、ボーン数、フレーム間の時間を取得
-	mNumFrames = frames.GetUint();                     // フレーム数
-	mDuration = static_cast<float>(length.GetDouble());// アニメーション時間
-	mNumBones = bonecount.GetUint();                   // ボーン数
-	mFrameDuration = mDuration / (mNumFrames - 1);     // フレーム間の時間(アニメーションの再生時間/(フレーム数 - 1))
+	mNumFrames = frames.GetUint();						// フレーム数
+	mDuration = static_cast<float>(length.GetDouble());	// アニメーション時間
+	mNumBones = bonecount.GetUint();					// ボーン数
+	mFrameDuration = mDuration / (mNumFrames - 1);		// フレーム間の時間(アニメーションの再生時間/(フレーム数 - 1))
 
 	// トラック配列を確保
 	mTracks.resize(mNumBones);
@@ -63,7 +63,7 @@ bool Animation::Load(const char* _fileName)
 	if (!tracks.IsArray())
 	{
 		printf("シーケンス %s にトラック配列がありません", _fileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	// トラック数分ループ
@@ -73,7 +73,7 @@ bool Animation::Load(const char* _fileName)
 		if (!tracks[i].IsObject())
 		{
 			printf("アニメーション %s。トラック要素 %d は無効です", _fileName, i);
-			return false;   // falseを返す
+			return false;	// falseを返す
 		}
 
 		// tracks[i]の中の "bone"をuintで読み込み。ボーン番号を取得
@@ -85,14 +85,14 @@ bool Animation::Load(const char* _fileName)
 		if (!transforms.IsArray())
 		{
 			printf("アニメーション %s。トラック要素 %d にトランスフォームがありません", _fileName, i);
-			return false;   // falseを返す
+			return false;	// falseを返す
 		}
 
 		// transformsのサイズがアニメーションのフレーム数より小さかったら
 		if (transforms.Size() < mNumFrames)
 		{
 			printf("アニメーション %s。トラック要素 %d は予想より少ないフレーム数です", _fileName, i);
-			return false;   // falseを返す
+			return false;	// falseを返す
 		}
 
 		// transformsのサイズ分ループ。ボーン番号boneIndexの変換情報として取り込む
@@ -105,7 +105,7 @@ bool Animation::Load(const char* _fileName)
 			if (!rot.IsArray() || !trans.IsArray())
 			{
 				printf("ローテーション(quaternion)、またはtrans(平行移動成分)が読み込めませんでした");
-				return false;   // falseを返す
+				return false;	// falseを返す
 			}
 
 			BoneTransform temp; // BoneTransform … モデルのボーン変換
@@ -128,26 +128,26 @@ bool Animation::Load(const char* _fileName)
 	return true;
 }
 
-void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, float _inTime) const
+const void Animation::GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, float _inTime) const
 {
 	// アニメーションのためのボーン数と値が違っていたら
 	if (_outPoses.size() != mNumBones)
 	{
-		_outPoses.resize(mNumBones); // ポーズマトリックス配列を確保
+		_outPoses.resize(mNumBones);	// ポーズマトリックス配列を確保
 	}
 
 	// @@@
 	// 現在のフレームと次のフレームを見つけ出す。
 	// これはinTimeが [0～AnimDuration] の間にいることを前提としています。
-	size_t frame = static_cast<size_t>(_inTime / mFrameDuration); // フレーム = 指定時間 / アニメーションのフレーム間の時間
+	size_t frame = static_cast<size_t>(_inTime / mFrameDuration);	// フレーム = 指定時間 / アニメーションのフレーム間の時間
 	size_t nextFrame = frame + 1;
 	// フレームと次のフレームの間の小数値を計算します。
-	float pct = _inTime / mFrameDuration - frame;                 // pct = 指定時間 / アニメーションのフレーム間の時間 - frame
+	float pct = _inTime / mFrameDuration - frame;					// pct = 指定時間 / アニメーションのフレーム間の時間 - frame
 
 	// アニメーションのフレーム数がnextFrameよりも大きければ
 	if (mNumFrames <= nextFrame)
 	{
-		--nextFrame;  // nextFrameを減らす
+		--nextFrame;	// nextFrameを減らす
 	}
 
 	// ポーズをセットアップ
@@ -168,7 +168,7 @@ void Animation::GetGlobalPoseAtTime(std::vector<Matrix4>& _outPoses, const Skele
 	// 残りのポーズを設定します
 	for (size_t bone = 1; bone < mNumBones; ++bone)
 	{
-		Matrix4 localMat; // デフォルトは単位行列
+		Matrix4 localMat;	// デフォルトは単位行列
 		if (mTracks[bone].size() > 0)
 		{
 			// [bone][frame]のボーン姿勢と[bone][nextframe]を小数点以下のpctで補間した姿勢をinterpに算出

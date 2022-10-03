@@ -8,7 +8,7 @@ bool OpenJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName)
 	if (!file)
 	{
 		printf("このファイルは開けませんでした : %s", _inFileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 	// filestreamにファイル文字列を取り込む
 	stringstream fileStream;
@@ -26,7 +26,7 @@ bool OpenJsonFile(rapidjson::Document& _inputDocument, const char* _inFileName)
 	if (!_inputDocument.IsObject())
 	{
 		printf("このjsonファイルはjsonObjectとして読めませんでした : %s", _inFileName);
-		return false;   // falseを返す
+		return false;	// falseを返す
 	}
 
 	return true;

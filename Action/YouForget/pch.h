@@ -41,7 +41,7 @@ using namespace std;
 #include "RapidJsonHelper.h"
 #include "InputSystem.h"
 
-// Animation @ スケルトン
+// Animation
 #include "Animation.h"
 #include "BoneTransform.h"
 #include "MatrixPalette.h"
@@ -123,6 +123,5 @@ using namespace std;
 
 // Game @ 全部
 #include "Game.h"
-
 
 #endif //PCH_H
