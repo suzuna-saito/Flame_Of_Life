@@ -55,14 +55,12 @@ private:
 	Vector3 mOffset;
 	//画像に乗算する色
 	Vector3 mColor;
+	// 角度
+	Vector3 mAngle;
 	//サイズ
 	float mScale;
 	//透明度
 	float mAlpha;
-	// 角度
-	float mAngle;
-	// 回転
-	float mRot;
 	//テクスチャID
 	int mTextureID;
 	//ブレンドタイプ
@@ -112,19 +110,14 @@ public: //ゲッターセッター
 	void SetColor(const Vector3& _color) { mColor = _color; }
 
 	/*
+	@param mAngle 角度（ｘ軸）
+	*/
+	void SetAngle(const Vector3& _angle) { mAngle = _angle; }
+
+	/*
 	@param _alfa 透明度0~1
 	*/
 	void SetAlpha(float _alpha) { mAlpha = _alpha; }
-
-	/*
-	@param mAngle 角度（ｘ軸）
-	*/
-	void SetAngle(float _angle) { mAngle = _angle; }
-
-	/*
-	@param _alfa 角度（ｘ軸）
-	*/
-	void SetRot(float _rot) { mRot = _rot; }
 
 	/*
 	@param _scale スケール

@@ -60,7 +60,7 @@ void GameObject::Update(float _deltaTime)
 	//更新停止のイベント中でないか(ポーズ画面など)
 	if (mPauzingEvent == PauzingEvent::NoneEvent)
 	{
-		if (mState != State::Dead)
+		if (mState == State::Active)
 		{
 			//Transformのワールド変換
 			ComputeWorldTransform();
@@ -90,7 +90,7 @@ void GameObject::Update(float _deltaTime)
 */
 void GameObject::UpdateComponents(float _deltaTime)
 {
-	if (mState != State::Dead)
+	if (mState == State::Active)
 	{
 		for (auto itr : mComponents)
 		{

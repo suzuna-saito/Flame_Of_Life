@@ -40,7 +40,7 @@ MeshComponent::~MeshComponent()
 */
 void MeshComponent::Draw(Shader* _shader)
 {
-	if (mOwner->GetState() != State::Dead)
+	if (mOwner->GetState() == State::Active)
 	{
 		if (mMesh)
 		{

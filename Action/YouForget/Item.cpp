@@ -93,16 +93,13 @@ void Item::UpdateGameObject(float _deltaTime)
 		SetPosition(mPosition);
 	}
 	// プレイヤーと当たってたら
-	else if (mCollisionFlag && GetState() != State::Disabling && mItemExistsFlag)
+	else if (mCollisionFlag && GetState() != State::Paused && mItemExistsFlag)
 	{
 		// アイテムが存在してないとする
 		mItemExistsFlag = false;
 
-		// ステートをdisablにする
-		SetState(State::Disabling);
-
-		// アイテムカウントを減らす
-		ItemBase::mItemCount--;
+		// ステートをPausedにする
+		SetState(State::Paused);
 
 		// 取得したアイテムをデータ構造に格納する
 		mGetNumber.push_back(mItemNum);
@@ -115,7 +112,7 @@ void Item::UpdateGameObject(float _deltaTime)
 		mMeshComponent->SetVisible(false);
 
 		// ステートをdisablにする
-		SetState(State::Disabling);
+		SetState(State::Paused);
 	}
 }
 

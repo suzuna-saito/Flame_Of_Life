@@ -13,8 +13,10 @@ FallEffect::FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Objec
 	, MAlphaReductionVal(0.03f)
 	, MScaleAddVal(10.0f)
 {
+	mAngle.x = 0.5f;
 	mAlpha = 1.0f;
 	mScale = 200.0f;
+	mParticle->SetAngle(mAngle);
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	//mParticle->SetColor(Color::LightBlue);

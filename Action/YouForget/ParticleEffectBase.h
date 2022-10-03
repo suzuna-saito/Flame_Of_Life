@@ -56,18 +56,16 @@ protected:
 
 	//パーティクルの描画クラス
 	ParticleComponent* mParticle;
-
+	// 回転
+	Vector3             mAngle;
 	//生存時間
 	int					mLifeCount;
-
 	//アルファ値
 	float				mAlpha;
 	//大きさ
 	float				mScale;
 	//加速度
 	float				mSpeed;
-	// 回転
-	float               mRot;
 
 public:
 

@@ -27,8 +27,7 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag ,const V
 	, mColor(Vector3(1, 1, 1))
 	, mScale(_scale)
 	, mAlpha(1.0f)
-	, mAngle(0.5f)
-	, mRot(0.0f)
+	, mAngle(Vector3::Zero)
 	, mVisible(true)
 	, mReverce(false)
 	, mDrawOrder(_updateOrder)
@@ -81,16 +80,26 @@ void ParticleComponent::Draw(Shader* _shader)
 	else
 	{
 		// 全てのパーティクルのビルボード行列をセット
-		Matrix4 matRotation;
-		matRotation = Matrix4::CreateRotationX(mAngle * 3.14159f);
-
-		_shader->SetMatrixUniform("uWorldTransform", matScale * matRotation * mat);
-
-		if (mRot > 0.0f)
+		// X軸回転
+		if (mAngle.x > 0.0f)
 		{
-			Matrix4 addRot;
-			addRot = Matrix4::CreateRotationY(mRot * 3.14159f);
-			_shader->SetMatrixUniform("uWorldTransform", matScale * addRot * mat);
+			Matrix4 matRotationX;
+			matRotationX = Matrix4::CreateRotationX(mAngle.x * 3.14159f);
+			_shader->SetMatrixUniform("uWorldTransform", matScale * matRotationX * mat);
+		}
+		// Y軸回転
+		if (mAngle.y > 0.0f)
+		{
+			Matrix4 matRotationY;
+			matRotationY = Matrix4::CreateRotationY(mAngle.y * 3.14159f);
+			_shader->SetMatrixUniform("uWorldTransform", matScale * matRotationY * mat);
+		}
+		// Z軸回転
+		if (mAngle.z > 0.0f)
+		{
+			Matrix4 matRotationZ;
+			matRotationZ = Matrix4::CreateRotationZ(mAngle.z * 3.14159f);
+			_shader->SetMatrixUniform("uWorldTransform", matScale * matRotationZ * mat);
 		}
 	}
 	

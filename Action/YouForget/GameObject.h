@@ -17,7 +17,6 @@ enum class State :unsigned char
 {
 	//アクティブ
 	Active,
-	Disabling,
 	//更新が停止している
 	Paused,
 	//オブジェクトの更新が終了(外部からのみActiveに変更可能)

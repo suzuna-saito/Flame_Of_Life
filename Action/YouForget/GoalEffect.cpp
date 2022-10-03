@@ -7,7 +7,6 @@ GoalEffect::GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Objec
 	mScale = 1000.0f;
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
-	mParticle->SetAngle(1.0f);
 	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA);
 	mVelocity = _Vel;
 	mSpeed = 0.005f;
@@ -22,14 +21,16 @@ void GoalEffect::UpdateGameObject(float _deltaTime)
 		mSpeed *= -1.0f;
 	}
 
-	if (mRot >= 2.0f)
+	if (mAngle.y >= 2.0f)
 	{
-		mRot = 0.0f;
+		mAngle.y = 0.0f;
 	}
 
-	mRot += 0.002f;
+	mAngle.y += 0.002f;
 	mAlpha += mSpeed;
+	mScale += mSpeed * 300.0f;
 
 	mParticle->SetAlpha(mAlpha);
-	mParticle->SetRot(mRot);
+	mParticle->SetAngle(mAngle);
+	mParticle->SetScale(mScale);
 }

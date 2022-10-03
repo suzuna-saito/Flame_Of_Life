@@ -14,8 +14,10 @@ ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Objec
 	:ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag,false)
 	, mItemVisible(true)
 {
+	mAngle.x = 0.5f;
 	mAlpha = 0.7f;
 	mScale = 500.0f;
+	mParticle->SetAngle(mAngle);
 	mParticle->SetAlpha(mAlpha);
 	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::White);
@@ -54,7 +56,6 @@ void ItemEffect::UpdateGameObject(float _deltaTime)
 		}
 	}
 	
-	//ライフカウントが0より大きかったら速度、透明度、スケールの値を更新
+	//ライフカウントが0より大きかったら透明度、スケールの値を更新
 	mParticle->SetAlpha(mAlpha);
-	mParticle->SetScale(mScale);
 }
