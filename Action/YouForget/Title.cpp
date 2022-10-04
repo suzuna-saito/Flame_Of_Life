@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-Title::Title(const Scene& _nowScene)
+Title::Title(const SceneType& _nowScene)
 	:SceneBase()
 {
 	SetScene(_nowScene);
@@ -29,7 +29,7 @@ Title::Title(const Scene& _nowScene)
 */
 Title::~Title()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::title);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eTitle);
 	delete mSprite;
 }
 
@@ -50,7 +50,7 @@ SceneBase* Title::update()
 {
 	if (mGameSceneFlag)
 	{
-		return new FirstStage(Scene::first);
+		return new FirstStage(SceneType::eFirst);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
 		//return new ThirdStage(Scene::third);

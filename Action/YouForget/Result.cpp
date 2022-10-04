@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-Result::Result(const Scene& _nowScene)
+Result::Result(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
 	if (mTrueEndFlag)
@@ -29,7 +29,7 @@ Result::~Result()
 {
 	delete mSprite;
 
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::gameClear);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eGameClear);
 }
 
 void Result::Input(const InputState& _state)
@@ -49,7 +49,7 @@ SceneBase* Result::update()
 {
 	if (mGameSceneFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 	mResultUpdate();

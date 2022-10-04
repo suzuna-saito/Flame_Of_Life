@@ -77,19 +77,19 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	for (auto pending : mPendingGameObjects)
 	{
 		pending->ComputeWorldTransform();
-		if (pending->GetScene() == SceneBase::Scene::tutorial)
+		if (pending->GetScene() == SceneBase::SceneType::eTutorial)
 		{
 			mTutorialObjects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::first)
+		if (pending->GetScene() == SceneBase::SceneType::eFirst)
 		{
 			mEasyStageObjects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::second)
+		if (pending->GetScene() == SceneBase::SceneType::eSecond)
 		{
 			mNormalStageObjects.emplace_back(pending);
 		}
-		if (pending->GetScene() == SceneBase::Scene::third)
+		if (pending->GetScene() == SceneBase::SceneType::eThird)
 		{
 			mHardStageObjects.emplace_back(pending);
 		}
@@ -152,24 +152,24 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 
 		switch (_object->GetScene())
 		{
-		case SceneBase::Scene::title:
+		case SceneBase::SceneType::eTitle:
 			mTitleObjects.emplace_back(_object);
 			break;
-		case SceneBase::Scene::tutorial:
+		case SceneBase::SceneType::eTutorial:
 			mTutorialObjects.emplace_back(_object);
 			break;
-		case SceneBase::Scene::first :
+		case SceneBase::SceneType::eFirst :
 			mEasyStageObjects.emplace_back(_object);
 			break;
-		case SceneBase::Scene::second:
+		case SceneBase::SceneType::eSecond:
 			mNormalStageObjects.emplace_back(_object);
 			break;
-		case SceneBase::Scene::third:
+		case SceneBase::SceneType::eThird:
 			mHardStageObjects.emplace_back(_object);
 			break;
-		case SceneBase::Scene::firstResult:
-		case SceneBase::Scene::secondResult:
-		case SceneBase::Scene::thirdResult:
+		case SceneBase::SceneType::eFirstResult:
+		case SceneBase::SceneType::eSecondResult:
+		case SceneBase::SceneType::eThirdResult:
 			mResultObjects.emplace_back(_object);
 			break;
 		}
@@ -234,11 +234,11 @@ void GameObjectManager::RemoveGameObject(GameObject* _object)
 
 }
 
-void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
+void GameObjectManager::RemoveGameObjects(SceneBase::SceneType _scene)
 {
 	switch (_scene)
 	{
-	case SceneBase::Scene::title:
+	case SceneBase::SceneType::eTitle:
 
 		while (!mTitleObjects.empty())
 		{
@@ -246,7 +246,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::Scene::tutorial:
+	case SceneBase::SceneType::eTutorial:
 
 		while (!mTutorialObjects.empty())
 		{
@@ -254,7 +254,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::Scene::first:
+	case SceneBase::SceneType::eFirst:
 
 		while (!mEasyStageObjects.empty())
 		{
@@ -262,7 +262,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::Scene::second:
+	case SceneBase::SceneType::eSecond:
 
 		while (!mNormalStageObjects.empty())
 		{
@@ -270,7 +270,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::Scene::third:
+	case SceneBase::SceneType::eThird:
 
 		while (!mHardStageObjects.empty())
 		{
@@ -278,9 +278,9 @@ void GameObjectManager::RemoveGameObjects(SceneBase::Scene _scene)
 		}
 		break;
 
-	case SceneBase::Scene::firstResult:
-	case SceneBase::Scene::secondResult:
-	case SceneBase::Scene::thirdResult:
+	case SceneBase::SceneType::eFirstResult:
+	case SceneBase::SceneType::eSecondResult:
+	case SceneBase::SceneType::eThirdResult:
 
 		while (!mResultObjects.empty())
 		{

@@ -1,6 +1,6 @@
 #include "pch.h"
 
-GoalEffect::GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, GoalObj* _PlayerPtr)
+GoalEffect::GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, GoalObj* _PlayerPtr)
 	: ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Goal.png", _SceneTag, _ObjectTag, false)
 {
 	mAlpha = 1.0f;

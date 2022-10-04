@@ -18,7 +18,7 @@
 @param	_sceneTag シーンのタグ
 @param	_scale 画像の拡大サイズ
 */
-ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _billFlag, const float& _scale)
+ParticleEffectBase::ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::SceneType _sceneTag, const Tag& _objectTag, bool _billFlag, const float& _scale)
 	: GameObject(_sceneTag, _objectTag)
 	, mLifeCount(_lifeCount)
 	, mAngle(Vector3::Zero)

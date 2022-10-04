@@ -11,7 +11,7 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	SecondStage(const Scene& _nowScene);
+	SecondStage(const SceneType& _nowScene);
 
 	/*
 	@fn	デストラクタ

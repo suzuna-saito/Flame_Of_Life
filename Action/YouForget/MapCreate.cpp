@@ -7,7 +7,7 @@
 @fn	コンストラクタ
 */
 MapCreate::MapCreate()
-	:GameObject(SceneBase::Scene::other, Tag::Other)
+	:GameObject(SceneBase::SceneType::eInit, Tag::Other)
 	, mScene()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
@@ -54,19 +54,19 @@ bool MapCreate::OpenFile()
 	switch (mScene)
 	{
 	//----------------tutorial-----------------------
-	case SceneBase::Scene::tutorial:
+	case SceneBase::SceneType::eTutorial:
 		filename = "Assets/Config/tutorial.json";
 		break;
 	//----------------FirstStage---------------------
-	case SceneBase::Scene::first:
+	case SceneBase::SceneType::eFirst:
 		filename = "Assets/Config/first.json";
 		break;
 	//----------------SecondStage--------------------
-	case SceneBase::Scene::second:
+	case SceneBase::SceneType::eSecond:
 		filename = "Assets/Config/easy.json";
 		break;
 	//----------------ThirdStage---------------------
-	case SceneBase::Scene::third:
+	case SceneBase::SceneType::eThird:
 		filename = "Assets/Config/second.json";
 		break;
 	default:
@@ -112,7 +112,7 @@ bool MapCreate::OpenFile()
 	}
 
 	// チュートリアルシーンにはアイテムがないので、チュートリアル以外だったら
-	if (mScene != SceneBase::Scene::tutorial)
+	if (mScene != SceneBase::SceneType::eTutorial)
 	{
 		//アイテムデータの読み込み
 		if (!readTiledJson(mItemMapData, filename, "Item"))
@@ -162,14 +162,14 @@ void MapCreate::CreateGround()
 	srand((unsigned)time(NULL));
 
 	// 床の種類の数をステージによって設定
-	if (mScene == SceneBase::Scene::tutorial ||
-		mScene == SceneBase::Scene::first)
+	if (mScene == SceneBase::SceneType::eTutorial ||
+		mScene == SceneBase::SceneType::eFirst)
 	{
 		// 床の種類が1つ
 		Ground::mTypeNum = 1;
 	}
-	else if (mScene == SceneBase::Scene::second ||
-		mScene == SceneBase::Scene::third)
+	else if (mScene == SceneBase::SceneType::eSecond ||
+		mScene == SceneBase::SceneType::eThird)
 	{
 		// 床の種類が2つ
 		Ground::mTypeNum = 2;

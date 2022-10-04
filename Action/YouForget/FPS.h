@@ -21,14 +21,10 @@ private:
 	// 経過時間を比較して1フレームにかける時間を越すまで待つ
 	void Wait();
 
-	// フレームレートの最高値
-	const Uint32 MSetFps;
-	// １フレームにかける時間
-	const Uint32 MOneFrameTickCount;
-	// 前のフレームのかかった時間
-	int mBeforetickCount;
-	// 現在のフレームのかかった時間
-	float mDeltaTime;
+	const Uint32 MSetFps;				// フレームレートの最高値
+	const Uint32 MOneFrameTickCount;	// １フレームにかける時間
+	int mBeforetickCount;				// 前のフレームのかかった時間
+	float mDeltaTime;					// 現在のフレームのかかった時間
 
 public:// ゲッターセッター
 	// 現在のフレームにかかった時間（float型）

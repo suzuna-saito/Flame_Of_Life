@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-SecondStage::SecondStage(const Scene& _nowScene)
+SecondStage::SecondStage(const SceneType& _nowScene)
 	:SceneBase()
 {
 	SetScene(_nowScene);
@@ -38,7 +38,7 @@ SecondStage::SecondStage(const Scene& _nowScene)
 */
 SecondStage::~SecondStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::second);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eSecond);
 
 	delete mMapCreate;
 	delete mSprite;
@@ -67,12 +67,12 @@ SceneBase* SecondStage::update()
 {
 	if (GoalObj::mGoalFlag)
 	{
-		return new SecondResult(Scene::secondResult);
+		return new SecondResult(SceneType::eSecondResult);
 	}
 
 	if (mReturnTitleFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 

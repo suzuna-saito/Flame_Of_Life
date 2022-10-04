@@ -31,7 +31,7 @@ public:
 	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	FallEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr);
+	FallEffectManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _playerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -58,7 +58,7 @@ private:
 	//パーティクルの状態
 	ParticleState	 mState;
 	//シーンのタグ
-	SceneBase::Scene mSceneTag;
+	SceneBase::SceneType mSceneTag;
 	//アタッチしたゲームオブジェクトのタグ
 	Tag				 mTag;
 	//デスエフェクト

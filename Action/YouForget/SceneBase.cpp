@@ -4,7 +4,7 @@
 #include "pch.h"
 
 //現在のシーンの初期化
-SceneBase::Scene SceneBase::mIsScene = Scene::other;
+SceneBase::SceneType SceneBase::mIsScene = SceneType::eInit;
 
 /*
 @fn	コンストラクタ

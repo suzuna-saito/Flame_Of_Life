@@ -10,7 +10,7 @@
 @param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 @param	_SceneTag シーンのタグ
 */
-ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Item* _ItemPtr)
+ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr)
 	:ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag,false)
 	, mItemVisible(true)
 {

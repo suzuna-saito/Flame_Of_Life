@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-FirstResult::FirstResult(const Scene& _nowScene)
+FirstResult::FirstResult(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
 	mSprite = new Sprite("Assets/UI/FirstResult/FirstResultBase.png");
@@ -28,7 +28,7 @@ FirstResult::~FirstResult()
 {
 	delete mSprite;
 
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::firstResult);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eFirstResult);
 }
 
 void FirstResult::Input(const InputState& _state)
@@ -54,14 +54,14 @@ SceneBase* FirstResult::update()
 {
 	if (mGameSceneFlag)
 	{
-		return new SecondStage(Scene::second);
+		return new SecondStage(SceneType::eSecond);
 
 		//return new Result(Scene::gameClear);
 	}
 
 	if (mReturnTitleFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 	mResultUpdate();

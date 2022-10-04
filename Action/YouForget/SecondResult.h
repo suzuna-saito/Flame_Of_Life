@@ -8,7 +8,7 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	SecondResult(const Scene& _nowScene);
+	SecondResult(const SceneType& _nowScene);
 
 	/*
 	@fn	デストラクタ

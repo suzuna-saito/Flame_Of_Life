@@ -20,7 +20,7 @@ public:
 	@param	_SceneTag シーンのタグ
 	@param _ItemPtr アイテムのポインタ
 	*/
-	ItemEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Item* _ItemPtr);
+	ItemEffectManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr);
 
 	/*
 	@fn	デストラクタ
@@ -57,7 +57,7 @@ private:
 	//パーティクルの状態
 	ParticleState	 mState;
 	//シーンのタグ
-	SceneBase::Scene mSceneTag;
+	SceneBase::SceneType mSceneTag;
 	//アタッチしたゲームオブジェクトのタグ
 	Tag				 mTag;
 	//アイテムエフェクト

@@ -15,7 +15,7 @@ public:
 	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 	@param	_SceneTag シーンのタグ
 	*/
-	CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _PlayerPtr);
+	CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _PlayerPtr);
 
 	/*
 	@fn	デストラクタ

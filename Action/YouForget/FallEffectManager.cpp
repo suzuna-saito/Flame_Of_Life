@@ -9,7 +9,7 @@
 @param	_SceneTag シーンのタグ
 @param _playerPtr プレイヤーのポインタ
 */
-FallEffectManager::FallEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _playerPtr)
+FallEffectManager::FallEffectManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _playerPtr)
 	:GameObject(_SceneTag, _ObjectTag)
 	, mRandVel(Vector3::Zero)
 {

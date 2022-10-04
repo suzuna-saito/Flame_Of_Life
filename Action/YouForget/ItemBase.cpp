@@ -4,7 +4,7 @@
 int ItemBase::mItemCount = 0;
 vector<ItemNum> ItemBase::mGetNumber;
 
-ItemBase::ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag)
+ItemBase::ItemBase(const SceneBase::SceneType _sceneTag, const Tag& _objectTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mMeshComponent(0)
 	, mSelfBoxCollider(0)

@@ -10,7 +10,7 @@
 @param	_sceneTag シーンのタグ
 @param	_scale 画像の拡大サイズ
 */
-UIBase::UIBase(const Vector2& _pos, const std::string& _uiFileName, SceneBase::Scene _sceneTag, const Tag& _objectTag, const float& _scale)
+UIBase::UIBase(const Vector2& _pos, const std::string& _uiFileName, SceneBase::SceneType _sceneTag, const Tag& _objectTag, const float& _scale)
 	: GameObject(_sceneTag, _objectTag)
 {
 

@@ -1,7 +1,7 @@
 #include "pch.h"
 
 // コンストラクタ
-LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
 	, mOwner(_owner)

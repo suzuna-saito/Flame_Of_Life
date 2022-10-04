@@ -74,7 +74,7 @@ private:
 	vector<vector<int>> mItemMapData;
 
 	//現在のシーン
-	SceneBase::Scene mScene;
+	SceneBase::SceneType mScene;
 	//幅のマップデータ
 	int	mSizeX;
 	//奥行のマップデータ

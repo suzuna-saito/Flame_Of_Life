@@ -18,7 +18,7 @@ public:
 	@param	_SceneTag シーンのタグ
 	@param _ItemPtr プレイヤーのポインタ
 	*/
-	CircledShadowManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _PlayerPtr);
+	CircledShadowManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _PlayerPtr);
 
 	/*
 	@fn	デストラクタ
@@ -37,7 +37,7 @@ private:
 	//パーティクルの状態
 	ParticleState	 mState;
 	//シーンのタグ
-	SceneBase::Scene mSceneTag;
+	SceneBase::SceneType mSceneTag;
 	//アタッチしたゲームオブジェクトのタグ
 	Tag				 mTag;
 	//プレイヤーの影エフェクト

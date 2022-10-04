@@ -66,7 +66,7 @@ public:
 	@param	_objectTag ゲームオブジェクトのタグ
 	@param	_reUseGameObject
 	*/
-	GameObject(const SceneBase::Scene _sceneTag, const Tag& _objectTag, bool _reUseGameObject = false);
+	GameObject(const SceneBase::SceneType _sceneTag, const Tag& _objectTag, bool _reUseGameObject = false);
 
 	/*
 	@fn	デストラクタ
@@ -222,7 +222,7 @@ protected:
 	Vector3 mColor;
 
 	//シーンのタグ
-	SceneBase::Scene mSceneTag;
+	SceneBase::SceneType mSceneTag;
 	//アタッチされているコンポーネント
 	vector<class Component*>mComponents;
 private:
@@ -303,7 +303,7 @@ public://ゲッターセッター
 	/*
 	@return	シーンのタグ
 	*/
-	SceneBase::Scene GetScene() { return mSceneTag; };
+	SceneBase::SceneType GetScene() { return mSceneTag; };
 
 	/*
 	@return	オブジェクトのAABB

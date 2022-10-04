@@ -34,35 +34,20 @@ public:
     */
     virtual void Input(const InputState& state) {};
 
-    /*
-    @enum シーンの種類
-    */
-    enum class Scene:unsigned char
+    // シーンの種類
+    enum class SceneType :unsigned char
     {
-        // その他
-        other,
-        // タイトル
-        title,
-        // チュートリアル
-        tutorial,
-        // Firstステージ
-        first,
-        // Secondステージ
-        second,
-        // Thirdステージ
-        third,
-        // Firstリザルト
-        firstResult,
-        // Secondリザルト
-        secondResult,
-        // Thirdリザルト
-        thirdResult,
-        // ゲームクリア
-        gameClear,
-        // ゲームオーバー
-        gameOver,
-        // コンティニュー 
-        Continue
+        eInit,          // 初期状態
+        eTitle,         // タイトル
+        eTutorial,      // チュートリアル
+        eFirst,         // Firstステージ
+        eSecond,        // Secondステージ
+        eThird,         // Thirdステージ
+        eFirstResult,   // Firstリザルト
+        eSecondResult,  // Secondリザルト
+        eThirdResult,   // Thirdリザルト
+        eGameClear,     // ゲームクリア
+        eGameOver,      // ゲームオーバー
     };
 
 protected:
@@ -89,17 +74,17 @@ protected:
 private:
 
     //現在のシーン
-    static Scene mIsScene;
+    static SceneType mIsScene;
 
 public://ゲッターセッター
 
     /*
     @return 現在のシーン(int型)
     */
-    static Scene GetScene() { return mIsScene; };
+    static SceneType GetScene() { return mIsScene; };
 
     /*
     @param _isScene 現在のシーン
     */
-    virtual void SetScene(Scene _isScene) { mIsScene = _isScene; };
+    virtual void SetScene(SceneType _isScene) { mIsScene = _isScene; };
 };

@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-SecondResult::SecondResult(const Scene& _nowScene)
+SecondResult::SecondResult(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
 	mSprite = new Sprite("Assets/UI/SecondResult/SecondResultBase.png");
@@ -28,7 +28,7 @@ SecondResult::~SecondResult()
 {
 	delete mSprite;
 
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::secondResult);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eSecondResult);
 }
 
 void SecondResult::Input(const InputState& _state)
@@ -56,12 +56,12 @@ SceneBase* SecondResult::update()
 
 	if (mGameSceneFlag)
 	{
-		return new ThirdStage(Scene::third);
+		return new ThirdStage(SceneType::eThird);
 	}
 
 	if (mReturnTitleFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 	return this;

@@ -4,7 +4,7 @@
 Ground::alphaColor SwitchCollider::mLinkageColor = Ground::alphaColor::red;
 
 // コンストラクタ
-SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
 	, mOwner(_owner)
 {

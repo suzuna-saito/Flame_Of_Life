@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-ThirdResult::ThirdResult(const Scene& _nowScene)
+ThirdResult::ThirdResult(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
 	mSprite = new Sprite("Assets/UI/ThirdResult/ThirdResultBase.png");
@@ -27,7 +27,7 @@ ThirdResult::ThirdResult(const Scene& _nowScene)
 ThirdResult::~ThirdResult()
 {
 	delete mSprite;
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::thirdResult);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eThirdResult);
 }
 
 void ThirdResult::Input(const InputState& _state)
@@ -55,12 +55,12 @@ SceneBase* ThirdResult::update()
 
 	if (mGameSceneFlag)
 	{
-		return new Result(Scene::gameClear);
+		return new Result(SceneType::eGameClear);
 	}
 
 	if (mReturnTitleFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 	return this;

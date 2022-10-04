@@ -17,7 +17,7 @@ class ItemBase :public GameObject
 {
 public:
 	// コンストラクタ
-	ItemBase(const SceneBase::Scene _sceneTag, const Tag& _objectTag);
+	ItemBase(const SceneBase::SceneType _sceneTag, const Tag& _objectTag);
 
 	/*
 	@fn	デストラクタ

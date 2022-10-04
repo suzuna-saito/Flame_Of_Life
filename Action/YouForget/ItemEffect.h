@@ -21,7 +21,7 @@ public:
 	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 	@param	_SceneTag シーンのタグ
 	*/
-	ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Item* _ItemPtr);
+	ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr);
 
 	/*
 	@fn	デストラクタ

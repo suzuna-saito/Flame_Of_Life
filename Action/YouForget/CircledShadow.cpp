@@ -1,6 +1,6 @@
 #include "pch.h"
 
-CircledShadow::CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _PlayerPtr)
+CircledShadow::CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _PlayerPtr)
 	: ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag, false)
 {
 	mAngle.x = 0.5f;

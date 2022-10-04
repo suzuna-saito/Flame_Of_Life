@@ -15,7 +15,7 @@ public:
 	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 	@param	_SceneTag シーンのタグ
 	*/
-	GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, GoalObj* _PlayerPtr);
+	GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, GoalObj* _PlayerPtr);
 
 	/*
 	@fn	デストラクタ

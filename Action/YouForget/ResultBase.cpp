@@ -10,7 +10,7 @@ bool ResultBase::mTrueEndFlag = true;
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-ResultBase::ResultBase(const Scene& _nowScene)
+ResultBase::ResultBase(const SceneType& _nowScene)
 	:SceneBase()
 	, mDescription()
 	, mDeleteDescription()
@@ -83,7 +83,7 @@ void ResultBase::mSearch()
 	}
 
 	// 全てのピースを回収できてなかったら
-	if (GetScene() != Scene::gameClear &&
+	if (GetScene() != SceneType::eGameClear &&
 		mDescription.size() != 3)
 	{
 		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
@@ -94,19 +94,19 @@ void ResultBase::mSearch()
 		// シーンによって更に画像を追加
 		switch (GetScene())
 		{
-		case Scene::firstResult:
+		case SceneType::eFirstResult:
 			mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
 			mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
 			break;
-		case Scene::secondResult:
+		case SceneType::eSecondResult:
 			mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
 			mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
 			break;
-		case Scene::thirdResult:
+		case SceneType::eThirdResult:
 			mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
 			mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
 			break;
-		case Scene::gameClear:
+		case SceneType::eGameClear:
 			if (mTrueEndFlag)
 			{
 				mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
@@ -124,9 +124,9 @@ void ResultBase::mDrawUpdate()
 	// 次の説明を出すようにする
 	mDraw = true;
 
-	if (GetScene() == Scene::gameClear)
+	if (GetScene() == SceneType::eGameClear)
 	{
-		if (GetScene() == Scene::gameClear && mSprite != nullptr)
+		if (GetScene() == SceneType::eGameClear && mSprite != nullptr)
 		{
 			mSprite->SetThisVisible(false);
 		}
@@ -168,7 +168,7 @@ void ResultBase::mResultUpdate()
 	}
 
 	
-	if (mButtonSprite == nullptr && GetScene() != Scene::gameClear)
+	if (mButtonSprite == nullptr && GetScene() != SceneType::eGameClear)
 	{
 		mButtonSprite = new Sprite("Assets/UI/ResultBase/Button.png");
 	}

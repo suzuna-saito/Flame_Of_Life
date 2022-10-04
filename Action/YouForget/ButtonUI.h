@@ -14,7 +14,7 @@ public:
 	@param	_SceneTag シーンのタグ
 	@param _playerPtr プレイヤーのポインタ
 	*/
-	ButtonUI(const Vector2& _Pos, const Tag& _ObjectTag, const SceneBase::Scene _SceneTag);
+	ButtonUI(const Vector2& _Pos, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag);
 
 	/*
 	@fn	デストラクタ

@@ -9,7 +9,7 @@
 @param	_SceneTag シーンのタグ
 @param _ItemPtr アイテムのポインタ
 */
-CircledShadowManager::CircledShadowManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Player* _mPlayer)
+CircledShadowManager::CircledShadowManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _mPlayer)
 	:GameObject(_SceneTag, _ObjectTag)
 {
 	mState = ParticleState::PARTICLE_ACTIVE;

@@ -7,7 +7,7 @@
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-ThirdStage::ThirdStage(const Scene& _nowScene)
+ThirdStage::ThirdStage(const SceneType& _nowScene)
 	:SceneBase()
 {
 	SetScene(_nowScene);
@@ -38,7 +38,7 @@ ThirdStage::ThirdStage(const Scene& _nowScene)
 */
 ThirdStage::~ThirdStage()
 {
-	GAME_OBJECT_MANAGER->RemoveGameObjects(Scene::third);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eThird);
 
 	delete mMapCreate;
 	delete mSprite;
@@ -69,12 +69,12 @@ SceneBase* ThirdStage::update()
 	if (GoalObj::mGoalFlag)
 	{
 		
-		return new ThirdResult(Scene::thirdResult);
+		return new ThirdResult(SceneType::eThirdResult);
 	}
 
 	if (mReturnTitleFlag)
 	{
-		return new Title(Scene::title);
+		return new Title(SceneType::eTitle);
 	}
 
 

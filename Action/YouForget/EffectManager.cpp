@@ -9,7 +9,7 @@
 @param	_objectTag アタッチしたゲームオブジェクトのタグ
 @param	_sceneTag シーンのタグ
 */
-EffectManager::EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag)
+EffectManager::EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::SceneType _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
 	, mSandEffect(nullptr)
 	, mCreateSandEffectCount(0)

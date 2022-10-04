@@ -9,7 +9,7 @@
 @param	_SceneTag シーンのタグ
 @param _ItemPtr アイテムのポインタ
 */
-ItemEffectManager::ItemEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, Item* _ItemPtr)
+ItemEffectManager::ItemEffectManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr)
 	:GameObject(_SceneTag, _ObjectTag)
 	, mRandVel(Vector3::Zero)
 	, farstFlag(true)

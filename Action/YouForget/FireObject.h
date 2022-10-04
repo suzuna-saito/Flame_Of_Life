@@ -11,7 +11,7 @@ class FireObject :public GameObject
 public:
 
 	// コンストラクタ
-	FireObject(Candle* _owner, const Tag& _objectTag, const SceneBase::Scene _sceneTag);
+	FireObject(Candle* _owner, const Tag& _objectTag, const SceneBase::SceneType _sceneTag);
 
 	/*
 	@fn	デストラクタ

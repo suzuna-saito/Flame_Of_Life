@@ -12,7 +12,7 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	ResultBase(const Scene& _nowScene);
+	ResultBase(const SceneType& _nowScene);
 
 	/*
 	@fn	デストラクタ

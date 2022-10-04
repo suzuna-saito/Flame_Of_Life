@@ -3,7 +3,7 @@
 // 静的メンバ変数
 bool GoalObj::mGoalFlag = false; // ゴールしたかどうか
 
-GoalObj::GoalObj(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag)
+GoalObj::GoalObj(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 {
 	// ゴールしたかどうかフラグをfalseにする

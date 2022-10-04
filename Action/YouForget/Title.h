@@ -13,7 +13,7 @@ public:
 	@fn		コンストラクタ
 	@param	_nowScene 現在のシーン
 	*/
-	Title(const Scene& _nowScene);
+	Title(const SceneType& _nowScene);
 
 	/*
 	@fn	デストラクタ

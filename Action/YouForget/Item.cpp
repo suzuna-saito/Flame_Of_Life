@@ -1,6 +1,6 @@
 #include "pch.h"
 
-Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::Scene _sceneTag, const int _num)
+Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
 	, mItemExistsTime(0)
 	, MItemExistsOneTime(2000)
@@ -134,12 +134,12 @@ void Item::mItemType(int _num)
 {
 	switch (GetScene())
 	{
-	case SceneBase::Scene::second:
+	case SceneBase::SceneType::eSecond:
 		MItemExistsOneTime = 2700;
 		MItemExistsTwoTime = 800;
 		MItemExistsThreeTime = 400;
 		break;
-	case SceneBase::Scene::third:
+	case SceneBase::SceneType::eThird:
 		MItemExistsOneTime = 4800;
 		MItemExistsTwoTime = 3600;
 		MItemExistsThreeTime = 1600;

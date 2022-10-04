@@ -17,7 +17,7 @@ public:
 	@param	_objectTag アタッチしたゲームオブジェクトのタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::Scene _sceneTag);
+	EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBase::SceneType _sceneTag);
 
 	/*
 	@fn	デストラクタ
@@ -39,7 +39,7 @@ private:
 	//エフェクトマネージャーの座標
 	Vector3			 mPos;
 	//シーンのタグ
-	SceneBase::Scene mSceneTag;
+	SceneBase::SceneType mSceneTag;
 	//アタッチしたゲームオブジェクトのタグ
 	Tag				 mTag;
 	//砂ぼこりエフェクト

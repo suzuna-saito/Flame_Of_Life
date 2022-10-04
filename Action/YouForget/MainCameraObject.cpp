@@ -7,7 +7,7 @@
 @fn	コンストラクタ
 */
 MainCameraObject::MainCameraObject()
-	: GameObject(SceneBase::Scene::other, Tag::Camera, true)
+	: GameObject(SceneBase::SceneType::eInit, Tag::Camera, true)
 	, mHasParentObject(false)
 	, mOffsetPos(Vector3::Zero)
 	, mLerpObject(Vector3::Zero)

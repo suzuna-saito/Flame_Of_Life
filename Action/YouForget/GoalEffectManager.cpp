@@ -9,7 +9,7 @@
 @param	_SceneTag シーンのタグ
 @param _ItemPtr アイテムのポインタ
 */
-GoalEffectManager::GoalEffectManager(const Tag& _ObjectTag, const SceneBase::Scene _SceneTag, GoalObj* _mPlayer)
+GoalEffectManager::GoalEffectManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, GoalObj* _mPlayer)
 	:GameObject(_SceneTag, _ObjectTag)
 {
 	mState = ParticleState::PARTICLE_ACTIVE;
