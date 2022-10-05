@@ -10,10 +10,10 @@
 Title::Title(const SceneType& _nowScene)
 	:SceneBase()
 {
-	SetScene(_nowScene);
+	mIsScene = _nowScene;
 
 	// ƒ^ƒCƒgƒ‹‰æ‘œ
-	mSprite = new Sprite("Assets/UI/Title/TitleB.png");
+	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
 
 	ResultBase::mTrueEndFlag = true;
 
@@ -29,8 +29,8 @@ Title::Title(const SceneType& _nowScene)
 */
 Title::~Title()
 {
+	delete mFullPicture;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eTitle);
-	delete mSprite;
 }
 
 void Title::Input(const InputState& _state)

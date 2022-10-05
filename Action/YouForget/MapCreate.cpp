@@ -47,7 +47,7 @@ MapCreate::~MapCreate()
 */
 bool MapCreate::OpenFile()
 {
-	mScene = SceneBase::GetScene();
+	mScene = SceneBase::mIsScene;
 
 	// 現在のシーンによって読み込むファイル名を変える
 	const char *filename = nullptr;
@@ -142,11 +142,11 @@ void MapCreate::CreateBackGround()
 
 			if (name == 35)
 			{
-				new BackGround(objectPos, objectSize, Tag::Other, SceneBase::GetScene(), name);
+				new BackGround(objectPos, objectSize, Tag::Other, SceneBase::mIsScene, name);
 			}
 			else if (name == 36)
 			{
-				new BackGround(objectPos02, objectSize, Tag::Other, SceneBase::GetScene(), name);
+				new BackGround(objectPos02, objectSize, Tag::Other, SceneBase::mIsScene, name);
 			}
 		}
 	}
@@ -186,11 +186,11 @@ void MapCreate::CreateGround()
 
 			if (name == 1)
 			{
-				new Ground(objectPos, objectSize, Tag::ground, SceneBase::GetScene(), Ground::groundTag::notAlpha);
+				new Ground(objectPos, objectSize, Tag::ground, SceneBase::mIsScene, Ground::groundTag::notAlpha);
 			}
 			else if (name == 4)
 			{
-				new Ground(objectPos, objectSize, Tag::ground, SceneBase::GetScene(), Ground::groundTag::RGBalpha);
+				new Ground(objectPos, objectSize, Tag::ground, SceneBase::mIsScene, Ground::groundTag::RGBalpha);
 			}
 		}
 	}
@@ -213,7 +213,7 @@ void MapCreate::CreatePlayer()
 
 			if (name == 2)
 			{
-				new Player(objectPos, objectSize, Tag::player, SceneBase::GetScene());
+				new Player(objectPos, objectSize, Tag::player, SceneBase::mIsScene);
 			}
 		}
 	}
@@ -235,7 +235,7 @@ void MapCreate::CreateCandle()
 
 			if (name == 3)
 			{
-				new GoalObj(objectPos, objectSize, Tag::candle, SceneBase::GetScene());
+				new GoalObj(objectPos, objectSize, Tag::candle, SceneBase::mIsScene);
 			}
 
 		}
@@ -258,11 +258,11 @@ void MapCreate::CreateSwitch()
 
 			if (name == 18)
 			{
-				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::GetScene(), Switch::switchColor::red);
+				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::mIsScene, Switch::switchColor::red);
 			}
 			else if (name == 24)
 			{
-				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::GetScene(), Switch::switchColor::green);
+				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::mIsScene, Switch::switchColor::green);
 			}
 
 		}
@@ -287,7 +287,7 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos, objectSize, Tag::item, SceneBase::GetScene(), ItemNumber);
+				new Item(objectPos, objectSize, Tag::item, SceneBase::mIsScene, ItemNumber);
 				ItemNumber++;
 			}
 		}

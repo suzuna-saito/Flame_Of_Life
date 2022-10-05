@@ -192,6 +192,9 @@
     <ClCompile Include="GoalEffectManager.cpp">
       <Filter>ParticleEffect\GoalEffect</Filter>
     </ClCompile>
+    <ClCompile Include="FullPicture.cpp">
+      <Filter>UI\FullPicture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -387,6 +390,9 @@
     <ClInclude Include="GoalEffectManager.h">
       <Filter>ParticleEffect\GoalEffect</Filter>
     </ClInclude>
+    <ClInclude Include="FullPicture.h">
+      <Filter>UI\FullPicture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BasicMesh.frag">
@@ -543,6 +549,9 @@
     </Filter>
     <Filter Include="ParticleEffect\GoalEffect">
       <UniqueIdentifier>{e060a8b2-24bb-408a-a802-7a52d995683b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\FullPicture">
+      <UniqueIdentifier>{b5fcb936-6c08-4a41-953d-34c096c2f809}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

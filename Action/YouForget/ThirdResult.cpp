@@ -10,7 +10,7 @@
 ThirdResult::ThirdResult(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
-	mSprite = new Sprite("Assets/UI/ThirdResult/ThirdResultBase.png");
+	mFullPicture = new FullPicture("Assets/UI/ThirdResult/ThirdResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
 	mItemDescription[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
@@ -26,7 +26,7 @@ ThirdResult::ThirdResult(const SceneType& _nowScene)
 */
 ThirdResult::~ThirdResult()
 {
-	delete mSprite;
+	delete mFullPicture;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eThirdResult);
 }
 

@@ -10,7 +10,7 @@
 FirstStage::FirstStage(const SceneType& _nowScene)
 	:SceneBase()
 {
-	SetScene(_nowScene);
+	mIsScene = _nowScene;
 
 	mMapCreate = new MapCreate();
 
@@ -30,7 +30,7 @@ FirstStage::FirstStage(const SceneType& _nowScene)
 		mMapCreate->CreateItem();
 	}
 
-	mSprite = new Sprite("Assets/UI/Description.png");
+	mFullPicture = new FullPicture("Assets/UI/Description.png");
 }
 
 /*
@@ -40,7 +40,7 @@ FirstStage::~FirstStage()
 {
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eFirst);
 
-	delete mSprite;
+	delete mFullPicture;
 	delete mMapCreate;
 }
 
@@ -80,11 +80,11 @@ SceneBase* FirstStage::update()
 	// @@@
 	if (!Player::mMoveFlag)
 	{
-		mSprite->SetThisVisible(true);
+		mFullPicture->SetThisVisible(true);
 	}
 	else
 	{
-		mSprite->SetThisVisible(false);
+		mFullPicture->SetThisVisible(false);
 	}
 
 	return this;

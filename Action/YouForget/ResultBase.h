@@ -1,6 +1,5 @@
 #pragma once
 
-class Sprite;
 class ButtonUI;
 
 // リザルトのベースクラス
@@ -47,7 +46,7 @@ private:
 	// 描画する画像
 	vector<string> mDescription;
 	// 表示した画像をvectorに保存し、デストラクタでまとめて消す
-	vector <Sprite*> mDeleteDescription;
+	vector <class FullPicture*> mDeleteDescription;
 
 	// 表示処理をするかどうか
 	bool mDraw;
@@ -56,9 +55,9 @@ private:
 	unsigned int mNum;
 
 	// 今表示している画像
-	Sprite* mNowDescription;
+	class FullPicture* mNowDescription;
 	// ボタンの画像
-	Sprite* mButtonSprite;
+	class FullPicture* mButtonSprite;
 
 	////ボタン画像のUI
 	//ButtonUI* mButtonUI;

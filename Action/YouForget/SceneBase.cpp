@@ -10,7 +10,7 @@ SceneBase::SceneType SceneBase::mIsScene = SceneType::eInit;
 @fn	コンストラクタ
 */
 SceneBase::SceneBase()
-	: mSprite(nullptr)
+	: mFullPicture(nullptr)
 	, mMapCreate(nullptr)
 	, mClearFlag(false)
 	, mGameSceneFlag(false)

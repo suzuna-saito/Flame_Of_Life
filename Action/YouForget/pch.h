@@ -117,6 +117,7 @@ using namespace std;
 #include "UIBase.h"
 #include "ButtonUI.h"
 #include "Sprite.h"
+#include "FullPicture.h"
 
 // Map @ ‘S•”
 #include "MapCreate.h"

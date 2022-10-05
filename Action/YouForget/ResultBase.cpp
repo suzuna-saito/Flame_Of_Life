@@ -19,7 +19,8 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 	, mButtonSprite(nullptr)
 	, mNum(0)
 {
-	SetScene(_nowScene);
+	mIsScene = _nowScene;
+
 
 	/*if (GetScene() == Scene::gameClear)
 	{
@@ -83,7 +84,7 @@ void ResultBase::mSearch()
 	}
 
 	// 全てのピースを回収できてなかったら
-	if (GetScene() != SceneType::eGameClear &&
+	if (SceneBase::mIsScene != SceneType::eGameClear &&
 		mDescription.size() != 3)
 	{
 		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
@@ -92,7 +93,7 @@ void ResultBase::mSearch()
 	else
 	{
 		// シーンによって更に画像を追加
-		switch (GetScene())
+		switch (SceneBase::mIsScene)
 		{
 		case SceneType::eFirstResult:
 			mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
@@ -124,11 +125,11 @@ void ResultBase::mDrawUpdate()
 	// 次の説明を出すようにする
 	mDraw = true;
 
-	if (GetScene() == SceneType::eGameClear)
+	if (SceneBase::mIsScene == SceneType::eGameClear)
 	{
-		if (GetScene() == SceneType::eGameClear && mSprite != nullptr)
+		if (SceneBase::mIsScene == SceneType::eGameClear && mFullPicture != nullptr)
 		{
-			mSprite->SetThisVisible(false);
+			mFullPicture->SetThisVisible(false);
 		}
 
 		if (mNowDescription != nullptr)
@@ -156,7 +157,7 @@ void ResultBase::mResultUpdate()
 				mNowDescription->SetThisVisible(false);
 			}
 			// 新しい画像を出す
-			mNowDescription = new Sprite(mDescription[mNum]);
+			mNowDescription = new FullPicture(mDescription[mNum]);
 			// 一度newしたら、mDrawをfalseにする。
 			mDraw = false;
 
@@ -168,9 +169,9 @@ void ResultBase::mResultUpdate()
 	}
 
 	
-	if (mButtonSprite == nullptr && GetScene() != SceneType::eGameClear)
+	if (mButtonSprite == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
 	{
-		mButtonSprite = new Sprite("Assets/UI/ResultBase/Button.png");
+		mButtonSprite = new FullPicture("Assets/UI/ResultBase/Button.png");
 	}
 }
 

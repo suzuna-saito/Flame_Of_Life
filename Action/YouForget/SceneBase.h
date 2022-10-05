@@ -7,7 +7,6 @@ struct InputState;
 
 class BackGroundSprite;
 class MapCreate;
-class Sprite;
 class Candle;
 
 class SceneBase
@@ -50,12 +49,15 @@ public:
         eGameOver,      // ゲームオーバー
     };
 
+    //現在のシーン
+    static SceneType mIsScene;
+
 protected:
 
     //背景
-    Sprite* mSprite;
+    class FullPicture* mFullPicture;
     //マップ生成
-    MapCreate* mMapCreate;
+    class MapCreate* mMapCreate;
 
     // 次のシーンに遷移するか
     bool mGameSceneFlag;
@@ -73,18 +75,7 @@ protected:
     float mThisSpriteAlpha;
 private:
 
-    //現在のシーン
-    static SceneType mIsScene;
+   
 
 public://ゲッターセッター
-
-    /*
-    @return 現在のシーン(int型)
-    */
-    static SceneType GetScene() { return mIsScene; };
-
-    /*
-    @param _isScene 現在のシーン
-    */
-    virtual void SetScene(SceneType _isScene) { mIsScene = _isScene; };
 };

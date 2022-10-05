@@ -3,8 +3,6 @@
 */
 #pragma once
 
-class Sprite;
-
 class Title : public SceneBase
 {
 public:

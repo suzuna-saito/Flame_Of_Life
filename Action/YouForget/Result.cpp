@@ -12,11 +12,11 @@ Result::Result(const SceneType& _nowScene)
 {
 	if (mTrueEndFlag)
 	{
-		mSprite = new Sprite("Assets/UI/EndResult/Clear_1.png");
+		mFullPicture = new FullPicture("Assets/UI/EndResult/Clear_1.png");
 	}
 	else
 	{
-		mSprite = new Sprite("Assets/UI/EndResult/Clear_4.png");
+		mFullPicture = new FullPicture("Assets/UI/EndResult/Clear_4.png");
 	}
 
 	mSearch();
@@ -27,7 +27,7 @@ Result::Result(const SceneType& _nowScene)
 */
 Result::~Result()
 {
-	delete mSprite;
+	delete mFullPicture;
 
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eGameClear);
 }

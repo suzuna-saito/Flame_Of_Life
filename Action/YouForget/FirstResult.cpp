@@ -10,7 +10,7 @@
 FirstResult::FirstResult(const SceneType& _nowScene)
 	:ResultBase(_nowScene)
 {
-	mSprite = new Sprite("Assets/UI/FirstResult/FirstResultBase.png");
+	mFullPicture = new FullPicture("Assets/UI/FirstResult/FirstResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
 	mItemDescription[ItemNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
@@ -26,7 +26,7 @@ FirstResult::FirstResult(const SceneType& _nowScene)
 */
 FirstResult::~FirstResult()
 {
-	delete mSprite;
+	delete mFullPicture;
 
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eFirstResult);
 }

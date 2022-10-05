@@ -58,8 +58,11 @@ bool Texture::Load(const string& _fileName)
 	// RGBサーフェイスを解放する
 	SDL_FreeSurface(surf);
 
+	// 指定されたテクスチャオブジェクトのミップマップを生成
+	// (テクスチャオブジェクトをバインドする対象を指定)
 	glGenerateMipmap(GL_TEXTURE_2D);
-
+	// テクスチャ パラメーターを設定(2次元テクスチャを使用、
+	//							縮小時、拡大時のフィルタリング方法をそれぞれ指定、補完するフィルター（双線形補間）を設定)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -78,5 +81,6 @@ bool Texture::Load(const string& _fileName)
 
 void Texture::Unload()
 {
+	// 名前付きテクスチャを削除
 	glDeleteTextures(1, &mTextureID);
 }
