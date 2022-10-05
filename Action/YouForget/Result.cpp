@@ -27,8 +27,6 @@ Result::Result(const SceneType& _nowScene)
 */
 Result::~Result()
 {
-	delete mFullPicture;
-
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eGameClear);
 }
 

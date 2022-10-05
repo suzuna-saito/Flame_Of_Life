@@ -288,6 +288,14 @@ void Renderer::Draw()
 		}
 	}
 
+	for (auto UI : mUis)
+	{
+		if (UI->GetVisible())
+		{
+			UI->Draw(mSpriteShader, Vector3::Zero);
+		}
+	}
+
 	PHYSICS->DebugShowBox();
 
 	// バッファを交換

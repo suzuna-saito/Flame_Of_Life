@@ -41,7 +41,6 @@ ThirdStage::~ThirdStage()
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eThird);
 
 	delete mMapCreate;
-	delete mFullPicture;
 }
 
 

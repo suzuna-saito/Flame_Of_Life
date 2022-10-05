@@ -38,9 +38,9 @@ FirstStage::FirstStage(const SceneType& _nowScene)
 */
 FirstStage::~FirstStage()
 {
+	delete mFullPicture;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eFirst);
 
-	delete mFullPicture;
 	delete mMapCreate;
 }
 

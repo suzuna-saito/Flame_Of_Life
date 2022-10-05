@@ -13,7 +13,7 @@ bool ResultBase::mTrueEndFlag = true;
 ResultBase::ResultBase(const SceneType& _nowScene)
 	:SceneBase()
 	, mDescription()
-	, mDeleteDescription()
+	//, mDeleteDescription()
 	, mDraw(false)
 	, mNowDescription(nullptr)
 	, mButtonSprite(nullptr)
@@ -45,15 +45,6 @@ ResultBase::~ResultBase()
 	{
 		ItemBase::mGetNumber.clear();
 	}
-
-	// 消したいデータが入っていたら
-	int size = mDeleteDescription.size();
-	for (int i = 0; i < size; i++)
-	{
-		delete mDeleteDescription[i];
-	}
-
-	delete mButtonSprite;
 }
 
 /*
@@ -163,8 +154,8 @@ void ResultBase::mResultUpdate()
 
 			++mNum;
 
-			// デストラクタで削除するようにvectorに保存しておく
-			mDeleteDescription.push_back(mNowDescription);
+			//// デストラクタで削除するようにvectorに保存しておく
+			//mDeleteDescription.push_back(mNowDescription);
 		}
 	}
 

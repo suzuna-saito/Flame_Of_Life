@@ -29,7 +29,6 @@ Title::Title(const SceneType& _nowScene)
 */
 Title::~Title()
 {
-	delete mFullPicture;
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eTitle);
 }
 

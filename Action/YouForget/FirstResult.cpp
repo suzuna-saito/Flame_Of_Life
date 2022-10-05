@@ -26,8 +26,6 @@ FirstResult::FirstResult(const SceneType& _nowScene)
 */
 FirstResult::~FirstResult()
 {
-	delete mFullPicture;
-
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eFirstResult);
 }
 

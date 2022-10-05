@@ -41,7 +41,6 @@ SecondStage::~SecondStage()
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eSecond);
 
 	delete mMapCreate;
-	delete mFullPicture;
 }
 
 

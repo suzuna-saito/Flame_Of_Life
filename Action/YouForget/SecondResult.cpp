@@ -26,8 +26,6 @@ SecondResult::SecondResult(const SceneType& _nowScene)
 */
 SecondResult::~SecondResult()
 {
-	delete mFullPicture;
-
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eSecondResult);
 }
 
