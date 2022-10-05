@@ -1,8 +1,8 @@
-/*
-@brief プリプロセッサ
-*/
 #pragma once
 
+/*
+* ストーリーを進めるためのボタンUIの更新描画
+*/
 class ButtonUI :public UIBase
 {
 public:

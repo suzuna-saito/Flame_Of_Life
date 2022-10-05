@@ -1,6 +1,3 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
 /*
@@ -12,8 +9,8 @@
 */
 UIBase::UIBase(const Vector2& _pos, const std::string& _uiFileName, SceneBase::SceneType _sceneTag, const Tag& _objectTag, const float& _scale)
 	: GameObject(_sceneTag, _objectTag)
+	, mUI(nullptr)
 {
-
 }
 
 /*

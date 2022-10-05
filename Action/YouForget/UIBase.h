@@ -25,6 +25,5 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 protected:
-	//UIの描画クラス
-	UIComponent* mUI;
+	UIComponent* mUI;   //UIの描画クラス
 };

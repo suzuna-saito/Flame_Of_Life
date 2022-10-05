@@ -1,74 +1,61 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-/*
-@fn	コンストラクタ
-*/
 Texture::Texture()
 	: mTextureID(0)
 	, mWidth(0)
 	, mHeight(0)
-	, mLuminance(0)
 {
 }
 
-/*
-@fn	デストラクタ
-*/
-Texture::~Texture()
+bool Texture::Load(const string& _fileName)
 {
-}
-
-/*
-@fn		テクスチャのロード
-@param	_fileName テクスチャのファイル名
-@return	true : 成功 , false : 失敗(bool型)
-*/
-bool Texture::Load(const std::string& _fileName)
-{
+	// チャンネル数を格納するローカル変数
 	int channels = 0;
 
-	// SDLサーフェスをテクスチャから作成
-	SDL_Texture* tex = nullptr;
+	// チャンネル数を格納するローカル変数
 	SDL_Surface* surf = IMG_Load(_fileName.c_str());
 	if (!surf)
 	{
 		printf("テクスチャ読み込みに失敗 %s", _fileName.c_str());
-		return false;
+		return false;	// falseを返す
 	}
 
-	//サーフェスからテクスチャを作る
+	// SDLサーフェスをテクスチャから作成
+	SDL_Texture* tex = nullptr;
+	// SDL_CreateTextureFromSurface(レンダリングコンテキスト、テクスチャで使うピクセルデータを持つSDL_Surface)
 	tex = SDL_CreateTextureFromSurface(RENDERER->GetSDLRenderer(), surf);
 	if (!tex)
 	{
 		printf("サーフェスからテクスチャの作成に失敗 : %s", _fileName.c_str());
-		return false;
+		return false;	// falseを返す
 	}
 
-	// 画像の幅、高さを取得
-	mWidth = surf->w;
-	mHeight = surf->h;
-	channels = surf->format->BytesPerPixel;
+	// 画像の幅、高さ、チャンネル数を取得
+	mWidth = surf->w;						// 幅
+	mHeight = surf->h;						// 高さ
+	channels = surf->format->BytesPerPixel;	// チャンネルを取得
 
 	// OpenGLにテクスチャ登録
-	int format = GL_RGB;
+	int format = GL_RGB;	// アルファなしフルカラー（3）
 	int depth, pitch;
-	depth = 24;
-	pitch = 3 * mWidth; // 1ピクセルあたり3byte * 1行のピクセル数
+	depth = 24;				// 深度　24
+	pitch = 3 * mWidth;		// 1ピクセルあたり3byte * 1行のピクセル数
+	// チャンネル数が4つだったら
 	if (channels == 4)
 	{
-		format = GL_RGBA;
-		depth = 32;
-		pitch = 4 * mWidth;
+		format = GL_RGBA;	// アルファ付きフルカラーに設定（4）
+		depth = 32;			// 深度　32に設定
+		pitch = 4 * mWidth;	// 1ピクセルあたり4byte * 1行のピクセル数 
 	}
 
+	// テクスチャ名を1つ生成
 	glGenTextures(1, &mTextureID);
+	// 指定した名前のテクスチャを有効にする(2次元テクスチャ)
 	glBindTexture(GL_TEXTURE_2D, mTextureID);
-	// @@@
+	// 画像データを関連付ける(ターゲット、レベル（0はベース画像レベル）、色成分の数、画像幅、画像高さ、
+	//						0でなければならない、画素データの形式、画素データのデータ型、メモリ上の画像データへのポインタ)
 	glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format, GL_UNSIGNED_BYTE, surf->pixels);
-
+	// RGBサーフェイスを解放する
 	SDL_FreeSurface(surf);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -89,61 +76,7 @@ bool Texture::Load(const std::string& _fileName)
 	return true;
 }
 
-/*
-@fn	ロードしたテクスチャの解放
-*/
 void Texture::Unload()
 {
 	glDeleteTextures(1, &mTextureID);
-}
-
-/*
-@fn		サーフェイスから作成
-@param	_surface コピーで使われるピクセルの集まりの構造体
-*/
-void Texture::CreateFromSurface(SDL_Surface* _surface)
-{
-	mWidth = _surface->w;
-	mHeight = _surface->h;
-
-	// Generate a GL texture
-	glGenTextures(1, &mTextureID);
-	glBindTexture(GL_TEXTURE_2D, mTextureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, mWidth, mHeight, 0, GL_BGRA,
-		GL_UNSIGNED_BYTE, _surface->pixels);
-
-	// Use linear filtering
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
-
-/*
-@fn		レンダリング用のテクスチャを作成
-@param	_width テクスチャの横幅
-@param	_height テクスチャの縦幅
-@param	_format ピクセルデータのフォーマット
-*/
-void Texture::CreateForRendering(int _width, int _height, unsigned int _format)
-{
-	mWidth = _width;
-	mHeight = _height;
-	// テクスチャIDの作成
-	glGenTextures(1, &mTextureID);
-	glBindTexture(GL_TEXTURE_2D, mTextureID);
-	// 画像の幅と高さを設定（初期データは指定しない）
-	glTexImage2D(GL_TEXTURE_2D, 0, _format, mWidth, mHeight, 0, GL_RGB,
-		GL_FLOAT, nullptr);
-
-	// レンダリング先のテクスチャには最近傍フィルタリングのみを使う
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-}
-
-/*
-@fn	テクスチャをアクティブにする
-*/
-void Texture::SetActive()
-{
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, mTextureID);
 }

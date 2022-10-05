@@ -1,2 +1,1 @@
-﻿  pch.cpp
-C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\ButtonUI.h(28,7): error C3668: 'ButtonUI::UpdateGameObject': オーバーライド指定子 'override' を伴うメソッドは、基底クラス メソッドをオーバーライドしませんでした
+﻿  YouForget.vcxproj -> C:\Users\student\Desktop\Flame_of_Life\Action\Debug\YouForget.exe
