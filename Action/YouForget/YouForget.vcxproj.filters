@@ -141,9 +141,6 @@
     <ClCompile Include="Title.cpp">
       <Filter>Scene\Title</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>UI\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="UIBase.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -164,12 +161,6 @@
     </ClCompile>
     <ClCompile Include="ThirdResult.cpp">
       <Filter>Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonUI.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="UIComponent.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Result.cpp">
       <Filter>Scene\Result</Filter>
@@ -194,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="FullPicture.cpp">
       <Filter>UI\FullPicture</Filter>
+    </ClCompile>
+    <ClCompile Include="UIComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AButtonUI.cpp">
+      <Filter>UI\AButtonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -339,9 +336,6 @@
     <ClInclude Include="Title.h">
       <Filter>Scene\Title</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>UI\Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="UIBase.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -362,12 +356,6 @@
     </ClInclude>
     <ClInclude Include="ThirdResult.h">
       <Filter>Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonUI.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="UIComponent.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Result.h">
       <Filter>Scene\Result</Filter>
@@ -392,6 +380,12 @@
     </ClInclude>
     <ClInclude Include="FullPicture.h">
       <Filter>UI\FullPicture</Filter>
+    </ClInclude>
+    <ClInclude Include="UIComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AButtonUI.h">
+      <Filter>UI\AButtonUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -520,9 +514,6 @@
     <Filter Include="UI">
       <UniqueIdentifier>{ebc1c022-9a40-46e5-bce4-c7abeb287161}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Sprite">
-      <UniqueIdentifier>{d7f47d83-b23d-4350-bda0-568f8d1a674f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{4ce84b84-0ad6-442f-adfa-6f5ef9646908}</UniqueIdentifier>
     </Filter>
@@ -552,6 +543,9 @@
     </Filter>
     <Filter Include="UI\FullPicture">
       <UniqueIdentifier>{b5fcb936-6c08-4a41-953d-34c096c2f809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\AButtonUI">
+      <UniqueIdentifier>{7adeca7f-1b7c-4216-92e8-0b77b107d9a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

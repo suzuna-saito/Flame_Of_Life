@@ -113,11 +113,10 @@ using namespace std;
 #include "GoalEffect.h"
 #include "GoalEffectManager.h"
 
-// UI @ ‘S•”
+// UI
 #include "UIBase.h"
-#include "ButtonUI.h"
-#include "Sprite.h"
 #include "FullPicture.h"
+#include "AButtonUI.h"
 
 // Map @ ‘S•”
 #include "MapCreate.h"

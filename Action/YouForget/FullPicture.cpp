@@ -1,14 +1,11 @@
 #include "pch.h"
 
-/*
-@fn		コンストラクタ
-@param	_fileName 画像ファイルの名前
-*/
 FullPicture::FullPicture(const string _fileName)
-	:UIBase(Vector2::Zero, _fileName, SceneBase::mIsScene,Tag::UI,1.0f)
+	: UIBase()
 {
-	mUIComponent = new UIComponent(this);
+	// UIComponentを生成することで自動で描画されるようになる
+	mUiComponent = new UIComponent(this, mPosition, mScale, 0);
 
-	mFullPictureTexture = RENDERER->GetTexture(_fileName);
-	mUIComponent->SetTexture(mFullPictureTexture);
+	// テクスチャを生成
+	mUiComponent->SetTexture(RENDERER->GetTexture(_fileName));
 }

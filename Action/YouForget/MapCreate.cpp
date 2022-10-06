@@ -7,7 +7,7 @@
 @fn	コンストラクタ
 */
 MapCreate::MapCreate()
-	:GameObject(SceneBase::SceneType::eInit, Tag::Other)
+	:GameObject(SceneBase::SceneType::eInit, Tag::NoCollision)
 	, mScene()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
@@ -142,11 +142,11 @@ void MapCreate::CreateBackGround()
 
 			if (name == 35)
 			{
-				new BackGround(objectPos, objectSize, Tag::Other, SceneBase::mIsScene, name);
+				new BackGround(objectPos, objectSize, Tag::NoCollision, SceneBase::mIsScene, name);
 			}
 			else if (name == 36)
 			{
-				new BackGround(objectPos02, objectSize, Tag::Other, SceneBase::mIsScene, name);
+				new BackGround(objectPos02, objectSize, Tag::NoCollision, SceneBase::mIsScene, name);
 			}
 		}
 	}

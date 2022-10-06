@@ -16,7 +16,7 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 	//, mDeleteDescription()
 	, mDraw(false)
 	, mNowDescription(nullptr)
-	, mButtonSprite(nullptr)
+	, mButton(nullptr)
 	, mNum(0)
 {
 	mIsScene = _nowScene;
@@ -160,9 +160,9 @@ void ResultBase::mResultUpdate()
 	}
 
 	
-	if (mButtonSprite == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
+	if (mButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
 	{
-		mButtonSprite = new FullPicture("Assets/UI/ResultBase/Button.png");
+		mButton = new AButtonUI();
 	}
 }
 

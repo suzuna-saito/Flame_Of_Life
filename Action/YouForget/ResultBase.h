@@ -57,7 +57,7 @@ private:
 	// 今表示している画像
 	class FullPicture* mNowDescription;
 	// ボタンの画像
-	class FullPicture* mButtonSprite;
+	class AButtonUI * mButton;
 
 	////ボタン画像のUI
 	//ButtonUI* mButtonUI;

@@ -23,9 +23,10 @@ public:
 	/*
 	@fn		コンストラクタ
 	@param	_owner アタッチするゲームオブジェクトのポインタ
+	@param	_scale UIスケール
 	@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
 	*/
-	UIComponent(GameObject* _owner, int _drawOrder = 100);
+	UIComponent(GameObject* _owner, const Vector3 _pos,const Vector3 _scale, int _drawOrder = 100);
 
 	/*
 	@fn		デストラクタ
@@ -36,7 +37,7 @@ public:
 	@fn		描画処理
 	@param _shader 使用するシェーダークラスのポインタ
 	*/
-	virtual void Draw(Shader* _shader, const Vector3& _Offset);
+	virtual void Draw(Shader* _shader, const Vector3& _Pos, const Vector3 _scale);
 
 protected:
 
@@ -54,6 +55,10 @@ protected:
 	static int mUIid;
 	//このUIのID
 	int mMyUIid;
+	// UIのスケール
+	Vector3 mScale;
+	// ポジション
+	Vector3 mPos;
 
 public://ゲッターセッター
 
@@ -94,5 +99,9 @@ public://ゲッターセッター
 	@param	_visible true : 描画する , false : 描画しない
 	*/
 	void SetVisible(bool _visible) { mVisible = _visible; }
+
+	Vector3 GetScale()const { return mScale; }
+	void SetScale(const Vector3 _scale) { mScale = _scale; }
+	Vector3 GetPos()const { return mPos; }
 };
 

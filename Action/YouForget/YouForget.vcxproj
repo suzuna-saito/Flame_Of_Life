@@ -176,7 +176,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="ButtonUI.cpp" />
+    <ClCompile Include="AButtonUI.cpp" />
     <ClCompile Include="Candle.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -254,7 +254,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Switch.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SwitchCollider.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -268,7 +267,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="ButtonUI.h" />
+    <ClInclude Include="AButtonUI.h" />
     <ClInclude Include="Candle.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -337,7 +336,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Switch.h" />
     <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SwitchCollider.h" />
     <ClInclude Include="Texture.h" />

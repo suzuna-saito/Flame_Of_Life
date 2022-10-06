@@ -16,7 +16,7 @@ int UIComponent::mUIid = 0;
 @param _owner アタッチするゲームオブジェクトのポインタ
 @param _drawOrder 描画の順番（数値が小さいほど早く描画される）
 */
-UIComponent::UIComponent(GameObject* _owner, int _drawOrder)
+UIComponent::UIComponent(GameObject* _owner, const Vector3 _pos, const Vector3 _scale, int _drawOrder)
 	: Component(_owner)
 	, mTexture(nullptr)
 	, mDrawOrder(_drawOrder)
@@ -24,6 +24,8 @@ UIComponent::UIComponent(GameObject* _owner, int _drawOrder)
 	, mTextureHeight(0)
 	, mVisible(true)
 	, mMyUIid(mUIid)
+	, mScale(_scale)
+	, mPos(_pos)
 {
 	mUIid++;
 	//レンダラーにポインターを送る
@@ -44,20 +46,20 @@ UIComponent::~UIComponent()
 @fn		描画処理
 @param	_shader 使用するシェーダークラスのポインタ
 */
-void UIComponent::Draw(Shader* _shader, const Vector3& _Offset)
+void UIComponent::Draw(Shader* _shader, const Vector3& _Pos, const Vector3 _scale)
 {
 	//画像情報が空でないか、親オブジェクトが未更新状態でないか
 	if (mTexture && mOwner->GetState() != State::Dead)
 	{
 		Matrix4 scaleMatrix = Matrix4::CreateScale(
-			static_cast<float>(mTextureWidth),
-			static_cast<float>(mTextureHeight),
+			static_cast<float>(mTextureWidth)* _scale.x,
+			static_cast<float>(mTextureHeight)* _scale.y,
 			1.0f);
 
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
-			Vector3(_Offset.x - (mTextureWidth * 0.0f),
-				(mTextureHeight * 0.0f) - _Offset.z, 0.0f));
+			Vector3(_Pos.x - (mTextureWidth * 0.0f),
+				_Pos.z - (mTextureHeight * 0.0f), 0.0f));
 
 		Matrix4 world = scaleMatrix * transMat;
 

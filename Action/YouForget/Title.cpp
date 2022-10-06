@@ -49,7 +49,8 @@ SceneBase* Title::update()
 {
 	if (mGameSceneFlag)
 	{
-		return new FirstStage(SceneType::eFirst);
+		//return new FirstStage(SceneType::eFirst);
+		return new FirstResult(SceneType::eFirstResult);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
 		//return new ThirdStage(Scene::third);

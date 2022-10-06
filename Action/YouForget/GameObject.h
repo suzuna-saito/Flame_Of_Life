@@ -29,7 +29,7 @@ enum class State :unsigned char
 */
 enum class Tag :unsigned char
 {
-	Other,
+	NoCollision,
 	Camera,
 	player,
 	playerLegs,
@@ -38,7 +38,6 @@ enum class Tag :unsigned char
 	Switch,
 	SwitchCenter,
 	item,
-	UI,
 };
 
 /*
@@ -66,7 +65,7 @@ public:
 	@param	_objectTag ゲームオブジェクトのタグ
 	@param	_reUseGameObject
 	*/
-	GameObject(const SceneBase::SceneType _sceneTag, const Tag& _objectTag, bool _reUseGameObject = false);
+	GameObject(const SceneBase::SceneType _sceneTag, const Tag& _objectTag = Tag::NoCollision, bool _reUseGameObject = false);
 
 	/*
 	@fn	デストラクタ

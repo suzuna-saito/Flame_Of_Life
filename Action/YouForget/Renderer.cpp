@@ -292,7 +292,7 @@ void Renderer::Draw()
 	{
 		if (UI->GetVisible())
 		{
-			UI->Draw(mSpriteShader, Vector3::Zero);
+			UI->Draw(mSpriteShader,UI->GetPos(),UI->GetScale());
 		}
 	}
 
