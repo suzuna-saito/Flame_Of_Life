@@ -8,10 +8,8 @@
 @param	_nowScene 現在のシーン
 */
 Title::Title(const SceneType& _nowScene)
-	:SceneBase()
+	:SceneBase(_nowScene)
 {
-	mIsScene = _nowScene;
-
 	// タイトル画像
 	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
 
@@ -49,8 +47,8 @@ SceneBase* Title::update()
 {
 	if (mGameSceneFlag)
 	{
-		//return new FirstStage(SceneType::eFirst);
-		return new FirstResult(SceneType::eFirstResult);
+		return new FirstStage(SceneType::eFirst);
+		//return new FirstResult(SceneType::eFirstResult);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
 		//return new ThirdStage(Scene::third);

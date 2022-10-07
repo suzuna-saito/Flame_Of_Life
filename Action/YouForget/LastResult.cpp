@@ -8,7 +8,7 @@
 @param	_nowScene åªç›ÇÃÉVÅ[Éì
 */
 LastResult::LastResult(const SceneType& _nowScene)
-	:ResultBase()
+	:ResultBase(_nowScene)
 {
 	if (mClearEndFlag)
 	{

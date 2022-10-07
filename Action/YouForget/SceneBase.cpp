@@ -9,7 +9,7 @@ SceneBase::SceneType SceneBase::mIsScene = SceneType::eInit;
 /*
 @fn	コンストラクタ
 */
-SceneBase::SceneBase()
+SceneBase::SceneBase(const SceneType& _sceneType)
 	: mFullPicture(nullptr)
 	, mMapCreate(nullptr)
 	, mClearFlag(false)
@@ -18,6 +18,9 @@ SceneBase::SceneBase()
 	, mNextSceneCount(0)
 	, mThisSpriteAlpha(1.0f)
 {
+	// シーンタイプの更新
+	mIsScene = _sceneType;
+
 	//環境光
 	const Vector3 AmbientLight = Vector3(0.4f, 0.4f, 0.4f);
 

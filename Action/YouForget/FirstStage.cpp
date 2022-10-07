@@ -8,7 +8,7 @@
 @param	_nowScene åªç›ÇÃÉVÅ[Éì
 */
 FirstStage::FirstStage(const SceneType& _nowScene)
-	:SceneBase()
+	:SceneBase(_nowScene)
 {
 	mIsScene = _nowScene;
 

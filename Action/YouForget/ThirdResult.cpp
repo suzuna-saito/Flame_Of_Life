@@ -8,14 +8,14 @@
 @param	_nowScene 現在のシーン
 */
 ThirdResult::ThirdResult(const SceneType& _nowScene)
-	:ResultBase()
+	:ResultBase(_nowScene)
 {
 	mFullPicture = new FullPicture("Assets/UI/ThirdResult/ThirdResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
-	mPuzzles[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
-	mPuzzles[ItemNum::two] = "Assets/UI/ThirdResult/Puzzles_2.png";
-	mPuzzles[ItemNum::three] = "Assets/UI/ThirdResult/Puzzles_3.png";
+	mPuzzlePieces[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
+	mPuzzlePieces[ItemNum::two] = "Assets/UI/ThirdResult/Puzzles_2.png";
+	mPuzzlePieces[ItemNum::three] = "Assets/UI/ThirdResult/Puzzles_3.png";
 
 	// どのアイテムを取っているか検索
 	mSearch();

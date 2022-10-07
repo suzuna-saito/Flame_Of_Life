@@ -8,7 +8,7 @@
 @param	_nowScene åªç›ÇÃÉVÅ[Éì
 */
 ThirdStage::ThirdStage(const SceneType& _nowScene)
-	:SceneBase()
+	:SceneBase(_nowScene)
 {
 	mIsScene = _nowScene;
 

@@ -10,15 +10,31 @@ bool ResultBase::mClearEndFlag = true;
 @fn		コンストラクタ
 @param	_nowScene 現在のシーン
 */
-ResultBase::ResultBase()
-	:SceneBase()
-	, mPictures()
+ResultBase::ResultBase(const SceneType& _nowScene)
+	:SceneBase(_nowScene)
+	, mDescription()
+	, mGetPieces()
 	//, mDeleteDescription()
 	, mDraw(false)
 	, mNowDescription(nullptr)
-	, mAButton(nullptr)
+	, mPuzzleUI(nullptr)
+	, mButton(nullptr)
 	, mNum(0)
 {
+	mIsScene = _nowScene;
+
+
+	/*if (GetScene() == Scene::gameClear)
+	{
+		if (mTrueEndFlag)
+		{
+			mSprite = new Sprite("Assets/UI/EndResult/Clear_1.png");
+		}
+		else
+		{
+			mSprite = new Sprite("Assets/UI/EndResult/Clear_4.png");
+		}
+	}*/
 }
 
 /*
@@ -33,9 +49,6 @@ ResultBase::~ResultBase()
 	}
 }
 
-/*
-@fn	現在のシーン時に毎フレーム更新処理をする
-*/
 SceneBase* ResultBase::update()
 {
 	return nullptr;
@@ -43,28 +56,27 @@ SceneBase* ResultBase::update()
 
 void ResultBase::mSearch()
 {
-	// イテレーター
-	decltype(mPuzzles)::iterator it;
-
-	// 取得したアイテム分回す
+	// 取得したパズルピース分回す
+	decltype(mPuzzlePieces)::iterator it;
 	for (const auto& num : ItemBase::mGetNumber)
 	{
-		// 探す
-		it = mPuzzles.find(num);
+		// キーが一致するものを探す
+		it = mPuzzlePieces.find(num);
 
-		// 見つかった
-		if (it != mPuzzles.end())
+		// 見つかったら
+		if (it != mPuzzlePieces.end())
 		{
-			// mDescriptionに見つかった分だけ保存
-			mPictures.push_back(mPuzzles[num]);
+			// mGetPiecesに取得したピースの画像データ保存
+			mGetPieces.push_back(mPuzzlePieces[num]);
 		}
 	}
 
+	// @@@
 	// 全てのピースを回収できてなかったら
 	if (SceneBase::mIsScene != SceneType::eGameClear &&
-		mPictures.size() != 3)
+		mGetPieces.size() != mPuzzlePieces.size())
 	{
-		mPictures.push_back("Assets/UI/ResultBase/BadWord.png");
+		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
 		mClearEndFlag = false;
 	}
 	else
@@ -73,22 +85,22 @@ void ResultBase::mSearch()
 		switch (SceneBase::mIsScene)
 		{
 		case SceneType::eFirstResult:
-			mPictures.push_back("Assets/UI/FirstResult/Word_1.png");
-			mPictures.push_back("Assets/UI/FirstResult/Word_2.png");
+			mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
+			mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
 			break;
 		case SceneType::eSecondResult:
-			mPictures.push_back("Assets/UI/SecondResult/Word_1.png");
-			mPictures.push_back("Assets/UI/SecondResult/Word_2.png");
+			mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
+			mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
 			break;
 		case SceneType::eThirdResult:
-			mPictures.push_back("Assets/UI/ThirdResult/Word_1.png");
-			mPictures.push_back("Assets/UI/ThirdResult/Word_2.png");
+			mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
+			mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
 			break;
 		case SceneType::eGameClear:
 			if (mClearEndFlag)
 			{
-				mPictures.push_back("Assets/UI/EndResult/Clear_2.png");
-				mPictures.push_back("Assets/UI/EndResult/Clear_3.png");
+				mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
+				mDescription.push_back("Assets/UI/EndResult/Clear_3.png");
 			}
 			break;
 		default:
@@ -121,7 +133,7 @@ void ResultBase::mResultUpdate()
 	// mDrawがtrueの時
 	if (mDraw)
 	{
-		if (mNum == mPictures.size())
+		if (mNum == mDescription.size())
 		{
 			// シーン遷移フラグをtrueにする
 			mGameSceneFlag = true;
@@ -134,17 +146,22 @@ void ResultBase::mResultUpdate()
 				mNowDescription->SetThisVisible(false);
 			}
 			// 新しい画像を出す
-			mNowDescription = new FullPicture(mPictures[mNum]);
+			mPuzzleUI = new PuzzleUI(mGetPieces[mNum], UIBase::UIType::ePuzzlePiece);
+			//mNowDescription = new FullPicture(mDescription[mNum]);
 			// 一度newしたら、mDrawをfalseにする。
 			mDraw = false;
 
 			++mNum;
+
+			//// デストラクタで削除するようにvectorに保存しておく
+			//mDeleteDescription.push_back(mNowDescription);
 		}
 	}
 
-	
-	if (mAButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
+
+	if (mButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
 	{
-		mAButton = new AButtonUI();
+		mButton = new AButtonUI();
 	}
 }
+

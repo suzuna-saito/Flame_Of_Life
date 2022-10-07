@@ -1,27 +1,28 @@
 #pragma once
 
-class FirstResult :public ResultBase
+/*
+* FirstStageのリザルトクラス
+*/
+class FirstResult : public ResultBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_nowScene">現在のシーンタイプ</param>
 	FirstResult(const SceneType& _nowScene);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~FirstResult();
 
-	/*
-	@fn	タイトルシーン時に毎フレーム更新処理をする
-	*/
+	/// <summary>
+	/// 入力処理
+	/// </summary>
+	/// <param name="_inputState">入力状態</param>
+	void Input(const InputState& _inputState)override;
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns></returns>
 	SceneBase* update() override;
 
-	/*
-	@fn	タイトルシーン時に毎フレーム入力処理をする
-	*/
-	void Input(const InputState& _inputState)override;
 };

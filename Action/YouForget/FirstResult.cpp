@@ -8,16 +8,16 @@
 @param	_nowScene 現在のシーン
 */
 FirstResult::FirstResult(const SceneType& _nowScene)
-	:ResultBase()
+	:ResultBase(_nowScene)
 {
-	mFullPicture = new FullPicture("Assets/UI/FirstResult/FirstResultBase.png");
+	mPuzzleUI = new PuzzleUI("Assets/UI/FirstResult/FirstResultBase.png", UIBase::UIType::ePuzzleBase);
 
-	// マップをつかってアイテムと説明画像を関連付け	
-	mPuzzles[ItemNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
-	mPuzzles[ItemNum::two] = "Assets/UI/FirstResult/Puzzles_2.png";
-	mPuzzles[ItemNum::three] = "Assets/UI/FirstResult/Puzzles_3.png";
+	// アイテムと画像データを関連付け	
+	mPuzzlePieces[ItemNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
+	mPuzzlePieces[ItemNum::two] = "Assets/UI/FirstResult/Puzzles_2.png";
+	mPuzzlePieces[ItemNum::three] = "Assets/UI/FirstResult/Puzzles_3.png";
 
-	// どのアイテムを取っているか検索
+	// どのパズルピースを取得したか検索
 	mSearch();
 }
 
@@ -53,6 +53,7 @@ SceneBase* FirstResult::update()
 	if (mGameSceneFlag)
 	{
 		return new SecondStage(SceneType::eSecond);
+		//return new SecondResult(SceneType::eSecondResult);
 
 		//return new Result(Scene::gameClear);
 	}
