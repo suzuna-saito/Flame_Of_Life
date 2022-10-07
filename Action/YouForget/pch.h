@@ -99,7 +99,7 @@ using namespace std;
 #include "FirstResult.h"
 #include "SecondResult.h"
 #include "ThirdResult.h"
-#include "Result.h"
+#include "LastResult.h"
 
 // ParticleEffect @ ‘S•”
 #include "ParticleEffectBase.h"
@@ -116,6 +116,7 @@ using namespace std;
 // UI
 #include "UIBase.h"
 #include "FullPicture.h"
+#include "PuzzleUI.h"
 #include "AButtonUI.h"
 
 // Map @ ‘S•”

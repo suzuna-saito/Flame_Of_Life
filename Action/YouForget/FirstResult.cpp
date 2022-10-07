@@ -8,14 +8,14 @@
 @param	_nowScene 現在のシーン
 */
 FirstResult::FirstResult(const SceneType& _nowScene)
-	:ResultBase(_nowScene)
+	:ResultBase()
 {
 	mFullPicture = new FullPicture("Assets/UI/FirstResult/FirstResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
-	mItemDescription[ItemNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
-	mItemDescription[ItemNum::two] = "Assets/UI/FirstResult/Puzzles_2.png";
-	mItemDescription[ItemNum::three] = "Assets/UI/FirstResult/Puzzles_3.png";
+	mPuzzles[ItemNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
+	mPuzzles[ItemNum::two] = "Assets/UI/FirstResult/Puzzles_2.png";
+	mPuzzles[ItemNum::three] = "Assets/UI/FirstResult/Puzzles_3.png";
 
 	// どのアイテムを取っているか検索
 	mSearch();

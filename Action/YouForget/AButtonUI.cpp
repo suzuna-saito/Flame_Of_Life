@@ -9,9 +9,9 @@ AButtonUI::AButtonUI()
 	mScale = Vector3(2.0f, 2.0f, 0.0f);			// スケール
 
 	// UIComponentを生成することで自動で描画されるようになる
-	mUiComponent = new UIComponent(this, mPosition, mScale);
+	mUIComponent = new UIComponent(this, mPosition, mScale);
 	// テクスチャを生成
-	mUiComponent->SetTexture(RENDERER->GetTexture("Assets/UI/ResultBase/Button2.png"));
+	mUIComponent->SetTexture(RENDERER->GetTexture("Assets/UI/ResultBase/Button2.png"));
 }
 
 void AButtonUI::UpdateGameObject(float _deltaTime)
@@ -24,6 +24,6 @@ void AButtonUI::UpdateGameObject(float _deltaTime)
 	// スケール値にmAddScaleを足す
 	mScale += Vector3(mAddScale, mAddScale, 0.0f);
 	// スケール値をセット
-	mUiComponent->SetScale(mScale);
+	mUIComponent->SetScale(mScale);
 
 }

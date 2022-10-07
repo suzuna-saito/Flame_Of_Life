@@ -43,5 +43,5 @@ public: //ゲッターセッター
 	/// <param name="_outPoses">ポーズマトリックス</param>
 	/// <param name="_inSkeleton">ボーン</param>
 	/// <param name="_inTime">指定時間</param>
-	const void GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, float _inTime) const;
+	const void GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const class Skeleton* _inSkeleton, const float _inTime) const;
 };

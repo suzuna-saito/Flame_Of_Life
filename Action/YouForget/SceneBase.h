@@ -3,8 +3,6 @@
 */
 #pragma once
 
-struct InputState;
-
 class BackGroundSprite;
 class MapCreate;
 class Candle;

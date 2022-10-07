@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* 画面の大きさにあった画像を描画するクラス
+* 1920×1080サイズの画像を描画するクラス
 */
 class FullPicture : public UIBase
 {

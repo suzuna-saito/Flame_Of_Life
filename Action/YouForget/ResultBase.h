@@ -1,64 +1,39 @@
 #pragma once
 
-class ButtonUI;
-
 // リザルトのベースクラス
 class ResultBase :public SceneBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
-	*/
-	ResultBase(const SceneType& _nowScene);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// コンストラクタ
+	ResultBase();
+	// デストラクタ
 	~ResultBase();
 
-	/*
-	@fn	タイトルシーン時に毎フレーム更新処理をする
-	*/
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns>次のシーンのポインタを返す</returns>
 	SceneBase* update() override;
 
-	// エンドの分岐フラグ
-	static bool mTrueEndFlag;
-
-	// @@@
-	//static Sprite* mEndSprite;
+	static bool mClearEndFlag; // エンドの分岐フラグ(true : クリア)
 
 protected:
-	
-	// マップで取得したアイテムと説明を関連付ける
-	map<ItemNum, string> mItemDescription;
-
-	// どのアイテムを取っているか検索する
+	// どのピースを取得したかを検索する
 	void mSearch();
 	// 次の画像を出す処理
 	void mDrawUpdate();
 	// 次のシーンに移るか、まだ画像を出すかUpdate処理
 	void mResultUpdate();
 
+	map<ItemNum, string> mPuzzles;	// 取得したパズルピースとUIを関連付ける
+
 private:
+	vector<string> mPictures;	// 描画する画像
 
-	// 描画する画像
-	vector<string> mDescription;
-	// 表示した画像をvectorに保存し、デストラクタでまとめて消す
-	vector <class FullPicture*> mDeleteDescription;
+	bool mDraw;					// 表示処理をするかどうか
+	
+	unsigned int mNum;			// 出す画像のナンバー
 
-	// 表示処理をするかどうか
-	bool mDraw;
-
-	// 出す画像のナンバー
-	unsigned int mNum;
-
-	// 今表示している画像
-	class FullPicture* mNowDescription;
-	// ボタンの画像
-	class AButtonUI * mButton;
-
-	////ボタン画像のUI
-	//ButtonUI* mButtonUI;
+	class FullPicture* mNowDescription;	// いるか？
+	class AButtonUI * mAButton;			// AボタンのUI
 };

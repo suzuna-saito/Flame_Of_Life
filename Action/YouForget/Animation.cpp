@@ -128,7 +128,7 @@ bool Animation::Load(const char* _fileName)
 	return true;
 }
 
-const void Animation::GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, float _inTime) const
+const void Animation::GetGlobalPoseAtTime(vector<Matrix4>& _outPoses, const Skeleton* _inSkeleton, const float _inTime) const
 {
 	// アニメーションのためのボーン数と値が違っていたら
 	if (_outPoses.size() != mNumBones)

@@ -150,19 +150,10 @@
     <ClCompile Include="FireObject.cpp">
       <Filter>GameObJect\GoalObj</Filter>
     </ClCompile>
-    <ClCompile Include="FirstResult.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
     <ClCompile Include="ResultBase.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
-    <ClCompile Include="SecondResult.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdResult.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
-    <ClCompile Include="Result.cpp">
+    <ClCompile Include="LastResult.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
@@ -191,6 +182,18 @@
     </ClCompile>
     <ClCompile Include="AButtonUI.cpp">
       <Filter>UI\AButtonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleUI.cpp">
+      <Filter>UI\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstResult.cpp">
+      <Filter>Scene\Result\FirstResult</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondResult.cpp">
+      <Filter>Scene\Result\SecondResult</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdResult.cpp">
+      <Filter>Scene\Result\ThirdResult</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,19 +348,10 @@
     <ClInclude Include="FireObject.h">
       <Filter>GameObJect\GoalObj</Filter>
     </ClInclude>
-    <ClInclude Include="FirstResult.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
     <ClInclude Include="ResultBase.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
-    <ClInclude Include="SecondResult.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdResult.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
-    <ClInclude Include="Result.h">
+    <ClInclude Include="LastResult.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
@@ -386,6 +380,18 @@
     </ClInclude>
     <ClInclude Include="AButtonUI.h">
       <Filter>UI\AButtonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleUI.h">
+      <Filter>UI\Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstResult.h">
+      <Filter>Scene\Result\FirstResult</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondResult.h">
+      <Filter>Scene\Result\SecondResult</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdResult.h">
+      <Filter>Scene\Result\ThirdResult</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -546,6 +552,18 @@
     </Filter>
     <Filter Include="UI\AButtonUI">
       <UniqueIdentifier>{7adeca7f-1b7c-4216-92e8-0b77b107d9a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Puzzle">
+      <UniqueIdentifier>{e1f1945b-d0db-4337-be70-d0db2c1df706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Result\FirstResult">
+      <UniqueIdentifier>{d704a41c-f92b-496d-aa67-edb2db69aae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Result\SecondResult">
+      <UniqueIdentifier>{424a95ba-81aa-4567-b5dc-ce8ee335eb84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Result\ThirdResult">
+      <UniqueIdentifier>{7cb29bfa-ded2-4a8c-93cb-4852d3882e23}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

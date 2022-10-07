@@ -7,7 +7,8 @@
 @fn	コンストラクタ
 */
 Game::Game()
-	: mFps(nullptr)
+	: mNowScene(nullptr)
+	, mFps(nullptr)
 	, mRunningFlag(true)
 	, mSceneFlag(false)
 	, mInputSystem(0)

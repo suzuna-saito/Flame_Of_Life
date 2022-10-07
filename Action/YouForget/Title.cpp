@@ -15,7 +15,7 @@ Title::Title(const SceneType& _nowScene)
 	// タイトル画像
 	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
 
-	ResultBase::mTrueEndFlag = true;
+	ResultBase::mClearEndFlag = true;
 
 	// 取得したアイテムの中にデータが入っていれば
 	if (ItemBase::mGetNumber.size() != 0)

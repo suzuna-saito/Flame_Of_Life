@@ -8,14 +8,14 @@
 @param	_nowScene 現在のシーン
 */
 ThirdResult::ThirdResult(const SceneType& _nowScene)
-	:ResultBase(_nowScene)
+	:ResultBase()
 {
 	mFullPicture = new FullPicture("Assets/UI/ThirdResult/ThirdResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
-	mItemDescription[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
-	mItemDescription[ItemNum::two] = "Assets/UI/ThirdResult/Puzzles_2.png";
-	mItemDescription[ItemNum::three] = "Assets/UI/ThirdResult/Puzzles_3.png";
+	mPuzzles[ItemNum::one] = "Assets/UI/ThirdResult/Puzzles_1.png";
+	mPuzzles[ItemNum::two] = "Assets/UI/ThirdResult/Puzzles_2.png";
+	mPuzzles[ItemNum::three] = "Assets/UI/ThirdResult/Puzzles_3.png";
 
 	// どのアイテムを取っているか検索
 	mSearch();
@@ -55,7 +55,7 @@ SceneBase* ThirdResult::update()
 
 	if (mGameSceneFlag)
 	{
-		return new Result(SceneType::eGameClear);
+		return new LastResult(SceneType::eGameClear);
 	}
 
 	if (mReturnTitleFlag)

@@ -4,8 +4,8 @@ FullPicture::FullPicture(const string _fileName)
 	: UIBase()
 {
 	// UIComponentを生成することで自動で描画されるようになる
-	mUiComponent = new UIComponent(this, mPosition, mScale, 0);
+	mUIComponent = new UIComponent(this, mPosition, mScale, eFullPicture);
 
 	// テクスチャを生成
-	mUiComponent->SetTexture(RENDERER->GetTexture(_fileName));
+	mUIComponent->SetTexture(RENDERER->GetTexture(_fileName));
 }

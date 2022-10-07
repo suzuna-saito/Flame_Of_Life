@@ -9,7 +9,7 @@ Matrix4 BoneTransform::ToMatrix() const
 	return rot * trans;
 }
 
-BoneTransform BoneTransform::Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, float _interpolation)
+BoneTransform BoneTransform::Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, const float _interpolation)
 {
 	BoneTransform retVal;
 	// a‚©‚çb ‚É”’lf‚Å‹…–ÊüŒ`•âŠÔ(slerp)‚·‚é

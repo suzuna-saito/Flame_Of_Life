@@ -22,5 +22,5 @@ public:
 	/// <param name="_nextFramePose">次のフレームのポーズ</param>
 	/// <param name="_interpolation">補間値</param>
 	/// <returns>補間された値</returns>
-	static BoneTransform Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, float _interpolation);
+	static BoneTransform Interpolate(const BoneTransform& _nowFramePone, const BoneTransform& _nextFramePose, const float _interpolation);
 };
