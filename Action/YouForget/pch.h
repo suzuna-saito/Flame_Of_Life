@@ -90,7 +90,7 @@ using namespace std;
 // ジャンプ @コンポーネントか？
 #include "Jump.h"
 
-// シーン @ 全部
+// シーン @ リザルト意外終わってない
 #include "Title.h"
 #include "FirstStage.h"
 #include "SecondStage.h"

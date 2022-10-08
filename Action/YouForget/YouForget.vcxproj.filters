@@ -153,9 +153,6 @@
     <ClCompile Include="ResultBase.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
-    <ClCompile Include="LastResult.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>System\pch</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Text.cpp">
       <Filter>UI\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="LastResult.cpp">
+      <Filter>Scene\Result\LastResult</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -354,9 +354,6 @@
     <ClInclude Include="ResultBase.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
-    <ClInclude Include="LastResult.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>System\pch</Filter>
     </ClInclude>
@@ -399,50 +396,11 @@
     <ClInclude Include="Text.h">
       <Filter>UI\Text</Filter>
     </ClInclude>
+    <ClInclude Include="LastResult.h">
+      <Filter>Scene\Result\LastResult</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BasicMesh.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="BasicMesh.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="downsampling.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="framebufferScreen.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="framebufferScreen.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="gaussianblur.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="hdrBlurBlend.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="HDRMesh.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Particle.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Phong.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Phong.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Skinned.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Sprite.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Sprite.vert">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="Shaders\Line.frag">
       <Filter>Shader</Filter>
     </None>
@@ -450,6 +408,51 @@
       <Filter>Shader</Filter>
     </None>
     <None Include="Shaders\LineWorld.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\downsampling.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\gaussianblur.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\hdrBlurBlend.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\HDRMesh.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Particle.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Skinned.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\SkinnedPhong.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
       <Filter>Shader</Filter>
     </None>
   </ItemGroup>
@@ -573,6 +576,9 @@
     </Filter>
     <Filter Include="UI\Text">
       <UniqueIdentifier>{6762a942-ec64-4d08-a0e7-068682ec9a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\Result\LastResult">
+      <UniqueIdentifier>{1db74433-1e63-421d-9dca-fc37c3f03706}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -353,23 +353,24 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BasicMesh.frag" />
-    <None Include="BasicMesh.vert" />
-    <None Include="downsampling.frag" />
-    <None Include="framebufferScreen.frag" />
-    <None Include="framebufferScreen.vert" />
-    <None Include="gaussianblur.frag" />
-    <None Include="hdrBlurBlend.frag" />
-    <None Include="HDRMesh.frag" />
-    <None Include="Particle.frag" />
-    <None Include="Phong.frag" />
-    <None Include="Phong.vert" />
+    <None Include="Shaders\BasicMesh.frag" />
+    <None Include="Shaders\BasicMesh.vert" />
+    <None Include="Shaders\downsampling.frag" />
+    <None Include="Shaders\framebufferScreen.frag" />
+    <None Include="Shaders\framebufferScreen.vert" />
+    <None Include="Shaders\gaussianblur.frag" />
+    <None Include="Shaders\hdrBlurBlend.frag" />
+    <None Include="Shaders\HDRMesh.frag" />
     <None Include="Shaders\Line.frag" />
     <None Include="Shaders\Line.vert" />
     <None Include="Shaders\LineWorld.vert" />
-    <None Include="Skinned.vert" />
-    <None Include="Sprite.frag" />
-    <None Include="Sprite.vert" />
+    <None Include="Shaders\Particle.frag" />
+    <None Include="Shaders\Phong.frag" />
+    <None Include="Shaders\Phong.vert" />
+    <None Include="Shaders\Skinned.vert" />
+    <None Include="Shaders\SkinnedPhong.frag" />
+    <None Include="Shaders\Sprite.frag" />
+    <None Include="Shaders\Sprite.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

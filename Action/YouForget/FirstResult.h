@@ -3,7 +3,7 @@
 /*
 * FirstStageのリザルトクラス
 */
-class FirstResult : public ResultBase
+class FirstResult :public ResultBase
 {
 public:
 	/// <summary>
@@ -24,5 +24,4 @@ public:
 	/// </summary>
 	/// <returns></returns>
 	SceneBase* update() override;
-
 };

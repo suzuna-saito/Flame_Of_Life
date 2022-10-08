@@ -6,25 +6,22 @@
 class LastResult :public ResultBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_nowScene">現在のシーンタイプ</param>
 	LastResult(const SceneType& _nowScene);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~LastResult();
 
-	/*
-	@fn	タイトルシーン時に毎フレーム更新処理をする
-	*/
-	SceneBase* update() override;
-
-	/*
-	@fn	タイトルシーン時に毎フレーム入力処理をする
-	*/
+	/// <summary>
+	/// 入力処理
+	/// </summary>
+	/// <param name="_inputState">入力状態</param>
 	void Input(const InputState& _inputState)override;
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns></returns>
+	SceneBase* update() override;
 };
