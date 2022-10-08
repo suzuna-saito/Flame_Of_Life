@@ -1,84 +1,62 @@
-/*
-@file Game.h
-@brief ゲームの進行を行う
-*/
-
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
-class FPS;
-class InputSystem;
-
+/*
+* ゲームの進行を行うクラス
+*/
 class Game
 {
 public:
-
-	/*
-	@fn	コンストラクタ
-	*/
+	// コンストラクタ
 	Game();
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~Game() {};
 
-	/*
-	@fn		初期化処理
-	@return true : 成功, false : 失敗(bool型)
-	*/
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	/// <returns>true : 成功, false : 失敗</returns>
 	bool Initialize();
-
-	/*
-	@fn	終了処理
-	*/
+	
+	/// <summary>
+	/// 終了処理
+	/// </summary>
 	void Termination();
 
-	/*
-	@fn	ゲームループ
-	*/
+	/// <summary>
+	/// ゲームループ
+	/// </summary>
 	void GameLoop();
-
-	//シーンを切り替えるか
-	bool mSceneFlag;
-
 private:
-
-	//現在のシーン
-	SceneBase* mNowScene;
-
-	/*
-	@fn	入力関連の処理
-	*/
+	/// <summary>
+	/// 入力関連の処理
+	/// </summary>
 	void ProcessInput();
 
-	/*
-	@fn	描画関連の処理
-	*/
-	virtual void GenerateOutput();
-
-	/*
-	@fn	ゲームの更新処理
-	*/
+	/// <summary>
+	/// ゲームの更新処理
+	/// </summary>
 	void UpdateGame();
 
-	/*
-	@fn	ロードしたデータの解放
-	*/
+	/// <summary>
+	/// 描画関連の処理
+	/// </summary>
+	virtual void GenerateOutput();
+
+	/// <summary>
+	/// ロードしたデータの解放
+	/// </summary>
 	void UnloadData();
 
-	//FPS計測クラス
-	FPS* mFps;
-	//入力管理クラス
-	InputSystem* mInputSystem;
-	//ゲームを続けるかどうか
-	bool mRunningFlag;
+	class SceneBase* mNowScene;			// 現在のシーン
+	class FPS* mFps;					// FPS計測クラス
+	class InputSystem* mInputSystem;	// 入力管理クラス
+	
+	bool mRunningFlag;					// ゲームを続けるかどうか(true:続ける)
 
-	const float MWidth;
-	const float MHeight;
-public://ゲッターセッター
+	const float MWidth;					// 画面の横幅
+	const float MHeight;				// 画面の縦幅
+
+public:// ゲッターセッター
 
 	/*
 	@fn		最初のシーンを決める関数

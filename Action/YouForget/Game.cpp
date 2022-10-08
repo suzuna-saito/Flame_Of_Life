@@ -1,26 +1,15 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-/*
-@fn	コンストラクタ
-*/
 Game::Game()
 	: mNowScene(nullptr)
 	, mFps(nullptr)
 	, mRunningFlag(true)
-	, mSceneFlag(false)
 	, mInputSystem(0)
 	, MWidth(1920.0f)
 	, MHeight(1080.0f)
 {
 }
 
-/*
-@fn		初期化処理
-@return true : 成功 , false : 失敗(bool型)
-*/
 bool Game::Initialize()
 {
 	//SDLの初期化
@@ -57,7 +46,7 @@ bool Game::Initialize()
 	//ゲームオブジェクト管理クラスの初期化
 	GameObjectManager::CreateInstance();
 
-	Matrix4 v = Matrix4::CreateLookAt(Vector3(200, 0, -500), Vector3(200, 0, 0), Vector3::UnitZ);
+	Matrix4 v = Matrix4::CreateLookAt(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3::UnitZ);
 	RENDERER->SetViewMatrix(v);
 
 	return true;

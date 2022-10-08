@@ -1,19 +1,11 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-/*
-@fn		コンストラクタ
-@param	_nowScene 現在のシーン
-*/
 ThirdStage::ThirdStage(const SceneType& _nowScene)
 	:SceneBase(_nowScene)
 {
-	mIsScene = _nowScene;
-
-	mMapCreate = new MapCreate();
-
+	// マップの生成
+	mMapCreate = new MapCreate(_nowScene);
+	// ThirdStage用のファイルが開けたら
 	if (!mMapCreate->OpenFile())
 	{
 		// プレイヤーの生成
@@ -29,56 +21,46 @@ ThirdStage::ThirdStage(const SceneType& _nowScene)
 		// アイテムの生成
 		mMapCreate->CreateItem();
 	}
-
-	mFullPicture = new FullPicture("Assets/UI/Description.png");
 }
 
-/*
-@fn	デストラクタ
-*/
 ThirdStage::~ThirdStage()
 {
+	// 現在のシーンで生成したオブジェクトを全て削除
 	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eThird);
-
-	delete mMapCreate;
 }
 
 
 void ThirdStage::Input(const InputState& _state)
 {
+	// @@@デバック用
 	// 当たり判定表示モードの切り替え
 	if (_state.m_keyboard.GetKeyState(SDL_SCANCODE_0) == ButtonState::Pressed)
 	{
 		PHYSICS->ToggleDebugMode();
 	}
+	// タイトルシーン以外でコントローラーのスタートボタン、または、Bキーが押された瞬間
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		// タイトル遷移フラグをtrueにする
+		mReturnTitleFlag = true;
+	}
 }
 
-/*
-@fn	現在のシーン時に毎フレーム更新処理をする
-*/
 SceneBase* ThirdStage::update()
 {
-	// プレイヤーがろうそくにたどり着いたら
+	// プレイヤーがゴールにたどり着いたら
 	if (GoalObj::mGoalFlag)
 	{
-		
+		// 次のシーンのポインタを返す
 		return new ThirdResult(SceneType::eThirdResult);
 	}
 
+	// mReturnTitleFlagがtrueだったら
 	if (mReturnTitleFlag)
 	{
+		// タイトルシーンのポインタを返す
 		return new Title(SceneType::eTitle);
-	}
-
-
-	// @@@
-	if (!Player::mMoveFlag)
-	{
-		mFullPicture->SetThisVisible(true);
-	}
-	else
-	{
-		mFullPicture->SetThisVisible(false);
 	}
 
 	return this;

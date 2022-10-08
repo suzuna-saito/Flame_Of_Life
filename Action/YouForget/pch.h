@@ -61,14 +61,14 @@ using namespace std;
 #include "BoxCollider.h"
 #include "SphereCollider.h"
 
-// Renderer
+// Renderer@ テクスチャ以外
 #include "Renderer.h"
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
 #include "VertexArray.h"
 
-// シーン @ 終わってない
+// Scene
 #include "SceneBase.h"
 
 // GameObject @ 全部
@@ -90,7 +90,7 @@ using namespace std;
 // ジャンプ @コンポーネントか？
 #include "Jump.h"
 
-// シーン @ リザルト意外終わってない
+// Scene
 #include "Title.h"
 #include "FirstStage.h"
 #include "SecondStage.h"

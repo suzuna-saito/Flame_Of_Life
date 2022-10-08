@@ -1,31 +1,27 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
+/*
+* ThirdStageの更新
+*/
 class ThirdStage : public SceneBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_nowScene">現在のシーンタイプ</param>
 	ThirdStage(const SceneType& _nowScene);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~ThirdStage();
 
-	void Input(const InputState& state)override;
-
-	/*
-	@fn	現在のシーン時に毎フレーム更新処理をする
-	*/
+	/// <summary>
+	/// 入力処理
+	/// </summary>
+	/// <param name="_inputState">入力状態</param>
+	void Input(const InputState& _inputState)override;
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns></returns>
 	SceneBase* update() override;
-
-private:
-
 };
-

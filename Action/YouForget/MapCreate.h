@@ -11,7 +11,7 @@ public:
 	/*
 	@fn	コンストラクタ
 	*/
-	MapCreate();
+	MapCreate(const SceneBase::SceneType& _sceneType);
 
 	/*
 	@fn	デストラクタ

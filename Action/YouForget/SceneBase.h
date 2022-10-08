@@ -1,12 +1,8 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
-class BackGroundSprite;
-class MapCreate;
-class Candle;
-
+/*
+* シーンの基底クラス
+*/
 class SceneBase
 {
 public:
@@ -26,53 +22,32 @@ public:
         eGameOver,      // ゲームオーバー
     };
 
-    /*
-    @fn	コンストラクタ
-    */
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="_nowScene">現在のシーンタイプ</param>
     SceneBase(const SceneType& _sceneType);
-
-    /*
-    @fn	デストラクタ
-    */
+    // デストラクタ
     virtual ~SceneBase() {};
 
-    /*
-    @fn	現在のシーン時に毎フレーム更新処理をする
-    */
+    /// <summary>
+    /// 入力処理
+    /// </summary>
+    /// <param name="_inputState">入力状態</param>
+    virtual void Input(const InputState& _state) {};
+
+    /// <summary>
+    /// 更新処理
+    /// </summary>
+    /// <returns>次のシーンのポインタ</returns>
     virtual SceneBase* update() = 0;
 
-    /*
-    @fn	現在のシーン時に毎フレーム入力処理をする
-    */
-    virtual void Input(const InputState& _state);
-
-    //現在のシーン
-    static SceneType mIsScene;
+    static SceneType mIsScene;          // 現在のシーンタイプ
 
 protected:
+    class FullPicture* mFullPicture;    // 1920×1080サイズの画像UI
+    class MapCreate* mMapCreate;        // マップ
 
-    //背景
-    class FullPicture* mFullPicture;
-    //マップ生成
-    class MapCreate* mMapCreate;
-
-    // 次のシーンに遷移するか
-    bool mGameSceneFlag;
-
-    // タイトルシーンに遷移するか
-    bool mReturnTitleFlag;
-
-    //ゲームクリアしたか
-    bool mClearFlag;
-
-    //次のシーンに遷移する時の待機時間
-    int mNextSceneCount;
-
-    // 説明画像のα値
-    float mThisSpriteAlpha;
-private:
-
-   
-
-public://ゲッターセッター
+    bool mGameSceneFlag;                // 次のシーンに遷移するか(true:する)
+    bool mReturnTitleFlag;              // タイトルシーンに遷移するか(true:する)
 };

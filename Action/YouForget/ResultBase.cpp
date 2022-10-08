@@ -1,10 +1,11 @@
 #include "pch.h"
 
 // 静的メンバ変数の初期化
-bool ResultBase::mClearEndFlag = true;
+bool ResultBase::mClearEndFlag = true;	// エンドの分岐フラグ(true:クリア)
 
 ResultBase::ResultBase(const SceneType& _nowScene)
-	:SceneBase(_nowScene)
+	: SceneBase(_nowScene)
+	, mNowDrawTextUI(nullptr)
 {
 	mIsScene = _nowScene;
 
@@ -15,10 +16,7 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 ResultBase::~ResultBase()
 {
 	// シーンを遷移する前に取得したパズルピースを0に戻す
-	if (ItemBase::mGetNumber.size() != 0)
-	{
-		ItemBase::mGetNumber.clear();
-	}
+	ItemBase::mGetNumber.clear();
 }
 
 void ResultBase::Search()

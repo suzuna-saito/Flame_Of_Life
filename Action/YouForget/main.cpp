@@ -1,18 +1,15 @@
-//-----------------------------------------------------------------------------
-//	@brief	 インクルード
-//-----------------------------------------------------------------------------
 #include "pch.h"
 
 int main(int argc, char** argv)
 {
-	//ゲームクラスの定義
+	// ゲームクラスの定義
 	Game game;
-	//ゲームクラスの初期化が成功したか
-	bool success = game.Initialize();
-	game.SetFirstScene(new Title(SceneBase::SceneType::eTitle));
-
-	if (success)
+	// ゲームクラスの初期化が成功したら
+	if (game.Initialize())
 	{
+		// 最初のシーンを生成
+		game.SetFirstScene(new Title(SceneBase::SceneType::eTitle));
+		// ゲームループに入る
 		game.GameLoop();
 	}
 

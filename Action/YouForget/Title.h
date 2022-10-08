@@ -1,33 +1,28 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
+/*
+* Titleの更新
+*/
 class Title : public SceneBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_nowScene 現在のシーン
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_nowScene">現在のシーンタイプ</param>
 	Title(const SceneType& _nowScene);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~Title();
 
-	/*
-	@fn	タイトルシーン時に毎フレーム更新処理をする
-	*/
-	SceneBase* update() override;
-
-	/*
-	@fn	タイトルシーン時に毎フレーム入力処理をする
-	*/
+	/// <summary>
+	/// 入力処理
+	/// </summary>
+	/// <param name="_inputState">入力状態</param>
 	void Input(const InputState& _inputState)override;
-
-private:
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <returns></returns>
+	SceneBase* update() override;
 };
 

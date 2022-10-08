@@ -6,8 +6,8 @@
 /*
 @fn	コンストラクタ
 */
-MapCreate::MapCreate()
-	:GameObject(SceneBase::SceneType::eInit, Tag::NoCollision)
+MapCreate::MapCreate(const SceneBase::SceneType& _sceneType)
+	: GameObject(_sceneType, Tag::NoCollision)
 	, mScene()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)

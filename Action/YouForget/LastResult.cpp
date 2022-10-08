@@ -29,6 +29,13 @@ void LastResult::Input(const InputState& _state)
 		// 全て描画されていた時はシーン遷移フラグがtrueになる
 		mGameSceneFlag = mDrawUpdate();
 	}
+	// タイトルシーン以外でコントローラーのスタートボタン、または、Bキーが押された瞬間
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		// タイトル遷移フラグをtrueにする
+		mReturnTitleFlag = true;
+	}
 }
 
 SceneBase* LastResult::update()
