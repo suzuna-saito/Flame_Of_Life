@@ -19,7 +19,7 @@ LastResult::LastResult(const SceneType& _nowScene)
 		mFullPicture = new FullPicture("Assets/UI/EndResult/Clear_4.png");
 	}
 
-	mSearch();
+	Search();
 }
 
 /*
@@ -49,8 +49,6 @@ SceneBase* LastResult::update()
 	{
 		return new Title(SceneType::eTitle);
 	}
-
-	mResultUpdate();
 
 	return this;
 }

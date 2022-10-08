@@ -59,7 +59,7 @@ void UIComponent::Draw(Shader* _shader, const Vector3& _Pos, const Vector3 _scal
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
 			Vector3(_Pos.x - (mTextureWidth * 0.0f),
-				_Pos.z - (mTextureHeight * 0.0f), 0.0f));
+				_Pos.y - (mTextureHeight * 0.0f), 0.0f));
 
 		Matrix4 world = scaleMatrix * transMat;
 

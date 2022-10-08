@@ -2,11 +2,13 @@
 
 AButtonUI::AButtonUI()
 	: UIBase()
-	, mAddScale(-0.01f)
+	, mMaxScale(1.5f)
+	, mMinScale(1.2f)
+	, mAddScale(0.005f)
 {
 	// GameObjectクラスの変数初期化
-	mPosition = Vector3(800.0f,0.0f,-400.0f);	// ポジション
-	mScale = Vector3(2.0f, 2.0f, 0.0f);			// スケール
+	mPosition = Vector3(820.0f,-420.0f,0.0f);		// ポジション
+	mScale = Vector3(mMaxScale, mMaxScale, 0.0f);	// スケール
 
 	// UIComponentを生成することで自動で描画されるようになる
 	mUIComponent = new UIComponent(this, mPosition, mScale);
@@ -16,8 +18,8 @@ AButtonUI::AButtonUI()
 
 void AButtonUI::UpdateGameObject(float _deltaTime)
 {
-	// mScaleが2.0fより小さい、または、2.5fより大きかったら
-	if (mScale.x <= 2.0f || mScale.x >= 2.5f)
+	// mScaleが最小値より小さい、または、最大値より大きかったら
+	if (mScale.x <= mMinScale || mScale.x >= mMaxScale)
 	{
 		mAddScale *= -1;	// 符号を変える
 	}

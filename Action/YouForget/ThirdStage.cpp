@@ -51,12 +51,6 @@ void ThirdStage::Input(const InputState& _state)
 	{
 		PHYSICS->ToggleDebugMode();
 	}
-
-	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
-		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
-	{
-		mReturnTitleFlag = true;
-	}
 }
 
 /*

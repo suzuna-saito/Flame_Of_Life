@@ -1,207 +1,112 @@
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
+// 静的メンバ変数の初期化
 bool ResultBase::mClearEndFlag = true;
-//Sprite* ResultBase::mEndSprite;
 
-/*
-@fn		コンストラクタ
-@param	_nowScene 現在のシーン
-*/
 ResultBase::ResultBase(const SceneType& _nowScene)
 	:SceneBase(_nowScene)
-	, mDescription()
-	, mGetPieces()
-	//, mDeleteDescription()
-	, mDraw(false)
-	, mNowDescription(nullptr)
-	, mPuzzleUI(nullptr)
-	, mAButton(nullptr)
-	, mNum(0)
 {
 	mIsScene = _nowScene;
 
-
-	/*if (GetScene() == Scene::gameClear)
-	{
-		if (mTrueEndFlag)
-		{
-			mSprite = new Sprite("Assets/UI/EndResult/Clear_1.png");
-		}
-		else
-		{
-			mSprite = new Sprite("Assets/UI/EndResult/Clear_4.png");
-		}
-	}*/
+	// AボタンのUIを生成
+	new AButtonUI();
 }
 
-/*
-@fn	デストラクタ
-*/
 ResultBase::~ResultBase()
 {
-	// 取得したアイテムの中にデータが入っていれば
+	// シーンを遷移する前に取得したパズルピースを0に戻す
 	if (ItemBase::mGetNumber.size() != 0)
 	{
 		ItemBase::mGetNumber.clear();
 	}
 }
 
-SceneBase* ResultBase::update()
-{
-	return nullptr;
-}
-
-void ResultBase::mSearch()
+void ResultBase::Search()
 {
 	// 取得したパズルピース分回す
-	decltype(mPuzzlePieces)::iterator it;
+	decltype(mPuzzlePieceDatas)::iterator it;
 	for (const auto& num : ItemBase::mGetNumber)
 	{
 		// キーが一致するものを探す
-		it = mPuzzlePieces.find(num);
+		it = mPuzzlePieceDatas.find(num);
 
-		// 見つかったら
-		if (it != mPuzzlePieces.end())
+		// 一致したら
+		if (it != mPuzzlePieceDatas.end())
 		{
 			// ピースの画像データ保存
-			AddPictureData(UIBase::UIType::ePuzzlePiece, mPuzzlePieces[num]);
-		}
-	}
-
-	// 全てのピースを回収できてなかったら
-	if (mPictureDatas.size() != mPuzzlePieces.size())
-	{
-		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
-		mClearEndFlag = false;
-	}
-	else
-	{
-		// シーンによって更に画像を追加
-		switch (SceneBase::mIsScene)
-		{
-		case SceneType::eFirstResult:
-			mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
-			mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
-			break;
-		case SceneType::eSecondResult:
-			mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
-			mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
-			break;
-		case SceneType::eThirdResult:
-			mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
-			mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
-			break;
-		case SceneType::eGameClear:
-			if (mClearEndFlag)
-			{
-				mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
-				mDescription.push_back("Assets/UI/EndResult/Clear_3.png");
-			}
-			break;
-		default:
-			break;
-		}
-	}
-
-	// @@@
-	// 全てのピースを回収できてなかったら
-	//if (SceneBase::mIsScene != SceneType::eGameClear &&
-	//	mGetPieces.size() != mPuzzlePieces.size())
-	//{
-	//	mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
-	//	mClearEndFlag = false;
-	//}
-	//else
-	//{
-	//	 シーンによって更に画像を追加
-	//	switch (SceneBase::mIsScene)
-	//	{
-	//	case SceneType::eFirstResult:
-	//		mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
-	//		mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
-	//		break;
-	//	case SceneType::eSecondResult:
-	//		mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
-	//		mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
-	//		break;
-	//	case SceneType::eThirdResult:
-	//		mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
-	//		mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
-	//		break;
-	//	case SceneType::eGameClear:
-	//		if (mClearEndFlag)
-	//		{
-	//			mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
-	//			mDescription.push_back("Assets/UI/EndResult/Clear_3.png");
-	//		}
-	//		break;
-	//	default:
-	//		break;
-	//	}
-	//}
-}
-
-void ResultBase::mDrawUpdate()
-{
-	// 次の説明を出すようにする
-	mDraw = true;
-
-	if (SceneBase::mIsScene == SceneType::eGameClear)
-	{
-		if (SceneBase::mIsScene == SceneType::eGameClear && mFullPicture != nullptr)
-		{
-			mFullPicture->SetThisVisible(false);
-		}
-
-		if (mNowDescription != nullptr)
-		{
-			mNowDescription->SetThisVisible(false);
+			StoresData(mPuzzlePieceDatas[num], UIBase::UIType::ePuzzlePiece);
 		}
 	}
 }
 
-void ResultBase::mResultUpdate()
+bool ResultBase::Collected()
 {
-	// mDrawがtrueの時
-	if (mDraw)
+	// 全てのピースを回収できてなかったら
+	if (mPictureDatas.size() != mPuzzlePieceDatas.size())
 	{
-		if (mNum == mDescription.size())
+		// 取得したピースが1つ以下だったら
+		if (mPictureDatas.size() <= 1)
 		{
-			// シーン遷移フラグをtrueにする
-			mGameSceneFlag = true;
+			// 回収出来なかった用のテキスト画像 1 を追加格納
+			StoresData("Assets/UI/ResultBase/BadWord.png", UIBase::UIType::eText);
 		}
+		// 取得したピースが2つ以上だったら
 		else
 		{
-			// @@@
-			if (mNum == 4)
-			{
-				mNowDescription->SetThisVisible(false);
-			}
-			// 新しい画像を出す
-			mPuzzleUI = new PuzzleUI(mGetPieces[mNum], UIBase::UIType::ePuzzlePiece);
-			//mNowDescription = new FullPicture(mDescription[mNum]);
-			// 一度newしたら、mDrawをfalseにする。
-			mDraw = false;
-
-			++mNum;
-
-			//// デストラクタで削除するようにvectorに保存しておく
-			//mDeleteDescription.push_back(mNowDescription);
+			// 回収出来なかった用のテキスト画像 2 を追加格納
+			StoresData("Assets/UI/ResultBase/BadWord2.png", UIBase::UIType::eText);
 		}
-	}
+		
+		// クリアフラグをfalseにする
+		mClearEndFlag = false;
 
-
-	if (mAButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
-	{
-		mAButton = new AButtonUI();
+		return false;
 	}
+	
+	return true;
 }
 
-void ResultBase::AddPictureData(const UIBase::UIType _uiType, const string _filename)
+void ResultBase::StoresData(const string _filename, const int _uiType)
 {
 	// 描画したい画像データとその画像のUIタイプを関連付けて格納
-	mPictureDatas.insert(pair<UIBase::UIType, string>(_uiType, _filename));
+	mPictureDatas[_filename] = _uiType;
+	// キー（ファイル名）を格納
+	mFileNames.emplace_back(_filename);
+}
+
+bool ResultBase::mDrawUpdate()
+{
+	// mFileNamesの中が空だったら
+	if (mFileNames.empty())
+	{
+		// 今描画しているテキストの描画をやめる
+		mNowDrawTextUI->SetThisVisible(false);
+		// もう全て描画したのでtrueを返す
+		return true;
+	}
+
+	// mPictureDatasの値がePuzzlePieceだった時
+	if (mPictureDatas[mFileNames[0]] == UIBase::UIType::ePuzzlePiece)
+	{
+		// パズルピースを生成
+		new PuzzleUI(mFileNames[0], UIBase::UIType::ePuzzlePiece);
+	}
+	// mPictureDatasの値がeTextだった時
+	else if (mPictureDatas[mFileNames[0]] == UIBase::UIType::eText)
+	{
+		// mNowDrawTextUIが空じゃなかったら
+		if (mNowDrawTextUI != nullptr)
+		{
+			// 今描画しているテキストの描画をやめる
+			mNowDrawTextUI->SetThisVisible(false);
+		}
+
+		// テキスト画像を生成
+		mNowDrawTextUI = new Text(mFileNames[0]);
+	}
+
+	// (もうすでに描画したファイルなので)mFileNamesの先頭要素を削除
+	mFileNames.erase(mFileNames.begin());
+
+	return false;
 }

@@ -13,12 +13,12 @@ SecondResult::SecondResult(const SceneType& _nowScene)
 	mFullPicture = new FullPicture("Assets/UI/SecondResult/SecondResultBase.png");
 
 	// マップをつかってアイテムと説明画像を関連付け	
-	mPuzzlePieces[ItemNum::one] = "Assets/UI/SecondResult/Puzzles_1.png";
-	mPuzzlePieces[ItemNum::two] = "Assets/UI/SecondResult/Puzzles_2.png";
-	mPuzzlePieces[ItemNum::three] = "Assets/UI/SecondResult/Puzzles_3.png";
+	mPuzzlePieceDatas[ItemNum::one] = "Assets/UI/SecondResult/Puzzles_1.png";
+	mPuzzlePieceDatas[ItemNum::two] = "Assets/UI/SecondResult/Puzzles_2.png";
+	mPuzzlePieceDatas[ItemNum::three] = "Assets/UI/SecondResult/Puzzles_3.png";
 
 	// どのアイテムを取っているか検索
-	mSearch();
+	Search();
 }
 
 /*
@@ -36,12 +36,6 @@ void SecondResult::Input(const InputState& _state)
 	{
 		mDrawUpdate();
 	}
-
-	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
-		_state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
-	{
-		mReturnTitleFlag = true;
-	}
 }
 
 
@@ -50,8 +44,6 @@ void SecondResult::Input(const InputState& _state)
 */
 SceneBase* SecondResult::update()
 {
-	mResultUpdate();
-
 	if (mGameSceneFlag)
 	{
 		return new ThirdStage(SceneType::eThird);

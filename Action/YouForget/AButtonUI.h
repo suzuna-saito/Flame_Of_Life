@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* ストーリーを進めるためのボタンUIの更新
+* ストーリーを進めるためのボタンUIの更新、描画するクラス
 */
 class AButtonUI :public UIBase
 {
@@ -18,5 +18,7 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
-	float mAddScale;	// スケールの増加値
+	const float mMaxScale;	// スケールの最大値
+	const float mMinScale;	// スケールの最小値
+	float mAddScale;		// スケールの増加値
 };

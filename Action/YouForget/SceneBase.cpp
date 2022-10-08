@@ -32,3 +32,14 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	//dir.m_diffuseColor = Vector3(0.5f, 0.5f, 0.8f);
 	dir.m_specColor = Vector3(0.8f, 0.8f, 0.8f);
 }
+
+void SceneBase::Input(const InputState& _state)
+{
+	// タイトルシーン以外でコントローラーのスタートボタン、または、Bキーが押された瞬間
+	if (mIsScene != SceneType::eTitle && _state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_START) == 1 ||
+		mIsScene != SceneType::eTitle && _state.m_keyboard.GetKeyState(SDL_SCANCODE_B) == ButtonState::Released)
+	{
+		// タイトル遷移フラグをtrueにする
+		mReturnTitleFlag = true;
+	}
+}

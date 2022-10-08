@@ -6,7 +6,6 @@
 class ResultBase :public SceneBase
 {
 public:
-
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
@@ -19,48 +18,35 @@ public:
 	/// 更新処理
 	/// </summary>
 	/// <returns>次のシーンのポインタ</returns>
-	SceneBase* update() override;
+	SceneBase* update() override { return nullptr; }
 
 	static bool mClearEndFlag;	// エンドの分岐フラグ(true:クリア)
 
 protected:
-	// どのアイテムを取っているか検索する
-	void mSearch();
-	// 次の画像を出す処理
-	void mDrawUpdate();
-	// 次のシーンに移るか、まだ画像を出すかUpdate処理
-	void mResultUpdate();
-
-	map<ItemNum, string> mPuzzlePieces;	// ピースと必要な画像データを関連付けて格納
-	class PuzzleUI* mPuzzleUI;			// パズルのUI
-private:
+	// どのパズルピースを取得しているか検索し、取得したデータは格納する
+	void Search();	
 	/// <summary>
-	/// 描画したい画像データを追加する
+	/// 取得数に応じてフラグを返す
 	/// </summary>
-	/// <param name="_uiType">画像のUIタイプ</param>
+	/// <returns>true : パズルピースを全て回収している</returns>
+	bool Collected();
+
+	/// <summary>
+	/// 描画したい画像データを格納する
+	/// </summary>
 	/// <param name="_filename">画像のファイル名</param>
-	void AddPictureData(const UIBase::UIType _uiType, const string _filename);
+	/// <param name="_uiType">画像のUIタイプ</param>
+	void StoresData(const string _filename, const int _uiType);
+	/// <summary>
+	/// mFileNamesに格納されているデータを一つずつ描画する
+	/// </summary>
+	/// <returns>true : 全て描画した</returns>
+	bool mDrawUpdate();
 
-	class Text* mTextUI;										// テキスト画像のUI
+	map<ItemNum, string> mPuzzlePieceDatas;	// ピースと必要な画像データを関連付けて格納
+private:
+	class Text* mNowDrawTextUI;				// 今描画しいているテキスト画像のUI
 
-	unordered_multimap<UIBase::UIType, string> mPictureDatas;	// 描画したい画像データとその画像のUIタイプを関連付けて格納(キー重複OK)
-	//vector<string> mGetPieces;								// プレイ中に取得したパズルピースの画像データを格納
-	//// 描画する画像
-	//vector<string> mDescription;
-	//// 表示した画像をvectorに保存し、デストラクタでまとめて消す
-	//vector <class FullPicture*> mDeleteDescription;
-
-	//// 表示処理をするかどうか
-	//bool mDraw;
-
-	//// 出す画像のナンバー
-	//unsigned int mNum;
-
-	//// 今表示している画像
-	//class FullPicture* mNowDescription;
-	//// ボタンのUI
-	//class AButtonUI* mAButton;
-
-	//////ボタン画像のUI
-	////ButtonUI* mButtonUI;
+	map<string, int> mPictureDatas;			// 描画したい画像データとその画像のUIタイプを関連付けて格納
+	vector<string> mFileNames;				// mPictureDatasにキーとして格納した全てのファイル名(描画したいファイル)
 };
