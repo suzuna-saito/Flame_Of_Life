@@ -195,6 +195,9 @@
     <ClCompile Include="ThirdResult.cpp">
       <Filter>Scene\Result\ThirdResult</Filter>
     </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>UI\Text</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -393,6 +396,9 @@
     <ClInclude Include="ThirdResult.h">
       <Filter>Scene\Result\ThirdResult</Filter>
     </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>UI\Text</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="BasicMesh.frag">
@@ -564,6 +570,9 @@
     </Filter>
     <Filter Include="Scene\Result\ThirdResult">
       <UniqueIdentifier>{7cb29bfa-ded2-4a8c-93cb-4852d3882e23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Text">
+      <UniqueIdentifier>{6762a942-ec64-4d08-a0e7-068682ec9a6b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

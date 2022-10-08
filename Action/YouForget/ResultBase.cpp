@@ -18,7 +18,7 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 	, mDraw(false)
 	, mNowDescription(nullptr)
 	, mPuzzleUI(nullptr)
-	, mButton(nullptr)
+	, mAButton(nullptr)
 	, mNum(0)
 {
 	mIsScene = _nowScene;
@@ -66,15 +66,13 @@ void ResultBase::mSearch()
 		// 見つかったら
 		if (it != mPuzzlePieces.end())
 		{
-			// mGetPiecesに取得したピースの画像データ保存
-			mGetPieces.push_back(mPuzzlePieces[num]);
+			// ピースの画像データ保存
+			AddPictureData(UIBase::UIType::ePuzzlePiece, mPuzzlePieces[num]);
 		}
 	}
 
-	// @@@
 	// 全てのピースを回収できてなかったら
-	if (SceneBase::mIsScene != SceneType::eGameClear &&
-		mGetPieces.size() != mPuzzlePieces.size())
+	if (mPictureDatas.size() != mPuzzlePieces.size())
 	{
 		mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
 		mClearEndFlag = false;
@@ -107,6 +105,43 @@ void ResultBase::mSearch()
 			break;
 		}
 	}
+
+	// @@@
+	// 全てのピースを回収できてなかったら
+	//if (SceneBase::mIsScene != SceneType::eGameClear &&
+	//	mGetPieces.size() != mPuzzlePieces.size())
+	//{
+	//	mDescription.push_back("Assets/UI/ResultBase/BadWord.png");
+	//	mClearEndFlag = false;
+	//}
+	//else
+	//{
+	//	 シーンによって更に画像を追加
+	//	switch (SceneBase::mIsScene)
+	//	{
+	//	case SceneType::eFirstResult:
+	//		mDescription.push_back("Assets/UI/FirstResult/Word_1.png");
+	//		mDescription.push_back("Assets/UI/FirstResult/Word_2.png");
+	//		break;
+	//	case SceneType::eSecondResult:
+	//		mDescription.push_back("Assets/UI/SecondResult/Word_1.png");
+	//		mDescription.push_back("Assets/UI/SecondResult/Word_2.png");
+	//		break;
+	//	case SceneType::eThirdResult:
+	//		mDescription.push_back("Assets/UI/ThirdResult/Word_1.png");
+	//		mDescription.push_back("Assets/UI/ThirdResult/Word_2.png");
+	//		break;
+	//	case SceneType::eGameClear:
+	//		if (mClearEndFlag)
+	//		{
+	//			mDescription.push_back("Assets/UI/EndResult/Clear_2.png");
+	//			mDescription.push_back("Assets/UI/EndResult/Clear_3.png");
+	//		}
+	//		break;
+	//	default:
+	//		break;
+	//	}
+	//}
 }
 
 void ResultBase::mDrawUpdate()
@@ -159,9 +194,14 @@ void ResultBase::mResultUpdate()
 	}
 
 
-	if (mButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
+	if (mAButton == nullptr && SceneBase::mIsScene != SceneType::eGameClear)
 	{
-		mButton = new AButtonUI();
+		mAButton = new AButtonUI();
 	}
 }
 
+void ResultBase::AddPictureData(const UIBase::UIType _uiType, const string _filename)
+{
+	// 描画したい画像データとその画像のUIタイプを関連付けて格納
+	mPictureDatas.insert(pair<UIBase::UIType, string>(_uiType, _filename));
+}

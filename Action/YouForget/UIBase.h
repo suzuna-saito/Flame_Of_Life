@@ -17,6 +17,7 @@ public:
 		eFullPicture,	// 1920×1080サイズのUI
 		ePuzzleBase,	// パズルの基盤
 		ePuzzlePiece,	// パズルのピース
+		eText,			// テキスト
 		eAButton,		// Aボタン
 	};
 

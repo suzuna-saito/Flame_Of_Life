@@ -117,6 +117,7 @@ using namespace std;
 #include "UIBase.h"
 #include "FullPicture.h"
 #include "PuzzleUI.h"
+#include "Text.h"
 #include "AButtonUI.h"
 
 // Map @ ‘S•”

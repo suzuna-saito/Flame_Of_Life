@@ -217,6 +217,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="LastResult.cpp" />
     <ClCompile Include="ResultBase.cpp" />
     <ClCompile Include="SecondResult.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="ThirdResult.cpp" />
     <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
@@ -309,6 +310,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="LastResult.h" />
     <ClInclude Include="ResultBase.h" />
     <ClInclude Include="SecondResult.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="ThirdResult.h" />
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="InputSystem.h" />
