@@ -29,3 +29,6 @@
 *.out
 *.app
 .vs
+Action/Debug
+Action/x64
+Action/YouForget/Debug
