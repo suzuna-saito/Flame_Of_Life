@@ -9,7 +9,7 @@ public:
 	// コンストラクタ
 	UIBase();
 	// デストラクタ
-	~UIBase() {};
+	virtual ~UIBase() {};
 
 	//　UIの種類（描画したい順）
 	enum UIType :unsigned char

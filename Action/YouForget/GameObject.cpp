@@ -26,7 +26,7 @@ GameObject::GameObject(SceneBase::SceneType _sceneTag, const Tag& _objectTag, bo
 	, mRotation(Quaternion::Identity)
 	, mMyObjectId(mGameObjectId)
 	, mTag(_objectTag)
-	, mSceneTag(_sceneTag)
+	, mSceneTag(SceneBase::mIsSceneType)
 	, mMoveSpeed(800.0f)
 	, mGravity(90.0f)
 	, mReUseObject(_reUseGameObject)

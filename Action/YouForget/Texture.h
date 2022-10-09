@@ -1,6 +1,3 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
 /*

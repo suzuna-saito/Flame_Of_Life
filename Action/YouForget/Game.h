@@ -49,4 +49,3 @@ public:// ゲッターセッター
 	/// <param name="_sceneType">生成したいシーンタイプ</param>
 	void SetNewScene(const SceneBase::SceneType _sceneType);
 };
-

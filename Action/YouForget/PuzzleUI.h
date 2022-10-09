@@ -1,6 +1,8 @@
 #pragma once
 
-// パズルの基盤、ピースを描画するクラス
+/*
+* パズルの基盤、ピースを描画するクラス
+*/
 class PuzzleUI : public UIBase
 {
 public:

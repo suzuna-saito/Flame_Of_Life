@@ -170,6 +170,8 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 		case SceneBase::SceneType::eFirstResult:
 		case SceneBase::SceneType::eSecondResult:
 		case SceneBase::SceneType::eThirdResult:
+		case SceneBase::SceneType::eLastResult:
+
 			mResultObjects.emplace_back(_object);
 			break;
 		}
@@ -281,6 +283,7 @@ void GameObjectManager::RemoveGameObjects(SceneBase::SceneType _scene)
 	case SceneBase::SceneType::eFirstResult:
 	case SceneBase::SceneType::eSecondResult:
 	case SceneBase::SceneType::eThirdResult:
+	case SceneBase::SceneType::eLastResult:
 
 		while (!mResultObjects.empty())
 		{

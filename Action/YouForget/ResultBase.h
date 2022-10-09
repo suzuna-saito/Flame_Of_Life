@@ -12,7 +12,7 @@ public:
 	/// <param name="_nowScene">現在のシーンタイプ</param>
 	ResultBase(const SceneType& _nowScene);
 	// デストラクタ
-	~ResultBase();
+	virtual ~ResultBase();
 
 	/// <summary>
 	/// 更新処理
