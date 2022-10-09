@@ -30,13 +30,13 @@ void Title::Input(const InputState& _state)
 	}
 }
 
-SceneBase* Title::update()
+SceneBase::SceneType Title::update()
 {
 	// mGameSceneFlagがtrueだったら
 	if (mGameSceneFlag)
 	{
-		// 次のシーンのポインタを返す
-		return new FirstStage(SceneType::eFirst);
+		// 次のシーンのタイプを返す
+		return SceneType::eFirst;
 		//return new FirstResult(SceneType::eFirstResult);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
@@ -44,5 +44,5 @@ SceneBase* Title::update()
 		//return new Result(Scene::result);
 	}
 
-	return this;
+	return mIsSceneType;
 }

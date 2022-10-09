@@ -7,7 +7,7 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 	: SceneBase(_nowScene)
 	, mNowDrawTextUI(nullptr)
 {
-	mIsScene = _nowScene;
+	mIsSceneType = _nowScene;
 
 	// AボタンのUIを生成
 	new AButtonUI();
@@ -77,8 +77,12 @@ bool ResultBase::mDrawUpdate()
 	// mFileNamesの中が空だったら
 	if (mFileNames.empty())
 	{
-		// 今描画しているテキストの描画をやめる
-		mNowDrawTextUI->SetThisVisible(false);
+		// mNowDrawTextUIが空じゃなかったら
+		if (mNowDrawTextUI != nullptr)
+		{
+			// 今描画しているテキストの描画をやめる
+			mNowDrawTextUI->SetThisVisible(false);
+		}
 		// もう全て描画したのでtrueを返す
 		return true;
 	}

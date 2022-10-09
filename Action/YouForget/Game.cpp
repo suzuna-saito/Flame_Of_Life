@@ -3,6 +3,7 @@
 Game::Game()
 	: mNowScene(nullptr)
 	, mFps(nullptr)
+	, mReturnSceneType(SceneBase::SceneType::eInit)
 	, mRunningFlag(true)
 	, mInputSystem(0)
 	, MWidth(1920.0f)
@@ -12,10 +13,12 @@ Game::Game()
 
 bool Game::Initialize()
 {
-	//SDLの初期化
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) != 0)
+	// SDLの初期化
+	// 返り値の整数が0でなかったら
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO |
+		SDL_INIT_GAMECONTROLLER | SDL_INIT_HAPTIC) != 0)
 	{
-		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+		printf("SDLを初期化できません : %s", SDL_GetError());
 		return false;
 	}
 
@@ -23,7 +26,7 @@ bool Game::Initialize()
 	mInputSystem = new InputSystem();
 	if (!mInputSystem->Initialize())
 	{
-		SDL_Log("Failed to initialize input system");
+		printf("インプットシステムの初期化に失敗しました");
 		return false;
 	}
 
@@ -32,7 +35,7 @@ bool Game::Initialize()
 	//画面作成
 	if (!RENDERER->Initialize(MWidth, MHeight, false))
 	{
-		SDL_Log("Failed to initialize renderer");
+		printf("レンダラーの初期化に失敗しました\n");
 		Renderer::DeleteInstance();
 		return false;
 	}
@@ -46,65 +49,29 @@ bool Game::Initialize()
 	//ゲームオブジェクト管理クラスの初期化
 	GameObjectManager::CreateInstance();
 
-	Matrix4 v = Matrix4::CreateLookAt(Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3::UnitZ);
-	RENDERER->SetViewMatrix(v);
-
 	return true;
 }
 
-/*
-@fn	終了処理
-*/
-void Game::Termination()
-{
-	//データのアンロード
-	UnloadData();
-	//スタティッククラスの解放処理
-	GameObjectManager::DeleteInstance();
-	Renderer::DeleteInstance();
-	PhysicsWorld::DeleteInstance();
-	//クラスの解放処理
-	delete mFps;
-	delete mInputSystem;
-	//サブシステムの終了
-	SDL_Quit();
-}
-
-/*
-@fn		最初のシーンを決める関数
-@param	_firstScene 最初のシーン
-*/
-void Game::SetFirstScene(SceneBase* _firstScene)
-{
-	mNowScene = _firstScene;
-}
-
-/*
-@fn	ゲームループ
-*/
 void Game::GameLoop()
 {
 	while (mRunningFlag)
 	{
-		//入力関連の処理
+		// 入力関連の処理
 		ProcessInput();
 
-		SceneBase* tmpScene;
-		//const InputState& state = mInputSystem->GetState();
-
+		// 実行中のシーンの入力処理
 		mNowScene->Input(mInputSystem->GetState());
-
 		// 実行中のシーンを更新処理
-		tmpScene = mNowScene->update();
+		mReturnSceneType = mNowScene->update();
 
 		// シーンの切り替えが発生した？
-		if (tmpScene != mNowScene)
+		if (SceneBase::mIsSceneType != mReturnSceneType)
 		{
 			// 現在のシーンの解放
 			delete mNowScene;
+			// シーンの切り替え
+			SetNewScene(mReturnSceneType);
 
-			// 現在実行中のシーンの切り替え
-			mNowScene = tmpScene;
 			continue;
 		}
 
@@ -117,43 +84,31 @@ void Game::GameLoop()
 	}
 }
 
-/*
-@fn	ロードしたデータの解放
-*/
-void Game::UnloadData()
-{
-	if (RENDERER != nullptr)
-	{
-		RENDERER->UnloadData();
-		RENDERER->Shutdown();
-	}
-}
-
-/*
-@fn	入力関連の処理
-*/
 void Game::ProcessInput()
 {
+	// Updateの準備をする
 	mInputSystem->PrepareForUpdate();
 
-	SDL_Event event;
 	// キューにイベントがあれば繰り返す
+	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
 		{
-		case SDL_QUIT:
-			mRunningFlag = false;
+		case SDL_QUIT:							// サブシステムを終了
+			mRunningFlag = false;				// ゲームループを終わる
 			break;
-		case SDL_MOUSEWHEEL:
-			mInputSystem->ProcessEvent(event);
-			break;
+		//case SDL_MOUSEWHEEL:
+		//	mInputSystem->ProcessEvent(event);
+		//	break;
 		default:
 			break;
 		}
 	}
 
+	// フレーム毎の処理
 	mInputSystem->Update();
+
 	// 現在の状態が格納された配列
 	const InputState& state = mInputSystem->GetState();
 
@@ -161,26 +116,81 @@ void Game::ProcessInput()
 	if (state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_BACK) ||
 		state.m_keyboard.GetKeyState(SDL_SCANCODE_ESCAPE) == ButtonState::Released)
 	{
-		mRunningFlag = false;
+		mRunningFlag = false;	// ゲームループを終わる
 	}
 
+	// アクターの入力状態の更新
 	GAME_OBJECT_MANAGER->ProcessInput(state);
 }
 
-/*
-@fn	描画関連の処理
-*/
+void Game::UpdateGame()
+{
+	// 現在のフレームにかかった時間を取得
+	float deltaTime = mFps->GetDeltaTime();
+	// アクターの更新処理
+	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
+}
+
 void Game::GenerateOutput()
 {
+	// 実行中のものを描画
 	RENDERER->Draw();
 }
 
-/*
-@fn	ゲームの更新処理
-*/
-void Game::UpdateGame()
+void Game::Termination()
 {
-	float deltaTime = mFps->GetDeltaTime();
+	// データのアンロード
+	UnloadData();
+	// スタティッククラスの解放処理
+	GameObjectManager::DeleteInstance();	// Object
+	Renderer::DeleteInstance();				// Renderer
+	PhysicsWorld::DeleteInstance();			// PhysicsWorld
+	// クラスの解放処理
+	delete mFps;
+	delete mInputSystem;
+	// サブシステムの終了
+	SDL_Quit();
+}
 
-	GAME_OBJECT_MANAGER->UpdateGameObject(deltaTime);
+void Game::UnloadData()
+{
+	// 描画しているデータを削除
+	if (RENDERER != nullptr)
+	{
+		RENDERER->UnloadData();	// 解放
+		RENDERER->Shutdown();	// 終了処理
+	}
+}
+
+void Game::SetNewScene(const SceneBase::SceneType _sceneType)
+{
+	switch (_sceneType)
+	{
+	case SceneBase::SceneType::eTitle:			// Title
+		mNowScene = new Title(_sceneType);
+		break;
+	case SceneBase::SceneType::eFirst:			// FirstStage
+		mNowScene = new FirstStage(_sceneType);
+		break;
+	case SceneBase::SceneType::eSecond:			// SecondStage
+		mNowScene = new SecondStage(_sceneType);
+		break;
+	case SceneBase::SceneType::eThird:			// ThirdStage
+		mNowScene = new ThirdStage(_sceneType);
+		break;
+	case SceneBase::SceneType::eFirstResult:	// FirstResult
+		mNowScene = new FirstResult(_sceneType);
+		break;
+	case SceneBase::SceneType::eSecondResult:	// SecondResult
+		mNowScene = new SecondResult(_sceneType);
+		break;
+	case SceneBase::SceneType::eThirdResult:	// ThirdResult
+		mNowScene = new ThirdResult(_sceneType);
+		break;
+	case SceneBase::SceneType::eLastResult:		// LastResult
+		mNowScene = new LastResult(_sceneType);
+		break;
+	default:
+		break;
+	}
 }

@@ -1,7 +1,7 @@
 #include "pch.h"
 
 UIBase::UIBase()
-	: GameObject(SceneBase::mIsScene)
+	: GameObject(SceneBase::mIsSceneType)
 	, mUIComponent(nullptr)
 {
 }

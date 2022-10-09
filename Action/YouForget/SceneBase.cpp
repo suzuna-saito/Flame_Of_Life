@@ -1,7 +1,7 @@
 #include "pch.h"
 
 // 静的メンバ変数の初期化
-SceneBase::SceneType SceneBase::mIsScene = SceneType::eInit;	// 現在のシーンタイプ
+SceneBase::SceneType SceneBase::mIsSceneType = SceneType::eInit;	// 現在のシーンタイプ
 
 SceneBase::SceneBase(const SceneType& _sceneType)
 	: mFullPicture(nullptr)
@@ -10,7 +10,7 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	, mReturnTitleFlag(false)
 {
 	// シーンタイプの更新
-	mIsScene = _sceneType;
+	mIsSceneType = _sceneType;
 
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(1.0f, 1.0f, 1.0f));	// 光の色

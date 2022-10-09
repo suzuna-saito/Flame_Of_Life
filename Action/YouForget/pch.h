@@ -123,7 +123,7 @@ using namespace std;
 // Map @ ‘S•”
 #include "MapCreate.h"
 
-// Game @ ‘S•”
+// Game
 #include "Game.h"
 
 #endif //PCH_H

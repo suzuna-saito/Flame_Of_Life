@@ -16,52 +16,37 @@ public:
 	/// </summary>
 	/// <returns>true : 成功, false : 失敗</returns>
 	bool Initialize();
-	
-	/// <summary>
-	/// 終了処理
-	/// </summary>
+	// ゲームループ
+	void GameLoop();
+	// 終了処理
 	void Termination();
 
-	/// <summary>
-	/// ゲームループ
-	/// </summary>
-	void GameLoop();
 private:
-	/// <summary>
-	/// 入力関連の処理
-	/// </summary>
+	// 入力関連の処理
 	void ProcessInput();
-
-	/// <summary>
-	/// ゲームの更新処理
-	/// </summary>
+	// ゲームの更新処理
 	void UpdateGame();
-
-	/// <summary>
-	/// 描画関連の処理
-	/// </summary>
+	// 描画関連の処理
 	virtual void GenerateOutput();
-
-	/// <summary>
-	/// ロードしたデータの解放
-	/// </summary>
+	// ロードしたデータの解放
 	void UnloadData();
 
-	class SceneBase* mNowScene;			// 現在のシーン
-	class FPS* mFps;					// FPS計測クラス
-	class InputSystem* mInputSystem;	// 入力管理クラス
+	class SceneBase* mNowScene;				// 現在のシーン
+	class FPS* mFps;						// FPS計測クラス
+	class InputSystem* mInputSystem;		// 入力管理クラス
 	
-	bool mRunningFlag;					// ゲームを続けるかどうか(true:続ける)
+	SceneBase::SceneType mReturnSceneType;	// シーンの更新時に返ってきたシーンタイプ
 
-	const float MWidth;					// 画面の横幅
-	const float MHeight;				// 画面の縦幅
+	bool mRunningFlag;						// ゲームを続けるかどうか(true:続ける)
+
+	const float MWidth;						// 画面の横幅
+	const float MHeight;					// 画面の縦幅
 
 public:// ゲッターセッター
-
-	/*
-	@fn		最初のシーンを決める関数
-	@param	_firstScene 最初のシーン
-	*/
-	void SetFirstScene(SceneBase* _firstScene);
+	/// <summary>
+	/// 新しいシーンを生成する
+	/// </summary>
+	/// <param name="_sceneType">生成したいシーンタイプ</param>
+	void SetNewScene(const SceneBase::SceneType _sceneType);
 };
 

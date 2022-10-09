@@ -16,7 +16,7 @@ LastResult::LastResult(const SceneType& _nowScene)
 LastResult::~LastResult()
 {
 	// 現在のシーンで生成したオブジェクトを全て削除
-	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eGameClear);
+	GAME_OBJECT_MANAGER->RemoveGameObjects(SceneType::eLastResult);
 }
 
 void LastResult::Input(const InputState& _state)
@@ -38,14 +38,14 @@ void LastResult::Input(const InputState& _state)
 	}
 }
 
-SceneBase* LastResult::update()
+SceneBase::SceneType LastResult::update()
 {
 	// mGameSceneFlagがtrueだったら
 	if (mGameSceneFlag)
 	{
-		// 次のシーンのポインタを返す
-		return new Title(SceneType::eTitle);
+		// 次のシーンのタイプを返す
+		return SceneType::eTitle;
 	}
 
-	return this;
+	return mIsSceneType;
 }

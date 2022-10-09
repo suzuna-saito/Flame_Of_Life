@@ -22,6 +22,6 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	/// <returns></returns>
-	SceneBase* update() override;
+	/// <returns>次のシーンのタイプ</returns>
+	SceneType update() override;
 };

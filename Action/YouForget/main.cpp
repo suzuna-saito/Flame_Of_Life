@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 	if (game.Initialize())
 	{
 		// 最初のシーンを生成
-		game.SetFirstScene(new Title(SceneBase::SceneType::eTitle));
+		game.SetNewScene(SceneBase::SceneType::eTitle);
 		// ゲームループに入る
 		game.GameLoop();
 	}

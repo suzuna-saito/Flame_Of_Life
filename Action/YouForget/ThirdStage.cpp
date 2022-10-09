@@ -47,21 +47,21 @@ void ThirdStage::Input(const InputState& _state)
 	}
 }
 
-SceneBase* ThirdStage::update()
+SceneBase::SceneType ThirdStage::update()
 {
 	// プレイヤーがゴールにたどり着いたら
 	if (GoalObj::mGoalFlag)
 	{
-		// 次のシーンのポインタを返す
-		return new ThirdResult(SceneType::eThirdResult);
+		// 次のシーンのタイプを返す
+		return SceneType::eThirdResult;
 	}
 
 	// mReturnTitleFlagがtrueだったら
 	if (mReturnTitleFlag)
 	{
-		// タイトルシーンのポインタを返す
-		return new Title(SceneType::eTitle);
+		// タイトルシーンタイプを返す
+		return SceneType::eTitle;
 	}
 
-	return this;
+	return mIsSceneType;
 }

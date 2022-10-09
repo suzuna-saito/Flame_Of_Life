@@ -17,8 +17,8 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	/// <returns>次のシーンのポインタ</returns>
-	SceneBase* update() override { return nullptr; }
+	/// <returns>次のシーンのタイプ</returns>
+	SceneType update() override { return SceneType::eInit; }
 
 	static bool mClearEndFlag;	// エンドの分岐フラグ(true:クリア)
 

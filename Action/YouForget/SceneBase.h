@@ -18,8 +18,7 @@ public:
         eFirstResult,   // Firstリザルト
         eSecondResult,  // Secondリザルト
         eThirdResult,   // Thirdリザルト
-        eGameClear,     // ゲームクリア
-        eGameOver,      // ゲームオーバー
+        eLastResult,    // 最後のリザルト
     };
 
     /// <summary>
@@ -39,10 +38,10 @@ public:
     /// <summary>
     /// 更新処理
     /// </summary>
-    /// <returns>次のシーンのポインタ</returns>
-    virtual SceneBase* update() = 0;
+    /// <returns>次のシーンのタイプ</returns>
+    virtual SceneType update() = 0;
 
-    static SceneType mIsScene;          // 現在のシーンタイプ
+    static SceneType mIsSceneType;      // 現在のシーンタイプ
 
 protected:
     class FullPicture* mFullPicture;    // 1920×1080サイズの画像UI

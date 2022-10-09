@@ -46,22 +46,22 @@ void FirstStage::Input(const InputState& _state)
 	}
 }
 
-SceneBase* FirstStage::update()
+SceneBase::SceneType FirstStage::update()
 {
 	// プレイヤーがゴールにたどり着いたら
 	if (GoalObj::mGoalFlag)
 	{
-		// 次のシーンのポインタを返す
+		// 次のシーンのタイプを返す
 		//return new SecondStage(Scene::second);
-		return new FirstResult(SceneType::eFirstResult);
+		return SceneType::eFirstResult;
 	}
 
 	// mReturnTitleFlagがtrueだったら
 	if (mReturnTitleFlag)
 	{
-		// タイトルシーンのポインタを返す
-		return new Title(SceneType::eTitle);
+		// タイトルシーンタイプを返す
+		return SceneType::eTitle;
 	}
 
-	return this;
+	return mIsSceneType;
 }

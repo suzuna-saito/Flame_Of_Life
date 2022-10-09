@@ -47,13 +47,13 @@ void FirstResult::Input(const InputState& _state)
 	}
 }
 
-SceneBase* FirstResult::update()
+SceneBase::SceneType FirstResult::update()
 {
 	// mGameSceneFlagがtrueだったら
 	if (mGameSceneFlag)
 	{
-		// 次のシーンのポインタを返す
-		return new SecondStage(SceneType::eSecond);
+		// 次のシーンのタイプを返す
+		return SceneType::eSecond;
 		//return new SecondResult(SceneType::eSecondResult);
 
 		//return new Result(Scene::gameClear);
@@ -62,9 +62,9 @@ SceneBase* FirstResult::update()
 	// mReturnTitleFlagがtrueだったら
 	if (mReturnTitleFlag)
 	{
-		// タイトルシーンのポインタを返す
-		return new Title(SceneType::eTitle);
+		// タイトルシーンタイプを返す
+		return SceneType::eTitle;
 	}
 
-	return this;
+	return mIsSceneType;
 }
