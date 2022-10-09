@@ -13,7 +13,7 @@ FallEffectManager::FallEffectManager(const Tag& _ObjectTag, const SceneBase::Sce
 	:GameObject(_SceneTag, _ObjectTag)
 	, mRandVel(Vector3::Zero)
 {
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleEffectBase::ParticleState::eParticleDisable;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -32,21 +32,21 @@ void FallEffectManager::UpdateGameObject(float _deltaTime)
 {
 	if (!Player::mOperable && mPlayer->GetStartFlag() && OneCreateFallFlag)
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		ParticleEffectBase::ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		ParticleEffectBase::ParticleState::eParticleDisable;
 	}
 
 	switch (mState)
 	{
-	case ParticleState::PARTICLE_DISABLE:
+	case ParticleEffectBase::ParticleState::eParticleDisable:
 
 		mCreateFallEffectCount = 0;
 
 		break;
-	case ParticleState::PARTICLE_ACTIVE:
+	case ParticleEffectBase::ParticleState::eParticleActive:
 
 		
 		mPosition = mPlayer->GetPosition();

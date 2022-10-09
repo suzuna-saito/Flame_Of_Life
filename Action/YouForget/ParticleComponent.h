@@ -14,12 +14,12 @@ class ParticleComponent : public Component
 public:
 
 	//パーティクルに対するブレンドの種類
-	typedef enum class PARTICLE_BLEND_ENUM :unsigned char
+	typedef enum class ParticleBlendType :unsigned char
 	{
-		PARTICLE_BLEND_ENUM_ALPHA,
-		PARTICLE_BLEND_ENUM_ADD,
-		PARTICLE_BLEND_ENUM_MULT
-	}PARTICLE_ENUM;
+		eAlphaBlend,// アルファブレンド
+		eAddBlend,	// 加算合成
+		eMultBlend	// 乗算合成
+	};
 
 	/*
 	@fn		コンストラクタ
@@ -57,14 +57,12 @@ private:
 	Vector3 mColor;
 	// 角度
 	Vector3 mAngle;
-	//サイズ
-	float mScale;
 	//透明度
 	float mAlpha;
 	//テクスチャID
 	int mTextureID;
 	//ブレンドタイプ
-	PARTICLE_ENUM mBlendType;
+	ParticleBlendType mBlendType;
 	//描画を行うか
 	bool mVisible;
 	// ビルボード行列
@@ -86,7 +84,7 @@ public: //ゲッターセッター
 	/*
 	@return ブレンドタイプ(enum型 PARTICLE_ENUM)
 	*/
-	PARTICLE_ENUM GetBlendType() { return mBlendType; }
+	ParticleBlendType GetBlendType() { return mBlendType; }
 
 	/*
 	@fn		描画をするかどうかを取得する
@@ -120,11 +118,6 @@ public: //ゲッターセッター
 	void SetAlpha(float _alpha) { mAlpha = _alpha; }
 
 	/*
-	@param _scale スケール
-	*/
-	void SetScale(float _scale) { mScale = _scale; }
-
-	/*
 	@param _mat ビルボード行列
 	*/
 	void SetBillboardMat(const Matrix4& _mat) { mStaticBillboardMat = _mat; }
@@ -132,7 +125,7 @@ public: //ゲッターセッター
 	/*
 	@param _brendType カメラのワールド座標
 	*/
-	void SetBlendMode(PARTICLE_ENUM _blendType) { mBlendType = _blendType; }
+	void SetBlendMode(ParticleBlendType _blendType) { mBlendType = _blendType; }
 
 	/*
 	@fn		描画をするかどうかを設定

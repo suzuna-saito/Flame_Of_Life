@@ -1,86 +1,59 @@
-/*
-@file  SpriteComponent.h
-@brief 画像データクラスを管理し、スクリーン上に描画するクラス
-*/
-
-/*
-@brief インクルード
-*/
 #include "pch.h"
 
-//UIのID、カウント用の初期化
-int UIComponent::mUIid = 0;
-
-/*
-@fn	   コンストラクタ
-@param _owner アタッチするゲームオブジェクトのポインタ
-@param _drawOrder 描画の順番（数値が小さいほど早く描画される）
-*/
-UIComponent::UIComponent(GameObject* _owner, const Vector3 _pos, const Vector3 _scale, int _drawOrder)
+UIComponent::UIComponent(class GameObject* _owner, const int _drawOrder)
 	: Component(_owner)
 	, mTexture(nullptr)
 	, mDrawOrder(_drawOrder)
 	, mTextureWidth(0)
 	, mTextureHeight(0)
 	, mVisible(true)
-	, mMyUIid(mUIid)
-	, mScale(_scale)
-	, mPos(_pos)
 {
-	mUIid++;
 	//レンダラーにポインターを送る
 	RENDERER->AddUI(this);
 }
 
-/*
-@fn	デストラクタ
-*/
 UIComponent::~UIComponent()
 {
-	mUIid--;
 	//レンダラーからポインタを削除する
 	RENDERER->RemoveUI(this);
 }
 
-/*
-@fn		描画処理
-@param	_shader 使用するシェーダークラスのポインタ
-*/
-void UIComponent::Draw(Shader* _shader, const Vector3& _Pos, const Vector3 _scale)
+void UIComponent::Draw(Shader* _shader)
 {
-	//画像情報が空でないか、親オブジェクトが未更新状態でないか
+	// 画像情報が空じゃないかつ、オブジェクトが未更新状態じゃなかったら
 	if (mTexture && mOwner->GetState() != State::Dead)
 	{
+		// スケールの更新
 		Matrix4 scaleMatrix = Matrix4::CreateScale(
-			static_cast<float>(mTextureWidth)* _scale.x,
-			static_cast<float>(mTextureHeight)* _scale.y,
+			static_cast<float>(mTextureWidth)* mOwner->GetScale().x,
+			static_cast<float>(mTextureHeight)* mOwner->GetScale().y,
 			1.0f);
 
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
-			Vector3(_Pos.x - (mTextureWidth * 0.0f),
-				_Pos.y - (mTextureHeight * 0.0f), 0.0f));
+			Vector3(mOwner->GetPosition().x - (mTextureWidth * 0.0f),
+				mOwner->GetPosition().y - (mTextureHeight * 0.0f), 0.0f));
 
+		// 行列を計算
 		Matrix4 world = scaleMatrix * transMat;
-
+		// uWorldTransformを設定
 		_shader->SetMatrixUniform("uWorldTransform", world);
 
+		// これからスロット名”GL_TEXTURE0″の設定をする
 		glActiveTexture(GL_TEXTURE0);
+		// テクスチャの割り当て
 		glBindTexture(GL_TEXTURE_2D, mTexture->GetTextureID());
-		_shader->SetIntUniform("uSpriteTexture", 0);
-
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		// 描画
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 	}
 }
 
-/*
-@fn		テクスチャをセットし縦横の長さを計算する
-@param	_texture 使用するテクスチャのポインタ
-*/
 void UIComponent::SetTexture(Texture* _texture)
 {
+	// テクスチャをセット
 	mTexture = _texture;
+	// 縦、横の長さを取得
 	mTextureWidth = mTexture->GetWidth();
 	mTextureHeight = mTexture->GetHeight();
 }

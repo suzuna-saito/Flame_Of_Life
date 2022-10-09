@@ -12,7 +12,7 @@
 CircledShadowManager::CircledShadowManager(const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _mPlayer)
 	:GameObject(_SceneTag, _ObjectTag)
 {
-	mState = ParticleState::PARTICLE_ACTIVE;
+	mState = ParticleEffectBase::ParticleState::eParticleActive;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -23,7 +23,7 @@ CircledShadowManager::CircledShadowManager(const Tag& _ObjectTag, const SceneBas
 	mPosition = mPlayer->GetPosition();
 	mPosition.z = mPlayer->GetPosition().z ;
 
-	mCircledShadowEffect = new CircledShadow(mPosition, Vector3::Zero, mTag, mSceneTag, mPlayer);
+	mCircledShadowEffect = new CircledShadow(mPlayer);
 }
 
 /*

@@ -30,7 +30,7 @@ private:
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
 	//パーティクルの状態
-	ParticleState	 mState;
+	ParticleEffectBase::ParticleState mState;
 	//シーンのタグ
 	SceneBase::SceneType mSceneTag;
 	//アタッチしたゲームオブジェクトのタグ

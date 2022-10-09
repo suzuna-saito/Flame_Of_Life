@@ -279,20 +279,12 @@ void Renderer::Draw()
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
 	mSpriteShader->SetActive();
 	mSpriteVerts->SetActive();
-	// すべてのスプライトの描画
-	for (auto sprite : mSprites)
-	{
-		if (sprite->GetVisible())
-		{
-			sprite->Draw(mSpriteShader);
-		}
-	}
 
 	for (auto UI : mUis)
 	{
 		if (UI->GetVisible())
 		{
-			UI->Draw(mSpriteShader,UI->GetPos(),UI->GetScale());
+			UI->Draw(mSpriteShader);
 		}
 	}
 
@@ -306,54 +298,20 @@ void Renderer::Draw()
 
 }
 
-/*
-@fn		スプライトの追加
-@param	_spriteComponent　追加するSpriteComponentクラスのポインタ
-*/
-void Renderer::AddSprite(SpriteComponent* _spriteComponent)
-{
-	// 今あるスプライトから挿入する場所の検索
-	// (DrawOrderが小さい順番に描画するため)
-	int myDrawOrder = _spriteComponent->GetDrawOrder();
-	auto iter = mSprites.begin();
-	for (;
-		iter != mSprites.end();
-		++iter)
-	{
-		if (myDrawOrder < (*iter)->GetDrawOrder())
-		{
-			break;
-		}
-	}
 
-	// 検索した場所のiterの場所に挿入
-	mSprites.insert(iter, _spriteComponent);
-}
 
-/*
-@fn		スプライトの削除
-@param	_spriteComponent　削除するSpriteComponentクラスのポインタ
-*/
-void Renderer::RemoveSprite(SpriteComponent* _spriteComponent)
-{
-	auto iter = std::find(mSprites.begin(), mSprites.end(), _spriteComponent);
-	mSprites.erase(iter);
-}
-
-/*
-@fn		UIの追加
-@param	_ui　追加するUIクラスのポインタ
-*/
 void Renderer::AddUI(UIComponent* _ui)
 {
-	// 今あるスプライトから挿入する場所の検索
-	// (DrawOrderが小さい順番に描画するため)
+	// (DrawOrderが小さい順番に描画するため)今あるUIから挿入する場所の検索
+	// 自身のDrawOrderを取得
 	int myUiDrawOrder = _ui->GetDrawOrder();
+	// 今あるUIぶん回す
 	auto iterUi = mUis.begin();
 	for (;
 		iterUi != mUis.end();
 		++iterUi)
 	{
+		// 自身のDrawOrderと、今回しているDrawOrderを比べて自身のほうが小さければ
 		if (myUiDrawOrder < (*iterUi)->GetDrawOrder())
 		{
 			break;
@@ -364,13 +322,11 @@ void Renderer::AddUI(UIComponent* _ui)
 	mUis.insert(iterUi, _ui);
 }
 
-/*
-@fn		UIの削除
-@param	_ui　削除するUIクラスのポインタ
-*/
 void Renderer::RemoveUI(UIComponent* _ui)
 {
-	auto iterUi = std::find(mUis.begin(), mUis.end(), _ui);
+	// 削除するクラスのポインタを検索
+	auto iterUi = find(mUis.begin(), mUis.end(), _ui);
+	// 見つかったUIを削除
 	mUis.erase(iterUi);
 }
 
@@ -684,7 +640,7 @@ void Renderer::DrawParticle()
 		return;
 	}
 	// ブレンドモード初期状態取得
-	ParticleComponent::PARTICLE_BLEND_ENUM blendType, prevType;
+	ParticleComponent::ParticleBlendType blendType, prevType;
 	auto itr = mParticles.begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
@@ -814,17 +770,17 @@ void Renderer::SetLightUniforms(Shader* _shader, const Matrix4& _view)
 @fn		光源情報をシェーダーの変数にセットする
 @param  _blendType パーティクルに対するブレンドの種類
 */
-void Renderer::ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType)
+void Renderer::ChangeBlendMode(ParticleComponent::ParticleBlendType _blendType)
 {
 	switch (_blendType)
 	{
-	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ADD:
+	case ParticleComponent::ParticleBlendType::eAddBlend:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);  //加算合成
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA:
+	case ParticleComponent::ParticleBlendType::eAlphaBlend:
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // アルファブレンド
 		break;
-	case ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_MULT:
+	case ParticleComponent::ParticleBlendType::eMultBlend:
 		glBlendFunc(GL_ZERO, GL_SRC_COLOR); //乗算合成
 		break;
 	default:

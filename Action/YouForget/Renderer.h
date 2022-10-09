@@ -34,7 +34,6 @@ enum class TextureStage
 	ShadowMap,
 };
 
-class SpriteComponent;
 class Texture;
 class Shader;
 //class VertexArray;
@@ -75,28 +74,17 @@ public:
 	*/
 	void Draw();
 
-	/*
-	@fn		スプライトの追加
-	@param	_spriteComponent　追加するSpriteComponentクラスのポインタ
-	*/
-	void AddSprite(SpriteComponent* _spriteComponent);
 
-	/*
-	@fn		スプライトの削除
-	@param	_spriteComponent　削除するSpriteComponentクラスのポインタ
-	*/
-	void RemoveSprite(SpriteComponent* _spriteComponent);
-
-	/*
-	@fn		UIの追加
-	@param	_ui　追加するUIクラスのポインタ
-	*/
+	/// <summary>
+	/// UIの追加
+	/// </summary>
+	/// <param name="_ui">追加するUIクラスのポインタ</param>
 	void AddUI(UIComponent* _ui);
 
-	/*
-	@fn		UIの削除
-	@param	_ui　削除するUIクラスのポインタ
-	*/
+	/// <summary>
+	/// UIの削除
+	/// </summary>
+	/// <param name="_ui">削除するUIクラスのポインタ</param>
 	void RemoveUI(UIComponent* _ui);
 
 	/*
@@ -186,7 +174,7 @@ private:
 	@fn		光源情報をシェーダーの変数にセットする
 	@param  _blendType パーティクルに対するブレンドの種類
 	*/
-	void ChangeBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM _blendType);
+	void ChangeBlendMode(ParticleComponent::ParticleBlendType _blendType);
 
 	/*
 	@fn		テクスチャの変更
@@ -203,8 +191,6 @@ private:
 	std::unordered_map<std::string, Mesh*> mMeshes;
 	//メッシュコンポーネントのポインタの可変長コンテナ
 	std::vector<MeshComponent*> mMeshComponents;
-	//スプライトコンポーネントのポインタの可変長コンテナ
-	std::vector<SpriteComponent*> mSprites;
 	//UIのポインタの可変長コンテナ
 	std::vector<UIComponent*> mUis;
 	//パーティクルのポインタ

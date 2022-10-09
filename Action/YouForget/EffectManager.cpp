@@ -16,7 +16,7 @@ EffectManager::EffectManager(GameObject* _owner, const Tag& _objectTag, SceneBas
 	, mCreateDeathEffectCount(0)
 {
 	mOwner = _owner;
-	mState = ParticleState::PARTICLE_DISABLE;
+	mState = ParticleEffectBase::ParticleState::eParticleDisable;
 	mPos = Vector3::Zero;
 	mSceneTag = _sceneTag;
 	mTag = _objectTag;
@@ -31,20 +31,20 @@ void EffectManager::UpdateGameObject(float _deltaTime)
 {
 	if (mPos != mOwner->GetPosition())
 	{
-		mState = ParticleState::PARTICLE_ACTIVE;
+		ParticleEffectBase::ParticleState::eParticleActive;
 	}
 	else
 	{
-		mState = ParticleState::PARTICLE_DISABLE;
+		ParticleEffectBase::ParticleState::eParticleDisable;
 	}
 
 	Vector3 vel = Vector3(0.0f, 0.0f, 0.0f);
 
 	switch (mState)
 	{
-	case ParticleState::PARTICLE_DISABLE:
+	case ParticleEffectBase::ParticleState::eParticleDisable:
 		break;
-	case ParticleState::PARTICLE_ACTIVE:
+	case ParticleEffectBase::ParticleState::eParticleActive:
 
 		mCreateSandEffectCount++;
 		mPosition = mOwner->GetPosition();

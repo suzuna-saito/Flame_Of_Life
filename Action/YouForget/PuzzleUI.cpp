@@ -5,9 +5,8 @@ PuzzleUI::PuzzleUI(const string _fileName, const UIType _type)
 	, mType(_type)
 {
 	// UIComponentを生成することで自動で描画されるようになる
-	mUIComponent = new UIComponent(this, mPosition, mScale, _type);
-
-	// テクスチャを生成
+	mUIComponent = new UIComponent(this, _type);
+	// テクスチャをセット
 	mUIComponent->SetTexture(RENDERER->GetTexture(_fileName));
 }
 

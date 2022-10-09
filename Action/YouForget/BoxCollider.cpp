@@ -52,8 +52,8 @@ void BoxCollider::Refresh()
 {
 	mWorldBox = mObjectBox;
 
-	mWorldBox.m_min = (mObjectBox.m_min * mOwner->GetScale());
-	mWorldBox.m_max = (mObjectBox.m_max * mOwner->GetScale());
+	mWorldBox.m_min = (mObjectBox.m_min * mOwner->GetScale().x);
+	mWorldBox.m_max = (mObjectBox.m_max * mOwner->GetScale().x);
 
 	if (mShouldRotate)
 	{

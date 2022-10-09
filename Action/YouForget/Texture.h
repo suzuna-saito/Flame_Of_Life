@@ -23,8 +23,8 @@ public:
 
 private:
 	unsigned int mTextureID;	// このテクスチャのID
-	int mWidth;					//テクスチャの横幅
-	int mHeight;				//テクスチャの縦幅
+	int mWidth;					// テクスチャの横幅
+	int mHeight;				// テクスチャの縦幅
 
 public://ゲッターセッター
 	// テクスチャIDを取得

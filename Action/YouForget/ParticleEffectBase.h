@@ -1,44 +1,21 @@
-/*
-@file ParticleEffectBase.h
-@brief 一定時間で消える、主にエフェクトの基底クラスとして使用されるクラス
-*/
-
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
-
 /*
-@enum	パーティクルの状態
+* エフェクトの基底クラス
 */
-enum class ParticleState :unsigned char
-{
-	//アクティブ
-	PARTICLE_ACTIVE,
-	//無効にする
-	PARTICLE_DISABLE,
-};
-
 class ParticleEffectBase : public GameObject
 {
 public:
+	// パーティクルの状態
+	enum class ParticleState :unsigned char
+	{
+		eParticleActive,	// アクティブ
+		eParticleDisable,	// 無効にする
+	};
 
-	/*
-	@fn		コンストラクタ
-	@param	_pos エフェクトの生成場所
-	@param	_vel エフェクトの速度
-	@param	_lifeCount エフェクトの生存時間
-	@param	_particleFileName 画像へのアドレス
-	@param	_objectTag アタッチしたゲームオブジェクトのタグ
-	@param	_sceneTag シーンのタグ
-	@param	_scale 画像の拡大サイズ
-	*/
-	ParticleEffectBase(const Vector3& _pos, const Vector3& _vel, const int& _lifeCount, const std::string& _particleFileName, SceneBase::SceneType _sceneTag, const Tag& _objectTag , bool _billFlag ,const float& _scale = 10);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// コンストラクタ
+	ParticleEffectBase();
+	// デストラクタ
 	virtual ~ParticleEffectBase() {};
 
 	/*
@@ -60,15 +37,7 @@ protected:
 	Vector3             mAngle;
 	//生存時間
 	int					mLifeCount;
-	//アルファ値
-	float				mAlpha;
-	//大きさ
-	float				mScale;
-	//加速度
-	float				mSpeed;
-
 public:
-
 	/*
 	@param _flag 反転を行うか
 	*/

@@ -14,7 +14,7 @@ ItemEffectManager::ItemEffectManager(const Tag& _ObjectTag, const SceneBase::Sce
 	, mRandVel(Vector3::Zero)
 	, farstFlag(true)
 {
-	mState = ParticleState::PARTICLE_ACTIVE;
+	mState = ParticleEffectBase::ParticleState::eParticleActive;
 	mSceneTag = _SceneTag;
 	mTag = _ObjectTag;
 
@@ -39,7 +39,7 @@ void ItemEffectManager::UpdateGameObject(float _deltaTime)
 	if (!mItemEffect->GetItemVisible() && OneCreateItemFlag)
 	{
 		mCreateItemEffectCount = 0;
-		mState = ParticleState::PARTICLE_DISABLE;
+		mState = ParticleEffectBase::ParticleState::eParticleDisable;
 		OneCreateItemFlag = false;
 	}
 

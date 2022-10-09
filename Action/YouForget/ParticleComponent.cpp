@@ -22,10 +22,9 @@ Vector3 ParticleComponent::mStaticCameraWorldPos;
 */
 ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag ,const Vector3& _offset, float _scale, int _updateOrder)
 	: Component(_owner, _updateOrder)
-	, mBlendType(PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA)
+	, mBlendType(ParticleBlendType::eAlphaBlend)
 	, mOffset(_offset)
 	, mColor(Vector3(1, 1, 1))
-	, mScale(_scale)
 	, mAlpha(1.0f)
 	, mAngle(Vector3::Zero)
 	, mVisible(true)
@@ -67,7 +66,7 @@ void ParticleComponent::Draw(Shader* _shader)
 		reverceVec.x *= -1;
 	}
 
-	matScale = Matrix4::CreateScale(mScale * reverceVec * mOwner->GetScale());
+	matScale = Matrix4::CreateScale(reverceVec * mOwner->GetScale().x);
 	mat = Matrix4::CreateTranslation(mOffset + mOwner->GetPosition());
 
 	// ƒJƒƒ‰‚Ì•ûŒü‚ÉŒü‚©‚¹‚é‚©‚Ç‚¤‚©‚Å•ªŠò
@@ -103,7 +102,7 @@ void ParticleComponent::Draw(Shader* _shader)
 		}
 	}
 	
-	_shader->SetFloatUniform("uAlpha", mAlpha);
+	_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
 	_shader->SetVectorUniform("uColor", mColor);
 
 	glActiveTexture(GL_TEXTURE0);

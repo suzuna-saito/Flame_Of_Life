@@ -1,43 +1,55 @@
 #include "pch.h"
 
-CircledShadow::CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _PlayerPtr)
-	: ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag, false)
+CircledShadow::CircledShadow(class GameObject* _owner)
+	: ParticleEffectBase()
+	, MBaseZPos(90.0f)
+	, MMaxScale(300.0f)
 {
-	mAngle.x = 0.5f;
-	mAlpha = 1.0f;
-	mScale = 300.0f;
-	mParticle->SetAngle(mAngle);
-	mParticle->SetAlpha(mAlpha);
-	mParticle->SetScale(mScale);
+	// テクスチャをセット
+	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
+	// 乗算する色を設定
 	mParticle->SetColor(Color::LightPink);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA);
-	mVelocity = _Vel;
-	mSpeed = 1.15f;
+	// 回転値を設定
+	mParticle->SetAngle(Vector3(0.5f, 0.0f, 0.0f));
+	// ブレンドの種類をαブレンドに設定
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
+	
+	// GameObjectクラスの変数初期化
+	mPosition = _owner->GetPosition();	// ポジション
+	mPosition.z = MBaseZPos;
+	mScale = Vector3(MMaxScale,0.0f,0.0f);	// スケール
+	mMoveSpeed = 1.15f;					// 値の変化スピード
 
-	mPlayer = _PlayerPtr;
+	// アタッチしたオブジェクトのポインタ
+	mOwner = _owner;
 }
 
 void CircledShadow::UpdateGameObject(float _deltaTime)
 {
-	mPosition = mPlayer->GetPosition();
+	// ポジションを更新
+	mPosition = mOwner->GetPosition();
 
-	if (mPosition.z >= 90.0f)
+	// アタッチしたオブジェクトのポジションが90.0f以上の時
+	if (mOwner->GetPosition().z >= MBaseZPos)
 	{
-		if (mAlpha <= 1.0f)
+		// α値が1.0f未満だったら
+		if (mAlpha < 1.0f)
 		{
-			mAlpha += 0.05f;
+			mAlpha += 0.03f;	// α値をプラス
 		}
 
-		mPosition.z = 90.0f;
-
-		float maxScale = 300.0f;
-		mScale = maxScale - mPlayer->GetPosition().z / 4;
+		// ポジションZを90.0fに設定
+		mPosition.z = MBaseZPos;
+		// スケールを更新
+		mScale.x = MMaxScale - mOwner->GetPosition().z / 4;// MMaxScale - アタッチしたオブジェクトのポジション/4
 	}
+	// アタッチしたオブジェクトのポジションが90.0f未満の時
 	else
 	{
-		mAlpha -= 0.07f;
+		// α値が0.0fより上だったら
+		if (mAlpha > 0.0f)
+		{
+			mAlpha -= 0.07f;	// α値をマイナス
+		}
 	}
-
-	mParticle->SetAlpha(mAlpha);
-	mParticle->SetScale(mScale);
 }

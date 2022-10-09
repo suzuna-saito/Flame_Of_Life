@@ -9,19 +9,21 @@
 */
 
 FallEffect::FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag)
-	:ParticleEffectBase(_Pos, _Vel, 40, "Assets/Effect/Ripple.png", _SceneTag, _ObjectTag,false)
+	:ParticleEffectBase()
 	, MAlphaReductionVal(0.03f)
 	, MScaleAddVal(10.0f)
 {
+	// テクスチャをセット
+	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Ripple.png")->GetTextureID());
+
 	mAngle.x = 0.5f;
 	mAlpha = 1.0f;
-	mScale = 200.0f;
+	mScale = Vector3(200.0f, 1.0f, 1.0f);
 	mParticle->SetAngle(mAngle);
 	mParticle->SetAlpha(mAlpha);
-	mParticle->SetScale(mScale);
 	//mParticle->SetColor(Color::LightBlue);
 	mParticle->SetColor(Color::Red);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 	mVelocity = _Vel;
 }
 
@@ -38,10 +40,9 @@ void FallEffect::UpdateGameObject(float _deltaTime)
 	if (mLifeCount > 0)
 	{
 		mAlpha -= MAlphaReductionVal;
-		mScale += MScaleAddVal;
+		mScale.x += MScaleAddVal;
 
 		mParticle->SetAlpha(mAlpha);
-		mParticle->SetScale(mScale);
 	}
 
 	//ライフカウントが0以下だったら見えなくする

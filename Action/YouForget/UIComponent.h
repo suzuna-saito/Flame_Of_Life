@@ -1,107 +1,58 @@
-/*
-@file  SpriteComponent.h
-@brief 画像データクラスを管理し、スクリーン上に描画するクラス
-*/
-
-/*
-@brief プリプロセッサ
-*/
 #pragma once
 
 /*
-@brief 前方宣言
+* UIクラスを管理し、スクリーン上に描画するクラス
 */
-class GameObject;
-class Shader;
-class Texture;
-class Vector3;
-
 class UIComponent : public Component
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_owner アタッチするゲームオブジェクトのポインタ
-	@param	_scale UIスケール
-	@param	_drawOrder 描画の順番（数値が小さいほど早く描画される）
-	*/
-	UIComponent(GameObject* _owner, const Vector3 _pos,const Vector3 _scale, int _drawOrder = 100);
-
-	/*
-	@fn		デストラクタ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
+	/// <param name="_drawOrder">コンポーネントの更新順番（数値が小さいほど早く更新される）</param>
+	UIComponent(class GameObject* _owner,const int _drawOrder);
+	// デストラクタ
 	~UIComponent();
 
-	/*
-	@fn		描画処理
-	@param _shader 使用するシェーダークラスのポインタ
-	*/
-	virtual void Draw(Shader* _shader, const Vector3& _Pos, const Vector3 _scale);
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	/// <param name="_shader">使用するシェーダークラスのポインタ</param>
+	void Draw(class Shader* _shader);
 
-protected:
+private:
+	class Texture* mTexture;	// テクスチャ
 
-	//クラスのポインタ
-	Texture* mTexture;
-	//描画される順番（数値が少ないほど早く更新される）
-	int mDrawOrder;
-	//テクスチャの横幅
-	int mTextureWidth;
-	//テクスチャの縦幅
-	int mTextureHeight;
-	//描画を行うか
-	bool mVisible;
-	//UIのID、カウント用
-	static int mUIid;
-	//このUIのID
-	int mMyUIid;
-	// UIのスケール
-	Vector3 mScale;
-	// ポジション
-	Vector3 mPos;
+	int mDrawOrder;				// 描画される順番（数値が少ないほど早く更新される）
+
+	int mTextureWidth;			// テクスチャの横幅
+	int mTextureHeight;			// テクスチャの縦幅
+
+	bool mVisible;				// 描画を行うか
 
 public://ゲッターセッター
+	/// <summary>
+	/// 描画番号を取得
+	/// </summary>
+	/// <returns>描画される順番（数値が少ないほど早く更新される）</returns>
+	int GetDrawOrder()const { return mDrawOrder; }
 
-	/*
-	@return テクスチャの横幅(int型)
-	*/
-	int GetTexWidth() const { return mTextureWidth; }
-
-	/*
-	@return テクスチャの縦幅(int型)
-	*/
-	int GetTexHeight() const { return mTextureHeight; }
-
-	/*
-	@return 描画順(int型)
-	*/
-	int GetDrawOrder() { return mDrawOrder; }
-
-	/*
-	@fn		描画をするかどうかを取得する
-	@return	true : 描画する , false : 描画しない(bool型)
-	*/
+	/// <summary>
+	/// 描画をするかどうかを取得する
+	/// </summary>
+	/// <returns>true : 描画する</returns>
 	bool GetVisible() const { return mVisible; }
 
-	/*
-	@return	UIのid(int型)
-	*/
-	int GetUIid() { return mMyUIid; }
+	/// <summary>
+	/// テクスチャをセットし縦横の長さを計算する
+	/// </summary>
+	/// <param name="_texture">使用するテクスチャのポインタ</param>
+	void SetTexture(class Texture* _texture);
 
-	/*
-	@fn		テクスチャをセットし縦横の長さを計算する
-	@param	_texture 使用するテクスチャのポインタ
-	*/
-	virtual void SetTexture(Texture* _texture);
-
-	/*
-	@fn		描画をするかどうかを設定
-	@param	_visible true : 描画する , false : 描画しない
-	*/
+	/// <summary>
+	/// 描画をするかどうかを設定
+	/// </summary>
+	/// <param name="_visible">true : 描画する</param>
 	void SetVisible(bool _visible) { mVisible = _visible; }
-
-	Vector3 GetScale()const { return mScale; }
-	void SetScale(const Vector3 _scale) { mScale = _scale; }
-	Vector3 GetPos()const { return mPos; }
 };
-

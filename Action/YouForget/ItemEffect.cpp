@@ -11,19 +11,21 @@
 @param	_SceneTag シーンのタグ
 */
 ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr)
-	:ParticleEffectBase(_Pos, _Vel, 100, "Assets/Effect/Particle.png", _SceneTag, _ObjectTag,false)
+	:ParticleEffectBase()
 	, mItemVisible(true)
 {
+	// テクスチャをセット
+	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
+
 	mAngle.x = 0.5f;
 	mAlpha = 0.7f;
-	mScale = 500.0f;
+	mScale = Vector3(500.0f, 1.0f, 1.0f);
 	mParticle->SetAngle(mAngle);
 	mParticle->SetAlpha(mAlpha);
-	mParticle->SetScale(mScale);
 	mParticle->SetColor(Color::White);
-	mParticle->SetBlendMode(ParticleComponent::PARTICLE_BLEND_ENUM::PARTICLE_BLEND_ENUM_ALPHA);
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 	mVelocity = _Vel;
-	mSpeed = 1.15f;
+	mMoveSpeed = 1.15f;
 
 	mItem = _ItemPtr;
 }

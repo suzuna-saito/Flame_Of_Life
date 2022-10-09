@@ -1,9 +1,8 @@
-/*
-@brief プリプロセッサ
-*/
 #pragma once
 
-
+/*
+* オブジェクトの丸影エフェクト
+*/
 class CircledShadow : public ParticleEffectBase
 {
 public:
@@ -15,7 +14,7 @@ public:
 	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
 	@param	_SceneTag シーンのタグ
 	*/
-	CircledShadow(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Player* _PlayerPtr);
+	CircledShadow(class GameObject* _owner);
 
 	/*
 	@fn	デストラクタ
@@ -28,8 +27,10 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime)override;
 
-	// プレイヤーのポインタ
-	class Player* mPlayer;
-
+private:
+	class GameObject* mOwner;	// アタッチしたオブジェクトのポインタ
+	
+	const float MBaseZPos;		// 丸影のｚポジション(基盤)
+	const float MMaxScale;		// 最大スケール値
 };
 

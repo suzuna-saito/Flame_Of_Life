@@ -35,7 +35,7 @@ private:
 	//ゲームオブジェクトクラスのポインタ
 	GameObject* mOwner;
 	//パーティクルの状態
-	ParticleState	 mState;
+	ParticleEffectBase::ParticleState mState;
 	//エフェクトマネージャーの座標
 	Vector3			 mPos;
 	//シーンのタグ

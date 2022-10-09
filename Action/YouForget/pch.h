@@ -52,8 +52,7 @@ using namespace std;
 #include "MeshComponent.h"
 #include "ParticleComponent.h"
 #include "SkeletalMeshComponent.h"
-#include "SpriteComponent.h"
-#include "UIComponent.h"
+#include "UIComponent.h"//
 /* Collision */ // @ ‘S•”
 #include "Collision.h"
 #include "ColliderComponent.h"

@@ -24,9 +24,6 @@
     <ClCompile Include="SkeletalMeshComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="BoxCollider.cpp">
       <Filter>Components\Collision</Filter>
     </ClCompile>
@@ -223,9 +220,6 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="SkeletalMeshComponent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollider.h">
