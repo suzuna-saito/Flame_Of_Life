@@ -13,8 +13,11 @@ public:
 		eParticleDisable,	// 無効にする
 	};
 
-	// コンストラクタ
-	ParticleEffectBase();
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
+	ParticleEffectBase(class GameObject* _owner);
 	// デストラクタ
 	virtual ~ParticleEffectBase() {};
 

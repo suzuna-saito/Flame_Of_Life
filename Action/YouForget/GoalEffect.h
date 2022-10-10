@@ -1,35 +1,28 @@
-/*
-@brief プリプロセッサ
-*/
 #pragma once
 
-
+/*
+* ゴール場所に描画するエフェクト
+*/
 class GoalEffect : public ParticleEffectBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_Pos ゴールエフェクトの生成場所
-	@param	_Vel ゴールエフェクトの速度
-	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
-	@param	_SceneTag シーンのタグ
-	*/
-	GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, GoalObj* _PlayerPtr);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
+	GoalEffect(class GameObject* _owner);
+	// デストラクタ
 	~GoalEffect() {};
 
-	/*
-	@fn		ゴールエフェクトのアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
-	// ゴールのポインタ
-	class GoalObj* mGoal;
-
+private:
+	const float MAddAngleY;	// 回転値の増加値
+	const float MMInAlpha;	// α値の最低値
+	float mAddScale;		// スケールの追加値
+	float mAddAlpha;		// アルファ値の減少値
 };
-

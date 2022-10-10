@@ -1,7 +1,7 @@
 #include "pch.h"
 
 FallEffect::FallEffect(class GameObject* _owner)
-	:ParticleEffectBase()
+	:ParticleEffectBase(_owner)
 	, MBaseScale(200.0f)
 	, MAddScale(10.0f)
 	, MSubAlpha(-0.03f)
@@ -20,9 +20,6 @@ FallEffect::FallEffect(class GameObject* _owner)
 	
 	// GameObjectクラスの変数初期化
 	mScale = Vector3(MBaseScale, 1.0f, 1.0f);	// スケール
-
-	// アタッチしたオブジェクトのポインタ
-	mOwner = _owner;
 }
 
 void FallEffect::UpdateGameObject(float _deltaTime)
@@ -48,7 +45,7 @@ void FallEffect::UpdateGameObject(float _deltaTime)
 	// 描画フラグがtrueだったら
 	if (mParticle->GetVisible())
 	{
-		// α値、スケールを変更
+		// α値、スケールを更新
 		mAlpha += MSubAlpha;	// α値
 		mScale.x += MAddScale;	// スケール
 	}

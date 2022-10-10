@@ -10,7 +10,8 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
-	CircledShadow(class GameObject* _owner);
+	/// <param name="_color">丸影の色</param>
+	CircledShadow(class GameObject* _owner, const Vector3 _color);
 	// デストラクタ
 	~CircledShadow() {};
 

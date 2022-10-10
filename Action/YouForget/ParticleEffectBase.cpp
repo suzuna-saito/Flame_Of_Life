@@ -1,11 +1,15 @@
 #include "pch.h"
 
-ParticleEffectBase::ParticleEffectBase()
+ParticleEffectBase::ParticleEffectBase(class GameObject* _owner)
 	: GameObject(SceneBase::mIsSceneType)
 	, mAngle(Vector3::Zero)
+	, mOwner(_owner)
 {
 	// ParticleComponentを生成することで自動で描画されるようになる
 	mParticle = new ParticleComponent(this);
+
+	// アタッチしたオブジェクトのポインタ
+	mOwner = _owner;
 }
 
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)

@@ -15,7 +15,7 @@ GoalObj::GoalObj(const Vector3& _pos, const Vector3& _size, const Tag& _objectTa
 	SetPosition(_pos);   // オブジェクトのポジション
 
 	// エフェクト
-	mGoalEffectManager = new GoalEffectManager(_objectTag, _sceneTag, this);
+	new GoalEffect(this);
 
 	//ろうそくの当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::candleTag, GetOnCollisionFunc());

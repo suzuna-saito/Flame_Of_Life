@@ -108,7 +108,6 @@ using namespace std;
 #include "ItemEffectManager.h"
 #include "CircledShadow.h"
 #include "GoalEffect.h"
-#include "GoalEffectManager.h"
 
 // UI
 #include "UIBase.h"

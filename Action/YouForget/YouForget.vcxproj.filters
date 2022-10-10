@@ -159,9 +159,6 @@
     <ClCompile Include="GoalEffect.cpp">
       <Filter>ParticleEffect\GoalEffect</Filter>
     </ClCompile>
-    <ClCompile Include="GoalEffectManager.cpp">
-      <Filter>ParticleEffect\GoalEffect</Filter>
-    </ClCompile>
     <ClCompile Include="FullPicture.cpp">
       <Filter>UI\FullPicture</Filter>
     </ClCompile>
@@ -349,9 +346,6 @@
       <Filter>GameObJect\GoalObj</Filter>
     </ClInclude>
     <ClInclude Include="GoalEffect.h">
-      <Filter>ParticleEffect\GoalEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalEffectManager.h">
       <Filter>ParticleEffect\GoalEffect</Filter>
     </ClInclude>
     <ClInclude Include="FullPicture.h">

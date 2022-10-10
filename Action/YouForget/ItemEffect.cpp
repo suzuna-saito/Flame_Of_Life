@@ -11,7 +11,7 @@
 @param	_SceneTag シーンのタグ
 */
 ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, Item* _ItemPtr)
-	:ParticleEffectBase()
+	:ParticleEffectBase(nullptr)
 	, mItemVisible(true)
 {
 

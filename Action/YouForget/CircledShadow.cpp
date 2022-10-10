@@ -1,7 +1,7 @@
 #include "pch.h"
 
-CircledShadow::CircledShadow(class GameObject* _owner)
-	: ParticleEffectBase()
+CircledShadow::CircledShadow(class GameObject* _owner, const Vector3 _color)
+	: ParticleEffectBase(_owner)
 	, MBaseZPos(90.0f)
 	, MMaxScale(300.0f)
 	, MAddAlpha(0.03f)
@@ -10,7 +10,7 @@ CircledShadow::CircledShadow(class GameObject* _owner)
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
 	// 乗算する色を設定
-	mParticle->SetColor(Color::LightPink);
+	mParticle->SetColor(_color);
 	// 回転値を設定
 	mParticle->SetAngle(Vector3(0.5f, 0.0f, 0.0f));
 	// ブレンドの種類をαブレンドに設定
@@ -21,9 +21,6 @@ CircledShadow::CircledShadow(class GameObject* _owner)
 	mPosition.z = MBaseZPos;
 	mScale = Vector3(MMaxScale,0.0f,0.0f);	// スケール
 	mMoveSpeed = 1.15f;						// 値の変化値
-
-	// アタッチしたオブジェクトのポインタ
-	mOwner = _owner;
 }
 
 void CircledShadow::UpdateGameObject(float _deltaTime)
@@ -37,7 +34,7 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 		// α値が1.0f未満だったら
 		if (mAlpha < 1.0f)
 		{
-			// α値を変更
+			// α値を更新
 			mAlpha += MAddAlpha;
 		}
 
@@ -52,7 +49,7 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 		// α値が0.0fより上だったら
 		if (mAlpha > 0.0f)
 		{
-			// α値を変更
+			// α値を更新
 			mAlpha += MSubAlpha;
 		}
 	}

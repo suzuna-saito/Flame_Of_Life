@@ -22,7 +22,7 @@ public:
 
 private:
 	const float MBaseScale;	// スケール値(基盤)
-	const float MAddScale;	// スケールの追加値
+	const float MAddScale;	// スケールの増加値
 	const float MSubAlpha;	// アルファ値の減少値
 
 	bool mTmpVisible;		// 更新処理の最後に描画していたかどうかを保存

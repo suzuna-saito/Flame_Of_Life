@@ -57,7 +57,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 
 	// エフェクト
 	// プレイヤーの丸影エフェクト生成
-	new CircledShadow(this);
+	new CircledShadow(this,Color::LightPink);
 	// プレイヤーが落ちた時のエフェクト
 	mFallEffect = new FallEffect(this);
 
