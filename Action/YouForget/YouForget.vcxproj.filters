@@ -84,17 +84,8 @@
     <ClCompile Include="ParticleEffectBase.cpp">
       <Filter>ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="EffectManager.cpp">
-      <Filter>ParticleEffect</Filter>
-    </ClCompile>
     <ClCompile Include="FallEffect.cpp">
       <Filter>ParticleEffect\FallEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemEffect.cpp">
-      <Filter>ParticleEffect\ItemEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemEffectManager.cpp">
-      <Filter>ParticleEffect\ItemEffect</Filter>
     </ClCompile>
     <ClCompile Include="RapidJsonHelper.cpp">
       <Filter>System\RapidJson</Filter>
@@ -273,17 +264,8 @@
     <ClInclude Include="ParticleEffectBase.h">
       <Filter>ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="EffectManager.h">
-      <Filter>ParticleEffect</Filter>
-    </ClInclude>
     <ClInclude Include="FallEffect.h">
       <Filter>ParticleEffect\FallEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemEffect.h">
-      <Filter>ParticleEffect\ItemEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemEffectManager.h">
-      <Filter>ParticleEffect\ItemEffect</Filter>
     </ClInclude>
     <ClInclude Include="RapidJsonHelper.h">
       <Filter>System\RapidJson</Filter>
@@ -477,9 +459,6 @@
     </Filter>
     <Filter Include="ParticleEffect\FallEffect">
       <UniqueIdentifier>{3909bb12-c5a4-4fff-841f-589928a49fe8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ParticleEffect\ItemEffect">
-      <UniqueIdentifier>{84029283-e826-48c7-8f92-b6ff1bf0e3b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{894cef72-2412-4b0e-ab28-0af240abfa5d}</UniqueIdentifier>

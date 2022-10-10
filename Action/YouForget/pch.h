@@ -100,12 +100,9 @@ using namespace std;
 #include "ThirdResult.h"
 #include "LastResult.h"
 
-// ParticleEffect @ ‘S•”
+// ParticleEffect
 #include "ParticleEffectBase.h"
-#include "EffectManager.h"
 #include "FallEffect.h"
-#include "ItemEffect.h"
-#include "ItemEffectManager.h"
 #include "CircledShadow.h"
 #include "GoalEffect.h"
 

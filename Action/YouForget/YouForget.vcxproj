@@ -193,7 +193,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="FirstResult.cpp" />
     <ClCompile Include="FirstStage.cpp" />
-    <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FallEffect.cpp" />
     <ClCompile Include="FireObject.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -223,8 +222,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="ItemBase.cpp" />
-    <ClCompile Include="ItemEffect.cpp" />
-    <ClCompile Include="ItemEffectManager.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Jump.cpp" />
     <ClCompile Include="LegsCollider.cpp" />
@@ -282,7 +279,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Component.h" />
     <ClInclude Include="FirstResult.h" />
     <ClInclude Include="FirstStage.h" />
-    <ClInclude Include="EffectManager.h" />
     <ClInclude Include="FallEffect.h" />
     <ClInclude Include="FireObject.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -312,8 +308,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="ItemBase.h" />
-    <ClInclude Include="ItemEffect.h" />
-    <ClInclude Include="ItemEffectManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Jump.h" />
     <ClInclude Include="LegsCollider.h" />

@@ -26,8 +26,8 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, con
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Item/Puzzle.gpmesh"));
 
 	// エフェクト
-	// アイテムの後ろにあるエフェクト
-	mItemEffectManager = new ItemEffectManager(_objectTag, _sceneTag, this);
+	// アイテムの丸影エフェクト
+	new CircledShadow(this, Color::LightBlue);
 
 	//当たり判定
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::itemTag, GetOnCollisionFunc());
@@ -200,7 +200,10 @@ void Item::mItemExists()
 	// 残りの生存時間が0よりも小さくなったら
 	if (mItemExistsTime <= 0)
 	{
-		// 生存フラグをfalseにする
-		mItemExistsFlag = false;
+		if (mAlpha < 0.0f)
+		{
+			// 生存フラグをfalseにする
+			mItemExistsFlag = false;
+		}
 	}
 }

@@ -3,9 +3,11 @@
 CircledShadow::CircledShadow(class GameObject* _owner, const Vector3 _color)
 	: ParticleEffectBase(_owner)
 	, MBaseZPos(90.0f)
-	, MMaxScale(300.0f)
-	, MAddAlpha(0.03f)
-	, MSubAlpha(-0.07f)
+	, MMaxScale(350.0f)
+	, MInitOwnerAlpha(mOwner->GetAlpha())
+	, MMaxAlpha(0.8f)
+	, MAddAlpha(0.02f)
+	, MSubAlpha(-0.03f)
 {
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
@@ -20,7 +22,7 @@ CircledShadow::CircledShadow(class GameObject* _owner, const Vector3 _color)
 	mPosition = _owner->GetPosition();		// ポジション
 	mPosition.z = MBaseZPos;
 	mScale = Vector3(MMaxScale,0.0f,0.0f);	// スケール
-	mMoveSpeed = 1.15f;						// 値の変化値
+	mAlpha = MMaxAlpha;						// α値
 }
 
 void CircledShadow::UpdateGameObject(float _deltaTime)
@@ -28,29 +30,33 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 	// ポジションを更新
 	mPosition = mOwner->GetPosition();
 
+	// アタッチしたオブジェクトのα値が更新されていたら
+	if (MInitOwnerAlpha != mOwner->GetAlpha())
+	{
+		// α値をアタッチしたオブジェクトのα値に合わせて更新
+		mAlpha = mOwner->GetAlpha() - (MInitOwnerAlpha - MMaxAlpha);
+	}
+
 	// アタッチしたオブジェクトのポジションが90.0f以上の時
 	if (mOwner->GetPosition().z >= MBaseZPos)
 	{
-		// α値が1.0f未満だったら
-		if (mAlpha < 1.0f)
+		// α値がMMaxAlpha未満だったら
+		if (mAlpha < MMaxAlpha)
 		{
-			// α値を更新
-			mAlpha += MAddAlpha;
+			mAlpha += MAddAlpha;	// α値を更新
 		}
 
-		// ポジションZを90.0fに設定
-		mPosition.z = MBaseZPos;
-		// スケールを更新
-		mScale.x = MMaxScale - mOwner->GetPosition().z / 4;// MMaxScale - アタッチしたオブジェクトのポジション/4
+		// ポジション、スケールを更新
+		mPosition.z = MBaseZPos;							//ポジションZをMBaseZPosに設定
+		mScale.x = MMaxScale - mOwner->GetPosition().z / 4;	// MMaxScale - アタッチしたオブジェクトのポジション/4
 	}
-	// アタッチしたオブジェクトのポジションが90.0f未満の時
+	// 上記の条件が一致しなかったとき
 	else
 	{
 		// α値が0.0fより上だったら
 		if (mAlpha > 0.0f)
 		{
-			// α値を更新
-			mAlpha += MSubAlpha;
+			mAlpha += MSubAlpha;	// α値を更新
 		}
 	}
 }
