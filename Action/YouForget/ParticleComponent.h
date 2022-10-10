@@ -1,19 +1,12 @@
-/*
-@file ParticleComponent.h
-@brief 画像を管理しそれを3D空間上に描画するクラス。
-*/
-
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
-
+/*
+* エフェクトを3D空間上に描画するクラス
+*/
 class ParticleComponent : public Component
 {
 public:
-
-	//パーティクルに対するブレンドの種類
+	// パーティクルに対するブレンドのタイプ
 	typedef enum class ParticleBlendType :unsigned char
 	{
 		eAlphaBlend,// アルファブレンド
@@ -21,18 +14,14 @@ public:
 		eMultBlend	// 乗算合成
 	};
 
-	/*
-	@fn		コンストラクタ
-	@param	_owner アタッチするゲームオブジェクトのポインタ
-	@param	_offset 親オブジェクトクラスと画像を描画する位置の差
-	@param	_scale 画像の描画サイズ
-	@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
-	*/
-	ParticleComponent(GameObject* _owner, bool _billFlag = false ,const Vector3& _offset = Vector3(1, 1, 1), float _scale = 1.0f, int _updateOrder = 100);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
+	/// <param name="_billFlag">カメラの方向を向くかどうか true:向く</param>
+	/// <param name="_updateOrder">コンポーネントの更新順番（数値が小さいほど早く更新される）</param>
+	ParticleComponent(GameObject* _owner, bool _billFlag ,int _updateOrder = 100);
+	// デストラクタ
 	~ParticleComponent();
 
 	/*
@@ -51,14 +40,8 @@ public:
 	bool operator < (const ParticleComponent& _rhs) const;
 	bool operator > (const ParticleComponent& _rhs) const;
 private:
-	//親オブジェクトクラスと画像を描画する位置の差
-	Vector3 mOffset;
-	//画像に乗算する色
-	Vector3 mColor;
 	// 角度
 	Vector3 mAngle;
-	//透明度
-	float mAlpha;
 	//テクスチャID
 	int mTextureID;
 	//ブレンドタイプ
@@ -66,9 +49,9 @@ private:
 	//描画を行うか
 	bool mVisible;
 	// ビルボード行列
-	static Matrix4 mStaticBillboardMat;
+	Matrix4 mStaticBillboardMat;
 	// カメラのワールド座標
-	static Vector3 mStaticCameraWorldPos;
+	Vector3 mStaticCameraWorldPos;
 	//描画順(数字が少ないものから描画される)
 	int mDrawOrder;
 	//反転を行うか
@@ -103,19 +86,9 @@ public: //ゲッターセッター
 	void SetTextureID(int _texId) { mTextureID = _texId; }
 
 	/*
-	@param _color 画像に乗算する色
-	*/
-	void SetColor(const Vector3& _color) { mColor = _color; }
-
-	/*
 	@param mAngle 角度（ｘ軸）
 	*/
 	void SetAngle(const Vector3& _angle) { mAngle = _angle; }
-
-	/*
-	@param _alfa 透明度0~1
-	*/
-	void SetAlpha(float _alpha) { mAlpha = _alpha; }
 
 	/*
 	@param _mat ビルボード行列
@@ -137,11 +110,6 @@ public: //ゲッターセッター
 	@param _drawOrder 描画順
 	*/
 	void SetDrawOrder(int _drawOrder) { mDrawOrder = _drawOrder; }
-
-	/*
-	@param _offset 親オブジェクトの座標と描画位置の差
-	*/
-	void SetOffSet(Vector3 _offset) { mOffset = _offset; };
 
 	/*
 	@param _flag 反転を行うか

@@ -17,37 +17,18 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
-	ParticleEffectBase(class GameObject* _owner);
+	/// <param name="_billFlag">カメラの方向を向くかどうか true:向く</param>
+	ParticleEffectBase(class GameObject* _owner, bool _billFlag = false);
 	// デストラクタ
 	virtual ~ParticleEffectBase() {};
 
-	/*
-	@fn		派生クラスの更新関数を呼び座標に移動量を足し続ける
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
-	void UpdateGameObject(float _deltaTime)override;
-
 protected:
-
-	/*
-	@fn 生存時間をカウントダウンする関数。派生クラスで更新関数を決定した場合そこに追加すること。
-	*/
-	void LifeCountDown();
-
-	//パーティクルの描画クラス
-	ParticleComponent* mParticle;
-	// 回転
-	Vector3             mAngle;
-	//生存時間
-	int					mLifeCount;
-
-	class GameObject* mOwner;	// アタッチしたオブジェクトのポインタ
+	class ParticleComponent* mParticle;	// パーティクルの描画クラス
+	class GameObject* mOwner;			// アタッチしたオブジェクトのポインタ
+	
+	Vector3 mAngle;						// 回転値
+	float mFloatScale;					// 単体スケール値（float）
 public:
-	/*
-	@param _flag 反転を行うか
-	*/
-	void SetReverve(float _flag);
-
 	// 画像を描画するかしないかセットする true:描画する
 	void SetThisVisible(bool _flag) { mParticle->SetVisible(_flag); }
 };

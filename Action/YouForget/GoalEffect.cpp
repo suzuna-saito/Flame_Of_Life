@@ -12,9 +12,12 @@ GoalEffect::GoalEffect(class GameObject* _owner)
 	// ブレンドの種類をαブレンドに設定
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 	
+	// スケール値（単体）を設定
+	mFloatScale = 1000.0f;
+
 	// GameObjectクラスの変数初期化
-	mPosition = mOwner->GetPosition();		// ポジション
-	mScale = Vector3(1000.0f, 1.0f, 1.0f);	// スケール
+	mPosition = mOwner->GetPosition();					// ポジション
+	mScale = Vector3(mFloatScale, 1.0f, mFloatScale);	// スケール
 }
 
 void GoalEffect::UpdateGameObject(float _deltaTime)
@@ -35,9 +38,10 @@ void GoalEffect::UpdateGameObject(float _deltaTime)
 	}
 
 	// 回転値、α値、スケールの更新
-	mAngle.y += MAddAngleY;	// 回転値
-	mAlpha += mAddAlpha;	// α値
-	mScale.x += mAddScale;	// スケール
+	mAngle.y += MAddAngleY;		// 回転値
+	mAlpha += mAddAlpha;		// α値
+	mFloatScale += mAddScale;	// スケール
+	mScale = Vector3(mFloatScale, 1.0f, mFloatScale);
 
 	// 回転値を設定
 	mParticle->SetAngle(mAngle);

@@ -239,6 +239,8 @@ void Renderer::Draw()
 	mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
 	// シェーダーに渡すライティング情報を更新する
 	SetLightUniforms(mMeshShader, mView);
+
+
 	// すべてのメッシュの描画
 	for (auto mc : mMeshComponents)
 	{
@@ -264,7 +266,12 @@ void Renderer::Draw()
 		}
 	}
 
-	DrawParticle();
+	// パーティクルのポインタが格納されていたら
+	if (mParticles.size() != 0)
+	{
+		// パーティクルの描画
+		DrawParticle();
+	}
 
 	// UIの描画
 	// アルファブレンディングを有効にする
@@ -330,34 +337,33 @@ void Renderer::RemoveUI(UIComponent* _ui)
 	mUis.erase(iterUi);
 }
 
-
-/*
-@fn		パーティクルの追加
-@param	_particleComponent　追加するParticleObjectクラスのポインタ
-*/
 void Renderer::AddParticle(ParticleComponent* _particleComponent)
 {
+	// (DrawOrderが小さい順番に描画するため)今あるエフェクトから挿入する場所の検索
+	// 自身のDrawOrderを取得
 	int myDrawOrder = _particleComponent->GetDrawOrder();
+	// 今あるエフェクトぶん回す
 	auto iter = mParticles.begin();
 	for (;
 		iter != mParticles.end();
 		++iter)
 	{
+		// 自身のDrawOrderと、今回しているDrawOrderを比べて自身のほうが小さければ
 		if (myDrawOrder < (*iter)->GetDrawOrder())
 		{
 			break;
 		}
 	}
+
+	// 検索した場所のiterの場所に挿入
 	mParticles.insert(iter, _particleComponent);
 }
 
-/*
-@fn		パーティクルの削除
-@param	_particleComponent 削除するParticleObjectクラスのポインタ
-*/
 void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 {
+	// 削除するクラスのポインタを検索
 	auto iter = std::find(mParticles.begin(), mParticles.end(), _particleComponent);
+	// 見つかったUIを削除
 	mParticles.erase(iter);
 }
 
@@ -626,19 +632,8 @@ void Renderer::CreateParticleVerts()
 	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
-
-/*
-@fn	Particleの描画
-*/
 void Renderer::DrawParticle()
 {
-
-	std::sort(mParticles.begin(), mParticles.end(), std::greater<ParticleComponent*>());
-
-	if (mParticles.size() == 0)
-	{
-		return;
-	}
 	// ブレンドモード初期状態取得
 	ParticleComponent::ParticleBlendType blendType, prevType;
 	auto itr = mParticles.begin();
@@ -656,23 +651,18 @@ void Renderer::DrawParticle()
 	mParticleShader->SetActive();
 	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
 
-	// 全てのパーティクルのビルボード行列をセット
-	
-	(*itr)->SetBillboardMat(GetBillboardMatrix());
-
+	// 有効な場合は受信 RGBA カラー値とカラーバッファー内の値をブレンド
 	glEnable(GL_BLEND);
+	// 深度バッファへの書き込みを無効にする
 	glDepthMask(GL_FALSE);
 
 	// すべてのパーティクルを描画
-	ChangeBlendMode(blendType);
-	ChangeTexture(nowTexture);
-
 	for (auto particle : mParticles)
 	{
+		// パーティクルの描画フラグがtrueの時
 		if (particle->GetVisible())
 		{
 			//ブレンドモード変更が必要なら変更する
-			blendType = particle->GetBlendType();
 			blendType = particle->GetBlendType();
 			if (blendType != prevType)
 			{
@@ -685,6 +675,8 @@ void Renderer::DrawParticle()
 				ChangeTexture(nowTexture);
 			}
 
+			// 頂点配列をアクティブにする
+			mParticleVertex->SetActive();
 			// パーティクル描画
 			particle->Draw(mParticleShader);
 
@@ -693,7 +685,8 @@ void Renderer::DrawParticle()
 			prevTexture = nowTexture;
 		}
 	}
-	glDisable(GL_BLEND);
+
+	// 深度バッファへの書き込みを有効に戻す
 	glDepthMask(GL_TRUE);
 }
 

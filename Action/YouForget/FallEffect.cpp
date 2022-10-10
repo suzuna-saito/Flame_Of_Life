@@ -9,8 +9,6 @@ FallEffect::FallEffect(class GameObject* _owner)
 {
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Ripple.png")->GetTextureID());
-	// 乗算する色を設定
-	mParticle->SetColor(Color::Red);
 	// 回転値を設定
 	mParticle->SetAngle(Vector3(0.5f, 0.0, 0.0f));
 	// ブレンドの種類をαブレンドに設定
@@ -18,8 +16,12 @@ FallEffect::FallEffect(class GameObject* _owner)
 	// 描画をするかどうかを設定
 	mParticle->SetVisible(false);
 	
+	// スケール値のfloat値を代入
+	mFloatScale = MBaseScale;
+
 	// GameObjectクラスの変数初期化
-	mScale = Vector3(MBaseScale, 1.0f, 1.0f);	// スケール
+	mScale = Vector3(MBaseScale, 1.0f, MBaseScale);	// スケール
+	mColor = Color::Red;							// 乗算する色
 }
 
 void FallEffect::UpdateGameObject(float _deltaTime)
@@ -35,8 +37,8 @@ void FallEffect::UpdateGameObject(float _deltaTime)
 	if (mAlpha <= 0.0f)
 	{
 		// α値、スケールを初期値に戻す
-		mAlpha = 1.0f;			// α値
-		mScale.x = MBaseScale;	// スケール
+		mAlpha = 1.0f;				// α値
+		mFloatScale = MBaseScale;	// スケール
 
 		// 描画フラグをfalseにする
 		mParticle->SetVisible(false);
@@ -46,10 +48,12 @@ void FallEffect::UpdateGameObject(float _deltaTime)
 	if (mParticle->GetVisible())
 	{
 		// α値、スケールを更新
-		mAlpha += MSubAlpha;	// α値
-		mScale.x += MAddScale;	// スケール
+		mAlpha += MSubAlpha;		// α値
+		mFloatScale += MAddScale;	// スケール
 	}
 
+	// スケールを更新
+	mScale = Vector3(mFloatScale, 1.0f, mFloatScale);
 	// 描画していたかどうかを保存
 	mTmpVisible = mParticle->GetVisible();
 }

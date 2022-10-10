@@ -2,8 +2,8 @@
 
 UIComponent::UIComponent(class GameObject* _owner, const int _drawOrder)
 	: Component(_owner)
-	, mTexture(nullptr)
 	, mDrawOrder(_drawOrder)
+	, mTexture(nullptr)
 	, mTextureWidth(0)
 	, mTextureHeight(0)
 	, mVisible(true)
@@ -32,7 +32,8 @@ void UIComponent::Draw(Shader* _shader)
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
 			Vector3(mOwner->GetPosition().x - (mTextureWidth * 0.0f),
-				mOwner->GetPosition().y - (mTextureHeight * 0.0f), 0.0f));
+				mOwner->GetPosition().y - (mTextureHeight * 0.0f),
+				0.0f));
 
 		// 行列を計算
 		Matrix4 world = scaleMatrix * transMat;
@@ -45,7 +46,6 @@ void UIComponent::Draw(Shader* _shader)
 		glBindTexture(GL_TEXTURE_2D, mTexture->GetTextureID());
 		// 描画
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 	}
 }
 

@@ -80,23 +80,21 @@ public:
 	/// </summary>
 	/// <param name="_ui">追加するUIクラスのポインタ</param>
 	void AddUI(UIComponent* _ui);
-
 	/// <summary>
 	/// UIの削除
 	/// </summary>
 	/// <param name="_ui">削除するUIクラスのポインタ</param>
 	void RemoveUI(UIComponent* _ui);
 
-	/*
-	@fn		パーティクルの追加
-	@param	_particleComponent　追加するParticleObjectクラスのポインタ
-	*/
+	/// <summary>
+	/// パーティクルの追加
+	/// </summary>
+	/// <param name="_particleComponent">追加するParticleObjectクラスのポインタ</param>
 	void AddParticle(ParticleComponent* _particleComponent);
-
-	/*
-	@fn		パーティクルの削除
-	@param	_particleComponent 削除するParticleObjectクラスのポインタ
-	*/
+	/// <summary>
+	/// パーティクルの削除
+	/// </summary>
+	/// <param name="_particleComponent">削除するParticleObjectクラスのポインタ</param>
 	void RemoveParticle(ParticleComponent* _particleComponent);
 
 	/*
@@ -154,9 +152,7 @@ private:
 	*/
 	void CreateParticleVerts();
 
-	/*
-	@fn	Particleの描画
-	*/
+	// Particleの描画
 	void DrawParticle();
 
 	/*
