@@ -56,9 +56,11 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle]);
 
 	// エフェクト
-	mCircledShadowManager = new CircledShadowManager(_objectTag, _sceneTag, this);
+	// プレイヤーの丸影エフェクト生成
+	new CircledShadow(this);
 	// プレイヤーが落ちた時のエフェクト
-	mFallEffectManager = new FallEffectManager(_objectTag, _sceneTag, this);
+	mFallEffect = new FallEffect(this);
+
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
@@ -189,6 +191,8 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		// 振動フラグをtrueにする
 		mVibrationFlag = true;
+		// 落ちた時のエフェクトの描画
+		mFallEffect->SetThisVisible(true);
 		// 動作が出来なくする
 		mOperable = false;
 

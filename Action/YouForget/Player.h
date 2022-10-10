@@ -78,8 +78,7 @@ private:
 
 	// エフェクト
 	//プレイヤーが落ちた時のエフェクト
-	FallEffectManager* mFallEffectManager;
-	CircledShadowManager* mCircledShadowManager;
+	class FallEffect* mFallEffect;
 
 	// 現在の状態
 	playerState  mNowState;

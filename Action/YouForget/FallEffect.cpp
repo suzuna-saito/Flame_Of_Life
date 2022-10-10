@@ -1,53 +1,58 @@
 #include "pch.h"
 
-/*
-@fn		コンストラクタ
-@param	_Pos デスエフェクトの生成場所
-@param	_Vel クリアエフェクトの速度
-@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
-@param	_SceneTag シーンのタグ
-*/
-
-FallEffect::FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag)
+FallEffect::FallEffect(class GameObject* _owner)
 	:ParticleEffectBase()
-	, MAlphaReductionVal(0.03f)
-	, MScaleAddVal(10.0f)
+	, MBaseScale(200.0f)
+	, MAddScale(10.0f)
+	, MSubAlpha(-0.03f)
+	, mTmpVisible(false)
 {
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Ripple.png")->GetTextureID());
-
-	mAngle.x = 0.5f;
-	mAlpha = 1.0f;
-	mScale = Vector3(200.0f, 1.0f, 1.0f);
-	mParticle->SetAngle(mAngle);
-	mParticle->SetAlpha(mAlpha);
-	//mParticle->SetColor(Color::LightBlue);
+	// 乗算する色を設定
 	mParticle->SetColor(Color::Red);
+	// 回転値を設定
+	mParticle->SetAngle(Vector3(0.5f, 0.0, 0.0f));
+	// ブレンドの種類をαブレンドに設定
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
-	mVelocity = _Vel;
+	// 描画をするかどうかを設定
+	mParticle->SetVisible(false);
+	
+	// GameObjectクラスの変数初期化
+	mScale = Vector3(MBaseScale, 1.0f, 1.0f);	// スケール
+
+	// アタッチしたオブジェクトのポインタ
+	mOwner = _owner;
 }
 
-/*
-@fn		デスエフェクトのアップデート
-@param	_deltaTime 最後のフレームを完了するのに要した時間
-*/
 void FallEffect::UpdateGameObject(float _deltaTime)
 {
-	//生存時間をカウント
-	ParticleEffectBase::LifeCountDown();
-
-	//ライフカウントが0より大きかったら速度、透明度、スケールの値を更新
-	if (mLifeCount > 0)
+	// 描画フラグが外部から変更された時
+	if (mTmpVisible != mParticle->GetVisible())
 	{
-		mAlpha -= MAlphaReductionVal;
-		mScale.x += MScaleAddVal;
-
-		mParticle->SetAlpha(mAlpha);
+		// 描画ポジションを更新
+		mPosition = mOwner->GetPosition();
 	}
 
-	//ライフカウントが0以下だったら見えなくする
+	// α値が0.0f以下だったら
 	if (mAlpha <= 0.0f)
 	{
+		// α値、スケールを初期値に戻す
+		mAlpha = 1.0f;			// α値
+		mScale.x = MBaseScale;	// スケール
+
+		// 描画フラグをfalseにする
 		mParticle->SetVisible(false);
 	}
+
+	// 描画フラグがtrueだったら
+	if (mParticle->GetVisible())
+	{
+		// α値、スケールを変更
+		mAlpha += MSubAlpha;	// α値
+		mScale.x += MAddScale;	// スケール
+	}
+
+	// 描画していたかどうかを保存
+	mTmpVisible = mParticle->GetVisible();
 }

@@ -14,6 +14,7 @@ ItemEffect::ItemEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _Objec
 	:ParticleEffectBase()
 	, mItemVisible(true)
 {
+
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
 

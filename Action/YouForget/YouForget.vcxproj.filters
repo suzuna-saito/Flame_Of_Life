@@ -90,9 +90,6 @@
     <ClCompile Include="FallEffect.cpp">
       <Filter>ParticleEffect\FallEffect</Filter>
     </ClCompile>
-    <ClCompile Include="FallEffectManager.cpp">
-      <Filter>ParticleEffect\FallEffect</Filter>
-    </ClCompile>
     <ClCompile Include="ItemEffect.cpp">
       <Filter>ParticleEffect\ItemEffect</Filter>
     </ClCompile>
@@ -154,9 +151,6 @@
       <Filter>System\pch</Filter>
     </ClCompile>
     <ClCompile Include="CircledShadow.cpp">
-      <Filter>ParticleEffect\CircledShadow</Filter>
-    </ClCompile>
-    <ClCompile Include="CircledShadowManager.cpp">
       <Filter>ParticleEffect\CircledShadow</Filter>
     </ClCompile>
     <ClCompile Include="GoalObj.cpp">
@@ -288,9 +282,6 @@
     <ClInclude Include="FallEffect.h">
       <Filter>ParticleEffect\FallEffect</Filter>
     </ClInclude>
-    <ClInclude Include="FallEffectManager.h">
-      <Filter>ParticleEffect\FallEffect</Filter>
-    </ClInclude>
     <ClInclude Include="ItemEffect.h">
       <Filter>ParticleEffect\ItemEffect</Filter>
     </ClInclude>
@@ -352,9 +343,6 @@
       <Filter>System\pch</Filter>
     </ClInclude>
     <ClInclude Include="CircledShadow.h">
-      <Filter>ParticleEffect\CircledShadow</Filter>
-    </ClInclude>
-    <ClInclude Include="CircledShadowManager.h">
       <Filter>ParticleEffect\CircledShadow</Filter>
     </ClInclude>
     <ClInclude Include="GoalObj.h">

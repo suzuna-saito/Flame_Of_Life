@@ -37,9 +37,14 @@ protected:
 	Vector3             mAngle;
 	//生存時間
 	int					mLifeCount;
+
+	class GameObject* mOwner;	// アタッチしたオブジェクトのポインタ
 public:
 	/*
 	@param _flag 反転を行うか
 	*/
 	void SetReverve(float _flag);
+
+	// 画像を描画するかしないかセットする true:描画する
+	void SetThisVisible(bool _flag) { mParticle->SetVisible(_flag); }
 };

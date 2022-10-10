@@ -3,6 +3,7 @@
 GoalEffect::GoalEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag, GoalObj* _PlayerPtr)
 	: ParticleEffectBase()
 {
+
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Goal.png")->GetTextureID());
 

@@ -1,38 +1,29 @@
 #pragma once
 
 /*
-@brief プリプロセッサ
+* オブジェクトが落ちた時に描画するエフェクト
 */
-#pragma once
-
 class FallEffect : public ParticleEffectBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_Pos デスエフェクトの生成場所
-	@param	_Vel クリアエフェクトの速度
-	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
-	@param	_SceneTag シーンのタグ
-	*/
-	FallEffect(const Vector3 _Pos, const Vector3 _Vel, const Tag& _ObjectTag, const SceneBase::SceneType _SceneTag);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
+	FallEffect(class GameObject* _owner);
+	// デストラクタ
 	~FallEffect() {};
 
-	/*
-	@fn		デスエフェクトのアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
 private:
-	//アルファ値の削減値
-	const float MAlphaReductionVal;
-	//スケールの追加値
-	const float MScaleAddVal;
-};
+	const float MBaseScale;	// スケール値(基盤)
+	const float MAddScale;	// スケールの追加値
+	const float MSubAlpha;	// アルファ値の減少値
 
+	bool mTmpVisible;		// 更新処理の最後に描画していたかどうかを保存
+};

@@ -4,6 +4,8 @@ CircledShadow::CircledShadow(class GameObject* _owner)
 	: ParticleEffectBase()
 	, MBaseZPos(90.0f)
 	, MMaxScale(300.0f)
+	, MAddAlpha(0.03f)
+	, MSubAlpha(-0.07f)
 {
 	// テクスチャをセット
 	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
@@ -15,10 +17,10 @@ CircledShadow::CircledShadow(class GameObject* _owner)
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 	
 	// GameObjectクラスの変数初期化
-	mPosition = _owner->GetPosition();	// ポジション
+	mPosition = _owner->GetPosition();		// ポジション
 	mPosition.z = MBaseZPos;
 	mScale = Vector3(MMaxScale,0.0f,0.0f);	// スケール
-	mMoveSpeed = 1.15f;					// 値の変化スピード
+	mMoveSpeed = 1.15f;						// 値の変化値
 
 	// アタッチしたオブジェクトのポインタ
 	mOwner = _owner;
@@ -35,7 +37,8 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 		// α値が1.0f未満だったら
 		if (mAlpha < 1.0f)
 		{
-			mAlpha += 0.03f;	// α値をプラス
+			// α値を変更
+			mAlpha += MAddAlpha;
 		}
 
 		// ポジションZを90.0fに設定
@@ -49,7 +52,8 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 		// α値が0.0fより上だったら
 		if (mAlpha > 0.0f)
 		{
-			mAlpha -= 0.07f;	// α値をマイナス
+			// α値を変更
+			mAlpha += MSubAlpha;
 		}
 	}
 }

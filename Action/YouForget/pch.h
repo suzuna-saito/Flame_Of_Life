@@ -104,11 +104,9 @@ using namespace std;
 #include "ParticleEffectBase.h"
 #include "EffectManager.h"
 #include "FallEffect.h"
-#include "FallEffectManager.h"
 #include "ItemEffect.h"
 #include "ItemEffectManager.h"
 #include "CircledShadow.h"
-#include "CircledShadowManager.h"
 #include "GoalEffect.h"
 #include "GoalEffectManager.h"
 

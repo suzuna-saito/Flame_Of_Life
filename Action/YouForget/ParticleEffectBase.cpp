@@ -10,8 +10,8 @@ ParticleEffectBase::ParticleEffectBase()
 
 void ParticleEffectBase::UpdateGameObject(float _deltaTime)
 {
-	LifeCountDown();
-	SetPosition(mPosition + mVelocity);
+	//LifeCountDown();
+	//SetPosition(mPosition + mVelocity);
 }
 
 void ParticleEffectBase::LifeCountDown()

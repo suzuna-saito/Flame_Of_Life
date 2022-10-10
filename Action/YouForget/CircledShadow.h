@@ -6,31 +6,24 @@
 class CircledShadow : public ParticleEffectBase
 {
 public:
-
-	/*
-	@fn		コンストラクタ
-	@param	_Pos 影エフェクトの生成場所
-	@param	_Vel 影エフェクトの速度
-	@param	_ObjectTag アタッチしたゲームオブジェクトのタグ
-	@param	_SceneTag シーンのタグ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	CircledShadow(class GameObject* _owner);
-
-	/*
-	@fn	デストラクタ
-	*/
+	// デストラクタ
 	~CircledShadow() {};
 
-	/*
-	@fn		影エフェクトのアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
-private:
-	class GameObject* mOwner;	// アタッチしたオブジェクトのポインタ
-	
+private:	
 	const float MBaseZPos;		// 丸影のｚポジション(基盤)
 	const float MMaxScale;		// 最大スケール値
-};
 
+	const float MAddAlpha;		// α値の増加値
+	const float MSubAlpha;		// α値の減少値
+};
