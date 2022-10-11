@@ -38,6 +38,11 @@ void CircledShadow::UpdateGameObject(float _deltaTime)
 		{
 			mAlpha += MSubAlpha;	// α値を更新
 		}
+		// アタッチしたオブジェクトのステータスがアクティブじゃなかったら
+		if (mOwner->GetState() != State::Active)
+		{
+			mPosition.z = MBaseZPos;//ポジションZをMBaseZPosに設定
+		}
 	}
 	// 上記の条件が一致しなかったとき
 	else

@@ -39,6 +39,8 @@ void UIComponent::Draw(Shader* _shader)
 		Matrix4 world = scaleMatrix * transMat;
 		// uWorldTransform‚ğİ’è
 		_shader->SetMatrixUniform("uWorldTransform", world);
+		// uAlpha‚ğİ’è
+		_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
 
 		// ‚±‚ê‚©‚çƒXƒƒbƒg–¼hGL_TEXTURE0‚Ìİ’è‚ğ‚·‚é
 		glActiveTexture(GL_TEXTURE0);

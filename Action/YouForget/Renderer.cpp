@@ -251,7 +251,7 @@ void Renderer::Draw()
 	}
 
 	// メッシュコンポーネントの描画
- // 基本的なメッシュシェーダーをアクティブにする
+	// 基本的なメッシュシェーダーをアクティブにする
 	mSkinnedShader->SetActive();
 	// ビュー射影行列を更新する
 	mSkinnedShader->SetMatrixUniform("uViewProj", mView * mProjection);
@@ -275,11 +275,11 @@ void Renderer::Draw()
 
 	// UIの描画
 	// アルファブレンディングを有効にする
-	glEnable(GL_BLEND);
+	//glEnable(GL_BLEND);
 	// デプスバッファ法を無効にする
 	glDisable(GL_DEPTH_TEST);
-	// RGB成分とα成分のブレンディング方法を別々に設定
-	glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
+	//// RGB成分とα成分のブレンディング方法を別々に設定
+	//glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
 	// RGB成分とアルファ成分に別々の混合係数を設定
 	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 
@@ -295,6 +295,7 @@ void Renderer::Draw()
 		}
 	}
 
+	// 当たり判定を描画する
 	PHYSICS->DebugShowBox();
 
 	// バッファを交換
@@ -302,7 +303,6 @@ void Renderer::Draw()
 
 	/*glDisable(GL_BLEND);
 	glDisable(GL_ALPHA_TEST);*/
-
 }
 
 

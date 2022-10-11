@@ -20,7 +20,6 @@ public:
 	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
-
 private:
 	UIType mType;	// ピースか基盤か判別用
 };

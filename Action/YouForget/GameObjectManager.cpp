@@ -44,12 +44,16 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 		cameraObject->Update(_deltaTime);
 	}
 
+	// タイトルを更新する
+	for (auto titleObject : mTitleObjects)
+	{
+		titleObject->Update(_deltaTime);
+	}
 	// チュートリアルを更新する
 	for (auto tutorialObject : mTutorialObjects)
 	{
 		tutorialObject->Update(_deltaTime);
 	}
-
 	// Easyステージを更新する
 	for (auto easystageObject : mEasyStageObjects)
 	{
@@ -77,6 +81,10 @@ void GameObjectManager::UpdateGameObject(float _deltaTime)
 	for (auto pending : mPendingGameObjects)
 	{
 		pending->ComputeWorldTransform();
+		if (pending->GetScene() == SceneBase::SceneType::eTitle)
+		{
+			mTitleObjects.emplace_back(pending);
+		}
 		if (pending->GetScene() == SceneBase::SceneType::eTutorial)
 		{
 			mTutorialObjects.emplace_back(pending);
