@@ -4,7 +4,7 @@
 bool Fade::mFadeFlag = false;
 
 Fade::Fade()
-	: ParticleEffectBase(nullptr)
+	: ParticleEffectBase(nullptr,true)
 	, mFadeSpeed(0.01f)
 {
 	// テクスチャをセット
@@ -13,7 +13,8 @@ Fade::Fade()
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 
 	// GameObjectクラスの変数初期化
-	mScale = Vector3(1920.0f, 1080.0f, 0.0f);	// スケール
+	mScale = Vector3(1920.0f,1.0f,1080.0f);											// スケール
+	mPosition = GameObject::mMainCamera->mOffsetPos - Vector3(0.0f,-10.0f,10.0f);	// ポジション
 }
 
 void Fade::UpdateGameObject(float _deltaTime)

@@ -37,5 +37,6 @@ void main()
         HiBrightBuffer = vec4(0.0f);
     }
 
-    HDRBuffer.rgb = texColor.rgb;
+    HDRBuffer = texColor;
 }
+

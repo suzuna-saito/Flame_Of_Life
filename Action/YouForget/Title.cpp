@@ -8,13 +8,8 @@ Title::Title(const SceneType& _nowScene)
 	// mGetNumberを空にする
 	ItemBase::mGetNumber.clear();
 
-	//// タイトル画像の生成
-	//mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
-
-	// フェードクラスの生成
-	mFade = new Fade();
-	// 黒いフェードインをさせる
-	mFade->SetFade(Color::White , Fade::FadeType::eIn);
+	// タイトル画像の生成
+	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
 }
 
 Title::~Title()

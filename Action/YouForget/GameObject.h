@@ -153,6 +153,9 @@ public:
 	*/
 	static void CreateMainCamera();
 
+	//メインカメラ　生成はGameObjectManager生成時に行われる
+	static class MainCameraObject* mMainCamera;
+
 protected:
 
 	/*
@@ -173,8 +176,6 @@ protected:
 
 	//virtual void OnCollision(const GameObject& _hitObject,const AABB _movableBox, const AABB _fixedBox) {}
 
-	//メインカメラ　生成はGameObjectManager生成時に行われる
-	static class MainCameraObject* mMainCamera;
 	//ゲームオブジェクトの更新を止めるイベント状態
 	static PauzingEvent mPauzingEvent;
 	//衝突時のリアクション関数(ColliderComponentにこの関数のアドレスを渡す) Enter...衝突した Stay...衝突している

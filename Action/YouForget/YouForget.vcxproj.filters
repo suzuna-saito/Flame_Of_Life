@@ -544,9 +544,6 @@
     <Filter Include="Shader\BasicMesh">
       <UniqueIdentifier>{750c92e0-8df6-46c8-acc0-46d0acb8b8c3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shader\framebufferScreen">
-      <UniqueIdentifier>{1cec9232-5aab-403c-a162-139bf4cd7338}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader\Line">
       <UniqueIdentifier>{7029607f-dfdf-483e-a86e-baac4ddaebd1}</UniqueIdentifier>
     </Filter>
@@ -561,6 +558,9 @@
     </Filter>
     <Filter Include="ParticleEffect\Fade">
       <UniqueIdentifier>{68f1a3fc-d1e9-4e4b-af70-5c7d828d0f7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\framebufferScreen">
+      <UniqueIdentifier>{1cec9232-5aab-403c-a162-139bf4cd7338}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

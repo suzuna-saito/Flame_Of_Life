@@ -67,7 +67,7 @@ SceneBase::SceneType FirstStage::update()
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
 		// 黒いフェードアウトをさせる
-		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
+		//mFade->SetFade(Color::Black, Fade::FadeType::eOut);
 	}
 
 	return mIsSceneType;

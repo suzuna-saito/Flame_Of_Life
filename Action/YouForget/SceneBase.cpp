@@ -9,6 +9,9 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	, mGameSceneFlag(false)
 	, mReturnTitleFlag(false)
 {
+	// カメラをセット
+	GameObject::mMainCamera->SetViewMatrixLerpObject(Vector3(0, -1300, 1600), Vector3::Zero);	
+
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(1.0f, 1.0f, 1.0f));	// 光の色
 	DirectionalLight& dir = RENDERER->GetDirectionalLight();
@@ -18,15 +21,19 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 
 	// シーンタイプの更新
 	mIsSceneType = _sceneType;
-	//// シーンがeLastResultでクリアフラグがたっていた時だけ
-	//if (mIsSceneType == SceneType::eLastResult && ResultBase::mClearEndFlag)
-	//{
-	//	// 白いフェードインをさせる
-	//	mFade->SetFade(Color::White, Fade::FadeType::eIn);
-	//}
-	//else
-	//{
-	//	// 黒いフェードインをさせる
-	//	mFade->SetFade(Color::Black, Fade::FadeType::eIn);
-	//}
+
+	// フェードクラスの生成
+	mFade = new Fade;
+
+	// シーンがeLastResultでクリアフラグがたっていた時だけ
+	if (mIsSceneType == SceneType::eLastResult && ResultBase::mClearEndFlag)
+	{
+		// 白いフェードインをさせる
+		mFade->SetFade(Color::White, Fade::FadeType::eIn);
+	}
+	else
+	{
+		// 黒いフェードインをさせる
+		mFade->SetFade(Color::Black, Fade::FadeType::eIn);
+	}
 }

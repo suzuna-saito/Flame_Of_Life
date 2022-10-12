@@ -3,13 +3,13 @@
 */
 #include "pch.h"
 
+Vector3 MainCameraObject::mOffsetPos = Vector3::Zero;
 /*
 @fn	コンストラクタ
 */
 MainCameraObject::MainCameraObject()
 	: GameObject(SceneBase::SceneType::eInit, Tag::Camera, true)
 	, mHasParentObject(false)
-	, mOffsetPos(Vector3::Zero)
 	, mLerpObject(Vector3::Zero)
 {
 	SetPosition(Vector3(-100.0f, 0.0f, 0.0f));

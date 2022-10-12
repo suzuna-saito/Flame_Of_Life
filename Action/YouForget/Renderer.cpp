@@ -222,15 +222,18 @@ void Renderer::UnloadData()
 */
 void Renderer::Draw()
 {
+	// フレームの最初でカラーバッファとデプスバッファをクリア
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	// デプスバッファ法を有効にする
 	glEnable(GL_DEPTH_TEST);
+
+	// RGBAカラー値とカラーバッファ内の値をブレンド
 	glEnable(GL_BLEND);
-
-
-	/*glEnable(GL_BLEND);
+	// αを有効にする
 	glEnable(GL_ALPHA_TEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
+	// ピクセルの色に新しい色を組み合わせる処理
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// メッシュコンポーネントの描画
 	// 基本的なメッシュシェーダーをアクティブにする
@@ -239,8 +242,6 @@ void Renderer::Draw()
 	mMeshShader->SetMatrixUniform("uViewProj", mView * mProjection);
 	// シェーダーに渡すライティング情報を更新する
 	SetLightUniforms(mMeshShader, mView);
-
-
 	// すべてのメッシュの描画
 	for (auto mc : mMeshComponents)
 	{
@@ -249,6 +250,11 @@ void Renderer::Draw()
 			mc->Draw(mMeshShader);
 		}
 	}
+
+	// 無効にする
+	glDisable(GL_BLEND);
+	// αを無効にする
+	glDisable(GL_ALPHA_TEST);
 
 	// メッシュコンポーネントの描画
 	// 基本的なメッシュシェーダーをアクティブにする
@@ -266,27 +272,16 @@ void Renderer::Draw()
 		}
 	}
 
-	// パーティクルのポインタが格納されていたら
-	if (mParticles.size() != 0)
-	{
-		// パーティクルの描画
-		DrawParticle();
-	}
+	// 深度バッファへの書き込みを無効にする
+	glDepthMask(GL_FALSE);
+	// RGBAカラー値とカラーバッファー内の値をブレンド
+	glEnable(GL_BLEND);
 
-	// UIの描画
-	// アルファブレンディングを有効にする
-	//glEnable(GL_BLEND);
 	// デプスバッファ法を無効にする
 	glDisable(GL_DEPTH_TEST);
-	//// RGB成分とα成分のブレンディング方法を別々に設定
-	//glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_ADD);
-	// RGB成分とアルファ成分に別々の混合係数を設定
-	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
 	mSpriteShader->SetActive();
 	mSpriteVerts->SetActive();
-
 	for (auto UI : mUis)
 	{
 		if (UI->GetVisible())
@@ -294,15 +289,25 @@ void Renderer::Draw()
 			UI->Draw(mSpriteShader);
 		}
 	}
+	// デプスバッファ法を有効にする
+	glEnable(GL_DEPTH_TEST);
+
+	// パーティクルのポインタが格納されていたら
+	if (mParticles.size() != 0)
+	{
+		// パーティクルの描画
+		DrawParticle();
+	}
+
+	// 深度バッファへの書き込みを有効に戻す
+	glDepthMask(GL_TRUE);
+
 
 	// 当たり判定を描画する
 	PHYSICS->DebugShowBox();
 
 	// バッファを交換
 	SDL_GL_SwapWindow(mWindow);
-
-	/*glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);*/
 }
 
 
@@ -651,11 +656,6 @@ void Renderer::DrawParticle()
 	mParticleShader->SetActive();
 	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
 
-	// 有効な場合は受信 RGBA カラー値とカラーバッファー内の値をブレンド
-	glEnable(GL_BLEND);
-	// 深度バッファへの書き込みを無効にする
-	glDepthMask(GL_FALSE);
-
 	// すべてのパーティクルを描画
 	for (auto particle : mParticles)
 	{
@@ -685,9 +685,6 @@ void Renderer::DrawParticle()
 			prevTexture = nowTexture;
 		}
 	}
-
-	// 深度バッファへの書き込みを有効に戻す
-	glDepthMask(GL_TRUE);
 }
 
 /*

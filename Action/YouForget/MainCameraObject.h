@@ -29,6 +29,8 @@ public:
 	*/
 	void UpdateGameObject(float _deltaTime = 1.0f)override;
 
+	//親オブジェクトとの差
+	static Vector3 mOffsetPos;
 private:
 
 	/*
@@ -37,8 +39,6 @@ private:
 	*/
 	void InGameMovableProcess(float _deltaTime);
 
-	//親オブジェクトとの差
-	Vector3 mOffsetPos;
 	//追従先のオブジェクト座標
 	Vector3 mLerpObject;
 	//追従先のオブジェクトを所持しているか
@@ -51,6 +51,5 @@ public://ゲッターセッター
 	@param _parentPos 見る座標
 	*/
 	void SetViewMatrixLerpObject(const Vector3& _offset, const Vector3& _parentPos);
-
 };
 
