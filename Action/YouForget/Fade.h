@@ -26,14 +26,12 @@ public:
 	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
+	static bool mFadeFlag;	// フェードイン、フェードアウトの更新処理をするフラグ true: 更新してる
 
 private:
-	float mFadeSpeed;	// フェードさせるスピード
-	bool mFadeFlag;		// フェードイン、フェードアウトの更新処理をするフラグ true: 更新してる
+	float mFadeSpeed;		// フェードさせるスピード
 
 public:	// ゲッター、セッター
-	// フェードを更新しているか取得するture:更新している
-	bool GetNowFadeFlag() { return mFadeFlag; }
 	/// <summary>
 	/// フェードインまたはフェードアウトを始める設定をする
 	/// </summary>

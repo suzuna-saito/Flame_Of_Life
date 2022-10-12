@@ -1,5 +1,8 @@
 #include "pch.h"
 
+// Ã“Iƒƒ“ƒo•Ï”‚Ì‰Šú‰»
+bool Fade::mFadeFlag = false;
+
 Fade::Fade()
 	: UIBase()
 	, mFadeSpeed(0.01f)

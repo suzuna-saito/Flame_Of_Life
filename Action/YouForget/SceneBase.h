@@ -39,9 +39,10 @@ public:
     /// 更新処理
     /// </summary>
     /// <returns>次のシーンのタイプ</returns>
-    virtual SceneType update() = 0;
+    virtual SceneType update();
 
     static SceneType mIsSceneType;      // 現在のシーンタイプ
+    static bool mClearEndFlag;	        // エンドの分岐フラグ(true:クリア)
 
 protected:
     class Fade* mFade;                  // フェードイン、フェードアウト

@@ -116,104 +116,100 @@ void Player::UpdateGameObject(float _deltaTime)
 		mMainCamera->SetViewMatrixLerpObject(mCameraPos, mPosition);
 	}
 
-	// フェード中は更新しない
-	if (!Fade::mFadeFlag)
+	//プレイヤーを横から見る位置にカメラをセット
+	//mMainCamera->SetViewMatrixLerpObject(Vector3(1000, 0, 200), mPosition);
+	// デバック用
+	//mMainCamera->SetViewMatrixLerpObject(Vector3(0, -1000, 200), mPosition + testPos);
+
+
+	// 現在の状態からそれぞれのふるまいを行う関数にジャンプ
+	switch (mNowState)
 	{
-		//プレイヤーを横から見る位置にカメラをセット
-		//mMainCamera->SetViewMatrixLerpObject(Vector3(1000, 0, 200), mPosition);
-		// デバック用
-		//mMainCamera->SetViewMatrixLerpObject(Vector3(0, -1000, 200), mPosition + testPos);
+	case playerState::idle:
+		mIdleBehavior();
+		break;
 
+	case playerState::run:
+		mRunBehavior();
+		break;
 
-		// 現在の状態からそれぞれのふるまいを行う関数にジャンプ
-		switch (mNowState)
-		{
-		case playerState::idle:
-			mIdleBehavior();
-			break;
+	default:
+		break;
+	}
 
-		case playerState::run:
-			mRunBehavior();
-			break;
-
-		default:
-			break;
-		}
-
-		// ジャンプしてたらジャンプ力を足す
-		if (mJump->GetJumpFlag())
-		{
-			mMoveSpeed = 830.0f;
-			mVelocity.z += mJump->GetVelocity();
-			mLegs->SetIsGround(false);
-		}
-
-		// velocityが一定数まで行ったら、ジャンプ力をなくす
-		if (mVelocity.z >= MMaxJumpVel)
-		{
-			mGravity = 50.0f;
-
-			mJump->SetEndJump(true);
-		}
-
-		if (mGravity <= 90.0f)
-		{
-			mGravity += 1.0f;
-		}
-
-		// 重力
-		if (!mLegs->GetIsGround() && !mDebug && mOperable)
-		{
-			mVelocity.z -= mGravity;
-		}
-		else if (mOperable)
-		{
-			mVelocity.z = 0.0f;
-		}
-
-
-		// 座標をセット
-		mPosition += (mVelocity + mInputSpeed) * _deltaTime;
-
-		// 状態が切り替わったらアニメーションを開始
-		if (mNowState != mPrevState)
-		{
-			mSkelComp->PlayAnimation(mAnimations[(int)mNowState], 0.5f);
-		}
-
-		if (!mLegs->GetIsGround())
-		{
-			ComputeWorldTransform();
-		}
-
-		//このフレームのステートは1つ前のステートになる
-		mPrevState = mNowState;
-
-
-		// プレイヤーが落ちたら
-		if (mPosition.z <= MRedoingPosZ && mOperable)
-		{
-			// 振動フラグをtrueにする
-			mVibrationFlag = true;
-			// 落ちた時のエフェクトの描画
-			mFallEffect->SetThisVisible(true);
-			// 動作が出来なくする
-			mOperable = false;
-
-			mVelocity = Vector3::Zero;
-		}
-
-		if (!mOperable)
-		{
-			// 復帰位置まで移動させる
-			mRedoing(mPosition, mReturnPos);
-		}
-
-
-		// ポジションをセット
-		SetPosition(mPosition);
+	// ジャンプしてたらジャンプ力を足す
+	if (mJump->GetJumpFlag())
+	{
+		mMoveSpeed = 830.0f;
+		mVelocity.z += mJump->GetVelocity();
 		mLegs->SetIsGround(false);
 	}
+
+	// velocityが一定数まで行ったら、ジャンプ力をなくす
+	if (mVelocity.z >= MMaxJumpVel)
+	{
+		mGravity = 50.0f;
+
+		mJump->SetEndJump(true);
+	}
+
+	if (mGravity <= 90.0f)
+	{
+		mGravity += 1.0f;
+	}
+
+	// 重力
+	if (!mLegs->GetIsGround() && !mDebug && mOperable)
+	{
+		mVelocity.z -= mGravity;
+	}
+	else if (mOperable)
+	{
+		mVelocity.z = 0.0f;
+	}
+
+
+	// 座標をセット
+	mPosition += (mVelocity + mInputSpeed) * _deltaTime;
+
+	// 状態が切り替わったらアニメーションを開始
+	if (mNowState != mPrevState)
+	{
+		mSkelComp->PlayAnimation(mAnimations[(int)mNowState], 0.5f);
+	}
+
+	if (!mLegs->GetIsGround())
+	{
+		ComputeWorldTransform();
+	}
+
+	//このフレームのステートは1つ前のステートになる
+	mPrevState = mNowState;
+
+
+	// プレイヤーが落ちたら
+	if (mPosition.z <= MRedoingPosZ && mOperable)
+	{
+		// 振動フラグをtrueにする
+		mVibrationFlag = true;
+		// 落ちた時のエフェクトの描画
+		mFallEffect->SetThisVisible(true);
+		// 動作が出来なくする
+		mOperable = false;
+
+		mVelocity = Vector3::Zero;
+	}
+
+	if (!mOperable)
+	{
+		// 復帰位置まで移動させる
+		mRedoing(mPosition, mReturnPos);
+	}
+
+
+	// ポジションをセット
+	SetPosition(mPosition);
+	mLegs->SetIsGround(false);
 }
 
 /*
@@ -228,7 +224,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 	Vector3 inputVec = Vector3::Zero;
 	mInputSpeed = Vector3::Zero;
 
-	if (mOperable)
+	if (mOperable && !Fade::mFadeFlag)
 	{
 		// Wで奥に移動
 		if (_keyState.m_controller.GetLAxisVec().y < -0.5f ||

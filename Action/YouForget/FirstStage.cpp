@@ -48,19 +48,23 @@ void FirstStage::Input(const InputState& _state)
 
 SceneBase::SceneType FirstStage::update()
 {
-	// プレイヤーがゴールにたどり着いたら
-	if (GoalObj::mGoalFlag)
+	// mGameSceneFlagがtrueかつ、フェード中じゃなければ
+	if (mGameSceneFlag && !Fade::mFadeFlag)
 	{
 		// 次のシーンのタイプを返す
-		//return new SecondStage(Scene::second);
 		return SceneType::eFirstResult;
 	}
-
 	// mReturnTitleFlagがtrueだったら
 	if (mReturnTitleFlag)
 	{
 		// タイトルシーンタイプを返す
 		return SceneType::eTitle;
+	}
+
+	// プレイヤーがゴールにたどり着いたら
+	if (GoalObj::mGoalFlag)
+	{
+		mGameSceneFlag = true;
 	}
 
 	return mIsSceneType;

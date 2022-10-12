@@ -11,10 +11,6 @@ Title::Title(const SceneType& _nowScene)
 	
 	// mGetNumberを空にする
 	ItemBase::mGetNumber.clear();
-
-	mFade = new Fade();
-	// フェードインさせる
-	mFade->SetFade(Color::Black,Fade::FadeType::eIn);
 }
 
 Title::~Title()
@@ -25,24 +21,21 @@ Title::~Title()
 
 void Title::Input(const InputState& _state)
 {
+	// フェード更新中じゃないとき
 	// コントローラーのAボタン、または、スペースキーが押された瞬間
-	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
-		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
+	if (!Fade::mFadeFlag && _state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
+		!Fade::mFadeFlag && _state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
-		if (mFade->GetNowFadeFlag())
-		{
-			// フェードアウトさせる
-			mFade->SetFade(Color::Black, Fade::FadeType::eOut);
-		}
+
 		// シーン遷移フラグをtrueにする
-		//mGameSceneFlag = true;
+		mGameSceneFlag = true;
 	}
 }
 
 SceneBase::SceneType Title::update()
 {
-	// mGameSceneFlagがtrueだったら
-	if (mGameSceneFlag)
+	// mGameSceneFlagがtrueかつ、フェード中じゃなければ
+	if (mGameSceneFlag && !Fade::mFadeFlag)
 	{
 		// 次のシーンのタイプを返す
 		return SceneType::eFirst;
