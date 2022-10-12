@@ -11,7 +11,7 @@ public:
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	/// <param name="_drawOrder">コンポーネントの更新順番（数値が小さいほど早く更新される）</param>
-	UIComponent(class GameObject* _owner,const int _drawOrder);
+	UIComponent(class GameObject* _owner, const int _drawOrder);
 	// デストラクタ
 	~UIComponent();
 

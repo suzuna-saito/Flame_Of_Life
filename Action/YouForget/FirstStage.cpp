@@ -61,10 +61,13 @@ SceneBase::SceneType FirstStage::update()
 		return SceneType::eTitle;
 	}
 
-	// プレイヤーがゴールにたどり着いたら
-	if (GoalObj::mGoalFlag)
+	// プレイヤーがゴールにたどり着いた時、フェードの更新をしていなかったら
+	if (GoalObj::mGoalFlag && !Fade::mFadeFlag)
 	{
+		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
+		// 黒いフェードアウトをさせる
+		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
 	}
 
 	return mIsSceneType;

@@ -7,6 +7,7 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	: mFullPicture(nullptr)
 	, mMapCreate(nullptr)
 	, mGameSceneFlag(false)
+	, mReturnTitleFlag(false)
 {
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(1.0f, 1.0f, 1.0f));	// 光の色
@@ -17,38 +18,15 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 
 	// シーンタイプの更新
 	mIsSceneType = _sceneType;
-	// フェードクラスの生成
-	mFade = new Fade();
-	// シーンがeLastResultでクリアフラグがたっていた時だけ
-	if (mIsSceneType == SceneType::eLastResult && ResultBase::mClearEndFlag)
-	{
-		// 白いフェードインをさせる
-		mFade->SetFade(Color::White, Fade::FadeType::eIn);
-	}
-	else
-	{
-		// 黒いフェードインをさせる
-		mFade->SetFade(Color::Black, Fade::FadeType::eIn);
-	}
-}
-
-SceneBase::SceneType SceneBase::update()
-{
-	// シーンフラグがtrueの時
-	if (mGameSceneFlag)
-	{
-		// シーンがeThirdResultでクリアフラグがたっていた時だけ
-		if (mIsSceneType == SceneType::eThirdResult && ResultBase::mClearEndFlag)
-		{
-			// 白いフェードアウトをさせる
-			mFade->SetFade(Color::White, Fade::FadeType::eOut);
-		}
-		else
-		{
-			// 黒いフェードアウトをさせる
-			mFade->SetFade(Color::Black, Fade::FadeType::eOut);
-		}
-	}
-
-	return SceneType::eInit;
+	//// シーンがeLastResultでクリアフラグがたっていた時だけ
+	//if (mIsSceneType == SceneType::eLastResult && ResultBase::mClearEndFlag)
+	//{
+	//	// 白いフェードインをさせる
+	//	mFade->SetFade(Color::White, Fade::FadeType::eIn);
+	//}
+	//else
+	//{
+	//	// 黒いフェードインをさせる
+	//	mFade->SetFade(Color::Black, Fade::FadeType::eIn);
+	//}
 }

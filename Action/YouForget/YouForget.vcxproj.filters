@@ -178,7 +178,7 @@
       <Filter>Scene\Result\LastResult</Filter>
     </ClCompile>
     <ClCompile Include="Fade.cpp">
-      <Filter>UI\Fade</Filter>
+      <Filter>ParticleEffect\Fade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -361,7 +361,7 @@
       <Filter>Scene\Result\LastResult</Filter>
     </ClInclude>
     <ClInclude Include="Fade.h">
-      <Filter>UI\Fade</Filter>
+      <Filter>ParticleEffect\Fade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -559,8 +559,8 @@
     <Filter Include="Shader\Sprite">
       <UniqueIdentifier>{597b6267-6b08-4928-872a-0dc0a0fe651e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="UI\Fade">
-      <UniqueIdentifier>{3ab855df-f8f6-4314-9452-b43e54b80f0c}</UniqueIdentifier>
+    <Filter Include="ParticleEffect\Fade">
+      <UniqueIdentifier>{68f1a3fc-d1e9-4e4b-af70-5c7d828d0f7f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

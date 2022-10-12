@@ -14,13 +14,12 @@ public:
 	//　UIの種類（描画したい順）
 	enum UIType :unsigned char
 	{
+		eInit,			// 初期化用
 		eFullPicture,	// 1920×1080サイズのUI
 		ePuzzleBase,	// パズルの基盤
 		ePuzzlePiece,	// パズルのピース
 		eText,			// テキスト
 		eAButton,		// Aボタン
-
-		eFade,			// フェード
 	};
 
 protected:

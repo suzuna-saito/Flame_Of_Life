@@ -4,13 +4,13 @@
 bool Fade::mFadeFlag = false;
 
 Fade::Fade()
-	: UIBase()
+	: ParticleEffectBase(nullptr)
 	, mFadeSpeed(0.01f)
 {
-	// UIComponentを生成することで自動で描画されるようになる
-	mUIComponent = new UIComponent(this, eFade);
 	// テクスチャをセット
-	mUIComponent->SetTexture(RENDERER->GetTexture("Assets/UI/Fade/Fade.png"));
+	mParticle->SetTextureID(RENDERER->GetTexture("Assets/UI/Fade/Fade.png")->GetTextureID());
+	// ブレンドの種類をαブレンドに設定
+	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 
 	// GameObjectクラスの変数初期化
 	mScale = Vector3(1920.0f, 1080.0f, 0.0f);	// スケール

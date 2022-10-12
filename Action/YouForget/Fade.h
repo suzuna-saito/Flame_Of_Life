@@ -3,7 +3,7 @@
 /*
 * フェードイン、フェードアウト用クラス
 */
-class Fade : public UIBase
+class Fade : public ParticleEffectBase
 {
 public:
 	// フェードイン　or フェードアウト

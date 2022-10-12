@@ -39,7 +39,7 @@ public:
     /// 更新処理
     /// </summary>
     /// <returns>次のシーンのタイプ</returns>
-    virtual SceneType update();
+    virtual SceneType update() = 0;
 
     static SceneType mIsSceneType;      // 現在のシーンタイプ
     static bool mClearEndFlag;	        // エンドの分岐フラグ(true:クリア)

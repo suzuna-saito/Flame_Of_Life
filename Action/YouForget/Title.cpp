@@ -5,12 +5,16 @@ Title::Title(const SceneType& _nowScene)
 {
 	// mClearEndFlagをtrueにする
 	ResultBase::mClearEndFlag = true;
-
-	// タイトル画像の生成
-	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
-	
 	// mGetNumberを空にする
 	ItemBase::mGetNumber.clear();
+
+	//// タイトル画像の生成
+	//mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
+
+	// フェードクラスの生成
+	mFade = new Fade();
+	// 黒いフェードインをさせる
+	mFade->SetFade(Color::White , Fade::FadeType::eIn);
 }
 
 Title::~Title()
@@ -26,9 +30,10 @@ void Title::Input(const InputState& _state)
 	if (!Fade::mFadeFlag && _state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
 		!Fade::mFadeFlag && _state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
-
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
+		// 黒いフェードアウトをさせる
+		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
 	}
 }
 
