@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* UI関連の基底クラス
+* UI関連の基底クラス(スクリーン座標)
 */
 class UIBase : public GameObject
 {
@@ -19,6 +19,8 @@ public:
 		ePuzzlePiece,	// パズルのピース
 		eText,			// テキスト
 		eAButton,		// Aボタン
+
+		eFade,			// フェード
 	};
 
 protected:

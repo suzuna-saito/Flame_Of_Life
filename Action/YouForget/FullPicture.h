@@ -13,7 +13,4 @@ public:
 	FullPicture(const string _fileName);
 	// デストラクタ
 	~FullPicture() {};
-
-	void UpdateGameObject(float _deltaTime)override;
 };
-

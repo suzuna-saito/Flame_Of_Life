@@ -39,8 +39,9 @@ void UIComponent::Draw(Shader* _shader)
 		Matrix4 world = scaleMatrix * transMat;
 		// uWorldTransformを設定
 		_shader->SetMatrixUniform("uWorldTransform", world);
-		// uAlphaを設定
-		_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
+		// アタッチしたオブジェクトの値をセット
+		_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());		// α値
+		_shader->SetVectorUniform("uColor", mOwner->GetColor());	// 乗算色
 
 		// これからスロット名”GL_TEXTURE0″の設定をする
 		glActiveTexture(GL_TEXTURE0);

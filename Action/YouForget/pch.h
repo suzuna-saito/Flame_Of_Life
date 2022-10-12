@@ -112,6 +112,7 @@ using namespace std;
 #include "PuzzleUI.h"
 #include "Text.h"
 #include "AButtonUI.h"
+#include "Fade.h"
 
 // Map @ ‘S•”
 #include "MapCreate.h"

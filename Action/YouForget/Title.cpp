@@ -11,6 +11,10 @@ Title::Title(const SceneType& _nowScene)
 	
 	// mGetNumberを空にする
 	ItemBase::mGetNumber.clear();
+
+	mFade = new Fade();
+	// フェードインさせる
+	mFade->SetFade(Color::Black,Fade::FadeType::eIn);
 }
 
 Title::~Title()
@@ -25,8 +29,13 @@ void Title::Input(const InputState& _state)
 	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
 		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
+		if (mFade->GetNowFadeFlag())
+		{
+			// フェードアウトさせる
+			mFade->SetFade(Color::Black, Fade::FadeType::eOut);
+		}
 		// シーン遷移フラグをtrueにする
-		mGameSceneFlag = true;
+		//mGameSceneFlag = true;
 	}
 }
 

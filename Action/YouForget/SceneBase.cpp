@@ -4,7 +4,8 @@
 SceneBase::SceneType SceneBase::mIsSceneType = SceneType::eInit;	// 現在のシーンタイプ
 
 SceneBase::SceneBase(const SceneType& _sceneType)
-	: mFullPicture(nullptr)
+	: mFade(nullptr)
+	, mFullPicture(nullptr)
 	, mMapCreate(nullptr)
 	, mGameSceneFlag(false)
 	, mReturnTitleFlag(false)

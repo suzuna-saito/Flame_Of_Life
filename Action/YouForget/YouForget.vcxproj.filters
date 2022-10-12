@@ -177,6 +177,9 @@
     <ClCompile Include="LastResult.cpp">
       <Filter>Scene\Result\LastResult</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>UI\Fade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -357,30 +360,12 @@
     <ClInclude Include="LastResult.h">
       <Filter>Scene\Result\LastResult</Filter>
     </ClInclude>
+    <ClInclude Include="Fade.h">
+      <Filter>UI\Fade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Line.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\Line.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\LineWorld.vert">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\BasicMesh.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\BasicMesh.vert">
-      <Filter>Shader</Filter>
-    </None>
     <None Include="Shaders\downsampling.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\framebufferScreen.frag">
-      <Filter>Shader</Filter>
-    </None>
-    <None Include="Shaders\framebufferScreen.vert">
       <Filter>Shader</Filter>
     </None>
     <None Include="Shaders\gaussianblur.frag">
@@ -395,23 +380,44 @@
     <None Include="Shaders\Particle.frag">
       <Filter>Shader</Filter>
     </None>
+    <None Include="Shaders\BasicMesh.frag">
+      <Filter>Shader\BasicMesh</Filter>
+    </None>
+    <None Include="Shaders\BasicMesh.vert">
+      <Filter>Shader\BasicMesh</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.frag">
+      <Filter>Shader\framebufferScreen</Filter>
+    </None>
+    <None Include="Shaders\framebufferScreen.vert">
+      <Filter>Shader\framebufferScreen</Filter>
+    </None>
+    <None Include="Shaders\Line.frag">
+      <Filter>Shader\Line</Filter>
+    </None>
+    <None Include="Shaders\Line.vert">
+      <Filter>Shader\Line</Filter>
+    </None>
+    <None Include="Shaders\LineWorld.vert">
+      <Filter>Shader\Line</Filter>
+    </None>
     <None Include="Shaders\Phong.frag">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Phong</Filter>
     </None>
     <None Include="Shaders\Phong.vert">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Phong</Filter>
     </None>
     <None Include="Shaders\Skinned.vert">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Skinned</Filter>
     </None>
     <None Include="Shaders\SkinnedPhong.frag">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Skinned</Filter>
     </None>
     <None Include="Shaders\Sprite.frag">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Sprite</Filter>
     </None>
     <None Include="Shaders\Sprite.vert">
-      <Filter>Shader</Filter>
+      <Filter>Shader\Sprite</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -534,6 +540,27 @@
     </Filter>
     <Filter Include="Scene\Result\LastResult">
       <UniqueIdentifier>{1db74433-1e63-421d-9dca-fc37c3f03706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\BasicMesh">
+      <UniqueIdentifier>{750c92e0-8df6-46c8-acc0-46d0acb8b8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\framebufferScreen">
+      <UniqueIdentifier>{1cec9232-5aab-403c-a162-139bf4cd7338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Line">
+      <UniqueIdentifier>{7029607f-dfdf-483e-a86e-baac4ddaebd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Phong">
+      <UniqueIdentifier>{51be8c0b-9ba0-4edd-8b2c-87fc5a79a602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Skinned">
+      <UniqueIdentifier>{d10a7386-3d55-4d3a-bb5e-78686c64d70a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Sprite">
+      <UniqueIdentifier>{597b6267-6b08-4928-872a-0dc0a0fe651e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\Fade">
+      <UniqueIdentifier>{3ab855df-f8f6-4314-9452-b43e54b80f0c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -44,6 +44,7 @@ public:
     static SceneType mIsSceneType;      // 現在のシーンタイプ
 
 protected:
+    class Fade* mFade;                  // フェードイン、フェードアウト
     class FullPicture* mFullPicture;    // 1920×1080サイズの画像UI
     class MapCreate* mMapCreate;        // マップ
 

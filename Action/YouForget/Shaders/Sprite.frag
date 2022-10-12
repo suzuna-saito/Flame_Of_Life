@@ -18,6 +18,9 @@ in vec2 fragTexCoord;
 uniform sampler2D uSpriteTexture;
 uniform sampler2D uEmissiveMap;
 
+uniform float     uAlpha;
+uniform vec3      uColor;
+
 // Ž©ŒÈ”­Œõ‹­“x
 uniform float uLuminance;
 
@@ -37,6 +40,8 @@ void main()
         HiBrightBuffer = vec4(0.0f);
     }
 
-    HDRBuffer = texColor;
-}
+    texColor.a = uAlpha;
 
+    HDRBuffer.rgb = texColor.rgb* uColor;
+    HDRBuffer.a = texColor.a * uAlpha;
+}
