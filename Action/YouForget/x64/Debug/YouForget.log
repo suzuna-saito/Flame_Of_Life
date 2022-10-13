@@ -1,5 +1,6 @@
 ﻿  pch.cpp
 C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\ParticleComponent.h(15): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'ParticleComponent::ParticleBlendType' の左辺を無視します。
+C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\Fade.h(14): warning C4091: 'typedef ': 変数が何も宣言されていないときは、'Fade::FadeType' の左辺を無視します。
   Animation.cpp
   BackGround.cpp
   BoneTransform.cpp
@@ -9,6 +10,7 @@ C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\ParticleComponent.h(15):
   ColliderComponent.cpp
   Collision.cpp
   Component.cpp
+  Fade.cpp
   FirstResult.cpp
   FirstStage.cpp
   FallEffect.cpp
@@ -19,9 +21,9 @@ C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\ParticleComponent.h(15):
   GameObjectManager.cpp
   GoalEffect.cpp
   Ground.cpp
-  PuzzleUI.cpp
   コードを生成中...
   コンパイル中...
+  PuzzleUI.cpp
   LastResult.cpp
   ResultBase.cpp
   SecondResult.cpp
@@ -44,9 +46,9 @@ C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\Mesh.cpp(250,65): warnin
   MeshComponent.cpp
   SecondStage.cpp
   ParticleComponent.cpp
-  ParticleEffectBase.cpp
   コードを生成中...
   コンパイル中...
+  ParticleEffectBase.cpp
   PhysicsWorld.cpp
   RapidJsonHelper.cpp
   Renderer.cpp
@@ -119,7 +121,6 @@ Renderer.obj : error LNK2019: 未解決の外部シンボル SDL_GL_DeleteContex
 Renderer.obj : error LNK2019: 未解決の外部シンボル SDL_CreateRenderer が関数 "public: bool __cdecl Renderer::Initialize(float,float,bool)" (?Initialize@Renderer@@QEAA_NMM_N@Z) で参照されました
 Renderer.obj : error LNK2019: 未解決の外部シンボル SDL_DestroyRenderer が関数 "public: void __cdecl Renderer::Shutdown(void)" (?Shutdown@Renderer@@QEAAXXZ) で参照されました
 Renderer.obj : error LNK2019: 未解決の外部シンボル TTF_Init が関数 "public: bool __cdecl Renderer::Initialize(float,float,bool)" (?Initialize@Renderer@@QEAA_NMM_N@Z) で参照されました
-Renderer.obj : error LNK2019: 未解決の外部シンボル __imp___glewBlendFuncSeparate が関数 "public: void __cdecl Renderer::Draw(void)" (?Draw@Renderer@@QEAAXXZ) で参照されました
 Renderer.obj : error LNK2019: 未解決の外部シンボル __imp___glewBindFramebuffer が関数 "private: void __cdecl Renderer::Draw3DScene(unsigned int,class Matrix4 const &,class Matrix4 const &,float,bool)" (?Draw3DScene@Renderer@@AEAAXIAEBVMatrix4@@0M_N@Z) で参照されました
 Renderer.obj : error LNK2019: 未解決の外部シンボル __imp_glewExperimental が関数 "public: bool __cdecl Renderer::Initialize(float,float,bool)" (?Initialize@Renderer@@QEAA_NMM_N@Z) で参照されました
 Shader.obj : error LNK2019: 未解決の外部シンボル __imp___glewAttachShader が関数 "public: bool __cdecl Shader::Load(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?Load@Shader@@QEAA_NAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z) で参照されました
@@ -156,4 +157,4 @@ MSVCRTD.lib(exe_main.obj) : error LNK2019: 未解決の外部シンボル main �
 ..\..\external\SDL\lib\win\x86\SDL2_image.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
 ..\..\external\GLEW\lib\win\x86\glew32.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
 ..\..\external\SOIL\lib\win\x86\SOIL.lib : warning LNK4272: ライブラリのコンピューターの種類 'x86' がターゲットのコンピューターの種類' x64' と競合しています
-C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\YouForget.exe : fatal error LNK1120: 70 件の未解決の外部参照
+C:\Users\student\Desktop\Flame_of_Life\Action\YouForget\YouForget.exe : fatal error LNK1120: 69 件の未解決の外部参照

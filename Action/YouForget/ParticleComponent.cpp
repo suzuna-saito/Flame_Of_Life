@@ -1,8 +1,9 @@
 #include "pch.h"
 
-ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag, int _updateOrder)
+ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag, EffectType _effectType, int _updateOrder)
 	: Component(_owner, _updateOrder)
 	, mBlendType(ParticleBlendType::eAlphaBlend)
+	, mEffectType(_effectType)
 	, mAngle(Vector3::Zero)
 	, mVisible(true)
 	, mReverce(false)
@@ -33,9 +34,19 @@ void ParticleComponent::Draw(Shader* _shader)
 	matScale = Matrix4::CreateScale(mOwner->GetScale());	// スケール
 	mat = Matrix4::CreateTranslation(mOwner->GetPosition());// ポジション
 
-	// カメラの方向に向かせるかどうかで分岐
+	//エフェクトのタイプが2Dだったら
+	if (mEffectType == EffectType::e2D)
+	{
+		// スクリーン位置の平行移動
+		mat = Matrix4::CreateTranslation(
+			Vector3(mOwner->GetPosition().x - (1.0f * 0.0f),
+				mOwner->GetPosition().y - (1.0f * 0.0f),
+				0.0f));
+		_shader->SetMatrixUniform("uWorldTransform", matScale * mat);
+	}
+	// 3Dだったらカメラの方向に向かせるかどうかで分岐
 	// 向かせる
-	if (mBillboardFlag)
+	else if (mBillboardFlag)
 	{
 		// uWorldTransformにカメラの向きの行列を設定
 		mStaticBillboardMat = GetBillboardMatrix();
@@ -54,7 +65,7 @@ void ParticleComponent::Draw(Shader* _shader)
 		resultMat = matRotationX * matRotationY * matRotationZ;
 		_shader->SetMatrixUniform("uWorldTransform", matScale * resultMat * mat);
 	}
-	
+
 	// アタッチしたオブジェクトの値をセット
 	_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());		// α値
 	_shader->SetVectorUniform("uColor", mOwner->GetColor());	// 乗算色

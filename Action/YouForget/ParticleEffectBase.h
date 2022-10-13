@@ -18,7 +18,8 @@ public:
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	/// <param name="_billFlag">カメラの方向を向くかどうか true:向く</param>
-	ParticleEffectBase(class GameObject* _owner, bool _billFlag = false);
+	/// <param name="_effectType">エフェクトのタイプ(ベースは3D)</param>
+	ParticleEffectBase(class GameObject* _owner, bool _billFlag = false, EffectType _effectType = EffectType::e3D);
 	// デストラクタ
 	virtual ~ParticleEffectBase() {};
 
@@ -28,7 +29,8 @@ protected:
 	
 	Vector3 mAngle;						// 回転値
 	float mFloatScale;					// 単体スケール値（float）
-public:
+
+public:	// ゲッター、セッター
 	// 画像を描画するかしないかセットする true:描画する
 	void SetThisVisible(bool _flag) { mParticle->SetVisible(_flag); }
 };

@@ -7,7 +7,7 @@ class ParticleComponent : public Component
 {
 public:
 	// パーティクルに対するブレンドのタイプ
-	typedef enum class ParticleBlendType :unsigned char
+	enum class ParticleBlendType :unsigned char
 	{
 		eAlphaBlend,// アルファブレンド
 		eAddBlend,	// 加算合成
@@ -19,8 +19,9 @@ public:
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	/// <param name="_billFlag">カメラの方向を向くかどうか true:向く</param>
+	/// <param name="_effectType">エフェクトのタイプ</param>
 	/// <param name="_updateOrder">コンポーネントの更新順番（数値が小さいほど早く更新される）</param>
-	ParticleComponent(GameObject* _owner, bool _billFlag ,int _updateOrder = 100);
+	ParticleComponent(GameObject* _owner, bool _billFlag , EffectType _effectType,int _updateOrder = 100);
 	// デストラクタ
 	~ParticleComponent();
 
@@ -34,12 +35,13 @@ public:
 	@fn		描画処理
 	@param	_shader 使用するシェーダークラスのポインタ
 	*/
-	void Draw(class Shader* _shader);
+	void Draw(class Shader* _shadere);
 
 	// カメラ距離でのソート用
 	bool operator < (const ParticleComponent& _rhs) const;
 	bool operator > (const ParticleComponent& _rhs) const;
 private:
+	EffectType mEffectType;	// エフェクトが2Ｄか3Ｄか(ベースは3D)
 	// 角度
 	Vector3 mAngle;
 	//テクスチャID
@@ -59,6 +61,8 @@ private:
 	// カメラの方向を向くかどうか _true 向く,_false 向かない
 	bool mBillboardFlag;
 public: //ゲッターセッター
+	// エフェクトのタイプを取得
+	EffectType GetEffectType() const { return mEffectType; }
 	/*
 	@return テクスチャID(int型)
 	*/

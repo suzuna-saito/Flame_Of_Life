@@ -217,14 +217,31 @@ void Renderer::UnloadData()
 	mMeshes.clear();
 }
 
-/*
-@fn	描画処理
-*/
 void Renderer::Draw()
 {
 	// フレームの最初でカラーバッファとデプスバッファをクリア
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	// 深度バッファへの書き込みを無効にする
+	glDepthMask(GL_FALSE);
+	// RGBAカラー値とカラーバッファー内の値をブレンド
+	glEnable(GL_BLEND);
+
+	// デプスバッファ法を無効にする
+	glDisable(GL_DEPTH_TEST);
+	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
+	mSpriteShader->SetActive();
+	mSpriteVerts->SetActive();
+	for (auto UI : mUis)
+	{
+		if (UI->GetVisible())
+		{
+			UI->Draw(mSpriteShader);
+		}
+	}
+
+	// 深度バッファへの書き込みを有効に戻す
+	glDepthMask(GL_TRUE);
 	// デプスバッファ法を有効にする
 	glEnable(GL_DEPTH_TEST);
 
@@ -277,26 +294,13 @@ void Renderer::Draw()
 	// RGBAカラー値とカラーバッファー内の値をブレンド
 	glEnable(GL_BLEND);
 
-	// デプスバッファ法を無効にする
-	glDisable(GL_DEPTH_TEST);
-	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
-	mSpriteShader->SetActive();
-	mSpriteVerts->SetActive();
-	for (auto UI : mUis)
-	{
-		if (UI->GetVisible())
-		{
-			UI->Draw(mSpriteShader);
-		}
-	}
-	// デプスバッファ法を有効にする
-	glEnable(GL_DEPTH_TEST);
-
 	// パーティクルのポインタが格納されていたら
 	if (mParticles.size() != 0)
 	{
-		// パーティクルの描画
-		DrawParticle();
+		// パーティクルの描画(3D)
+		DrawParticle3D();
+		// パーティクルの描画(2D)
+		DrawParticle2D();
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
@@ -344,13 +348,24 @@ void Renderer::RemoveUI(UIComponent* _ui)
 
 void Renderer::AddParticle(ParticleComponent* _particleComponent)
 {
+	// 現在のエフェクトのエフェクトタイプを保存
+	EffectType type;
+	if (_particleComponent->GetEffectType() == EffectType::e2D)
+	{
+		type = EffectType::e2D;	// 2D
+	}
+	else
+	{
+		type = EffectType::e3D;	// 3D
+	}
+
 	// (DrawOrderが小さい順番に描画するため)今あるエフェクトから挿入する場所の検索
 	// 自身のDrawOrderを取得
 	int myDrawOrder = _particleComponent->GetDrawOrder();
-	// 今あるエフェクトぶん回す
-	auto iter = mParticles.begin();
+	// 今あるエフェクトぶん回す(エフェクトタイプ別)
+	auto iter = mParticles[type].begin();
 	for (;
-		iter != mParticles.end();
+		iter != mParticles[type].end();
 		++iter)
 	{
 		// 自身のDrawOrderと、今回しているDrawOrderを比べて自身のほうが小さければ
@@ -361,7 +376,7 @@ void Renderer::AddParticle(ParticleComponent* _particleComponent)
 	}
 
 	// 検索した場所のiterの場所に挿入
-	mParticles.insert(iter, _particleComponent);
+	mParticles[type].insert(iter, _particleComponent);
 }
 
 void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
@@ -637,11 +652,11 @@ void Renderer::CreateParticleVerts()
 	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
-void Renderer::DrawParticle()
+void Renderer::DrawParticle3D()
 {
 	// ブレンドモード初期状態取得
 	ParticleComponent::ParticleBlendType blendType, prevType;
-	auto itr = mParticles.begin();
+	auto itr = mParticles[EffectType::e3D].begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
 	// テクスチャID初期状態取得
@@ -657,7 +672,57 @@ void Renderer::DrawParticle()
 	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
 
 	// すべてのパーティクルを描画
-	for (auto particle : mParticles)
+	for (auto particle : mParticles[EffectType::e3D])
+	{
+		// パーティクルの描画フラグがtrueの時
+		if (particle->GetVisible())
+		{
+			//ブレンドモード変更が必要なら変更する
+			blendType = particle->GetBlendType();
+			if (blendType != prevType)
+			{
+				ChangeBlendMode(blendType);
+			}
+			// テクスチャ変更が必要なら変更する
+			nowTexture = particle->GetTextureID();
+			if (nowTexture != prevTexture)
+			{
+				ChangeTexture(nowTexture);
+			}
+
+			// 頂点配列をアクティブにする
+			mParticleVertex->SetActive();
+			// パーティクル描画
+			particle->Draw(mParticleShader);
+
+			// 前回描画状態として保存
+			prevType = blendType;
+			prevTexture = nowTexture;
+		}
+	}
+}
+
+void Renderer::DrawParticle2D()
+{
+	// ブレンドモード初期状態取得
+	ParticleComponent::ParticleBlendType blendType, prevType;
+	auto itr = mParticles[EffectType::e2D].begin();
+	blendType = prevType = (*itr)->GetBlendType();
+
+	// テクスチャID初期状態取得
+	int nowTexture, prevTexture;
+	nowTexture = prevTexture = (*itr)->GetTextureID();
+
+	// ビュープロジェクション行列
+	Matrix4 viewProjectionMat;
+	viewProjectionMat = mView * mProjection;
+
+	// シェーダーON
+	mParticleShader->SetActive();
+	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+
+	// すべてのパーティクルを描画
+	for (auto particle : mParticles[EffectType::e2D])
 	{
 		// パーティクルの描画フラグがtrueの時
 		if (particle->GetVisible())
