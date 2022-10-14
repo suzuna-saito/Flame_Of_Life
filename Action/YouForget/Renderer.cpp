@@ -301,7 +301,7 @@ void Renderer::Draw()
 		DrawParticle(EffectType::e2D);
 	}
 	// 3Dエフェクトがあれば
-	if (!mParticles[EffectType::e3D].empty())
+	if(!mParticles[EffectType::e3D].empty())
 	{
 		// パーティクルの描画(3D)
 		DrawParticle(EffectType::e3D);
@@ -666,10 +666,6 @@ void Renderer::DrawParticle(EffectType _effectType)
 	auto itr = mParticles[_effectType].begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
-	// テクスチャID初期状態取得
-	int nowTexture, prevTexture;
-	nowTexture = prevTexture = (*itr)->GetTextureID();
-
 	// ビュープロジェクション行列
 	Matrix4 viewProjectionMat;
 	viewProjectionMat = mView * mProjection;
@@ -690,12 +686,6 @@ void Renderer::DrawParticle(EffectType _effectType)
 			{
 				ChangeBlendMode(blendType);
 			}
-			// テクスチャ変更が必要なら変更する
-			nowTexture = particle->GetTextureID();
-			if (nowTexture != prevTexture)
-			{
-				ChangeTexture(nowTexture);
-			}
 
 			// 頂点配列をアクティブにする
 			mParticleVertex->SetActive();
@@ -704,7 +694,6 @@ void Renderer::DrawParticle(EffectType _effectType)
 
 			// 前回描画状態として保存
 			prevType = blendType;
-			prevTexture = nowTexture;
 		}
 	}
 }

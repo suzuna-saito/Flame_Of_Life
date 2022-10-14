@@ -13,7 +13,7 @@ Fade::Fade()
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 
 	// GameObjectクラスの変数初期化
-	mScale = Vector3(1920.0f,0.0f,1080.0f);							// スケール
+	mScale = Vector3(100.0f,100.0f,100.0f);		// スケール
 }
 
 void Fade::UpdateGameObject(float _deltaTime)

@@ -9,7 +9,7 @@
 // テクスチャ座標
 in vec2 fragTexCoord;
 // 法線（ワールド空間）
-in vec3 fragNormal;
+//in vec3 fragNormal;
 // 頂点位置（ワールド空間）
 in vec3 fragWorldPos;
 
