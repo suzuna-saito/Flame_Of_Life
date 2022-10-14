@@ -37,12 +37,23 @@ void ParticleComponent::Draw(Shader* _shader)
 	//エフェクトのタイプが2Dだったら
 	if (mEffectType == EffectType::e2D)
 	{
+		// スケールの更新
+		matScale = Matrix4::CreateScale(
+			static_cast<float>(1.0f) * mOwner->GetScale().x,
+			1.0f,
+			static_cast<float>(1.0f) * mOwner->GetScale().z);
+
 		// スクリーン位置の平行移動
 		mat = Matrix4::CreateTranslation(
-			Vector3(mOwner->GetPosition().x - (1.0f * 0.0f),
-				mOwner->GetPosition().y - (1.0f * 0.0f),
-				0.0f));
-		_shader->SetMatrixUniform("uWorldTransform", matScale * mat);
+			Vector3(mOwner->GetPosition().x,
+				0.0f,
+				mOwner->GetPosition().z));
+
+		// 行列を計算
+		Matrix4 world = matScale * mat;
+		// uWorldTransformを設定
+		_shader->SetMatrixUniform("uWorldTransform", world);
+
 	}
 	// 3Dだったらカメラの方向に向かせるかどうかで分岐
 	// 向かせる

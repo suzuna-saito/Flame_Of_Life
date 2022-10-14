@@ -33,14 +33,14 @@ void main()
 	// Convert position to homogeneous coordinates
 	vec4 pos = vec4(inPosition, 1.0);
 	// Transform position to world space
-	pos = pos * uWorldTransform;
+	//pos = pos * uWorldTransform;
 	// Save world position
-	fragWorldPos = pos.xyz;
+	//fragWorldPos = pos.xyz;
 	// Transform to clip space
-	gl_Position = pos * uViewProj;
+	gl_Position = pos * uWorldTransform * uViewProj;
 
 	// Transform normal into world space (w = 0)
-	fragNormal = (vec4(inNormal, 0.0f) * uWorldTransform).xyz;
+	//fragNormal = (vec4(inNormal, 0.0f) * uWorldTransform).xyz;
 
 	// Pass along the texture coordinate to frag shader
 	fragTexCoord = inTexCoord;

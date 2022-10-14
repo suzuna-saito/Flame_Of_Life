@@ -152,10 +152,8 @@ private:
 	*/
 	void CreateParticleVerts();
 
-	// Particleの描画(3D)
-	void DrawParticle3D();
-	// Particleの描画(2D)
-	void DrawParticle2D();
+	// Particleの描画(描画するタイプの引数を渡す)
+	void DrawParticle(EffectType _effectType);
 
 	/*
 	@fn	Particleの描画
@@ -192,7 +190,7 @@ private:
 	//UIのポインタの可変長コンテナ
 	std::vector<UIComponent*> mUis;
 	//パーティクルのポインタ(エフェクトのタイプ別に格納する)
-	std::map<EffectType, vector<ParticleComponent*>> mParticles;
+	std::map<EffectType, std::vector<ParticleComponent*>> mParticles;
 	//ファイル名でテクスチャを取得するための連想配列
 	std::unordered_map<std::string, Texture*> mTextures;
 

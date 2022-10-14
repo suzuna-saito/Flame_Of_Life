@@ -294,13 +294,17 @@ void Renderer::Draw()
 	// RGBAカラー値とカラーバッファー内の値をブレンド
 	glEnable(GL_BLEND);
 
-	// パーティクルのポインタが格納されていたら
-	if (mParticles.size() != 0)
+	// 2Dエフェクトがあれば
+	if (!mParticles[EffectType::e2D].empty())
+	{
+		// パーティクルの描画(2D)
+		DrawParticle(EffectType::e2D);
+	}
+	// 3Dエフェクトがあれば
+	if (!mParticles[EffectType::e3D].empty())
 	{
 		// パーティクルの描画(3D)
-		DrawParticle3D();
-		// パーティクルの描画(2D)
-		DrawParticle2D();
+		DrawParticle(EffectType::e3D);
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
@@ -382,9 +386,12 @@ void Renderer::AddParticle(ParticleComponent* _particleComponent)
 void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 {
 	// 削除するクラスのポインタを検索
-	auto iter = std::find(mParticles.begin(), mParticles.end(), _particleComponent);
+	// エフェクトのタイプによって回すキーを変える
+	EffectType nowEffectType = _particleComponent->GetEffectType();
+
+	auto iter = find(mParticles[nowEffectType].begin(), mParticles[nowEffectType].end(), _particleComponent);
 	// 見つかったUIを削除
-	mParticles.erase(iter);
+	mParticles[nowEffectType].erase(iter);
 }
 
 /*
@@ -652,11 +659,11 @@ void Renderer::CreateParticleVerts()
 	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
 }
 
-void Renderer::DrawParticle3D()
+void Renderer::DrawParticle(EffectType _effectType)
 {
 	// ブレンドモード初期状態取得
 	ParticleComponent::ParticleBlendType blendType, prevType;
-	auto itr = mParticles[EffectType::e3D].begin();
+	auto itr = mParticles[_effectType].begin();
 	blendType = prevType = (*itr)->GetBlendType();
 
 	// テクスチャID初期状態取得
@@ -672,57 +679,7 @@ void Renderer::DrawParticle3D()
 	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
 
 	// すべてのパーティクルを描画
-	for (auto particle : mParticles[EffectType::e3D])
-	{
-		// パーティクルの描画フラグがtrueの時
-		if (particle->GetVisible())
-		{
-			//ブレンドモード変更が必要なら変更する
-			blendType = particle->GetBlendType();
-			if (blendType != prevType)
-			{
-				ChangeBlendMode(blendType);
-			}
-			// テクスチャ変更が必要なら変更する
-			nowTexture = particle->GetTextureID();
-			if (nowTexture != prevTexture)
-			{
-				ChangeTexture(nowTexture);
-			}
-
-			// 頂点配列をアクティブにする
-			mParticleVertex->SetActive();
-			// パーティクル描画
-			particle->Draw(mParticleShader);
-
-			// 前回描画状態として保存
-			prevType = blendType;
-			prevTexture = nowTexture;
-		}
-	}
-}
-
-void Renderer::DrawParticle2D()
-{
-	// ブレンドモード初期状態取得
-	ParticleComponent::ParticleBlendType blendType, prevType;
-	auto itr = mParticles[EffectType::e2D].begin();
-	blendType = prevType = (*itr)->GetBlendType();
-
-	// テクスチャID初期状態取得
-	int nowTexture, prevTexture;
-	nowTexture = prevTexture = (*itr)->GetTextureID();
-
-	// ビュープロジェクション行列
-	Matrix4 viewProjectionMat;
-	viewProjectionMat = mView * mProjection;
-
-	// シェーダーON
-	mParticleShader->SetActive();
-	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
-
-	// すべてのパーティクルを描画
-	for (auto particle : mParticles[EffectType::e2D])
+	for (auto particle : mParticles[_effectType])
 	{
 		// パーティクルの描画フラグがtrueの時
 		if (particle->GetVisible())

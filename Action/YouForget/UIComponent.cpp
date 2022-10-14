@@ -31,8 +31,8 @@ void UIComponent::Draw(Shader* _shader)
 
 		// スクリーン位置の平行移動
 		Matrix4 transMat = Matrix4::CreateTranslation(
-			Vector3(mOwner->GetPosition().x - (mTextureWidth * 0.0f),
-				mOwner->GetPosition().y - (mTextureHeight * 0.0f),
+			Vector3(mOwner->GetPosition().x,
+				mOwner->GetPosition().y,
 				0.0f));
 
 		// 行列を計算
