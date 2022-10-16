@@ -217,7 +217,8 @@ private:
 	//パーティクル
 	Shader* mParticleShader;
 	//パーティクル用頂点
-	class VertexArray* mParticleVertex;
+	class VertexArray* m2DParticleVertex;
+	class VertexArray* m3DParticleVertex;
 
 	//ビュー行列
 	Matrix4 mView;

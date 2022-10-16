@@ -16,7 +16,8 @@ Renderer* Renderer::mRenderer = nullptr;
 */
 void Renderer::SetParticleVertex()
 {
-	mParticleVertex->SetActive();
+	m2DParticleVertex->SetActive();
+	m3DParticleVertex->SetActive();
 }
 
 /*
@@ -28,7 +29,8 @@ Renderer::Renderer()
 	, mMeshShader(nullptr)
 	, mBasicShader(nullptr)
 	, mParticleShader(nullptr)
-	, mParticleVertex(nullptr)
+	, m2DParticleVertex(nullptr)
+	, m3DParticleVertex(nullptr)
 	, mSkinnedShader(nullptr)
 	, mContext(nullptr)
 	, mWindow(nullptr)
@@ -240,6 +242,13 @@ void Renderer::Draw()
 		}
 	}
 
+	// 2Dエフェクトがあれば
+	if (!mParticles[EffectType::e2D].empty())
+	{
+		// パーティクルの描画(2D)
+		DrawParticle(EffectType::e2D);
+	}
+
 	// 深度バッファへの書き込みを有効に戻す
 	glDepthMask(GL_TRUE);
 	// デプスバッファ法を有効にする
@@ -294,12 +303,12 @@ void Renderer::Draw()
 	// RGBAカラー値とカラーバッファー内の値をブレンド
 	glEnable(GL_BLEND);
 
-	// 2Dエフェクトがあれば
-	if (!mParticles[EffectType::e2D].empty())
-	{
-		// パーティクルの描画(2D)
-		DrawParticle(EffectType::e2D);
-	}
+	//// 2Dエフェクトがあれば
+	//if (!mParticles[EffectType::e2D].empty())
+	//{
+	//	// パーティクルの描画(2D)
+	//	DrawParticle(EffectType::e2D);
+	//}
 	// 3Dエフェクトがあれば
 	if(!mParticles[EffectType::e3D].empty())
 	{
@@ -645,34 +654,68 @@ void Renderer::CreateSpriteVerts()
 */
 void Renderer::CreateParticleVerts()
 {
-	float vertices[] = {
-		-0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
-		 0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
-		 0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
-		-0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
-	};
+	// 2Dバーテックス
+	{
+		float vertices[] = {
+		-0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 0.f, // 左上
+		0.5f, 0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 0.f, // 右上
+		0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 1.f, 1.f, // 右下
+		-0.5f,-0.5f, 0.f, 0.f, 0.f, 0.0f, 0.f, 1.f  // 左下
+		};
 
-	unsigned int indices[] = {
-		0, 2, 1,
-		2, 0, 3
-	};
-	mParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+		unsigned int indices[] = {
+			0, 1, 2,
+			2, 3, 0
+		};
+
+		m2DParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+
+	}
+
+	// 3Dバーテックス
+	{
+		float vertices[] = {
+			-0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 0.f, 0.f, // top left
+			 0.5f, 0.f, 0.5f, 0.f, 0.f, 0.0f, 1.f, 0.f, // top right
+			 0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 1.f, 1.f, // bottom right
+			-0.5f, 0.f,-0.5f, 0.f, 0.f, 0.0f, 0.f, 1.f  // bottom left
+		};
+
+		unsigned int indices[] = {
+			0, 2, 1,
+			2, 0, 3
+		};
+
+		m3DParticleVertex = new VertexArray(vertices, 4, VertexArray::PosNormTex, indices, 6);
+	}
 }
 
 void Renderer::DrawParticle(EffectType _effectType)
 {
-	// ブレンドモード初期状態取得
-	ParticleComponent::ParticleBlendType blendType, prevType;
-	auto itr = mParticles[_effectType].begin();
-	blendType = prevType = (*itr)->GetBlendType();
+	CreateParticleVerts();
 
-	// ビュープロジェクション行列
-	Matrix4 viewProjectionMat;
-	viewProjectionMat = mView * mProjection;
+	// ブレンドモード初期状態取得
+	//ParticleComponent::ParticleBlendType blendType, prevType;
+	//auto itr = mParticles[_effectType].begin();
+	//blendType = prevType = (*itr)->GetBlendType();
 
 	// シェーダーON
 	mParticleShader->SetActive();
-	mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+	// ビュープロジェクション行列
+	Matrix4 viewProjectionMat;
+
+	if (_effectType == EffectType::e2D)
+	{
+		viewProjectionMat = Matrix4::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
+
+		mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+	}
+	else
+	{
+		viewProjectionMat = mView * mProjection;
+
+		mParticleShader->SetMatrixUniform("uViewProj", viewProjectionMat);
+	}
 
 	// すべてのパーティクルを描画
 	for (auto particle : mParticles[_effectType])
@@ -680,20 +723,18 @@ void Renderer::DrawParticle(EffectType _effectType)
 		// パーティクルの描画フラグがtrueの時
 		if (particle->GetVisible())
 		{
-			//ブレンドモード変更が必要なら変更する
-			blendType = particle->GetBlendType();
-			if (blendType != prevType)
-			{
-				ChangeBlendMode(blendType);
-			}
+			////ブレンドモード変更が必要なら変更する
+			//blendType = particle->GetBlendType();
+			//if (blendType != prevType)
+			//{
+			//	ChangeBlendMode(blendType);
+			//}
 
-			// 頂点配列をアクティブにする
-			mParticleVertex->SetActive();
 			// パーティクル描画
 			particle->Draw(mParticleShader);
 
 			// 前回描画状態として保存
-			prevType = blendType;
+			//prevType = blendType;
 		}
 	}
 }

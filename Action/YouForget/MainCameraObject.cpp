@@ -12,7 +12,7 @@ MainCameraObject::MainCameraObject()
 	, mHasParentObject(false)
 	, mLerpObject(Vector3::Zero)
 {
-	SetPosition(Vector3(-100.0f, 0.0f, 0.0f));
+	//SetPosition(Vector3(-100.0f, 0.0f, 0.0f));
 	mTag = Tag::Camera;
 }
 

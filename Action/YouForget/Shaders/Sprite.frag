@@ -26,15 +26,15 @@ void main()
 	// Sample color from texture
     vec4 texColor =  texture(uSpriteTexture, fragTexCoord);
 
-	float brightness = dot(texColor.rgb, vec3(0.2126, 0.7152, 0.0722));
-    if(brightness > 1.0)
+	//float brightness = dot(texColor.rgb, vec3(0.2126, 0.7152, 0.0722));
+    //if(brightness > 1.0)
     {
          //HiBrightBuffer = texColor + texture(uEmissiveMap,fragTexCoord) * uLuminance;
-           HiBrightBuffer = texColor ;
+          // HiBrightBuffer = texColor ;
     }
-    else
+    //else
     {
-        HiBrightBuffer = vec4(0.0f);
+       // HiBrightBuffer = vec4(0.0f);
     }
 
     HDRBuffer = texColor;

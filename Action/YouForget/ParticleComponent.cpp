@@ -40,14 +40,14 @@ void ParticleComponent::Draw(Shader* _shader)
 		// スケールの更新
 		matScale = Matrix4::CreateScale(
 			static_cast<float>(1.0f) * mOwner->GetScale().x,
-			1.0f,
-			static_cast<float>(1.0f) * mOwner->GetScale().z);
+			static_cast<float>(1.0f) * mOwner->GetScale().y,
+			1.0f);
 
 		// スクリーン位置の平行移動
 		mat = Matrix4::CreateTranslation(
 			Vector3(mOwner->GetPosition().x,
-				0.0f,
-				mOwner->GetPosition().z));
+				mOwner->GetPosition().y,
+				0.0f));
 
 		// 行列を計算
 		Matrix4 world = matScale * mat;
