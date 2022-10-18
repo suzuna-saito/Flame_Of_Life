@@ -28,7 +28,7 @@ void Title::Input(const InputState& _state)
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
 		// 黒いフェードアウトをさせる
-		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
+		//mFade->SetFade(Color::Black, Fade::FadeType::eOut);
 	}
 }
 
@@ -42,7 +42,7 @@ SceneBase::SceneType Title::update()
 		//return new FirstResult(SceneType::eFirstResult);
 		//return new Tutorial(Scene::tutorial);
 		//return new SecondStage(Scene::second);
-		//return new ThirdStage(Scene::third);
+		//return SceneType::eThirdResult;
 		//return new Result(Scene::result);
 	}
 
