@@ -8,7 +8,7 @@ LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBas
 {
 	//プレイヤー足元の当たり判定(ボックス)
 	mLegsBoxCollider = new BoxCollider(this, ColliderTag::playerLegsTag, GetOnCollisionFunc());
-	AABB Legsbox = { Vector3(-5.0f,-5.0f,-10.0f),Vector3(5.0f,5.0f,5.0f) };
+	AABB Legsbox = { Vector3(-20.0f,-20.0f,-10.0f),Vector3(20.0f,20.0f,5.0f) };
 	mLegsBoxCollider->SetObjectBox(Legsbox);
 }
 

@@ -10,7 +10,7 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	, mReturnTitleFlag(false)
 {
 	// カメラをセット
-	GameObject::mMainCamera->SetViewMatrixLerpObject(Vector3(0.0f, -100.0f, -100.0f), Vector3::Zero);
+	GameObject::mMainCamera->SetViewMatrixLerpObject(Vector3(0.0f, 0.0f, 0.0f), Vector3::Zero);
 
 	// ライトを設定(設定しないと何も映らない)
 	RENDERER->SetAmbientLight(Vector3(1.0f, 1.0f, 1.0f));	// 光の色
@@ -34,6 +34,6 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 	else
 	{
 		// 黒いフェードインをさせる
-		mFade->SetFade(Color::White, Fade::FadeType::eIn);
+		mFade->SetFade(Color::Black, Fade::FadeType::eIn);
 	}
 }

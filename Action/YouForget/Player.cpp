@@ -224,7 +224,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 	Vector3 inputVec = Vector3::Zero;
 	mInputSpeed = Vector3::Zero;
 
-	if (mOperable && !Fade::mFadeFlag)
+	if (mOperable)
 	{
 		// W‚Å‰œ‚ÉˆÚ“®
 		if (_keyState.m_controller.GetLAxisVec().y < -0.5f ||

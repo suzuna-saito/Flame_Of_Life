@@ -48,7 +48,6 @@ GameObject::~GameObject()
 	{
 		delete mComponents.back();
 	}
-
 }
 
 /*

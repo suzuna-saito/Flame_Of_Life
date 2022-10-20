@@ -242,13 +242,6 @@ void Renderer::Draw()
 		}
 	}
 
-	// 2Dエフェクトがあれば
-	if (!mParticles[EffectType::e2D].empty())
-	{
-		// パーティクルの描画(2D)
-		DrawParticle(EffectType::e2D);
-	}
-
 	// 深度バッファへの書き込みを有効に戻す
 	glDepthMask(GL_TRUE);
 	// デプスバッファ法を有効にする
@@ -303,21 +296,27 @@ void Renderer::Draw()
 	// RGBAカラー値とカラーバッファー内の値をブレンド
 	glEnable(GL_BLEND);
 
-	//// 2Dエフェクトがあれば
-	//if (!mParticles[EffectType::e2D].empty())
-	//{
-	//	// パーティクルの描画(2D)
-	//	DrawParticle(EffectType::e2D);
-	//}
 	// 3Dエフェクトがあれば
 	if(!mParticles[EffectType::e3D].empty())
 	{
 		// パーティクルの描画(3D)
-		DrawParticle(EffectType::e3D);
+		DrawParticle(EffectType::e3D,m3DParticleVertex);
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
 	glDepthMask(GL_TRUE);
+
+	// デプスバッファ法を無効にする
+	glDisable(GL_DEPTH_TEST);
+
+	// 2Dエフェクトがあれば
+	if (!mParticles[EffectType::e2D].empty())
+	{
+		// パーティクルの描画(2D)
+		DrawParticle(EffectType::e2D,m2DParticleVertex);
+	}
+	// デプスバッファ法を有効にする
+	glEnable(GL_DEPTH_TEST);
 
 
 	// 当たり判定を描画する
@@ -690,17 +689,17 @@ void Renderer::CreateParticleVerts()
 	}
 }
 
-void Renderer::DrawParticle(EffectType _effectType)
+void Renderer::DrawParticle(EffectType _effectType ,class VertexArray* _vertexArray)
 {
-	CreateParticleVerts();
-
 	// ブレンドモード初期状態取得
-	//ParticleComponent::ParticleBlendType blendType, prevType;
-	//auto itr = mParticles[_effectType].begin();
-	//blendType = prevType = (*itr)->GetBlendType();
+	ParticleComponent::ParticleBlendType blendType, prevType;
+	auto itr = mParticles[_effectType].begin();
+	blendType = prevType = (*itr)->GetBlendType();
 
 	// シェーダーON
 	mParticleShader->SetActive();
+	_vertexArray->SetActive();
+
 	// ビュープロジェクション行列
 	Matrix4 viewProjectionMat;
 
@@ -723,18 +722,18 @@ void Renderer::DrawParticle(EffectType _effectType)
 		// パーティクルの描画フラグがtrueの時
 		if (particle->GetVisible())
 		{
-			////ブレンドモード変更が必要なら変更する
-			//blendType = particle->GetBlendType();
-			//if (blendType != prevType)
-			//{
-			//	ChangeBlendMode(blendType);
-			//}
+			//ブレンドモード変更が必要なら変更する
+			blendType = particle->GetBlendType();
+			if (blendType != prevType)
+			{
+				ChangeBlendMode(blendType);
+			}
 
 			// パーティクル描画
 			particle->Draw(mParticleShader);
 
 			// 前回描画状態として保存
-			//prevType = blendType;
+			prevType = blendType;
 		}
 	}
 }

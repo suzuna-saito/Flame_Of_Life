@@ -20,15 +20,14 @@ Title::~Title()
 
 void Title::Input(const InputState& _state)
 {
-	// フェード更新中じゃないとき
 	// コントローラーのAボタン、または、スペースキーが押された瞬間
-	if (!Fade::mFadeFlag && _state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
-		!Fade::mFadeFlag && _state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
+	if (_state.m_controller.GetButtonValue(SDL_CONTROLLER_BUTTON_A) == 1 ||
+		_state.m_keyboard.GetKeyState(SDL_SCANCODE_SPACE) == ButtonState::Released)
 	{
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
 		// 黒いフェードアウトをさせる
-		//mFade->SetFade(Color::Black, Fade::FadeType::eOut);
+		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
 	}
 }
 

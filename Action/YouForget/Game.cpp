@@ -56,11 +56,14 @@ void Game::GameLoop()
 {
 	while (mRunningFlag)
 	{
-		// 入力関連の処理
-		ProcessInput();
-
-		// 実行中のシーンの入力処理
-		mNowScene->Input(mInputSystem->GetState());
+		// フェード中じゃなかったら
+		if (!Fade::mFadeFlag)
+		{
+			// 入力関連の処理
+			ProcessInput();
+			// 実行中のシーンの入力処理
+			mNowScene->Input(mInputSystem->GetState());
+		}
 		// 実行中のシーンを更新処理
 		mReturnSceneType = mNowScene->update();
 

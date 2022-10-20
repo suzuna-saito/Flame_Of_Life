@@ -153,7 +153,7 @@ private:
 	void CreateParticleVerts();
 
 	// Particle‚Ì•`‰æ(•`‰æ‚·‚éƒ^ƒCƒv‚Ìˆø”‚ğ“n‚·)
-	void DrawParticle(EffectType _effectType);
+	void DrawParticle(EffectType _effectType, class VertexArray* _vertexArray);
 
 	/*
 	@fn	Particle‚Ì•`‰æ
