@@ -153,7 +153,7 @@ private:
 	void CreateParticleVerts();
 
 	// Particleの描画(描画するタイプの引数を渡す)
-	void DrawParticle(EffectType _effectType, class VertexArray* _vertexArray);
+	void DrawParticle(EffectType _effectType);
 
 	/*
 	@fn	Particleの描画
@@ -187,8 +187,8 @@ private:
 	std::unordered_map<std::string, Mesh*> mMeshes;
 	//メッシュコンポーネントのポインタの可変長コンテナ
 	std::vector<MeshComponent*> mMeshComponents;
-	//UIのポインタの可変長コンテナ
-	std::vector<UIComponent*> mUis;
+	//UIのポインタ(UIの描画タイプ別に格納する)
+	std::map<UIComponent::UIDrawType, std::vector<UIComponent*>> mUis;
 	//パーティクルのポインタ(エフェクトのタイプ別に格納する)
 	std::map<EffectType, std::vector<ParticleComponent*>> mParticles;
 	//ファイル名でテクスチャを取得するための連想配列

@@ -18,12 +18,14 @@ bool Player::mMoveFlag = false;
 */
 Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
-	, mCameraPos(Vector3(0, -1300, 1600))
+	, mCameraPos(Vector3(0, -1400, _pos.z + 1800.0f))
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
 	, MStartCameraPos(2000.0f)
 	, MAddCameraPos(100.0f)
-	, MCameraPointZ(66.0f)
+	, mCameraPointX(_pos.x)
+	, MCameraPointZ(90.0f)
+	, MinitCameraPointX(_pos.x)
 	, MChagePosZ(70.0f)
 	, MRedoingPosZ(-700.0f)
 	, MReturnAddZ(100.0f)
@@ -107,13 +109,46 @@ void Player::UpdateGameObject(float _deltaTime)
 	
 	if (mPosition.z >= MChagePosZ)
 	{
+		Vector3 distance = Vector3::Zero;
+
+		// 距離ベクトル
+		distance.x = mCameraPointX - MinitCameraPointX;
+
+		// 1に近かったら
+		if (!Math::NearZero(distance.Length(), 5.0f))
+		{
+			Vector3 difference = Vector3::Zero;
+			Vector3 camera = Vector3(mCameraPointX, 0.0f, 0.0f);
+			Vector3 pos = Vector3(MinitCameraPointX, 0.0f, 0.0f);
+			// 現在のポジションとリスポーン地点の座標を用いて線形補間を行い、次の座標を計算する
+			difference = Vector3::Lerp(camera, pos, 0.05f);
+
+			mCameraPointX = difference.x;
+		}
+
 		//プレイヤーを見下ろす位置にカメラをセット
-		mMainCamera->SetViewMatrixLerpObject(mCameraPos, Vector3(mPosition.x, mPosition.y + 50.0f, MCameraPointZ));
+		mMainCamera->SetViewMatrixLerpObject(mCameraPos, Vector3(mCameraPointX, mPosition.y + 50.0f, MCameraPointZ));
 	}
 	else
 	{
+		Vector3 distance = Vector3::Zero;
+
+		// 距離ベクトル
+		distance.x = mCameraPointX - mPosition.x;
+
+		// 1に近かったら
+		if (!Math::NearZero(distance.Length(), 5.0f))
+		{
+			Vector3 difference = Vector3::Zero;
+			Vector3 camera = Vector3(mCameraPointX, 0.0f, 0.0f);
+			Vector3 pos = Vector3(mPosition.x, 0.0f, 0.0f);
+			// 現在のポジションとリスポーン地点の座標を用いて線形補間を行い、次の座標を計算する
+			difference = Vector3::Lerp(camera, pos, 0.05f);
+
+			mCameraPointX = difference.x;
+		}
 		//プレイヤーを見下ろす位置にカメラをセット
-		mMainCamera->SetViewMatrixLerpObject(mCameraPos, mPosition);
+		mMainCamera->SetViewMatrixLerpObject(mCameraPos, Vector3(mCameraPointX, mPosition.y, mPosition.z));
 	}
 
 	//プレイヤーを横から見る位置にカメラをセット

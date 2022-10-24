@@ -9,7 +9,7 @@ Title::Title(const SceneType& _nowScene)
 	ItemBase::mGetNumber.clear();
 
 	// ƒ^ƒCƒgƒ‹‰æ‘œ‚Ì¶¬
-	mFullPicture = new FullPicture("Assets/UI/Title/TitleB.png");
+	mFullPicture = new FullPicture("Assets/UI/Title/Title.png");
 }
 
 Title::~Title()

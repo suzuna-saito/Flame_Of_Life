@@ -51,4 +51,8 @@ protected:
 
     bool mGameSceneFlag;                // 次のシーンに遷移するか(true:する)
     bool mReturnTitleFlag;              // タイトルシーンに遷移するか(true:する)
+
+private:
+    void SetBackUI();       // 背景画像を設定
+    void SetFadein();       // フェードインの設定
 };

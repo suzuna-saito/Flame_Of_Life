@@ -1,8 +1,9 @@
 #include "pch.h"
 
-UIComponent::UIComponent(class GameObject* _owner, const int _drawOrder)
+UIComponent::UIComponent(class GameObject* _owner, const int _drawOrder, const UIDrawType _uiDrawType)
 	: Component(_owner)
 	, mDrawOrder(_drawOrder)
+	, mUIDrawType(_uiDrawType)
 	, mTexture(nullptr)
 	, mTextureWidth(0)
 	, mTextureHeight(0)

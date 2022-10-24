@@ -56,11 +56,12 @@ void Game::GameLoop()
 {
 	while (mRunningFlag)
 	{
+		// 入力関連の処理
+		ProcessInput();
+
 		// フェード中じゃなかったら
 		if (!Fade::mFadeFlag)
 		{
-			// 入力関連の処理
-			ProcessInput();
 			// 実行中のシーンの入力処理
 			mNowScene->Input(mInputSystem->GetState());
 		}
@@ -122,8 +123,12 @@ void Game::ProcessInput()
 		mRunningFlag = false;	// ゲームループを終わる
 	}
 
-	// アクターの入力状態の更新
-	GAME_OBJECT_MANAGER->ProcessInput(state);
+	// フェード中じゃなかったら
+	if (!Fade::mFadeFlag)
+	{
+		// アクターの入力状態の更新
+		GAME_OBJECT_MANAGER->ProcessInput(state);
+	}
 }
 
 void Game::UpdateGame()

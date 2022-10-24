@@ -6,12 +6,20 @@
 class UIComponent : public Component
 {
 public:
+	// 手前に描画するか、奥に描画するか
+	enum class UIDrawType :unsigned char
+	{
+		eNear,	// 手前側に描画
+		eFar,	// 奥側に描画
+	};
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	/// <param name="_drawOrder">コンポーネントの更新順番（数値が小さいほど早く更新される）</param>
-	UIComponent(class GameObject* _owner, const int _drawOrder);
+	/// <param name="_uiType">UIを手前に描画するか奥に描画するか判別するタグ （ベースは手前側に描画）</param>
+	UIComponent(class GameObject* _owner, const int _drawOrder, const UIDrawType _uiDrawType = UIDrawType::eNear);
 	// デストラクタ
 	~UIComponent();
 
@@ -23,6 +31,8 @@ public:
 
 private:
 	class Texture* mTexture;	// テクスチャ
+	
+	UIDrawType mUIDrawType;		// UIのタイプ
 
 	int mDrawOrder;				// 描画される順番（数値が少ないほど早く更新される）
 
@@ -32,6 +42,12 @@ private:
 	bool mVisible;				// 描画を行うか
 
 public://ゲッターセッター
+	/// <summary>
+	/// UIのタイプを取得
+	/// </summary>
+	/// <returns></returns>
+	UIDrawType GetUIDrawType()const { return mUIDrawType; }
+
 	/// <summary>
 	/// 描画番号を取得
 	/// </summary>

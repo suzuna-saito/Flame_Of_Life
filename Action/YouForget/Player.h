@@ -99,6 +99,8 @@ private:
 	Vector3 mCameraPos;
 	// カメラのZ軸注視点
 	const float MCameraPointZ;
+	const float MinitCameraPointX;
+	float mCameraPointX;
 	// ゲームがスタートするカメラの位置
 	const float MStartCameraPos;
 	// カメラが一定の高さに行くまで足す値

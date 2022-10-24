@@ -234,7 +234,8 @@ void Renderer::Draw()
 	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
 	mSpriteShader->SetActive();
 	mSpriteVerts->SetActive();
-	for (auto UI : mUis)
+
+	for (auto UI : mUis[UIComponent::UIDrawType::eFar])
 	{
 		if (UI->GetVisible())
 		{
@@ -300,7 +301,8 @@ void Renderer::Draw()
 	if(!mParticles[EffectType::e3D].empty())
 	{
 		// パーティクルの描画(3D)
-		DrawParticle(EffectType::e3D,m3DParticleVertex);
+		m3DParticleVertex->SetActive();
+		DrawParticle(EffectType::e3D);
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
@@ -309,15 +311,28 @@ void Renderer::Draw()
 	// デプスバッファ法を無効にする
 	glDisable(GL_DEPTH_TEST);
 
+	// スプライトシェーダーをアクティブにする/スプライト頂点配列を有効にする
+	mSpriteShader->SetActive();
+	mSpriteVerts->SetActive();
+
+	for (auto UI : mUis[UIComponent::UIDrawType::eNear])
+	{
+		if (UI->GetVisible())
+		{
+			UI->Draw(mSpriteShader);
+		}
+	}
+
 	// 2Dエフェクトがあれば
 	if (!mParticles[EffectType::e2D].empty())
 	{
 		// パーティクルの描画(2D)
-		DrawParticle(EffectType::e2D,m2DParticleVertex);
+		m2DParticleVertex->SetActive();
+		DrawParticle(EffectType::e2D);
 	}
-	// デプスバッファ法を有効にする
-	glEnable(GL_DEPTH_TEST);
 
+	// 深度バッファへの書き込みを有効に戻す
+	glDepthMask(GL_TRUE);
 
 	// 当たり判定を描画する
 	PHYSICS->DebugShowBox();
@@ -330,13 +345,24 @@ void Renderer::Draw()
 
 void Renderer::AddUI(UIComponent* _ui)
 {
-	// (DrawOrderが小さい順番に描画するため)今あるUIから挿入する場所の検索
+	// 現在のUIの描画タイプを保存
+	UIComponent::UIDrawType uiType;
+	if (_ui->GetUIDrawType() == UIComponent::UIDrawType::eNear)
+	{
+		uiType = UIComponent::UIDrawType::eNear;	// 手前側
+	}
+	else
+	{
+		uiType = UIComponent::UIDrawType::eFar;		// 奥側
+	}
+
+	// タイプ別に(DrawOrderが小さい順番に描画するため)今あるUIから挿入する場所の検索
 	// 自身のDrawOrderを取得
 	int myUiDrawOrder = _ui->GetDrawOrder();
 	// 今あるUIぶん回す
-	auto iterUi = mUis.begin();
+	auto iterUi = mUis[uiType].begin();
 	for (;
-		iterUi != mUis.end();
+		iterUi != mUis[uiType].end();
 		++iterUi)
 	{
 		// 自身のDrawOrderと、今回しているDrawOrderを比べて自身のほうが小さければ
@@ -347,15 +373,18 @@ void Renderer::AddUI(UIComponent* _ui)
 	}
 
 	// 検索した場所のiterの場所に挿入
-	mUis.insert(iterUi, _ui);
+	mUis[uiType].insert(iterUi, _ui);
 }
 
 void Renderer::RemoveUI(UIComponent* _ui)
 {
 	// 削除するクラスのポインタを検索
-	auto iterUi = find(mUis.begin(), mUis.end(), _ui);
+	// UIの描画タイプによって回すキーを変える
+	UIComponent::UIDrawType nowUIType = _ui->GetUIDrawType();
+
+	auto iter = find(mUis[nowUIType].begin(), mUis[nowUIType].end(), _ui);
 	// 見つかったUIを削除
-	mUis.erase(iterUi);
+	mUis[nowUIType].erase(iter);
 }
 
 void Renderer::AddParticle(ParticleComponent* _particleComponent)
@@ -689,7 +718,7 @@ void Renderer::CreateParticleVerts()
 	}
 }
 
-void Renderer::DrawParticle(EffectType _effectType ,class VertexArray* _vertexArray)
+void Renderer::DrawParticle(EffectType _effectType)
 {
 	// ブレンドモード初期状態取得
 	ParticleComponent::ParticleBlendType blendType, prevType;
@@ -698,7 +727,6 @@ void Renderer::DrawParticle(EffectType _effectType ,class VertexArray* _vertexAr
 
 	// シェーダーON
 	mParticleShader->SetActive();
-	_vertexArray->SetActive();
 
 	// ビュープロジェクション行列
 	Matrix4 viewProjectionMat;
