@@ -30,7 +30,7 @@ public:
 	@fn		フレーム毎の処理
 	@param	_deltaTime 最後のフレームを完了するのに要した時間
 	*/
-	virtual void Update(float _deltaTime);
+	virtual void Update(float _deltaTime) {};
 
 	/*
 	@fn		入力処理

@@ -19,7 +19,7 @@ public:
 	/// <param name="_owner">アタッチするゲームオブジェクトのポインタ</param>
 	/// <param name="_billFlag">カメラの方向を向くかどうか true:向く</param>
 	/// <param name="_effectType">エフェクトのタイプ(ベースは3D)</param>
-	ParticleEffectBase(class GameObject* _owner, bool _billFlag = false, EffectType _effectType = EffectType::e3D);
+	ParticleEffectBase(class GameObject* _owner, bool _billFlag = false, ParticleComponent::EffectType _effectType = ParticleComponent::EffectType::e3D);
 	// デストラクタ
 	virtual ~ParticleEffectBase() {};
 

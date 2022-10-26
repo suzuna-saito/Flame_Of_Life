@@ -4,7 +4,7 @@
 bool Fade::mFadeFlag = false;
 
 Fade::Fade()
-	: ParticleEffectBase(this, false , EffectType::e2D)
+	: ParticleEffectBase(this, false , ParticleComponent::EffectType::e2D)
 	, mFadeSpeed(0.01f)
 {
 	// テクスチャをセット

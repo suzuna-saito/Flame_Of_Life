@@ -6,6 +6,13 @@
 class ParticleComponent : public Component
 {
 public:
+	// エフェクトが2Ｄか3Ｄか
+	enum class EffectType :unsigned char
+	{
+		e2D,		// 2Dエフェクト
+		e3D,		// 3Dエフェクト
+	};
+
 	// パーティクルに対するブレンドのタイプ
 	enum class ParticleBlendType :unsigned char
 	{
@@ -25,103 +32,68 @@ public:
 	// デストラクタ
 	~ParticleComponent();
 
-	/*
-	@fn		フレーム毎の処理
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
-	virtual void Update(float _deltaTime) override {};
-
-	/*
-	@fn		描画処理
-	@param	_shader 使用するシェーダークラスのポインタ
-	*/
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	/// <param name="_shadere">使用するシェーダークラスのポインタ</param>
 	void Draw(class Shader* _shadere);
 
-	// カメラ距離でのソート用
-	bool operator < (const ParticleComponent& _rhs) const;
-	bool operator > (const ParticleComponent& _rhs) const;
 private:
-	EffectType mEffectType;	// エフェクトが2Ｄか3Ｄか(ベースは3D)
-	// 角度
-	Vector3 mAngle;
-	//テクスチャID
-	int mTextureID;
-	//ブレンドタイプ
-	ParticleBlendType mBlendType;
-	//描画を行うか
-	bool mVisible;
-	// ビルボード行列
-	Matrix4 mStaticBillboardMat;
-	// カメラのワールド座標
-	Vector3 mStaticCameraWorldPos;
-	//描画順(数字が少ないものから描画される)
-	int mDrawOrder;
-	//反転を行うか
-	bool mReverce;
-	// カメラの方向を向くかどうか _true 向く,_false 向かない
-	bool mBillboardFlag;
-public: //ゲッターセッター
+	/// <summary>
+	/// ビルボード行列を取得(Matrix4)
+	/// </summary>
+	/// <returns>ビルボード行列</returns>
+	Matrix4 GetBillboardMatrix();
+
+	class Texture* mTexture;		// テクスチャ
+
+	EffectType mEffectType;			// エフェクトが2Ｄか3Ｄか(ベースは3D)
+	ParticleBlendType mBlendType;	// ブレンドタイプ
+
+	Matrix4 mStaticBillboardMat;	// ビルボード行列
+
+	Vector3 mAngle;					// エフェクトの角度
+
+	int mDrawOrder;			// 描画順(数字が少ないものから描画される)
+	int mTextureID;			// テクスチャID
+	int mTextureWidth;		// テクスチャの横幅
+	int mTextureHeight;		// テクスチャの縦幅
+
+	bool mVisible;			// 描画を行うか true:行う
+	bool mBillboardFlag;	// カメラの方向を向くかどうか true:向く
+
+public: // ゲッターセッター
 	// エフェクトのタイプを取得
-	EffectType GetEffectType() const { return mEffectType; }
-	/*
-	@return テクスチャID(int型)
-	*/
-	int GetTextureID() { return mTextureID; }
+	const EffectType GetEffectType() const { return mEffectType; }
+	// ブレンドタイプを取得
+	const ParticleBlendType GetBlendType() const { return mBlendType; }
 
-	/*
-	@return ブレンドタイプ(enum型 PARTICLE_ENUM)
-	*/
-	ParticleBlendType GetBlendType() { return mBlendType; }
+	// 描画順を取得
+	const int GetDrawOrder() const { return mDrawOrder; }
+	// 描画をするかどうかを取得 true:描画する
+	const bool GetVisible() const { return mVisible; }
 
-	/*
-	@fn		描画をするかどうかを取得する
-	@return	true : 描画する , false : 描画しない(bool型)
-	*/
-	bool GetVisible() const { return mVisible; }
-
-	/*
-	@return 描画順(int型)
-	*/
-	int GetDrawOrder() { return mDrawOrder; }
-
-	/*
-	@param _texId テクスチャID
-	*/
-	void SetTextureID(int _texId) { mTextureID = _texId; }
-
-	/*
-	@param mAngle 角度（ｘ軸）
-	*/
-	void SetAngle(const Vector3& _angle) { mAngle = _angle; }
-
-	/*
-	@param _mat ビルボード行列
-	*/
-	void SetBillboardMat(const Matrix4& _mat) { mStaticBillboardMat = _mat; }
-
-	/*
-	@param _brendType カメラのワールド座標
-	*/
+	/// <summary>
+	/// ブレンドタイプを設定
+	/// </summary>
+	/// <param name="_blendType">ブレンド</param>
 	void SetBlendMode(ParticleBlendType _blendType) { mBlendType = _blendType; }
 
-	/*
-	@fn		描画をするかどうかを設定
-	@param	_visible true : 描画する , false : 描画しない
-	*/
+	/// <summary>
+	/// エフェクトの角度を設定
+	/// </summary>
+	/// <param name="_angle">エフェクトの角度</param>
+	void SetAngle(const Vector3& _angle) { mAngle = _angle; }
+
+	/// <summary>
+	/// テクスチャをセットし縦横の長さを計算する
+	/// </summary>
+	/// <param name="_texture">使用するテクスチャのポインタ</param>
+	void SetTexture(class Texture* _texture);
+
+	/// <summary>
+	/// 描画をするかどうかを設定
+	/// </summary>
+	/// <param name="_visible">描画フラグ true: 描画する</param>
 	void SetVisible(bool _visible) { mVisible = _visible; }
-
-	/*
-	@param _drawOrder 描画順
-	*/
-	void SetDrawOrder(int _drawOrder) { mDrawOrder = _drawOrder; }
-
-	/*
-	@param _flag 反転を行うか
-	*/
-	void SetReverce(bool _flag) { mReverce = _flag; }
 };
-
-/*
-@return ビルボード行列(Matrix4)
-*/
-Matrix4 GetBillboardMatrix();

@@ -2,45 +2,41 @@
 
 ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag, EffectType _effectType, int _updateOrder)
 	: Component(_owner, _updateOrder)
-	, mBlendType(ParticleBlendType::eAlphaBlend)
+	, mTexture(nullptr)
 	, mEffectType(_effectType)
+	, mBlendType(ParticleBlendType::eAlphaBlend)
 	, mAngle(Vector3::Zero)
-	, mVisible(true)
-	, mReverce(false)
 	, mDrawOrder(_updateOrder)
 	, mTextureID(0)
+	, mTextureWidth(0)
+	, mTextureHeight(0)
+	, mVisible(true)
 	, mBillboardFlag(_billFlag)
 {
-	//レンダラーにポインターを送る
+	// レンダラーにポインターを送る
 	RENDERER->AddParticle(this);
 }
 
 ParticleComponent::~ParticleComponent()
 {
-	//レンダラーからポインタを削除する
+	// レンダラーからポインタを削除する
 	RENDERER->RemoveParticle(this);
 }
 
 void ParticleComponent::Draw(Shader* _shader)
 {
-	//親オブジェクトが未更新状態だったら
-	if (mOwner->GetState() == State::Dead)
-	{
-		return;
-	}
-
 	// 行列を作成
 	Matrix4 mat, matScale;
-	matScale = Matrix4::CreateScale(mOwner->GetScale());	// スケール
 	mat = Matrix4::CreateTranslation(mOwner->GetPosition());// ポジション
+	matScale = Matrix4::CreateScale(mOwner->GetScale());	// スケール
 
 	//エフェクトのタイプが2Dだったら
 	if (mEffectType == EffectType::e2D)
 	{
 		// スケールの更新
 		matScale = Matrix4::CreateScale(
-			static_cast<float>(1.0f) * mOwner->GetScale().x,
-			static_cast<float>(1.0f) * mOwner->GetScale().y,
+			static_cast<float>(mTextureWidth) * mOwner->GetScale().x,
+			static_cast<float>(mTextureHeight) * mOwner->GetScale().y,
 			1.0f);
 
 		// スクリーン位置の平行移動
@@ -89,23 +85,7 @@ void ParticleComponent::Draw(Shader* _shader)
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-bool ParticleComponent::operator<(const ParticleComponent& _rhs) const
-{
-	float lenThis, lenRhs;
-	lenThis = (mStaticCameraWorldPos).LengthSq();
-	lenRhs = (mStaticCameraWorldPos).LengthSq();
-	return lenThis < lenRhs;
-}
-
-bool ParticleComponent::operator>(const ParticleComponent& _rhs) const
-{
-	float lenThis, lenRhs;
-	lenThis = (mStaticCameraWorldPos).LengthSq();
-	lenRhs = (mStaticCameraWorldPos).LengthSq();
-	return lenThis > lenRhs;
-}
-
-Matrix4 GetBillboardMatrix()
+Matrix4 ParticleComponent::GetBillboardMatrix()
 {
 	// カメラの向き行列を取得
 	Matrix4 ret;
@@ -115,4 +95,13 @@ Matrix4 GetBillboardMatrix()
 	ret.mat[2][2] *= -1;
 
 	return Matrix4(ret);
+}
+
+void ParticleComponent::SetTexture(Texture* _texture)
+{
+	// テクスチャをセット
+	mTexture = _texture;
+	// 縦、横の長さを取得
+	mTextureWidth = mTexture->GetWidth();
+	mTextureHeight = mTexture->GetHeight();
 }

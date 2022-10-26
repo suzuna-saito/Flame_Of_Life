@@ -37,6 +37,9 @@ void GoalObj::UpdateGameObject(float _deltaTime)
 */
 void GoalObj::OnCollision(const GameObject& _hitObject)
 {
-	// ゴールしたかどうかフラグをtrueにする
-	mGoalFlag = true;
+	if (Player::mOperable)
+	{
+		// ゴールしたかどうかフラグをtrueにする
+		mGoalFlag = true;
+	}
 }

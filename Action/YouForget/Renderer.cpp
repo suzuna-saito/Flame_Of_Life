@@ -298,11 +298,11 @@ void Renderer::Draw()
 	glEnable(GL_BLEND);
 
 	// 3Dエフェクトがあれば
-	if(!mParticles[EffectType::e3D].empty())
+	if(!mParticles[ParticleComponent::EffectType::e3D].empty())
 	{
 		// パーティクルの描画(3D)
 		m3DParticleVertex->SetActive();
-		DrawParticle(EffectType::e3D);
+		DrawParticle(ParticleComponent::EffectType::e3D);
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
@@ -324,11 +324,11 @@ void Renderer::Draw()
 	}
 
 	// 2Dエフェクトがあれば
-	if (!mParticles[EffectType::e2D].empty())
+	if (!mParticles[ParticleComponent::EffectType::e2D].empty())
 	{
 		// パーティクルの描画(2D)
 		m2DParticleVertex->SetActive();
-		DrawParticle(EffectType::e2D);
+		DrawParticle(ParticleComponent::EffectType::e2D);
 	}
 
 	// 深度バッファへの書き込みを有効に戻す
@@ -390,18 +390,18 @@ void Renderer::RemoveUI(UIComponent* _ui)
 void Renderer::AddParticle(ParticleComponent* _particleComponent)
 {
 	// 現在のエフェクトのエフェクトタイプを保存
-	EffectType type;
-	if (_particleComponent->GetEffectType() == EffectType::e2D)
+	ParticleComponent::EffectType type;
+	if (_particleComponent->GetEffectType() == ParticleComponent::EffectType::e2D)
 	{
-		type = EffectType::e2D;	// 2D
+		type = ParticleComponent::EffectType::e2D;	// 2D
 	}
 	else
 	{
-		type = EffectType::e3D;	// 3D
+		type = ParticleComponent::EffectType::e3D;	// 3D
 	}
 
 	// (DrawOrderが小さい順番に描画するため)今あるエフェクトから挿入する場所の検索
-	// 自身のDrawOrderを取得
+	// 自身の描画順を取得
 	int myDrawOrder = _particleComponent->GetDrawOrder();
 	// 今あるエフェクトぶん回す(エフェクトタイプ別)
 	auto iter = mParticles[type].begin();
@@ -416,7 +416,7 @@ void Renderer::AddParticle(ParticleComponent* _particleComponent)
 		}
 	}
 
-	// 検索した場所のiterの場所に挿入
+	// 検索したiterの場所に挿入（エフェクトタイプ別）
 	mParticles[type].insert(iter, _particleComponent);
 }
 
@@ -424,10 +424,11 @@ void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 {
 	// 削除するクラスのポインタを検索
 	// エフェクトのタイプによって回すキーを変える
-	EffectType nowEffectType = _particleComponent->GetEffectType();
+	ParticleComponent::EffectType nowEffectType = _particleComponent->GetEffectType();
 
+	// エフェクトを探す
 	auto iter = find(mParticles[nowEffectType].begin(), mParticles[nowEffectType].end(), _particleComponent);
-	// 見つかったUIを削除
+	// 見つかったエフェクトを削除
 	mParticles[nowEffectType].erase(iter);
 }
 
@@ -718,7 +719,7 @@ void Renderer::CreateParticleVerts()
 	}
 }
 
-void Renderer::DrawParticle(EffectType _effectType)
+void Renderer::DrawParticle(ParticleComponent::EffectType _effectType)
 {
 	// ブレンドモード初期状態取得
 	ParticleComponent::ParticleBlendType blendType, prevType;
@@ -731,7 +732,7 @@ void Renderer::DrawParticle(EffectType _effectType)
 	// ビュープロジェクション行列
 	Matrix4 viewProjectionMat;
 
-	if (_effectType == EffectType::e2D)
+	if (_effectType == ParticleComponent::EffectType::e2D)
 	{
 		viewProjectionMat = Matrix4::CreateSimpleViewProj(mScreenWidth, mScreenHeight);
 

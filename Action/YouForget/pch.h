@@ -3,13 +3,6 @@
 
 using namespace std;
 
-// エフェクトが2Ｄか3Ｄか
-enum class EffectType
-{
-	e2D,		// 2Dエフェクト
-	e3D,		// 3Dエフェクト
-};
-
 // 外部依存
 #include <algorithm>
 #include <array>

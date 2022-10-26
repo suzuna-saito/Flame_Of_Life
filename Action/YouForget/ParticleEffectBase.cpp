@@ -1,6 +1,6 @@
 #include "pch.h"
 
-ParticleEffectBase::ParticleEffectBase(class GameObject* _owner, bool _billFlag, EffectType _effectType)
+ParticleEffectBase::ParticleEffectBase(class GameObject* _owner, bool _billFlag, ParticleComponent::EffectType _effectType)
 	: GameObject(SceneBase::mIsSceneType)
 	, mAngle(Vector3::Zero)
 	, mOwner(_owner)

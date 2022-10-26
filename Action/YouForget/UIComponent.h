@@ -42,23 +42,14 @@ private:
 	bool mVisible;				// 描画を行うか
 
 public://ゲッターセッター
-	/// <summary>
-	/// UIのタイプを取得
-	/// </summary>
-	/// <returns></returns>
-	UIDrawType GetUIDrawType()const { return mUIDrawType; }
+	// UIのタイプを取得
+	const UIDrawType GetUIDrawType()const { return mUIDrawType; }
 
-	/// <summary>
-	/// 描画番号を取得
-	/// </summary>
-	/// <returns>描画される順番（数値が少ないほど早く更新される）</returns>
-	int GetDrawOrder()const { return mDrawOrder; }
+	// 描画番号を取得
+	const int GetDrawOrder()const { return mDrawOrder; }
 
-	/// <summary>
-	/// 描画をするかどうかを取得する
-	/// </summary>
-	/// <returns>true : 描画する</returns>
-	bool GetVisible() const { return mVisible; }
+	// 描画をするかどうかを取得する
+	const bool GetVisible() const { return mVisible; }
 
 	/// <summary>
 	/// テクスチャをセットし縦横の長さを計算する

@@ -27,11 +27,3 @@ Component::~Component()
 {
 	mOwner->RemoveComponent(this);
 }
-
-/*
-@fn		フレーム毎の処理
-@param	_deltaTime 最後のフレームを完了するのに要した時間
-*/
-void Component::Update(float _deltaTime)
-{
-}

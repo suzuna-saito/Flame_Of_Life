@@ -28,10 +28,9 @@ private:
 
 public://ゲッターセッター
 	// テクスチャIDを取得
-	int GetTextureID()const { return mTextureID; }
+	const int GetTextureID()const { return mTextureID; }
 	// テクスチャの横幅を取得
-	int GetWidth() const { return mWidth; }
+	const int GetWidth() const { return mWidth; }
 	// テクスチャの縦幅を取得
-	int GetHeight() const { return mHeight; }
-
+	const int GetHeight() const { return mHeight; }
 };

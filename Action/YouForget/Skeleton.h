@@ -32,7 +32,7 @@ private:
 
 public: //ゲッターセッター
 	// ボーン数を返す
-	size_t GetNumBones() const { return mBones.size(); }
+	const size_t GetNumBones() const { return mBones.size(); }
 	// ボーン配列(Bone型)を返す
 	const vector<Bone>& GetBones() const { return mBones; }
 	// 逆バインドポーズ行列(Matrix4型)
