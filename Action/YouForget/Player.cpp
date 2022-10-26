@@ -16,7 +16,7 @@ bool Player::mMoveFlag = false;
 @param	_objectTag プレイヤーのタグ
 @param	_sceneTag シーンのタグ
 */
-Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
+Player::Player(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mCameraPos(Vector3(0, -1400, _pos.z + 1800.0f))
 	, mReturnPos(_pos)
@@ -78,7 +78,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	SetRotation(target);
 
 	// 足元当たり判定の生成
-	mLegs = new LegsCollider(this, Tag::playerLegs, _sceneTag);
+	mLegs = new LegsCollider(this, CollisionTag::playerLegs, _sceneTag);
 
 	// ジャンプを追加
 	mJump = new Jump(this);
@@ -346,7 +346,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 @param	_pairAABB ヒットするオブジェクトの矩形当たり判定
 @param	_pairTag ヒットするオブジェクトのタグ
 */
-void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)
+void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag)
 {
 	Vector3 ment = Vector3::Zero;
 	CalcCollisionFixVec(_myAABB, _pairAABB, ment);
@@ -361,11 +361,11 @@ void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag&
 void Player::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	Tag hitObjectTag = _hitObject.GetTag();
+	CollisionTag hitObjectTag = _hitObject.GetTag();
 
 	if (mOperable &&
-		(hitObjectTag == Tag::ground ||
-			hitObjectTag == Tag::Switch))
+		(hitObjectTag == CollisionTag::ground ||
+			hitObjectTag == CollisionTag::Switch))
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);

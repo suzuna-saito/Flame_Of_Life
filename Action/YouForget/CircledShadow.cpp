@@ -10,7 +10,7 @@ CircledShadow::CircledShadow(class GameObject* _owner, const Vector3 _color)
 	, MSubAlpha(-0.03f)
 {
 	// テクスチャをセット
-	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Particle.png")->GetTextureID());
+	mParticle->SetTexture(RENDERER->GetTexture("Assets/Effect/Particle.png"));
 	// 回転値を設定
 	mParticle->SetAngle(Vector3(0.5f, 0.0f, 0.0f));
 	// ブレンドの種類をαブレンドに設定

@@ -7,7 +7,6 @@ ParticleComponent::ParticleComponent(GameObject* _owner, bool _billFlag, EffectT
 	, mBlendType(ParticleBlendType::eAlphaBlend)
 	, mAngle(Vector3::Zero)
 	, mDrawOrder(_updateOrder)
-	, mTextureID(0)
 	, mTextureWidth(0)
 	, mTextureHeight(0)
 	, mVisible(true)
@@ -69,6 +68,8 @@ void ParticleComponent::Draw(Shader* _shader)
 		matRotationX = Matrix4::CreateRotationX(mAngle.x * 3.14159f);	// XŽ²‰ñ“]
 		matRotationY = Matrix4::CreateRotationY(mAngle.y * 3.14159f);	// YŽ²‰ñ“]
 		matRotationZ = Matrix4::CreateRotationZ(mAngle.z * 3.14159f);	// ZŽ²‰ñ“]
+
+		// uWorldTransform‚É”CˆÓ‚ÌŒü‚«‚Ìs—ñ‚ðÝ’è
 		resultMat = matRotationX * matRotationY * matRotationZ;
 		_shader->SetMatrixUniform("uWorldTransform", matScale * resultMat * mat);
 	}
@@ -80,7 +81,7 @@ void ParticleComponent::Draw(Shader* _shader)
 	// ‚±‚ê‚©‚çƒXƒƒbƒg–¼hGL_TEXTURE0‚ÌÝ’è‚ð‚·‚é
 	glActiveTexture(GL_TEXTURE0);
 	// ƒeƒNƒXƒ`ƒƒ‚ÌŠ„‚è“–‚Ä
-	glBindTexture(GL_TEXTURE_2D, mTextureID);
+	glBindTexture(GL_TEXTURE_2D, mTexture->GetTextureID());
 	// •`‰æ
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

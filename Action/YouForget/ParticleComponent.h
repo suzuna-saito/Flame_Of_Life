@@ -55,7 +55,6 @@ private:
 	Vector3 mAngle;					// エフェクトの角度
 
 	int mDrawOrder;			// 描画順(数字が少ないものから描画される)
-	int mTextureID;			// テクスチャID
 	int mTextureWidth;		// テクスチャの横幅
 	int mTextureHeight;		// テクスチャの縦幅
 

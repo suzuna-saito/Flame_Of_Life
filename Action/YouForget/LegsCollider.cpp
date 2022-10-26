@@ -1,7 +1,7 @@
 #include "pch.h"
 
 // コンストラクタ
-LegsCollider::LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
+LegsCollider::LegsCollider(Player* _owner, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
 	, mIsGround(false)
 	, mOwner(_owner)
@@ -23,16 +23,16 @@ void LegsCollider::UpdateGameObject(float _deltaTime)
 void LegsCollider::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	Tag hitObjectTag = _hitObject.GetTag();
+	CollisionTag hitObjectTag = _hitObject.GetTag();
 	
-	if (hitObjectTag == Tag::ground ||
-		hitObjectTag == Tag::Switch)
+	if (hitObjectTag == CollisionTag::ground ||
+		hitObjectTag == CollisionTag::Switch)
 	{
 		// 接地フラグをtrueにする
 		mIsGround = true;
 	}
 
-	if (hitObjectTag == Tag::SwitchCenter && Player::mOperable)
+	if (hitObjectTag == CollisionTag::SwitchCenter && Player::mOperable)
 	{
 		mOwner->SetReturnPos(_hitObject.GetPosition());
 	}

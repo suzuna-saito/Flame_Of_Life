@@ -1,7 +1,7 @@
 #include "pch.h"
 
 // コンストラクタ
-FireObject::FireObject(Candle* _owner, const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
+FireObject::FireObject(Candle* _owner, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
 	: GameObject(_sceneTag, _objectTag)
 	, mOwner(_owner)
 	, MFireSize(10.0f)

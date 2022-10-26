@@ -7,7 +7,7 @@
 // スイッチをおしているかどうか
 bool Switch::mSwitchFlag = false;
 
-Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag, const switchColor& _color)
+Switch::Switch(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag, const switchColor& _color)
 	:GameObject(_sceneTag, _objectTag)
 {
 	//GameObjectメンバ変数の初期化
@@ -46,7 +46,7 @@ Switch::Switch(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag,
 	mSelfBoxCollider->SetObjectBox(box);
 
 	// スイッチ中心当たり判定の生成
-	mSwitchCenter = new SwitchCollider(this, Tag::SwitchCenter, _sceneTag);
+	mSwitchCenter = new SwitchCollider(this, CollisionTag::SwitchCenter, _sceneTag);
 
 }
 

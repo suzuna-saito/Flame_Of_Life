@@ -1,9 +1,4 @@
 /*
-@file	GameObjectManager.h
-@brief	ゲームオブジェクトの更新を行う
-*/
-
-/*
 @brief	プリプロセッサ
 */
 #pragma once
@@ -71,13 +66,13 @@ public:
 	@fn		特定のゲームオブジェクトを探す
 	@param	_tag ゲームオブジェクトのタグ
 	*/
-	GameObject* FindGameObject(Tag _tag);
+	GameObject* FindGameObject(CollisionTag _tag);
 
 	/*
 	@fn		特定のゲームオブジェクトを探す
 	@param	_tag ゲームオブジェクトのタグ
 	*/
-	std::vector<GameObject*> FindGameObjects(Tag _tag);
+	std::vector<GameObject*> FindGameObjects(CollisionTag _tag);
 
 private:
 

@@ -10,7 +10,7 @@ public:
 	/*
 	@fn		コンストラクタ
 	*/
-	LegsCollider(Player* _owner, const Tag& _objectTag, const SceneBase::SceneType _sceneTag);
+	LegsCollider(Player* _owner, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag);
 
 	/*
 	@fn	デストラクタ

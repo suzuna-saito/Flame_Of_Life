@@ -8,7 +8,7 @@ GoalEffect::GoalEffect(class GameObject* _owner)
 	, mAddAlpha(0.005f)
 {
 	// テクスチャをセット
-	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Goal.png")->GetTextureID());
+	mParticle->SetTexture(RENDERER->GetTexture("Assets/Effect/Goal.png"));
 	// ブレンドの種類をαブレンドに設定
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 	

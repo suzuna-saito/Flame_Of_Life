@@ -4,13 +4,13 @@
 Ground::alphaColor SwitchCollider::mLinkageColor = Ground::alphaColor::red;
 
 // コンストラクタ
-SwitchCollider::SwitchCollider(Switch* _owner,const Tag& _objectTag, const SceneBase::SceneType _sceneTag)
+SwitchCollider::SwitchCollider(Switch* _owner,const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
 	:GameObject(_sceneTag, _objectTag)
 	, mOwner(_owner)
 {
 	SetPosition(_owner->GetPosition());
 
-	mTag = Tag::SwitchCenter;
+	mTag = CollisionTag::SwitchCenter;
 
 	//スイッチ中心の当たり判定(ボックス)
 	mSwitchBoxCollider = new BoxCollider(this, ColliderTag::switchTag, GetOnCollisionFunc());
@@ -27,10 +27,10 @@ void SwitchCollider::UpdateGameObject(float _deltaTime)
 void SwitchCollider::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	Tag hitObjectTag = _hitObject.GetTag();
+	CollisionTag hitObjectTag = _hitObject.GetTag();
 
 	// スイッチと当たった時かつ、スイッチフラグがfalseの時
-	if (hitObjectTag == Tag::playerLegs && !Switch::mSwitchFlag)
+	if (hitObjectTag == CollisionTag::playerLegs && !Switch::mSwitchFlag)
 	{
 		// フラグをtrueにする
 		Switch::mSwitchFlag = true;

@@ -8,7 +8,7 @@ FallEffect::FallEffect(class GameObject* _owner)
 	, mTmpVisible(false)
 {
 	// テクスチャをセット
-	mParticle->SetTextureID(RENDERER->GetTexture("Assets/Effect/Ripple.png")->GetTextureID());
+	mParticle->SetTexture(RENDERER->GetTexture("Assets/Effect/Ripple.png"));
 	// 回転値を設定
 	mParticle->SetAngle(Vector3(0.5f, 0.0, 0.0f));
 	// ブレンドの種類をαブレンドに設定

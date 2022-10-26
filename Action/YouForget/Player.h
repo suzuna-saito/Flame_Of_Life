@@ -22,7 +22,7 @@ public:
 	@param	_objectTag プレイヤーのタグ
 	@param	_sceneTag シーンのタグ
 	*/
-	Player(const Vector3& _pos, const Vector3& _size, const Tag& _objectTag, const SceneBase::SceneType _sceneTag);
+	Player(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag);
 
 	/*
 	@fn	デストラクタ
@@ -68,7 +68,7 @@ private:
 	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
 	@param	_pairTag ヒットするオブジェクトのタグ
 	*/
-	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag)override;
+	void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag)override;
 
 
 	//プレイヤーの当たり判定を生成

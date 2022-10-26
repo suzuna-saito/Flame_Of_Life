@@ -8,12 +8,12 @@ Vector3 MainCameraObject::mOffsetPos = Vector3::Zero;
 @fn	コンストラクタ
 */
 MainCameraObject::MainCameraObject()
-	: GameObject(SceneBase::SceneType::eInit, Tag::Camera, true)
+	: GameObject(SceneBase::SceneType::eInit, CollisionTag::eCamera, true)
 	, mHasParentObject(false)
 	, mLerpObject(Vector3::Zero)
 {
 	//SetPosition(Vector3(-100.0f, 0.0f, 0.0f));
-	mTag = Tag::Camera;
+	mTag = CollisionTag::eCamera;
 }
 
 /*

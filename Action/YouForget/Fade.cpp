@@ -8,7 +8,7 @@ Fade::Fade()
 	, mFadeSpeed(0.01f)
 {
 	// テクスチャをセット
-	mParticle->SetTextureID(RENDERER->GetTexture("Assets/UI/Fade/Fade.png")->GetTextureID());
+	mParticle->SetTexture(RENDERER->GetTexture("Assets/UI/Fade/Fade.png"));
 	// ブレンドの種類をαブレンドに設定
 	mParticle->SetBlendMode(ParticleComponent::ParticleBlendType::eAlphaBlend);
 

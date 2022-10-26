@@ -1,13 +1,4 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
-
-class Component;
-class ColliderComponent;
-class MeshComponent;
-class Mesh;
-class BoxCollider;
 
 /*
 @enum	GameObjectステート
@@ -27,11 +18,11 @@ enum class State :unsigned char
 @enum	GameObjectタグ
 @brief	衝突相手を判別するために使用
 */
-enum class Tag :unsigned char
+enum class CollisionTag :unsigned char
 {
-	NoCollision,
-	Camera,
-	player,
+	eNoCollision,
+	eCamera,
+	ePlayer,
 	playerLegs,
 	ground,
 	candle,
@@ -65,7 +56,7 @@ public:
 	@param	_objectTag ゲームオブジェクトのタグ
 	@param	_reUseGameObject
 	*/
-	GameObject(const SceneBase::SceneType _sceneTag, const Tag& _objectTag = Tag::NoCollision, bool _reUseGameObject = false);
+	GameObject(const SceneBase::SceneType _sceneTag, const CollisionTag& _objectTag = CollisionTag::eNoCollision, bool _reUseGameObject = false);
 
 	/*
 	@fn	デストラクタ
@@ -140,7 +131,7 @@ public:
 	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
 	@param	_pairTag ヒットするオブジェクトのタグ
 	*/
-	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Tag& _pairTag);
+	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag);
 
 	/*
 	@fn		前方ベクトルの向きに回転する
@@ -167,35 +158,35 @@ protected:
 	void CalcCollisionFixVec(const AABB& _movableBox, const AABB& _fixedBox, Vector3& _calcFixVec);
 
 	//function<void(GameObject&, AABB, AABB)> GetOnCollisionFunc() { return bind(&GameObject::OnCollision, this, placeholders::_1, placeholders::_2, placeholders::_3); }
-	function<void(GameObject&)> GetOnCollisionFunc() { return bind(&GameObject::OnCollision, this, placeholders::_1); }
+	function<void(class GameObject&)> GetOnCollisionFunc() { return bind(&GameObject::OnCollision, this, placeholders::_1); }
 	/*
 	@fn		ゲームオブジェクトがヒットした時の処理
 	@param	_hitObject ヒットした対象のゲームオブジェクトのアドレス
 	*/
-	virtual void OnCollision(const GameObject& _hitObject) {}
+	virtual void OnCollision(const class GameObject& _hitObject) {}
 
 	//virtual void OnCollision(const GameObject& _hitObject,const AABB _movableBox, const AABB _fixedBox) {}
 
 	//ゲームオブジェクトの更新を止めるイベント状態
 	static PauzingEvent mPauzingEvent;
 	//衝突時のリアクション関数(ColliderComponentにこの関数のアドレスを渡す) Enter...衝突した Stay...衝突している
-	virtual void OnTriggerEnter(ColliderComponent* _colliderPair) {};
+	virtual void OnTriggerEnter(class ColliderComponent* _colliderPair) {};
 	//衝突時のリアクション関数(ColliderComponentにこの関数のアドレスを渡す) Enter...衝突した Stay...衝突している
-	virtual void OnTriggerStay(ColliderComponent* _colliderPair) {};
+	virtual void OnTriggerStay(class ColliderComponent* _colliderPair) {};
 
 	//オブジェクトのAABB
 	AABB mAabb;
 	//ゲームオブジェクトの状態
 	State mState;
 	//ゲームオブジェクトのタグ
-	Tag mTag;
+	CollisionTag mTag;
 	//ゲームオブジェクトのID、カウント用
 	static int mGameObjectId;
 	//このゲームオブジェクトのID
 	int mMyObjectId;
 
 	// ボックスの当たり判定
-	BoxCollider* mBoxCollider;
+	class BoxCollider* mBoxCollider;
 
 	//Transform
 	Vector3 mPosition;
@@ -288,7 +279,7 @@ public://ゲッターセッター
 	/*
 	@return	オブジェクトのタグ(enum型 Tag)
 	*/
-	Tag GetTag() const { return mTag; };
+	CollisionTag GetTag() const { return mTag; };
 
 	/*
 	@return	オブジェクトのid(int型)
@@ -331,6 +322,5 @@ public://ゲッターセッター
 	virtual void SetPosition(const Vector3& _pos) { mPosition = _pos; mRecomputeWorldTransform = true; }
 
 	AABB GetAabb() const { return mAabb; }
-
 };
 

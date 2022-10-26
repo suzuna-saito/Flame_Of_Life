@@ -7,7 +7,7 @@
 @fn	コンストラクタ
 */
 MapCreate::MapCreate(const SceneBase::SceneType& _sceneType)
-	: GameObject(_sceneType, Tag::NoCollision)
+	: GameObject(_sceneType, CollisionTag::eNoCollision)
 	, mScene()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
@@ -142,11 +142,11 @@ void MapCreate::CreateBackGround()
 
 			if (name == 35)
 			{
-				new BackGround(objectPos, objectSize, Tag::NoCollision, SceneBase::mIsSceneType, name);
+				new BackGround(objectPos, objectSize, CollisionTag::eNoCollision, SceneBase::mIsSceneType, name);
 			}
 			else if (name == 36)
 			{
-				new BackGround(objectPos02, objectSize, Tag::NoCollision, SceneBase::mIsSceneType, name);
+				new BackGround(objectPos02, objectSize, CollisionTag::eNoCollision, SceneBase::mIsSceneType, name);
 			}
 		}
 	}
@@ -186,11 +186,11 @@ void MapCreate::CreateGround()
 
 			if (name == 1)
 			{
-				new Ground(objectPos, objectSize, Tag::ground, SceneBase::mIsSceneType, Ground::groundTag::notAlpha);
+				new Ground(objectPos, objectSize, CollisionTag::ground, SceneBase::mIsSceneType, Ground::groundTag::notAlpha);
 			}
 			else if (name == 4)
 			{
-				new Ground(objectPos, objectSize, Tag::ground, SceneBase::mIsSceneType, Ground::groundTag::RGBalpha);
+				new Ground(objectPos, objectSize, CollisionTag::ground, SceneBase::mIsSceneType, Ground::groundTag::RGBalpha);
 			}
 		}
 	}
@@ -213,7 +213,7 @@ void MapCreate::CreatePlayer()
 
 			if (name == 2)
 			{
-				new Player(objectPos, objectSize, Tag::player, SceneBase::mIsSceneType);
+				new Player(objectPos, objectSize, CollisionTag::ePlayer, SceneBase::mIsSceneType);
 			}
 		}
 	}
@@ -235,7 +235,7 @@ void MapCreate::CreateCandle()
 
 			if (name == 3)
 			{
-				new GoalObj(objectPos, objectSize, Tag::candle, SceneBase::mIsSceneType);
+				new GoalObj(objectPos, objectSize, CollisionTag::candle, SceneBase::mIsSceneType);
 			}
 
 		}
@@ -258,11 +258,11 @@ void MapCreate::CreateSwitch()
 
 			if (name == 18)
 			{
-				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::mIsSceneType, Switch::switchColor::red);
+				new Switch(objectPos, objectSize, CollisionTag::Switch, SceneBase::mIsSceneType, Switch::switchColor::red);
 			}
 			else if (name == 24)
 			{
-				new Switch(objectPos, objectSize, Tag::Switch, SceneBase::mIsSceneType, Switch::switchColor::green);
+				new Switch(objectPos, objectSize, CollisionTag::Switch, SceneBase::mIsSceneType, Switch::switchColor::green);
 			}
 
 		}
@@ -287,7 +287,7 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos, objectSize, Tag::item, SceneBase::mIsSceneType, ItemNumber);
+				new Item(objectPos, objectSize, CollisionTag::item, SceneBase::mIsSceneType, ItemNumber);
 				ItemNumber++;
 			}
 		}
