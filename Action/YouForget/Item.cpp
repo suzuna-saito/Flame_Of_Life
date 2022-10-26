@@ -1,6 +1,6 @@
 #include "pch.h"
 
-Item::Item(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag, const int _num)
+Item::Item(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const int _num)
 	: ItemBase(_sceneTag, _objectTag)
 	, mItemExistsTime(0)
 	, MItemExistsOneTime(2000)
@@ -30,7 +30,7 @@ Item::Item(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objec
 	new CircledShadow(this, Color::LightBlue);
 
 	//“–‚½‚è”»’è
-	mSelfBoxCollider = new BoxCollider(this, ColliderTag::itemTag, GetOnCollisionFunc());
+	mSelfBoxCollider = new BoxCollider(this, mTag, GetOnCollisionFunc());
 	AABB box = { Vector3(3.0f,-3.0f,-3.0f),Vector3(-3.0f,4.0f,3.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 

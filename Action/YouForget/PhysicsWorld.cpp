@@ -53,7 +53,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		return;
 	}
 
-	if (_box->GetTag() == ColliderTag::playerTag)
+	if (_box->GetTag() == GameObject::ObjTag::ePlayer)
 	{
 		for (auto itr : mBoxes)
 		{
@@ -67,7 +67,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 			{
 				continue;
 			}
-			
+
 			/*if (itr->GetTag() == ColliderTag::switchTag)
 			{
 				continue;
@@ -105,7 +105,7 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 		}
 	}
 
-	if (_box->GetTag() == ColliderTag::playerLegsTag)
+	if (_box->GetTag() == GameObject::ObjTag::ePlayerLegs)
 	{
 		for (auto itr : mBoxes)
 		{
@@ -114,8 +114,8 @@ void PhysicsWorld::HitCheck(BoxCollider* _box)
 				continue;
 			}
 
-			if (itr->GetTag() != ColliderTag::groundTag &&
-				itr->GetTag() != ColliderTag::switchTag)
+			if (itr->GetTag() != GameObject::ObjTag::eGround &&
+				itr->GetTag() != GameObject::ObjTag::eSwitchCenter)
 			{
 				continue;
 			}
@@ -151,7 +151,7 @@ void PhysicsWorld::HitCheck(SphereCollider* _sphere)
 	}
 
 	//プレイヤーが何かと当たったら
-	if (_sphere->GetTag() == ColliderTag::playerLegsTag)
+	if (_sphere->GetTag() == GameObject::ObjTag::ePlayerLegs)
 	{
 		//床
 		for (auto itr : mBoxes)
@@ -423,34 +423,34 @@ void PhysicsWorld::DrawCollisions(std::vector<class BoxCollider*>& boxes, const 
 	for (auto item : boxes)
 	{
 
-		if (item->GetTag() == ColliderTag::groundTag)
+		if (item->GetTag() == GameObject::ObjTag::eGround)
 		{
 			continue;
 		}
 		//// Boxだった場合の描画
 		//if (item->GetColliderType() == ColliderTypeEnum::Box)
 		//{
-			AABB box = AABB(Vector3::Zero, Vector3::Zero);
-			Vector3 min, max;
-			// そのオブジェの大きさ？
-			box = item->GetWorldBox();
+		AABB box = AABB(Vector3::Zero, Vector3::Zero);
+		Vector3 min, max;
+		// そのオブジェの大きさ？
+		box = item->GetWorldBox();
 
-			// ボックスのスケールと位置を取得
-			min = box.m_min;
-			max = box.m_max;
-			scale = max - min;
-			pos = min;
+		// ボックスのスケールと位置を取得
+		min = box.m_min;
+		max = box.m_max;
+		scale = max - min;
+		pos = min;
 
-			// scaleMat = マトリックス4
-			// scaleとposをmatrix4に変換
-			scaleMat = Matrix4::CreateScale(scale);
-			posMat = Matrix4::CreateTranslation(pos);
+		// scaleMat = マトリックス4
+		// scaleとposをmatrix4に変換
+		scaleMat = Matrix4::CreateScale(scale);
+		posMat = Matrix4::CreateTranslation(pos);
 
-			worldMat = scaleMat * posMat;
-			mLineShader->SetMatrixUniform("uWorld", worldMat);
+		worldMat = scaleMat * posMat;
+		mLineShader->SetMatrixUniform("uWorld", worldMat);
 
-			glBindVertexArray(mBoxVAO);
-			glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(mBoxVAO);
+		glDrawElements(GL_LINES, 24, GL_UNSIGNED_INT, 0);
 		//}
 		//// Wallだった場合の描画 
 		//if (item->GetColliderType() == ColliderTypeEnum::Wall ||

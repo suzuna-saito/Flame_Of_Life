@@ -47,9 +47,28 @@ using namespace std;
 #include "MatrixPalette.h"
 #include "Skeleton.h"
 
+// Scene
+#include "SceneBase.h"
+#include "Collision.h"
+
+// GameObject @ 全部
+#include "GameObject.h"
+#include "GameObjectManager.h"
+#include "BackGround.h"//
+#include "MainCameraObject.h"
+#include "GoalObj.h"
+#include "Ground.h"
+#include "Player.h"
+#include "LegsCollider.h"
+#include "Switch.h"
+#include "SwitchCollider.h"
+#include "ItemBase.h"
+#include "Item.h"
+#include "PuzzlePiece.h"
+
 // Component @ 全部
 #include "Component.h"
-#include "MeshComponent.h"
+#include "MeshComponent.h"//
 #include "ParticleComponent.h"//
 #include "SkeletalMeshComponent.h"
 #include "UIComponent.h"//
@@ -67,24 +86,6 @@ using namespace std;
 #include "Texture.h"
 #include "VertexArray.h"
 
-// Scene
-#include "SceneBase.h"
-
-// GameObject @ 全部
-#include "GameObject.h"
-#include "GameObjectManager.h"
-#include "BackGround.h"
-#include "MainCameraObject.h"
-#include "GoalObj.h"
-#include "Candle.h"
-#include "FireObject.h"
-#include "Ground.h"
-#include "Player.h"
-#include "LegsCollider.h"
-#include "Switch.h"
-#include "SwitchCollider.h"
-#include "ItemBase.h"
-#include "Item.h"
 
 // ジャンプ @コンポーネントか？
 #include "Jump.h"

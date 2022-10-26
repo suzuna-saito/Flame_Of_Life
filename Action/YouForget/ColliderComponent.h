@@ -44,11 +44,11 @@ public:
 		@param	_updateOrder コンポーネントの更新順番（数値が小さいほど早く更新される）
 		@param  _collisionOrder 当たり判定時に、めり込みから動かす処理の優先度を決める数値
 		*/
-	ColliderComponent(class GameObject* _owner, ColliderTag _tag, int _updateOrder = 200, int _collisionOrder = 100);
+	ColliderComponent(class GameObject* _owner, const GameObject::ObjTag _tag, int _updateOrder = 200, int _collisionOrder = 100);
 protected:
 
 	//アタッチするゲームオブジェクトの当たり判定のタグ
-	ColliderTag mTag;
+	GameObject::ObjTag mTag;
 
 private:
 
@@ -67,6 +67,6 @@ public: //ゲッターセッター
 	@fn		アタッチするゲームオブジェクトの当たり判定のタグを取得する
 	@return	タグの番号(enum型 ColliderTag)
 	*/
-	ColliderTag GetTag() const { return mTag; };
+	GameObject::ObjTag GetTag() const { return mTag; };
 };
 

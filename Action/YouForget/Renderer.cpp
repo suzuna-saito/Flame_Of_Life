@@ -432,19 +432,20 @@ void Renderer::RemoveParticle(ParticleComponent* _particleComponent)
 	mParticles[nowEffectType].erase(iter);
 }
 
-/*
-@fn		メッシュコンポーネントの追加
-@param	_meshComponent　追加するMeshComponentクラスのポインタ
-*/
 void Renderer::AddMeshComponent(MeshComponent* _meshComponent)
 {
+	// スケルトンデータを用いる場合
 	if (_meshComponent->GetIsSkeltal())
 	{
+		// 型をSkeletalMeshComponentに変更
 		SkeletalMeshComponent* sk = static_cast<SkeletalMeshComponent*>(_meshComponent);
+		// mSkeletalMeshesに格納
 		mSkeletalMeshes.emplace_back(sk);
 	}
+	// スケルトンデータを用いない場合
 	else
 	{
+		// mMeshComponentsに格納
 		mMeshComponents.emplace_back(_meshComponent);
 	}
 }

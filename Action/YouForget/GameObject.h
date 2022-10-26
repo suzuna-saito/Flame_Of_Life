@@ -15,23 +15,6 @@ enum class State :unsigned char
 };
 
 /*
-@enum	GameObjectタグ
-@brief	衝突相手を判別するために使用
-*/
-enum class CollisionTag :unsigned char
-{
-	eNoCollision,
-	eCamera,
-	ePlayer,
-	playerLegs,
-	ground,
-	candle,
-	Switch,
-	SwitchCenter,
-	item,
-};
-
-/*
 @enum	ゲームオブジェクトの更新を停止するイベント名
 */
 enum class PauzingEvent :unsigned char
@@ -49,18 +32,25 @@ enum class PauzingEvent :unsigned char
 class GameObject
 {
 public:
+	// GameObjectタグ(衝突相手を判別するために使用)
+	enum class ObjTag :unsigned char
+	{
+		eNoCollisionObj,	// 当たり判定のないオブジェクト
+		eCamera,			// カメラ
+		ePlayer,			// プレイヤー
+		ePlayerLegs,		// プレイヤーの足元
+		eGround,			// 床
+		eGoal,				// ゴール
+		eSwitchCenter,		// スイッチの真ん中
+		ePuzzle,			// パズルピース
+	};
 
-	/*
-	@fn		コンストラクタ
-	@param	_sceneTag シーンのタグ
-	@param	_objectTag ゲームオブジェクトのタグ
-	@param	_reUseGameObject
-	*/
-	GameObject(const SceneBase::SceneType _sceneTag, const CollisionTag& _objectTag = CollisionTag::eNoCollision, bool _reUseGameObject = false);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_objectTag">GameObjectタグ</param>
+	GameObject(const ObjTag& _objectTag = ObjTag::eNoCollisionObj);
+	// デストラクタ
 	virtual ~GameObject();
 
 	/*
@@ -106,13 +96,13 @@ public:
 	@fn		コンポーネントを追加する
 	@param	_component 追加するコンポーネントのポインタ
 	*/
-	void AddComponent(Component* _component);
+	void AddComponent(class Component* _component);
 
 	/*
 	@fn		コンポーネントを削除する
 	@param	_component 削除するコンポーネントのポインタ
 	*/
-	void RemoveComponent(Component* _component);
+	void RemoveComponent(class Component* _component);
 
 	/*
 	@fn			現在の仕様上行うことができない処理を外部から強引に行うための関数
@@ -131,7 +121,7 @@ public:
 	@param	_pairAABB ヒットするオブジェクトの矩形当たり判定
 	@param	_pairTag ヒットするオブジェクトのタグ
 	*/
-	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag);
+	virtual void FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const ObjTag& _pairTag);
 
 	/*
 	@fn		前方ベクトルの向きに回転する
@@ -179,7 +169,7 @@ protected:
 	//ゲームオブジェクトの状態
 	State mState;
 	//ゲームオブジェクトのタグ
-	CollisionTag mTag;
+	ObjTag mTag;
 	//ゲームオブジェクトのID、カウント用
 	static int mGameObjectId;
 	//このゲームオブジェクトのID
@@ -279,17 +269,12 @@ public://ゲッターセッター
 	/*
 	@return	オブジェクトのタグ(enum型 Tag)
 	*/
-	CollisionTag GetTag() const { return mTag; };
+	ObjTag GetTag() const { return mTag; };
 
 	/*
 	@return	オブジェクトのid(int型)
 	*/
 	int GetObjectId() { return mMyObjectId; };
-
-	/*
-	@return	解放されるオブジェクト(bool型)
-	*/
-	bool GetReUseGameObject() { return mReUseObject; };
 
 	/*
 	@return	シーンのタグ

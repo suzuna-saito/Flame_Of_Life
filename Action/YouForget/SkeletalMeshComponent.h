@@ -55,6 +55,11 @@ protected:
 	float mAnimTime;
 	//スケルトンデータに乗算する色
 	Vector3 mColor;
+	
+private:
+	//テクスチャサイズ
+	size_t mTextureIndex;
+
 public://ゲッターセッター
 	/*
 	@param _skeleton スケルトンデータ

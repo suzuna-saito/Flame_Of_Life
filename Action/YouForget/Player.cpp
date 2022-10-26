@@ -16,8 +16,8 @@ bool Player::mMoveFlag = false;
 @param	_objectTag プレイヤーのタグ
 @param	_sceneTag シーンのタグ
 */
-Player::Player(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
-	: GameObject(_sceneTag, _objectTag)
+Player::Player(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag)
+	: GameObject(ObjTag::ePlayer)
 	, mCameraPos(Vector3(0, -1400, _pos.z + 1800.0f))
 	, mReturnPos(_pos)
 	, mDifference(Vector3::Zero)
@@ -65,7 +65,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const CollisionTag& _o
 
 
 	//プレイヤー自身の当たり判定(ボックス)
-	mSelfBoxCollider = new BoxCollider(this, ColliderTag::playerTag, GetOnCollisionFunc());
+	mSelfBoxCollider = new BoxCollider(this, GameObject::ObjTag::ePlayer, GetOnCollisionFunc());
 	AABB box = { Vector3(750.0f,-750.0f,0.0f),Vector3(-750.0f,750.0f,3500.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
@@ -78,7 +78,7 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const CollisionTag& _o
 	SetRotation(target);
 
 	// 足元当たり判定の生成
-	mLegs = new LegsCollider(this, CollisionTag::playerLegs, _sceneTag);
+	mLegs = new LegsCollider(this, ObjTag::ePlayerLegs, _sceneTag);
 
 	// ジャンプを追加
 	mJump = new Jump(this);
@@ -346,7 +346,7 @@ void Player::GameObjectInput(const InputState& _keyState)
 @param	_pairAABB ヒットするオブジェクトの矩形当たり判定
 @param	_pairTag ヒットするオブジェクトのタグ
 */
-void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag)
+void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const ObjTag& _pairTag)
 {
 	Vector3 ment = Vector3::Zero;
 	CalcCollisionFixVec(_myAABB, _pairAABB, ment);
@@ -361,11 +361,10 @@ void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const Coll
 void Player::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	CollisionTag hitObjectTag = _hitObject.GetTag();
+	ObjTag hitObjectTag = _hitObject.GetTag();
 
 	if (mOperable &&
-		(hitObjectTag == CollisionTag::ground ||
-			hitObjectTag == CollisionTag::Switch))
+		hitObjectTag == ObjTag::eGround)
 	{
 		// 押し戻し
 		FixCollision(mSelfBoxCollider->GetWorldBox(), _hitObject.GetAabb(), mTag);

@@ -45,9 +45,6 @@
     <ClCompile Include="MainCameraObject.cpp">
       <Filter>GameObJect\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Candle.cpp">
-      <Filter>GameObJect\GoalObj</Filter>
-    </ClCompile>
     <ClCompile Include="Ground.cpp">
       <Filter>GameObJect\Ground</Filter>
     </ClCompile>
@@ -132,9 +129,6 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Components\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="FireObject.cpp">
-      <Filter>GameObJect\GoalObj</Filter>
-    </ClCompile>
     <ClCompile Include="ResultBase.cpp">
       <Filter>Scene\Result</Filter>
     </ClCompile>
@@ -179,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="Fade.cpp">
       <Filter>ParticleEffect\Fade</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzlePiece.cpp">
+      <Filter>GameObJect\PuzzlePiece</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +224,6 @@
     </ClInclude>
     <ClInclude Include="MainCameraObject.h">
       <Filter>GameObJect\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Candle.h">
-      <Filter>GameObJect\GoalObj</Filter>
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>GameObJect\Ground</Filter>
@@ -315,9 +309,6 @@
     <ClInclude Include="Collision.h">
       <Filter>Components\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="FireObject.h">
-      <Filter>GameObJect\GoalObj</Filter>
-    </ClInclude>
     <ClInclude Include="ResultBase.h">
       <Filter>Scene\Result</Filter>
     </ClInclude>
@@ -362,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="Fade.h">
       <Filter>ParticleEffect\Fade</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzlePiece.h">
+      <Filter>GameObJect\PuzzlePiece</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -561,6 +555,9 @@
     </Filter>
     <Filter Include="Shader\framebufferScreen">
       <UniqueIdentifier>{1cec9232-5aab-403c-a162-139bf4cd7338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObJect\PuzzlePiece">
+      <UniqueIdentifier>{b4b74f53-280c-41da-b077-9025f32793eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,80 +1,48 @@
-/*
-@file	MeshComponent.h
-@brief	メッシュデータの管理と描画を行う
-*/
-
-/*
-@brief	インクルード
-*/
 #include "pch.h"
 
-/*
-@fn		コンストラクタ
-@param	_owner アタッチするゲームオブジェクトのポインタ
-@param _skelton スケルトンデータを用いるか。
-@sa SkeletalMeshComponent.h
-*/
 MeshComponent::MeshComponent(GameObject* _owner, bool _skelton)
 	: Component(_owner)
 	, mMesh(nullptr)
-	, mTextureIndex(0)
 	, mVisible(true)
 	, mSkeltonFlag(_skelton)
 {
-	//レンダラーにポインターを送る
+	// レンダラーにポインターを送る
 	RENDERER->AddMeshComponent(this);
 }
 
-/*
-@fn		デストラクタ
-*/
 MeshComponent::~MeshComponent()
 {
-	//レンダラーからポインタを削除する
+	// レンダラーからポインタを削除する
 	RENDERER->RemoveMeshComponent(this);
 }
 
-/*
-@fn		描画処理
-@param	_shader 使用するシェーダークラスのポインタ
-*/
 void MeshComponent::Draw(Shader* _shader)
 {
-	if (mOwner->GetState() == State::Active)
+	// オブジェクトが更新終了状態じゃなければ
+	if (mOwner->GetState() != State::Dead)
 	{
-		if (mMesh)
-		{
-			// Set the world transform
-			_shader->SetMatrixUniform("uWorldTransform",
-				mOwner->GetWorldTransform());
-			// Set specular power
-			_shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
+		// uWorldTransformを設定
+		_shader->SetMatrixUniform("uWorldTransform",
+			mOwner->GetWorldTransform());
+		// uSpecPowerを設定
+		_shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
 
-			_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());
+		// アタッチしたオブジェクトの値をセット
+		_shader->SetFloatUniform("uAlpha", mOwner->GetAlpha());		// α値
+		_shader->SetVectorUniform("uColor", mOwner->GetColor());	// 乗算色
 
-			_shader->SetVectorUniform("uColor", mOwner->GetColor());
+		// メッシュに定義されているテクスチャをセット
+		SetTextureToShader(_shader);
 
-
-			// メッシュに定義されているテクスチャをセット
-			SetTextureToShader(_shader);
-
-			// Set the argMesh's vertex array as active
-			VertexArray* va = mMesh->GetVertexArray();
-			va->SetActive();
-			// Draw
-			glDrawElements(GL_TRIANGLES, va->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
-		}
+		// argMeshの頂点配列をactiveに設定
+		VertexArray* va = mMesh->GetVertexArray();
+		va->SetActive();
+		// 描画
+		glDrawElements(GL_TRIANGLES, va->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 	}
 }
 
-/*
-@fn		テクスチャをステージごとにセット
-@brief	ディフューズマップ	stage00
-		法線マップ			stage01
-		スペキュラーマップ	stage02
-		自己放射マップ		stage03
-@param	_shader 使用するシェーダークラスのポインタ
-*/
+// @@@
 void MeshComponent::SetTextureToShader(Shader* _shader)
 {
 	// メッシュテクスチャセット

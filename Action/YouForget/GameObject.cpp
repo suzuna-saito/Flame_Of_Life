@@ -13,7 +13,7 @@ PauzingEvent GameObject::mPauzingEvent = PauzingEvent::NoneEvent;
 /*
 @param	ゲームクラスのポインタ
 */
-GameObject::GameObject(SceneBase::SceneType _sceneTag, const CollisionTag& _objectTag, bool _reUseGameObject)
+GameObject::GameObject(const ObjTag& _objectTag)
 	: mState(State::Active)
 	, mWorldTransform()
 	, mBoxCollider()
@@ -29,7 +29,6 @@ GameObject::GameObject(SceneBase::SceneType _sceneTag, const CollisionTag& _obje
 	, mSceneTag(SceneBase::mIsSceneType)
 	, mMoveSpeed(800.0f)
 	, mGravity(90.0f)
-	, mReUseObject(_reUseGameObject)
 	, mRecomputeWorldTransform(true)
 	, mRespawnFlag(false)
 	, mAlpha(1.0f)
@@ -213,7 +212,7 @@ void GameObject::ComputeWorldTransform()
 	}
 }
 
-void GameObject::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const CollisionTag& _pairTag)
+void GameObject::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const ObjTag& _pairTag)
 {
 	Vector3 ment = Vector3(0, 0, 0);
 	CalcCollisionFixVec(_myAABB, _pairAABB, ment);

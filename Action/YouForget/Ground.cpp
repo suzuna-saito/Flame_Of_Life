@@ -6,8 +6,8 @@
 // 静的メンバ変数の初期化
 int Ground::mTypeNum = 0;
 
-Ground::Ground(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag, const groundTag& _tag)
-	:GameObject(_sceneTag, _objectTag)
+Ground::Ground(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const groundTag& _tag)
+	:GameObject(ObjTag::eGround)
 	, mAlphaNum(0)
 	, MAlphaAddSpeed(4.5f)
 	, MAlphaSubSpeed(0.8f)
@@ -18,7 +18,6 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const CollisionTag& _o
 	, mBeforeIsPlayer(false)
 {
 	//GameObjectメンバ変数の初期化
-	mTag = _objectTag;
 	SetScale(_size);
 	SetPosition(_pos);
 
@@ -28,7 +27,7 @@ Ground::Ground(const Vector3& _pos, const Vector3& _size, const CollisionTag& _o
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Books/Book_1.gpmesh"));
 
 	//地面の当たり判定
-	mSelfBoxCollider = new BoxCollider(this, ColliderTag::groundTag, GetOnCollisionFunc());
+	mSelfBoxCollider = new BoxCollider(this, mTag, GetOnCollisionFunc());
 	AABB box = { Vector3(-14.5f,-21.5f,0.0f),Vector3(14.5f,20.0f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
@@ -54,14 +53,14 @@ void Ground::UpdateGameObject(float _deltaTime)
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
 	// 床の透明度が0より小さかったらまたは、スイッチが押されたら
-	if (mAlpha <= 0.0f || Switch::mSwitchFlag)
+	if (mAlpha <= 0.0f || Switch::mFollowSwitchFlag)
 	{
 		// プレイヤーが乗っていなかった判定にする
 		mBeforeIsPlayer = false;
 	}
 
 	// スイッチを押していたらかつ、今踏んでるスイッチの色と床の色が一緒だったら
-	if (Switch::mSwitchFlag && mGroundTag == groundTag::RGBalpha &&
+	if (Switch::mFollowSwitchFlag && mGroundTag == groundTag::RGBalpha &&
 		mAlphaColorTag == SwitchCollider::mLinkageColor)
 	{
 		// 少しずつ透明度をあげる
@@ -81,8 +80,8 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// スイッチを押していないかつ、プレイヤーが乗っていなかったら
-	if(!Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer ||
-		Switch::mSwitchFlag && mGroundTag != groundTag::notAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
+	if(!Switch::mFollowSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer ||
+		Switch::mFollowSwitchFlag && mGroundTag != groundTag::notAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
@@ -120,9 +119,9 @@ void Ground::UpdateGameObject(float _deltaTime)
 void Ground::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	CollisionTag hitObjectTag = _hitObject.GetTag();
+	ObjTag hitObjectTag = _hitObject.GetTag();
 
-	if (hitObjectTag == CollisionTag::playerLegs)
+	if (hitObjectTag == ObjTag::ePlayerLegs)
 	{
 		mIsPlayer = true;
 	}

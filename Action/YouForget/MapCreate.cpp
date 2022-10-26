@@ -7,7 +7,7 @@
 @fn	コンストラクタ
 */
 MapCreate::MapCreate(const SceneBase::SceneType& _sceneType)
-	: GameObject(_sceneType, CollisionTag::eNoCollision)
+	: GameObject()
 	, mScene()
 	, MGroundScale(10.0f)
 	, MCandleScale(6.0f)
@@ -142,11 +142,11 @@ void MapCreate::CreateBackGround()
 
 			if (name == 35)
 			{
-				new BackGround(objectPos, objectSize, CollisionTag::eNoCollision, SceneBase::mIsSceneType, name);
+				new BackGround(objectPos, BackGround::BackGroundType::eBGtypeOne);
 			}
 			else if (name == 36)
 			{
-				new BackGround(objectPos02, objectSize, CollisionTag::eNoCollision, SceneBase::mIsSceneType, name);
+				new BackGround(objectPos02, BackGround::BackGroundType::eBGtypeTwo);
 			}
 		}
 	}
@@ -186,11 +186,11 @@ void MapCreate::CreateGround()
 
 			if (name == 1)
 			{
-				new Ground(objectPos, objectSize, CollisionTag::ground, SceneBase::mIsSceneType, Ground::groundTag::notAlpha);
+				new Ground(objectPos, objectSize, ObjTag::eGround, SceneBase::mIsSceneType, Ground::groundTag::notAlpha);
 			}
 			else if (name == 4)
 			{
-				new Ground(objectPos, objectSize, CollisionTag::ground, SceneBase::mIsSceneType, Ground::groundTag::RGBalpha);
+				new Ground(objectPos, objectSize, ObjTag::eGround, SceneBase::mIsSceneType, Ground::groundTag::RGBalpha);
 			}
 		}
 	}
@@ -213,15 +213,12 @@ void MapCreate::CreatePlayer()
 
 			if (name == 2)
 			{
-				new Player(objectPos, objectSize, CollisionTag::ePlayer, SceneBase::mIsSceneType);
+				new Player(objectPos, objectSize, ObjTag::ePlayer, SceneBase::mIsSceneType);
 			}
 		}
 	}
 }
 
-/*
-@fn	ろうそくを生成する
-*/
 void MapCreate::CreateCandle()
 {
 	for (float iz = 0; iz < mSizeY; iz++)
@@ -231,11 +228,10 @@ void MapCreate::CreateCandle()
 			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
 
 			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos+450.0f);
-			const Vector3 objectSize = Vector3(MCandleScale, MCandleScale, MCandleScale);
 
 			if (name == 3)
 			{
-				new GoalObj(objectPos, objectSize, CollisionTag::candle, SceneBase::mIsSceneType);
+				new GoalObj(objectPos);
 			}
 
 		}
@@ -254,15 +250,14 @@ void MapCreate::CreateSwitch()
 			const unsigned int name = mSwitchMapData[(int)iz][(int)ix];
 
 			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, 0.0f);
-			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
 
 			if (name == 18)
 			{
-				new Switch(objectPos, objectSize, CollisionTag::Switch, SceneBase::mIsSceneType, Switch::switchColor::red);
+				new Switch(objectPos,Switch::switchColor::red);
 			}
 			else if (name == 24)
 			{
-				new Switch(objectPos, objectSize, CollisionTag::Switch, SceneBase::mIsSceneType, Switch::switchColor::green);
+				new Switch(objectPos,Switch::switchColor::green);
 			}
 
 		}
@@ -287,7 +282,7 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos, objectSize, CollisionTag::item, SceneBase::mIsSceneType, ItemNumber);
+				new Item(objectPos, objectSize, ObjTag::ePuzzle, SceneBase::mIsSceneType, ItemNumber);
 				ItemNumber++;
 			}
 		}

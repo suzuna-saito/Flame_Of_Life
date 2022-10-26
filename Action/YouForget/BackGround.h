@@ -3,37 +3,23 @@
 class BackGround :public GameObject
 {
 public:
-	/*
-	@fn		コンストラクタ
-	@param	_pos ポジション
-	@param	_size サイズ
-	@param	_objectTag オブジェクトのタグ
-	@param	_sceneTag シーンタグ
-	*/
+	// 背景にちりばめられている床の種類
+	enum class BackGroundType :unsigned char
+	{
+		eBGtypeOne,	// 1
+		eBGtypeTwo,	// 2
+	};
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="_pos"></param>
-	/// <param name="_size"></param>
-	/// <param name="_objectTag"></param>
-	/// <param name="_sceneTag"></param>
-	/// <param name="_type"></param>
-	BackGround(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag, const int _type);
-
+	/// <param name="_pos">ポジション</param>
+	/// <param name="_type">背景にちりばめられている床の種類</param>
+	BackGround(const Vector3 _pos, const BackGroundType _type);
 	// デストラクタ
 	~BackGround() {};
 
-	/*
-	@fn		床のアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
-	//void UpdateGameObject(float _deltaTime)override;
-
 private:
 	//ゲームオブジェクトのメッシュポインタ変数
-	MeshComponent* mMeshComponent;
-
-	const int mType;
+	class MeshComponent* mMeshComponent;
 };
-

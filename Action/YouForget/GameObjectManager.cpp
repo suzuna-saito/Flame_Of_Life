@@ -153,7 +153,7 @@ void GameObjectManager::AddGameObject(GameObject* _object)
 	{
 		switch (_object->GetTag())
 		{
-		case CollisionTag::eCamera:
+		case GameObject::ObjTag::eCamera:
 			mCameraObjects.emplace_back(_object);
 			break;
 		}

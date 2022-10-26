@@ -1,7 +1,7 @@
 #include "pch.h"
 
 ParticleEffectBase::ParticleEffectBase(class GameObject* _owner, bool _billFlag, ParticleComponent::EffectType _effectType)
-	: GameObject(SceneBase::mIsSceneType)
+	: GameObject()
 	, mAngle(Vector3::Zero)
 	, mOwner(_owner)
 	, mFloatScale(0.0f)

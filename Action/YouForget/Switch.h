@@ -1,43 +1,32 @@
 #pragma once
 
-class SwitchCollider;
-
 // スイッチのオブジェクト
 class Switch :public GameObject
 {
 public:
-
 	// スイッチの色
 	enum class switchColor :unsigned char
 	{
-		red,
-		green,
-		yellow,
+		red,	// 赤
+		green,	// 緑
 	};
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="_pos">ポジション</param>
-	/// <param name="_size">サイズ</param>
-	/// <param name="_objectTag">自身のタグ</param>
-	/// <param name="_sceneTag">現在のシーンタグ</param>
-	/// <param name="_color">生成したい色の種類</param>
-	Switch(const Vector3& _pos, const Vector3& _size, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag, const switchColor& _color);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <param name="_color">生成したい色の種類<</param>
+	Switch(const Vector3 _pos, const switchColor& _color);
+	// デストラクタ
 	~Switch() {};
+
 
 	// 更新
 	void UpdateGameObject(float _deltaTime)override;
 
 	// スイッチを押しているかのフラグ
-	static bool mSwitchFlag;
+	static bool mFollowSwitchFlag;
 
-	// スイッチの色
-	switchColor mSwitchColor;
 private:
 
 	//ゲームオブジェクトのメッシュポインタ変数
@@ -46,17 +35,6 @@ private:
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
 
-	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数
-	@param	当たったGameObject
-	*/
-	void OnCollision(const GameObject& _hitObject)override;
-
 	// スイッチ中心の当たり判定
-	SwitchCollider* mSwitchCenter;
-
-public: // ゲッター、セッター
-	// スイッチの色を返す
-	switchColor GetSwitchColor() { return mSwitchColor; }
+	class SwitchCollider* mSwitchCenter;
 };
-

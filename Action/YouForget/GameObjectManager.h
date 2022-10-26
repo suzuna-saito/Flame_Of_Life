@@ -66,13 +66,13 @@ public:
 	@fn		特定のゲームオブジェクトを探す
 	@param	_tag ゲームオブジェクトのタグ
 	*/
-	GameObject* FindGameObject(CollisionTag _tag);
+	GameObject* FindGameObject(GameObject::ObjTag _tag);
 
 	/*
 	@fn		特定のゲームオブジェクトを探す
 	@param	_tag ゲームオブジェクトのタグ
 	*/
-	std::vector<GameObject*> FindGameObjects(CollisionTag _tag);
+	std::vector<GameObject*> FindGameObjects(GameObject::ObjTag _tag);
 
 private:
 

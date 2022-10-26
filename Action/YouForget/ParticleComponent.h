@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* エフェクトを3D空間上に描画するクラス
+* エフェクトを描画するクラス
 */
 class ParticleComponent : public Component
 {

@@ -10,7 +10,7 @@ public:
 	/*
 	@fn		コンストラクタ
 	*/
-	SwitchCollider(Switch* _owner, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag);
+	SwitchCollider(Switch* _owner, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag,const Switch::switchColor _switchColor);
 
 	/*
 	@fn	デストラクタ

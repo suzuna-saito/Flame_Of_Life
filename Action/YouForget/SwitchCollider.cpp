@@ -1,57 +1,49 @@
 #include "pch.h"
 
-// 静的メンバ　
+// 静的メンバの初期化
 Ground::alphaColor SwitchCollider::mLinkageColor = Ground::alphaColor::red;
 
 // コンストラクタ
-SwitchCollider::SwitchCollider(Switch* _owner,const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
-	:GameObject(_sceneTag, _objectTag)
+SwitchCollider::SwitchCollider(Switch* _owner,const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const Switch::switchColor _switchColor)
+	:GameObject(ObjTag::eSwitchCenter)
 	, mOwner(_owner)
 {
 	SetPosition(_owner->GetPosition());
 
-	mTag = CollisionTag::SwitchCenter;
+	mTag = ObjTag::eSwitchCenter;
 
 	//スイッチ中心の当たり判定(ボックス)
-	mSwitchBoxCollider = new BoxCollider(this, ColliderTag::switchTag, GetOnCollisionFunc());
+	mSwitchBoxCollider = new BoxCollider(this,mTag, GetOnCollisionFunc());
 	AABB Switchbox = { Vector3(-70.0f,-100.0f,0.0f),Vector3(70.0f,100.0f,100.0f) };
 	mSwitchBoxCollider->SetObjectBox(Switchbox);
+
+	if (_switchColor == Switch::switchColor::red)
+	{
+		// 床と連携させる色を赤に設定
+		mLinkageColor = Ground::alphaColor::red;
+	}
+	else
+	{
+		// 床と連携させる色を緑に設定
+		mLinkageColor = Ground::alphaColor::green;
+	}
 }
 
 void SwitchCollider::UpdateGameObject(float _deltaTime)
 {
 	// スイッチのフラグをfalseに戻す
-	Switch::mSwitchFlag = false;
+	Switch::mFollowSwitchFlag = false;
 }
 
 void SwitchCollider::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	CollisionTag hitObjectTag = _hitObject.GetTag();
+	ObjTag hitObjectTag = _hitObject.GetTag();
 
 	// スイッチと当たった時かつ、スイッチフラグがfalseの時
-	if (hitObjectTag == CollisionTag::playerLegs && !Switch::mSwitchFlag)
+	if (hitObjectTag == ObjTag::ePlayerLegs && !Switch::mFollowSwitchFlag)
 	{
 		// フラグをtrueにする
-		Switch::mSwitchFlag = true;
-	}
-
-	// スイッチの色が
-	switch (mOwner->GetSwitchColor())
-	{
-	case(Switch::switchColor::red):  // 赤だったら
-		// 床と連携させる色を赤に設定
-		mLinkageColor = Ground::alphaColor::red;
-		break;
-	case(Switch::switchColor::green):  // 緑だったら
-		// 床と連携させる色を緑に設定
-		mLinkageColor = Ground::alphaColor::green;
-		break;
-	case(Switch::switchColor::yellow):  // 黄色だったら
-		// 床と連携させる色を黄色に設定
-		mLinkageColor = Ground::alphaColor::yellow;
-		break;
-	default:
-		break;
+		Switch::mFollowSwitchFlag = true;
 	}
 }

@@ -1,13 +1,13 @@
 #include "pch.h"
 
 // コンストラクタ
-LegsCollider::LegsCollider(Player* _owner, const CollisionTag& _objectTag, const SceneBase::SceneType _sceneTag)
-	:GameObject(_sceneTag, _objectTag)
+LegsCollider::LegsCollider(Player* _owner, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag)
+	:GameObject(ObjTag::ePlayerLegs)
 	, mIsGround(false)
 	, mOwner(_owner)
 {
 	//プレイヤー足元の当たり判定(ボックス)
-	mLegsBoxCollider = new BoxCollider(this, ColliderTag::playerLegsTag, GetOnCollisionFunc());
+	mLegsBoxCollider = new BoxCollider(this, GameObject::ObjTag::ePlayerLegs, GetOnCollisionFunc());
 	AABB Legsbox = { Vector3(-20.0f,-20.0f,-10.0f),Vector3(20.0f,20.0f,5.0f) };
 	mLegsBoxCollider->SetObjectBox(Legsbox);
 }
@@ -23,16 +23,15 @@ void LegsCollider::UpdateGameObject(float _deltaTime)
 void LegsCollider::OnCollision(const GameObject& _hitObject)
 {
 	//ヒットしたオブジェクトのタグを取得
-	CollisionTag hitObjectTag = _hitObject.GetTag();
+	ObjTag hitObjectTag = _hitObject.GetTag();
 	
-	if (hitObjectTag == CollisionTag::ground ||
-		hitObjectTag == CollisionTag::Switch)
+	if (hitObjectTag == ObjTag::eGround)
 	{
 		// 接地フラグをtrueにする
 		mIsGround = true;
 	}
 
-	if (hitObjectTag == CollisionTag::SwitchCenter && Player::mOperable)
+	if (hitObjectTag == ObjTag::eSwitchCenter && Player::mOperable)
 	{
 		mOwner->SetReturnPos(_hitObject.GetPosition());
 	}
