@@ -51,9 +51,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>GameObJect\Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemBase.cpp">
-      <Filter>GameObJect\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObJect\Player</Filter>
     </ClCompile>
@@ -229,9 +226,6 @@
       <Filter>GameObJect\Ground</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>GameObJect\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemBase.h">
       <Filter>GameObJect\Item</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">

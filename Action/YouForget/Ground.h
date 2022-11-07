@@ -1,8 +1,8 @@
-/*
-@brief	プリプロセッサ
-*/
 #pragma once
 
+/*
+* 床オブジェクトの処理
+*/
 class Ground :public GameObject
 {
 public:
@@ -88,6 +88,5 @@ private:
 	@fn		床の色、α値の変わるタイミングを設定する
 	*/
 	void mInit();
-
 };
 

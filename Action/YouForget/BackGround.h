@@ -1,5 +1,8 @@
 #pragma once
 
+/*
+* 背景にちりばめられている床オブジェクトの処理
+*/
 class BackGround :public GameObject
 {
 public:

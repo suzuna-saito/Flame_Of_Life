@@ -18,7 +18,7 @@ MapCreate::MapCreate(const SceneBase::SceneType& _sceneType)
 	, MBackGroundInsidePosZ(-1200.0f)
 	, MPlayerZPos(150.0f)
 	, MCandleZPos(90.0f)
-	, MItemZPos(200.0f)
+	, MItemZPos(250.0f)
 	, mOffsetX(265.0f)
 	, mOffsetY(-380.0f)
 	, mOffsetZ(0.0f)
@@ -282,7 +282,7 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos, objectSize, ObjTag::ePuzzle, SceneBase::mIsSceneType, ItemNumber);
+				new Item(objectPos,ItemNumber);
 				ItemNumber++;
 			}
 		}

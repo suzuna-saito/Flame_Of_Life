@@ -56,13 +56,12 @@ using namespace std;
 #include "GameObjectManager.h"
 #include "BackGround.h"//
 #include "MainCameraObject.h"
-#include "GoalObj.h"
+#include "GoalObj.h"//
 #include "Ground.h"
 #include "Player.h"
 #include "LegsCollider.h"
 #include "Switch.h"
 #include "SwitchCollider.h"
-#include "ItemBase.h"
 #include "Item.h"
 #include "PuzzlePiece.h"
 

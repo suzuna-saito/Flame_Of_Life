@@ -6,7 +6,7 @@ Title::Title(const SceneType& _nowScene)
 	// mClearEndFlag‚ğtrue‚É‚·‚é
 	ResultBase::mClearEndFlag = true;
 	// mGetNumber‚ğ‹ó‚É‚·‚é
-	ItemBase::mGetNumber.clear();
+	Item::mGetNumber.clear();
 
 	// ƒ^ƒCƒgƒ‹‰æ‘œ‚Ì¶¬
 	mFullPicture = new FullPicture("Assets/UI/Title/Title.png");

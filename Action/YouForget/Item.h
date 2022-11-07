@@ -1,68 +1,69 @@
 #pragma once
 
 /*
-@brief 前方宣言
+* パズルピース（収集物）の処理
 */
-class ItemEffectManager;
-
-
-// アイテム
-class Item :public ItemBase
+class Item :public GameObject
 {
 public:
+	// パズルピースのナンバー
+	enum class PieceNum : unsigned char
+	{
+		one,
+		two,
+		three,
+	};
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="_pos">ポジション</param>
-	/// <param name="_size">サイズ</param>
-	/// <param name="_objectTag">自身のタグ</param>
-	/// <param name="_sceneTag">現在のシーン</param>
-	/// <param name="_num">何個目のアイテムか</param>
-	Item(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const int _num);
-
-	/*
-	@fn	デストラクタ
-	*/
+	/// <param name="_num">何個目のピースか</param>
+	Item(const Vector3 _pos, const int _num);
+	// デストラクタ
 	~Item() {};
 
-	// 更新
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
+	// 収集したパズルピースを格納するためのデータ構造
+	static vector<PieceNum> mGetNumber;
+
 private:
-
-	// エフェクト
-	// アイテムの後ろのエフェクト
-	ItemEffectManager* mItemEffectManager;
-
-	// アイテムがまだ存在しているかのフラグ true _存在する false _存在しない
-	bool mItemExistsFlag;
-
-	// アイテムの透明度をさげるかどうか true _下げる false _下げない
-	bool mAlphaDownFlag;
-	// アイテムが点滅し始める時間
-	int mItemFlashingTime;
-	// アイテムのそれぞれの生存時間
-	int mItemExistsTime;
-
-	int MItemExistsOneTime;
-	int MItemExistsTwoTime;
-	int MItemExistsThreeTime;
-
-	/*
-	@fn 当たり判定が行われHitした際に呼ばれる関数
-	@param	当たったGameObject
-	*/
+	/// <summary>
+	/// 当たり判定が行われHitした際に呼ばれる関数
+	/// </summary>
+	/// <param name="_hitObject">Hitした対象のゲームオブジェクトのアドレス</param>
 	void OnCollision(const GameObject& _hitObject)override;
 
-	// アイテムの種類を決定
-	void mItemType(int _num);
+	/// <summary>
+	/// パズルピースのナンバー、生存時間を設定
+	/// </summary>
+	/// <param name="_num">ピースの生成番号</param>
+	void SetPieceInfo(int _num);
+	// パズルピースの生存時間の計算
+	void PieceExists();
 
-	// アイテムの生存時間の処理
-	void mItemExists();
+	// ゲームオブジェクトのメッシュポインタ変数
+	class MeshComponent* mMeshComponent;
+	// 四角の当たり判定を生成
+	class BoxCollider* mSelfBoxCollider;
 
-	// ゲッター、セッター
-public:
-	// アイテムが存在してるかどうかをかえす
-	bool mGetItemExistsFlag() { return mItemExistsFlag; }
+	// ピースの上下移動pos値
+	const float MMaxPos;	// 最大値
+	const float MMinPos;	// 最小値
+
+	PieceNum mItemNum;		// ピースの種類
+
+	int mItemExistsTime;	// ピースのそれぞれの生存時間
+	int mItemFlashingTime;	// ピースが点滅し始める時間
+
+	float mPosMove;			// ポジションの移動値
+	float mAlphaMove;		// α値の変更値
+
+	bool mItemExistsFlag;	// ピースがまだ存在しているかのフラグ true _存在する false _存在しない
+	bool mCollisionFlag;	// プレイヤーと当たったかどうかの判定
 };
-

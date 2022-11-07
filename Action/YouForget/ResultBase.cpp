@@ -16,14 +16,14 @@ ResultBase::ResultBase(const SceneType& _nowScene)
 ResultBase::~ResultBase()
 {
 	// シーンを遷移する前に取得したパズルピースを0に戻す
-	ItemBase::mGetNumber.clear();
+	Item::mGetNumber.clear();
 }
 
 void ResultBase::Search()
 {
 	// 取得したパズルピース分回す
 	decltype(mPuzzlePieceDatas)::iterator it;
-	for (const auto& num : ItemBase::mGetNumber)
+	for (const auto& num : Item::mGetNumber)
 	{
 		// キーが一致するものを探す
 		it = mPuzzlePieceDatas.find(num);

@@ -43,7 +43,7 @@ protected:
 	/// <returns>true : 全て描画した</returns>
 	bool mDrawUpdate();
 
-	map<ItemNum, string> mPuzzlePieceDatas;	// ピースと必要な画像データを関連付けて格納
+	map<Item::PieceNum, string> mPuzzlePieceDatas;	// ピースと必要な画像データを関連付けて格納
 private:
 	class Text* mNowDrawTextUI;				// 今描画しいているテキスト画像のUI
 
