@@ -14,7 +14,7 @@ public:
 	};
 
 	// 床の色
-	enum class eAlphaColor :unsigned char
+	enum class GroundColor :unsigned char
 	{
 		eRed,		// 赤
 		eGreen,		// 緑
@@ -68,7 +68,7 @@ private:
 	// 床の種類
 	const GroundType MGroundType;
 	// 床の色の種類
-	eAlphaColor mAlphaColorTag;
+	GroundColor mAlphaColorTag;
 
 	// 床の色、透明度を設定
 	void SetGroundInfo();

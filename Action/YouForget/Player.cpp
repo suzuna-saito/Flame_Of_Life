@@ -360,7 +360,7 @@ void Player::FixCollision(const AABB& _myAABB, const AABB& _pairAABB, const ObjT
 */
 void Player::OnCollision(const GameObject& _hitObject)
 {
-	//ヒットしたオブジェクトのタグを取得
+	// ヒットしたオブジェクトのタグを取得
 	ObjTag hitObjectTag = _hitObject.GetTag();
 
 	if (mOperable &&

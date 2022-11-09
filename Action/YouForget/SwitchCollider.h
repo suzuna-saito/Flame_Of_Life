@@ -23,10 +23,10 @@ public:
 	void UpdateGameObject(float _deltaTime)override;
 
 	// スイッチと連携している床の色
-	static Ground::eAlphaColor mLinkageColor;
+	static Ground::GroundColor mLinkageColor;
 
 private:
-	Ground::eAlphaColor mSwitchColor;
+	Ground::GroundColor mSwitchColor;
 
 	//スイッチ中心の判定を生成
 	BoxCollider* mSwitchBoxCollider;

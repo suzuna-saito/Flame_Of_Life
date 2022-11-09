@@ -9,7 +9,7 @@ Ground::Ground(const Vector3 _pos, const GroundType _tag)
 	, MAlphaSubSpeed(0.8f)
 	, MAlphaMax(1.2f)
 	, MGroundType(_tag)
-	, mAlphaColorTag(eAlphaColor::eRed)
+	, mAlphaColorTag(GroundColor::eRed)
 	, mIsPlayer(false)
 	, mBeforeIsPlayer(false)
 {
@@ -24,8 +24,8 @@ Ground::Ground(const Vector3 _pos, const GroundType _tag)
 	mSelfBoxCollider->SetObjectBox(box);
 
 	// GameObjectメンバ変数の初期化
-	SetScale(Vector3(10.0f, 10.0f, 10.0f));	// スケール
-	SetPosition(_pos);						// ポジション
+	SetScale(Vector3(10.0f, 10.0f, 10.0f));		// スケール
+	SetPosition(_pos);							// ポジション
 
 	// 床の色、透明度を設定
 	SetGroundInfo();
@@ -44,22 +44,24 @@ void Ground::SetGroundInfo()
 	int randNum = rand() % mTypeNum;
 
 	// 値が赤と一致したら
-	if (randNum == (int)eAlphaColor::eRed)
+	if (randNum == (int)GroundColor::eRed)
 	{
 		mColor = Vector3(1.0f, 0.6f, 0.6f); // 色をうすい赤に設定
-		mAlphaColorTag = eAlphaColor::eRed;	// 床の色の種類を赤に設定
+		mAlphaColorTag = GroundColor::eRed;	// 床の色の種類を赤に設定
 	}
 	else
 	{
 		mColor = Color::LightGreen;			// 色を黄緑に設定
-		mAlphaColorTag = eAlphaColor::eGreen;
+		mAlphaColorTag = GroundColor::eGreen;
 	}
 
 	// 透明度を0.0fに設定
 	mAlpha = 0.0f;
 }
+
 void Ground::UpdateGameObject(float _deltaTime)
 {
+	// AABBを毎ループ更新
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
 	// 床の透明度が0より小さかったらまたは、スイッチが押されたら
