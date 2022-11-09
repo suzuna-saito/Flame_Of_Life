@@ -3,48 +3,61 @@
 // 静的メンバ変数の初期化
 int Ground::mTypeNum = 0;
 
-Ground::Ground(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const groundTag& _tag)
-	:GameObject(ObjTag::eGround)
-	, mAlphaNum(0)
+Ground::Ground(const Vector3 _pos, const GroundType _tag)
+	: GameObject(ObjTag::eGround)
 	, MAlphaAddSpeed(4.5f)
 	, MAlphaSubSpeed(0.8f)
 	, MAlphaMax(1.2f)
-	, mGroundTag(_tag)
-	, mAlphaColorTag(alphaColor::red)
+	, MGroundType(_tag)
+	, mAlphaColorTag(eAlphaColor::eRed)
 	, mIsPlayer(false)
 	, mBeforeIsPlayer(false)
 {
-	//GameObjectメンバ変数の初期化
-	SetScale(_size);
-	SetPosition(_pos);
-
-	//Component基底クラスは自動で管理クラスに追加され自動で解放される
+	// MeshComponentを生成することで自動で管理クラスに追加され自動で解放される
 	mMeshComponent = new MeshComponent(this);
-	//Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
+	// Rendererクラス内のMesh読み込み関数を利用してMeshをセット(.gpmesh)
 	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Books/Book_1.gpmesh"));
 
-	//地面の当たり判定
+	// 当たり判定
 	mSelfBoxCollider = new BoxCollider(this, mTag, GetOnCollisionFunc());
 	AABB box = { Vector3(-14.5f,-21.5f,0.0f),Vector3(14.5f,20.0f,9.0f) };
 	mSelfBoxCollider->SetObjectBox(box);
 
-	// 床の色などを設定する
-	if (mGroundTag == groundTag::RGBalpha)
+	// GameObjectメンバ変数の初期化
+	SetScale(Vector3(10.0f, 10.0f, 10.0f));	// スケール
+	SetPosition(_pos);						// ポジション
+
+	// 床の色、透明度を設定
+	SetGroundInfo();
+}
+
+void Ground::SetGroundInfo()
+{
+	// 透明にならない床だったら
+	if (MGroundType == GroundType::eNotAlpha)
 	{
-		mInit();
+		mColor = Color::White;				// 色を白に設定
+		return;
+	}
+
+	// ランダムで整数を取得
+	int randNum = rand() % mTypeNum;
+
+	// 値が赤と一致したら
+	if (randNum == (int)eAlphaColor::eRed)
+	{
+		mColor = Vector3(1.0f, 0.6f, 0.6f); // 色をうすい赤に設定
+		mAlphaColorTag = eAlphaColor::eRed;	// 床の色の種類を赤に設定
 	}
 	else
 	{
-		mColor = Vector3(1.0f,1.0f,1.0f);
+		mColor = Color::LightGreen;			// 色を黄緑に設定
+		mAlphaColorTag = eAlphaColor::eGreen;
 	}
 
-	// 透明度
-	if (mGroundTag == groundTag::RGBalpha)
-	{
-		mAlpha = 0.0f;
-	}
+	// 透明度を0.0fに設定
+	mAlpha = 0.0f;
 }
-
 void Ground::UpdateGameObject(float _deltaTime)
 {
 	mAabb = mSelfBoxCollider->GetWorldBox();
@@ -57,7 +70,7 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// スイッチを押していたらかつ、今踏んでるスイッチの色と床の色が一緒だったら
-	if (Switch::mFollowSwitchFlag && mGroundTag == groundTag::RGBalpha &&
+	if (Switch::mFollowSwitchFlag && MGroundType == GroundType::eAlpha &&
 		mAlphaColorTag == SwitchCollider::mLinkageColor)
 	{
 		// 少しずつ透明度をあげる
@@ -77,8 +90,8 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// スイッチを押していないかつ、プレイヤーが乗っていなかったら
-	if(!Switch::mFollowSwitchFlag && mGroundTag != groundTag::notAlpha && !mIsPlayer && !mBeforeIsPlayer ||
-		Switch::mFollowSwitchFlag && mGroundTag != groundTag::notAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
+	if(!Switch::mFollowSwitchFlag && MGroundType != GroundType::eNotAlpha && !mIsPlayer && !mBeforeIsPlayer ||
+		Switch::mFollowSwitchFlag && MGroundType != GroundType::eNotAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
@@ -86,7 +99,7 @@ void Ground::UpdateGameObject(float _deltaTime)
 			mAlpha -= MAlphaSubSpeed * _deltaTime;
 		}
 	}
-	else if (mGroundTag != groundTag::notAlpha && !mIsPlayer && mBeforeIsPlayer)
+	else if (MGroundType != GroundType::eNotAlpha && !mIsPlayer && mBeforeIsPlayer)
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)
@@ -121,30 +134,5 @@ void Ground::OnCollision(const GameObject& _hitObject)
 	if (hitObjectTag == ObjTag::ePlayerLegs)
 	{
 		mIsPlayer = true;
-	}
-}
-
-// 床の色、α値の変わるタイミングを設定する
-void Ground::mInit()
-{
-
-	// ランダムでmAlphaNamを設定
-	mAlphaNum = rand() % mTypeNum;
-
-	switch (mAlphaNum)
-	{
-	case (int)alphaColor::red:
-		mColor = Color::Red;
-		// 何色の床なのかを設定
-		mAlphaColorTag = alphaColor::red;
-		break;
-	case (int)alphaColor::green:
-		mColor = Color::Green;
-		// 何色の床なのかを設定
-		mAlphaColorTag = alphaColor::green;
-		break;
-	case (int)alphaColor::yellow:
-		mColor = Color::Yellow;
-		break;
 	}
 }

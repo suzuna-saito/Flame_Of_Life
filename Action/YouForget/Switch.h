@@ -20,7 +20,6 @@ public:
 	// デストラクタ
 	~Switch() {};
 
-
 	// 更新
 	void UpdateGameObject(float _deltaTime)override;
 

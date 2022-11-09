@@ -7,9 +7,9 @@ FirstResult::FirstResult(const SceneType& _nowScene)
 	new PuzzleUI("Assets/UI/FirstResult/FirstResultBase.png", UIBase::UIType::ePuzzleBase);
 
 	// アイテムと画像データを関連付け	
-	mPuzzlePieceDatas[Item::PieceNum::one] = "Assets/UI/FirstResult/Puzzles_1.png";
-	mPuzzlePieceDatas[Item::PieceNum::two] = "Assets/UI/FirstResult/Puzzles_2.png";
-	mPuzzlePieceDatas[Item::PieceNum::three] = "Assets/UI/FirstResult/Puzzles_3.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eOne] = "Assets/UI/FirstResult/Puzzles_1.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eTwo] = "Assets/UI/FirstResult/Puzzles_2.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eThree] = "Assets/UI/FirstResult/Puzzles_3.png";
 
 	// どのパズルピースを取得したか検索、格納
 	Search();

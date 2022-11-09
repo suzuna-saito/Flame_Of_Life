@@ -5,8 +5,8 @@ Title::Title(const SceneType& _nowScene)
 {
 	// mClearEndFlagをtrueにする
 	ResultBase::mClearEndFlag = true;
-	// mGetNumberを空にする
-	Item::mGetNumber.clear();
+	// 取得したピースの状態を空にする
+	PuzzlePiece::mGetNumber.clear();
 
 	// タイトル画像の生成
 	mFullPicture = new FullPicture("Assets/UI/Title/Title.png");

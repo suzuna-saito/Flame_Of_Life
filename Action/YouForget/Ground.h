@@ -6,50 +6,39 @@
 class Ground :public GameObject
 {
 public:
-
 	// 床の種類
-	enum class groundTag :unsigned char
+	enum class GroundType :unsigned char
 	{
-		// 透明になる（ｒｇy）
-		RGBalpha,
-		// 透明になる（固定の色）
-		alpha,
-		// 透明にならない
-		notAlpha,
+		eAlpha,		// 透明になる
+		eNotAlpha,	// 透明にならない
 	};
 
-	// α値の変わる床の色
-	enum class alphaColor :unsigned char
+	// 床の色
+	enum class eAlphaColor :unsigned char
 	{
-		red,
-		green,
-		yellow
+		eRed,		// 赤
+		eGreen,		// 緑
 	};
 
-	/*
-	@fn		コンストラクタ
-	@param	_pos ポジション
-	@param	_size サイズ
-	@param	_objectTag オブジェクトのタグ
-	@param	_sceneTag シーンタグ
-	@param	_tag 床の種類
-	*/
-	Ground(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag,const groundTag& _tag);
-
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="_pos">ポジション</param>
+	/// <param name="_tag">床の種類</param>
+	Ground(const Vector3 _pos, const GroundType _tag);
 	// デストラクタ
 	~Ground() {};
 
-	/*
-	@fn		床のアップデート
-	@param	_deltaTime 最後のフレームを完了するのに要した時間
-	*/
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="_deltaTime">最後のフレームを完了するのに要した時間</param>
 	void UpdateGameObject(float _deltaTime)override;
 
-	// シーンによって床の色の種類の数が異なる
+	// 床の種類の数（シーンによって床の色の種類の数が異なる）
 	static int mTypeNum;
 
 private:
-
 	/*
 	@fn 当たり判定が行われHitした際に呼ばれる関数(足元判定用)
 	@param	当たったGameObject
@@ -61,9 +50,6 @@ private:
 
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;
-
-	// α値の変わる種類
-	int mAlphaNum;
 	
 	// α値の変わっていく速度
 	const float MAlphaAddSpeed;
@@ -80,13 +66,10 @@ private:
 	bool mBeforeIsPlayer;
 
 	// 床の種類
-	groundTag mGroundTag;
+	const GroundType MGroundType;
 	// 床の色の種類
-	alphaColor mAlphaColorTag;
+	eAlphaColor mAlphaColorTag;
 
-	/*
-	@fn		床の色、α値の変わるタイミングを設定する
-	*/
-	void mInit();
+	// 床の色、透明度を設定
+	void SetGroundInfo();
 };
-

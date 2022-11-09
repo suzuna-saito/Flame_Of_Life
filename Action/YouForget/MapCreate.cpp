@@ -186,11 +186,11 @@ void MapCreate::CreateGround()
 
 			if (name == 1)
 			{
-				new Ground(objectPos, objectSize, ObjTag::eGround, SceneBase::mIsSceneType, Ground::groundTag::notAlpha);
+				new Ground(objectPos, Ground::GroundType::eNotAlpha);
 			}
 			else if (name == 4)
 			{
-				new Ground(objectPos, objectSize, ObjTag::eGround, SceneBase::mIsSceneType, Ground::groundTag::RGBalpha);
+				new Ground(objectPos, Ground::GroundType::eAlpha);
 			}
 		}
 	}
@@ -282,7 +282,7 @@ void MapCreate::CreateItem()
 
 			if (name == 7)
 			{
-				new Item(objectPos,ItemNumber);
+				new PuzzlePiece(objectPos,ItemNumber);
 				ItemNumber++;
 			}
 		}

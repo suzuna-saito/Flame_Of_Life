@@ -7,9 +7,9 @@ SecondResult::SecondResult(const SceneType& _nowScene)
 	new PuzzleUI("Assets/UI/SecondResult/SecondResultBase.png", UIBase::UIType::ePuzzleBase);
 
 	// アイテムと画像データを関連付け	
-	mPuzzlePieceDatas[Item::PieceNum::one] = "Assets/UI/SecondResult/Puzzles_1.png";
-	mPuzzlePieceDatas[Item::PieceNum::two] = "Assets/UI/SecondResult/Puzzles_2.png";
-	mPuzzlePieceDatas[Item::PieceNum::three] = "Assets/UI/SecondResult/Puzzles_3.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eOne] = "Assets/UI/SecondResult/Puzzles_1.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eTwo] = "Assets/UI/SecondResult/Puzzles_2.png";
+	mPuzzlePieceDatas[PuzzlePiece::PieceNum::eThree] = "Assets/UI/SecondResult/Puzzles_3.png";
 
 	// どのパズルピースを取得したか検索、格納
 	Search();

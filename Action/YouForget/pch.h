@@ -62,8 +62,7 @@ using namespace std;
 #include "LegsCollider.h"
 #include "Switch.h"
 #include "SwitchCollider.h"
-#include "Item.h"
-#include "PuzzlePiece.h"
+#include "PuzzlePiece.h"//
 
 // Component @ ‘S•”
 #include "Component.h"

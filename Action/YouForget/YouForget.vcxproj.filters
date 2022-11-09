@@ -48,9 +48,6 @@
     <ClCompile Include="Ground.cpp">
       <Filter>GameObJect\Ground</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>GameObJect\Item</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>GameObJect\Player</Filter>
     </ClCompile>
@@ -224,9 +221,6 @@
     </ClInclude>
     <ClInclude Include="Ground.h">
       <Filter>GameObJect\Ground</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>GameObJect\Item</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>GameObJect\Player</Filter>
@@ -432,9 +426,6 @@
     </Filter>
     <Filter Include="GameObJect\Ground">
       <UniqueIdentifier>{fe285a62-126b-4d2c-ad9b-b45f41d03be2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObJect\Item">
-      <UniqueIdentifier>{db95014f-806c-4521-b751-b00b880fce65}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObJect\Player">
       <UniqueIdentifier>{88f58169-f21d-4773-8b04-69334b3cea6f}</UniqueIdentifier>
