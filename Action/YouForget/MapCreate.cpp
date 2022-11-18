@@ -253,11 +253,11 @@ void MapCreate::CreateSwitch()
 
 			if (name == 18)
 			{
-				new Switch(objectPos,Switch::switchColor::red);
+				new Switch(objectPos, Ground::GroundColor::eRed);
 			}
 			else if (name == 24)
 			{
-				new Switch(objectPos,Switch::switchColor::green);
+				new Switch(objectPos,Ground::GroundColor::eGreen);
 			}
 
 		}

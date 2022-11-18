@@ -18,18 +18,18 @@ Switch::Switch(const Vector3 _pos,const Ground::GroundColor _color)
 	SetScale(Vector3(10.0f, 10.0f, 10.0f));	// スケール
 	SetPosition(_pos);						// ポジション
 
-	//// タグによってgpmeshを変更
-	//switch (_color)
-	//{
-	//case switchColor::red:
-	//	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/RedSwitch.gpmesh"));
-	//	break;
-	//case switchColor::green:
-	//	mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/GreenSwitch.gpmesh"));
-	//	break;
-	//default:
-	//	break;
-	//}
+	// タグによってgpmeshを変更
+	switch (_color)
+	{
+	case Ground::GroundColor::eRed:
+		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/RedSwitch.gpmesh"));
+		break;
+	case Ground::GroundColor::eGreen:
+		mMeshComponent->SetMesh(RENDERER->GetMesh("Assets/Model/Switch/GreenSwitch.gpmesh"));
+		break;
+	default:
+		break;
+	}
 
 	// スイッチ中心当たり判定の生成
 	mSwitchCenter = new SwitchCollider(this, ObjTag::eSwitchCenter, SceneBase::mIsSceneType, _color);

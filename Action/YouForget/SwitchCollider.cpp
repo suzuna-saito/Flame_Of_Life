@@ -4,29 +4,17 @@
 Ground::GroundColor SwitchCollider::mLinkageColor = Ground::GroundColor::eRed;
 
 // コンストラクタ
-SwitchCollider::SwitchCollider(Switch* _owner,const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const Switch::switchColor _switchColor)
+SwitchCollider::SwitchCollider(Switch* _owner, const ObjTag& _objectTag, const SceneBase::SceneType _sceneTag, const Ground::GroundColor _switchColor)
 	:GameObject(ObjTag::eSwitchCenter)
 	, mOwner(_owner)
+	, mSwitchColor(_switchColor)
 {
 	SetPosition(_owner->GetPosition());
-
-	mTag = ObjTag::eSwitchCenter;
 
 	//スイッチ中心の当たり判定(ボックス)
 	mSwitchBoxCollider = new BoxCollider(this,mTag, GetOnCollisionFunc());
 	AABB Switchbox = { Vector3(-70.0f,-100.0f,0.0f),Vector3(70.0f,100.0f,100.0f) };
 	mSwitchBoxCollider->SetObjectBox(Switchbox);
-
-	if (_switchColor == Switch::switchColor::red)
-	{
-		// 床と連携させる色を赤に設定
-		mSwitchColor = Ground::GroundColor::eRed;
-	}
-	else
-	{
-		// 床と連携させる色を緑に設定
-		mSwitchColor = Ground::GroundColor::eGreen;
-	}
 }
 
 void SwitchCollider::UpdateGameObject(float _deltaTime)
