@@ -177,39 +177,18 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BoneTransform.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="AButtonUI.cpp" />
-    <ClCompile Include="CircledShadow.cpp" />
     <ClCompile Include="ColliderComponent.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Fade.cpp" />
-    <ClCompile Include="FirstResult.cpp" />
     <ClCompile Include="FirstStage.cpp" />
-    <ClCompile Include="FallEffect.cpp" />
     <ClCompile Include="FPS.cpp" />
-    <ClCompile Include="FullPicture.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="GoalEffect.cpp" />
-    <ClCompile Include="GoalObj.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="PuzzlePiece.cpp" />
-    <ClCompile Include="PuzzleUI.cpp" />
-    <ClCompile Include="LastResult.cpp" />
-    <ClCompile Include="ResultBase.cpp" />
-    <ClCompile Include="SecondResult.cpp" />
-    <ClCompile Include="Text.cpp" />
-    <ClCompile Include="ThirdResult.cpp" />
-    <ClCompile Include="ThirdStage.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Jump.cpp" />
     <ClCompile Include="LegsCollider.cpp" />
@@ -219,7 +198,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
-    <ClCompile Include="SecondStage.cpp" />
     <ClCompile Include="ParticleComponent.cpp" />
     <ClCompile Include="ParticleEffectBase.cpp" />
     <ClCompile Include="pch.cpp">
@@ -240,9 +218,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkeletalMeshComponent.cpp" />
     <ClCompile Include="Skeleton.cpp" />
-    <ClCompile Include="Switch.cpp" />
     <ClCompile Include="SphereCollider.cpp" />
-    <ClCompile Include="SwitchCollider.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Title.cpp" />
     <ClCompile Include="UIBase.cpp" />
@@ -251,39 +227,18 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="BackGround.h" />
     <ClInclude Include="BoneTransform.h" />
     <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="AButtonUI.h" />
-    <ClInclude Include="CircledShadow.h" />
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Fade.h" />
-    <ClInclude Include="FirstResult.h" />
     <ClInclude Include="FirstStage.h" />
-    <ClInclude Include="FallEffect.h" />
     <ClInclude Include="FPS.h" />
-    <ClInclude Include="FullPicture.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="GoalEffect.h" />
-    <ClInclude Include="GoalObj.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="Ground.h" />
-    <ClInclude Include="PuzzlePiece.h" />
-    <ClInclude Include="PuzzleUI.h" />
-    <ClInclude Include="LastResult.h" />
-    <ClInclude Include="ResultBase.h" />
-    <ClInclude Include="SecondResult.h" />
-    <ClInclude Include="Text.h" />
-    <ClInclude Include="ThirdResult.h" />
-    <ClInclude Include="ThirdStage.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Jump.h" />
     <ClInclude Include="LegsCollider.h" />
@@ -293,7 +248,6 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="MatrixPalette.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
-    <ClInclude Include="SecondStage.h" />
     <ClInclude Include="ParticleComponent.h" />
     <ClInclude Include="ParticleEffectBase.h" />
     <ClInclude Include="pch.h" />
@@ -305,9 +259,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
     <ClInclude Include="Skeleton.h" />
-    <ClInclude Include="Switch.h" />
     <ClInclude Include="SphereCollider.h" />
-    <ClInclude Include="SwitchCollider.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="UIBase.h" />

@@ -39,9 +39,6 @@
     <ClCompile Include="FPS.cpp">
       <Filter>System\FPS</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>GameObJect\BackGround</Filter>
-    </ClCompile>
     <ClCompile Include="MainCameraObject.cpp">
       <Filter>GameObJect\Camera</Filter>
     </ClCompile>
@@ -57,12 +54,6 @@
     <ClCompile Include="Jump.cpp">
       <Filter>GameObJect\Player\Jump</Filter>
     </ClCompile>
-    <ClCompile Include="Switch.cpp">
-      <Filter>GameObJect\Switch</Filter>
-    </ClCompile>
-    <ClCompile Include="SwitchCollider.cpp">
-      <Filter>GameObJect\Switch</Filter>
-    </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>System\InputSystem</Filter>
     </ClCompile>
@@ -74,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="ParticleEffectBase.cpp">
       <Filter>ParticleEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="FallEffect.cpp">
-      <Filter>ParticleEffect\FallEffect</Filter>
     </ClCompile>
     <ClCompile Include="RapidJsonHelper.cpp">
       <Filter>System\RapidJson</Filter>
@@ -105,12 +93,6 @@
     <ClCompile Include="FirstStage.cpp">
       <Filter>Scene\First</Filter>
     </ClCompile>
-    <ClCompile Include="SecondStage.cpp">
-      <Filter>Scene\Second</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdStage.cpp">
-      <Filter>Scene\Third</Filter>
-    </ClCompile>
     <ClCompile Include="SceneBase.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -123,53 +105,14 @@
     <ClCompile Include="Collision.cpp">
       <Filter>Components\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="ResultBase.cpp">
-      <Filter>Scene\Result</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>System\pch</Filter>
-    </ClCompile>
-    <ClCompile Include="CircledShadow.cpp">
-      <Filter>ParticleEffect\CircledShadow</Filter>
-    </ClCompile>
-    <ClCompile Include="GoalObj.cpp">
-      <Filter>GameObJect\GoalObj</Filter>
-    </ClCompile>
-    <ClCompile Include="GoalEffect.cpp">
-      <Filter>ParticleEffect\GoalEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="FullPicture.cpp">
-      <Filter>UI\FullPicture</Filter>
     </ClCompile>
     <ClCompile Include="UIComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="AButtonUI.cpp">
-      <Filter>UI\AButtonUI</Filter>
-    </ClCompile>
-    <ClCompile Include="PuzzleUI.cpp">
-      <Filter>UI\Puzzle</Filter>
-    </ClCompile>
-    <ClCompile Include="FirstResult.cpp">
-      <Filter>Scene\Result\FirstResult</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondResult.cpp">
-      <Filter>Scene\Result\SecondResult</Filter>
-    </ClCompile>
-    <ClCompile Include="ThirdResult.cpp">
-      <Filter>Scene\Result\ThirdResult</Filter>
-    </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>UI\Text</Filter>
-    </ClCompile>
-    <ClCompile Include="LastResult.cpp">
-      <Filter>Scene\Result\LastResult</Filter>
-    </ClCompile>
     <ClCompile Include="Fade.cpp">
       <Filter>ParticleEffect\Fade</Filter>
-    </ClCompile>
-    <ClCompile Include="PuzzlePiece.cpp">
-      <Filter>GameObJect\PuzzlePiece</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,9 +156,6 @@
     <ClInclude Include="FPS.h">
       <Filter>System\FPS</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>GameObJect\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="MainCameraObject.h">
       <Filter>GameObJect\Camera</Filter>
     </ClInclude>
@@ -231,12 +171,6 @@
     <ClInclude Include="Jump.h">
       <Filter>GameObJect\Player\Jump</Filter>
     </ClInclude>
-    <ClInclude Include="Switch.h">
-      <Filter>GameObJect\Switch</Filter>
-    </ClInclude>
-    <ClInclude Include="SwitchCollider.h">
-      <Filter>GameObJect\Switch</Filter>
-    </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>System\InputSystem</Filter>
     </ClInclude>
@@ -248,9 +182,6 @@
     </ClInclude>
     <ClInclude Include="ParticleEffectBase.h">
       <Filter>ParticleEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="FallEffect.h">
-      <Filter>ParticleEffect\FallEffect</Filter>
     </ClInclude>
     <ClInclude Include="RapidJsonHelper.h">
       <Filter>System\RapidJson</Filter>
@@ -279,12 +210,6 @@
     <ClInclude Include="FirstStage.h">
       <Filter>Scene\First</Filter>
     </ClInclude>
-    <ClInclude Include="SecondStage.h">
-      <Filter>Scene\Second</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdStage.h">
-      <Filter>Scene\Third</Filter>
-    </ClInclude>
     <ClInclude Include="SceneBase.h">
       <Filter>Scene</Filter>
     </ClInclude>
@@ -297,53 +222,14 @@
     <ClInclude Include="Collision.h">
       <Filter>Components\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="ResultBase.h">
-      <Filter>Scene\Result</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>System\pch</Filter>
-    </ClInclude>
-    <ClInclude Include="CircledShadow.h">
-      <Filter>ParticleEffect\CircledShadow</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalObj.h">
-      <Filter>GameObJect\GoalObj</Filter>
-    </ClInclude>
-    <ClInclude Include="GoalEffect.h">
-      <Filter>ParticleEffect\GoalEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="FullPicture.h">
-      <Filter>UI\FullPicture</Filter>
     </ClInclude>
     <ClInclude Include="UIComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="AButtonUI.h">
-      <Filter>UI\AButtonUI</Filter>
-    </ClInclude>
-    <ClInclude Include="PuzzleUI.h">
-      <Filter>UI\Puzzle</Filter>
-    </ClInclude>
-    <ClInclude Include="FirstResult.h">
-      <Filter>Scene\Result\FirstResult</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondResult.h">
-      <Filter>Scene\Result\SecondResult</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdResult.h">
-      <Filter>Scene\Result\ThirdResult</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
-      <Filter>UI\Text</Filter>
-    </ClInclude>
-    <ClInclude Include="LastResult.h">
-      <Filter>Scene\Result\LastResult</Filter>
-    </ClInclude>
     <ClInclude Include="Fade.h">
       <Filter>ParticleEffect\Fade</Filter>
-    </ClInclude>
-    <ClInclude Include="PuzzlePiece.h">
-      <Filter>GameObJect\PuzzlePiece</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -415,14 +301,8 @@
     <Filter Include="GameObJect">
       <UniqueIdentifier>{2b882f3a-dfb0-4919-ad80-1a7d6c231986}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObJect\BackGround">
-      <UniqueIdentifier>{9266e494-1940-4294-a041-4cfaafb73070}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObJect\Camera">
       <UniqueIdentifier>{d9688b7f-1e8f-48c8-9a29-a8767b805dad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObJect\GoalObj">
-      <UniqueIdentifier>{984728ec-6c14-48ae-a525-622ed3a706c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObJect\Ground">
       <UniqueIdentifier>{fe285a62-126b-4d2c-ad9b-b45f41d03be2}</UniqueIdentifier>
@@ -433,17 +313,11 @@
     <Filter Include="GameObJect\Player\Jump">
       <UniqueIdentifier>{40d9c10b-eff8-4bf6-b1a9-58e6d846e680}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObJect\Switch">
-      <UniqueIdentifier>{681a86dd-23f0-4f94-a099-d9253064a06e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MapCreate">
       <UniqueIdentifier>{c4bba193-022a-47a8-acf4-85c61ac16af1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ParticleEffect">
       <UniqueIdentifier>{60b376f2-3cda-46ae-800a-e5c016d01be0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ParticleEffect\FallEffect">
-      <UniqueIdentifier>{3909bb12-c5a4-4fff-841f-589928a49fe8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{894cef72-2412-4b0e-ab28-0af240abfa5d}</UniqueIdentifier>
@@ -451,17 +325,8 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{4b1fd414-4578-49ea-9e48-8fc38cb89b3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\Second">
-      <UniqueIdentifier>{043ddb1f-01f1-41dc-a61d-263d14422b07}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scene\First">
       <UniqueIdentifier>{eee1bba8-0579-436a-8671-104d157f810c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Third">
-      <UniqueIdentifier>{6425960d-753e-49b4-b27d-3b546ed83179}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Result">
-      <UniqueIdentifier>{5e1b182d-0c13-4a37-83d9-99728980da65}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scene\Title">
       <UniqueIdentifier>{c3c3589f-bb0a-4ce6-91de-8d7a025e468b}</UniqueIdentifier>
@@ -490,36 +355,6 @@
     <Filter Include="System\InputSystem">
       <UniqueIdentifier>{9b51cda0-7143-4086-b801-44fa1957022a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleEffect\CircledShadow">
-      <UniqueIdentifier>{efbb653c-2331-425e-9620-53493b062e19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ParticleEffect\GoalEffect">
-      <UniqueIdentifier>{e060a8b2-24bb-408a-a802-7a52d995683b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\FullPicture">
-      <UniqueIdentifier>{b5fcb936-6c08-4a41-953d-34c096c2f809}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\AButtonUI">
-      <UniqueIdentifier>{7adeca7f-1b7c-4216-92e8-0b77b107d9a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Puzzle">
-      <UniqueIdentifier>{e1f1945b-d0db-4337-be70-d0db2c1df706}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Result\FirstResult">
-      <UniqueIdentifier>{d704a41c-f92b-496d-aa67-edb2db69aae8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Result\SecondResult">
-      <UniqueIdentifier>{424a95ba-81aa-4567-b5dc-ce8ee335eb84}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Result\ThirdResult">
-      <UniqueIdentifier>{7cb29bfa-ded2-4a8c-93cb-4852d3882e23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI\Text">
-      <UniqueIdentifier>{6762a942-ec64-4d08-a0e7-068682ec9a6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene\Result\LastResult">
-      <UniqueIdentifier>{1db74433-1e63-421d-9dca-fc37c3f03706}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader\BasicMesh">
       <UniqueIdentifier>{750c92e0-8df6-46c8-acc0-46d0acb8b8c3}</UniqueIdentifier>
     </Filter>
@@ -540,9 +375,6 @@
     </Filter>
     <Filter Include="Shader\framebufferScreen">
       <UniqueIdentifier>{1cec9232-5aab-403c-a162-139bf4cd7338}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObJect\PuzzlePiece">
-      <UniqueIdentifier>{b4b74f53-280c-41da-b077-9025f32793eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

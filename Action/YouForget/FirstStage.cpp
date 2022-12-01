@@ -8,18 +8,10 @@ FirstStage::FirstStage(const SceneType& _nowScene)
 	// ThirdStage用のファイルが開けたら
 	if (!mMapCreate->OpenFile())
 	{
-		// 背景の生成
-		mMapCreate->CreateBackGround();
-		// アイテムの生成
-		mMapCreate->CreateItem();
-		// スイッチの生成
-		mMapCreate->CreateSwitch();
 		// プレイヤーの生成
 		mMapCreate->CreatePlayer();
 		// 床の生成
 		mMapCreate->CreateGround();
-		// ろうそくの生成
-		mMapCreate->CreateCandle();
 	}
 }
 
@@ -62,7 +54,7 @@ SceneBase::SceneType FirstStage::update()
 	}
 
 	// プレイヤーがゴールにたどり着いた時、フェードの更新をしていなかったら
-	if (GoalObj::mGoalFlag && !Fade::mFadeFlag)
+	if (!Fade::mFadeFlag)
 	{
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;

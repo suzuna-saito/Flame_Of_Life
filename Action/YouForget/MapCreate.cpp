@@ -126,34 +126,6 @@ bool MapCreate::OpenFile()
 }
 
 /*
-@fn	背景を生成する
-*/
-void MapCreate::CreateBackGround()
-{
-	for (float iz = 0; iz < mSizeY; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mBackGroundMapData[(int)iz][(int)ix];
-			
-			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MBackGroundPosZ);
-			const Vector3 objectPos02 = Vector3(-mOffsetX * ix, mOffsetY * iz, MBackGroundInsidePosZ);
-			const Vector3 objectSize = Vector3(MGroundScale, MGroundScale, MGroundScale);
-
-			if (name == 35)
-			{
-				new BackGround(objectPos, BackGround::BackGroundType::eBGtypeOne);
-			}
-			else if (name == 36)
-			{
-				new BackGround(objectPos02, BackGround::BackGroundType::eBGtypeTwo);
-			}
-		}
-	}
-}
-
-
-/*
 @fn	床を生成する
 */
 void MapCreate::CreateGround()
@@ -217,77 +189,6 @@ void MapCreate::CreatePlayer()
 			}
 		}
 	}
-}
-
-void MapCreate::CreateCandle()
-{
-	for (float iz = 0; iz < mSizeY; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mCandleMapData[(int)iz][(int)ix];
-
-			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MCandleZPos+450.0f);
-
-			if (name == 3)
-			{
-				new GoalObj(objectPos);
-			}
-
-		}
-	}
-}
-
-/*
-@fn	スイッチを生成する
-*/
-void MapCreate::CreateSwitch()
-{
-	for (float iz = 0; iz < mSizeY; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mSwitchMapData[(int)iz][(int)ix];
-
-			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, 0.0f);
-
-			if (name == 18)
-			{
-				new Switch(objectPos, Ground::GroundColor::eRed);
-			}
-			else if (name == 24)
-			{
-				new Switch(objectPos,Ground::GroundColor::eGreen);
-			}
-
-		}
-	}
-
-}
-
-/*
-@fn	アイテムを生成する
-*/
-void MapCreate::CreateItem()
-{
-	int ItemNumber = 0;
-	for (float iz = 0; iz < mSizeY; iz++)
-	{
-		for (float ix = 0; ix < mSizeX; ix++)
-		{
-			const unsigned int name = mItemMapData[(int)iz][(int)ix];
-
-			const Vector3 objectPos = Vector3(-mOffsetX * ix, mOffsetY * iz, MItemZPos);
-			const Vector3 objectSize = Vector3(MItemScale, MItemScale, MItemScale);
-
-			if (name == 7)
-			{
-				new PuzzlePiece(objectPos,ItemNumber);
-				ItemNumber++;
-			}
-		}
-	}
-
 }
 
 bool MapCreate::readTiledJson(std::vector<std::vector<int>>& _mapData, const char* _fileName, const char* _layerName)

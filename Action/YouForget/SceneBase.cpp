@@ -27,15 +27,6 @@ SceneBase::SceneBase(const SceneType& _sceneType)
 
 void SceneBase::SetBackUI()
 {
-	// オブジェクトの奥に描画している画像
-	mFullPicture = new FullPicture("Assets/UI/Back/Back.png", UIComponent::UIDrawType::eFar);
-
-	//// プレイステージだったら
-	//if (mIsSceneType == SceneType::eFirst || mIsSceneType == SceneType::eSecond || mIsSceneType == SceneType::eThird)
-	//{
-	//	// 背景画像生成
-	//	mFullPicture = new FullPicture("Assets/UI/Back/BackPuzzle7.png");
-	//}
 }
 
 void SceneBase::SetFadein()
@@ -44,7 +35,7 @@ void SceneBase::SetFadein()
 	mFade = new Fade;
 
 	// シーンがeLastResultでクリアフラグがたっていた時だけ
-	if (mIsSceneType == SceneType::eLastResult && ResultBase::mClearEndFlag)
+	if (mIsSceneType == SceneType::eLastResult)
 	{
 		// 白いフェードインをさせる
 		mFade->SetFade(Color::White, Fade::FadeType::eIn);

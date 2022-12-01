@@ -46,7 +46,7 @@ private:
 	void OnCollision(const GameObject& _hitObject)override;
 
 	//ゲームオブジェクトのメッシュポインタ変数
-	MeshComponent* mMeshComponent;
+	class MeshComponent* mMeshComponent;
 
 	// 四角の地面の当たり判定を生成
 	BoxCollider* mSelfBoxCollider;

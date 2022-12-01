@@ -3,13 +3,6 @@
 Title::Title(const SceneType& _nowScene)
 	:SceneBase(_nowScene)
 {
-	// mClearEndFlagをtrueにする
-	ResultBase::mClearEndFlag = true;
-	// 取得したピースの状態を空にする
-	PuzzlePiece::mGetNumber.clear();
-
-	// タイトル画像の生成
-	mFullPicture = new FullPicture("Assets/UI/Title/Title.png");
 }
 
 Title::~Title()
@@ -27,7 +20,7 @@ void Title::Input(const InputState& _state)
 		// シーン遷移フラグをtrueにする
 		mGameSceneFlag = true;
 		// 黒いフェードアウトをさせる
-		mFade->SetFade(Color::Black, Fade::FadeType::eOut);
+		mFade->SetFade(Color::White, Fade::FadeType::eOut);
 	}
 }
 

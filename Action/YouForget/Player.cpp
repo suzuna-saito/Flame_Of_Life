@@ -57,12 +57,6 @@ Player::Player(const Vector3& _pos, const Vector3& _size, const ObjTag& _objectT
 	//アニメーションの再生
 	mSkelComp->PlayAnimation(mAnimations[(int)playerState::idle]);
 
-	// エフェクト
-	// プレイヤーの丸影エフェクト生成
-	new CircledShadow(this,Color::LightPink);
-	// プレイヤーが落ちた時のエフェクト
-	mFallEffect = new FallEffect(this);
-
 
 	//プレイヤー自身の当たり判定(ボックス)
 	mSelfBoxCollider = new BoxCollider(this, GameObject::ObjTag::ePlayer, GetOnCollisionFunc());
@@ -227,8 +221,6 @@ void Player::UpdateGameObject(float _deltaTime)
 	{
 		// 振動フラグをtrueにする
 		mVibrationFlag = true;
-		// 落ちた時のエフェクトの描画
-		mFallEffect->SetThisVisible(true);
 		// 動作が出来なくする
 		mOperable = false;
 

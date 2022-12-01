@@ -65,15 +65,14 @@ void Ground::UpdateGameObject(float _deltaTime)
 	mAabb = mSelfBoxCollider->GetWorldBox();
 
 	// 床の透明度が0より小さかったらまたは、スイッチが押されたら
-	if (mAlpha <= 0.0f || Switch::mFollowSwitchFlag)
+	if (mAlpha <= 0.0f )
 	{
 		// プレイヤーが乗っていなかった判定にする
 		mBeforeIsPlayer = false;
 	}
 
 	// スイッチを押していたらかつ、今踏んでるスイッチの色と床の色が一緒だったら
-	if (Switch::mFollowSwitchFlag && MGroundType == GroundType::eAlpha &&
-		mAlphaColorTag == SwitchCollider::mLinkageColor)
+	if (MGroundType == GroundType::eAlpha )
 	{
 		// 少しずつ透明度をあげる
 		if (mAlpha <= MAlphaMax)
@@ -92,8 +91,8 @@ void Ground::UpdateGameObject(float _deltaTime)
 	}
 
 	// スイッチを押していないかつ、プレイヤーが乗っていなかったら
-	if(!Switch::mFollowSwitchFlag && MGroundType != GroundType::eNotAlpha && !mIsPlayer && !mBeforeIsPlayer ||
-		Switch::mFollowSwitchFlag && MGroundType != GroundType::eNotAlpha && mAlphaColorTag != SwitchCollider::mLinkageColor)
+	if(MGroundType != GroundType::eNotAlpha && !mIsPlayer && !mBeforeIsPlayer ||
+		MGroundType != GroundType::eNotAlpha )
 	{
 		// 少しずつ透明度を下げる
 		if (mAlpha >= 0.0f)

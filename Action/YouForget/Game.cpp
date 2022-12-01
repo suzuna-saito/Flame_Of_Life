@@ -180,24 +180,6 @@ void Game::SetNewScene(const SceneBase::SceneType _sceneType)
 	case SceneBase::SceneType::eFirst:			// FirstStage
 		mNowScene = new FirstStage(_sceneType);
 		break;
-	case SceneBase::SceneType::eSecond:			// SecondStage
-		mNowScene = new SecondStage(_sceneType);
-		break;
-	case SceneBase::SceneType::eThird:			// ThirdStage
-		mNowScene = new ThirdStage(_sceneType);
-		break;
-	case SceneBase::SceneType::eFirstResult:	// FirstResult
-		mNowScene = new FirstResult(_sceneType);
-		break;
-	case SceneBase::SceneType::eSecondResult:	// SecondResult
-		mNowScene = new SecondResult(_sceneType);
-		break;
-	case SceneBase::SceneType::eThirdResult:	// ThirdResult
-		mNowScene = new ThirdResult(_sceneType);
-		break;
-	case SceneBase::SceneType::eLastResult:		// LastResult
-		mNowScene = new LastResult(_sceneType);
-		break;
 	default:
 		break;
 	}

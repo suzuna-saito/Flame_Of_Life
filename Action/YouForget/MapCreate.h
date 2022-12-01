@@ -30,29 +30,10 @@ public:
 	void CreateGround();
 
 	/*
-	@fn	背景を生成する
-	*/
-	void CreateBackGround();
-
-	/*
 	@fn	プレイヤーを生成する
 	*/
 	void CreatePlayer();
 
-	/*
-	@fn	ろうそくを生成する
-	*/
-	void CreateCandle();
-
-	/*
-	@fn	スイッチ（球体）を生成する
-	*/
-	void CreateSwitch();
-
-	/*
-	@fn	アイテムを生成する
-	*/
-	void CreateItem();
 private:
 
 	bool readTiledJson(vector<vector<int>>& _mapData, const char* _fileName, const char* _layerName);

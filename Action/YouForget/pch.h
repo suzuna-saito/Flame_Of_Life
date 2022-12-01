@@ -54,15 +54,10 @@ using namespace std;
 // GameObject @ ‘S•”
 #include "GameObject.h"
 #include "GameObjectManager.h"
-#include "BackGround.h"//
 #include "MainCameraObject.h"
-#include "GoalObj.h"//
 #include "Ground.h"
 #include "Player.h"
 #include "LegsCollider.h"
-#include "Switch.h"
-#include "SwitchCollider.h"
-#include "PuzzlePiece.h"//
 
 // Component @ ‘S•”
 #include "Component.h"
@@ -91,26 +86,12 @@ using namespace std;
 // Scene
 #include "Title.h"
 #include "FirstStage.h"
-#include "SecondStage.h"
-#include "ThirdStage.h"
-#include "ResultBase.h"
-#include "FirstResult.h"
-#include "SecondResult.h"
-#include "ThirdResult.h"
-#include "LastResult.h"
 
 // ParticleEffect
 #include "ParticleEffectBase.h"
-#include "FallEffect.h"
-#include "CircledShadow.h"
-#include "GoalEffect.h"
 
 // UI
 #include "UIBase.h"
-#include "FullPicture.h"
-#include "PuzzleUI.h"
-#include "Text.h"
-#include "AButtonUI.h"
 #include "Fade.h"
 
 // Map @ ‘S•”
